@@ -1,0 +1,329 @@
+<?xml version="1.0"?>
+<robot name="wheel_robot_base">
+  
+  <material name="Black">
+    <color rgba="0.0 0.0 0.0 1.0"/>
+  </material>
+ 
+  <material name="Blue">
+    <color rgba="0.0 0.0 0.8 1.0"/>
+  </material>
+ 
+  <material name="Green">
+    <color rgba="0.0 0.8 0.0 1.0"/>
+  </material>
+ 
+  <material name="Gray">
+    <color rgba="0.7 0.7 0.7 1.0"/>
+  </material>
+ 
+  <material name="DarkGray">
+    <color rgba="0.3 0.3 0.3 1.0"/>
+  </material>
+ 
+  <material name="Red">
+    <color rgba="0.8 0.0 0.0 1.0"/>
+  </material>
+ 
+  <material name="White">
+    <color rgba="1.0 1.0 1.0 1.0"/>
+  </material>
+ 
+  <material name="Yellow">
+    <color rgba="0.8 0.8 0.0 1.0"/>
+  </material>
+  
+  <!-- BASE-FOOTPRINT -->
+  <!-- base_footprint is a fictitious link(frame) that is on the ground right below base_link origin -->
+  <link name="base_footprint">
+    <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+            <box size="0.001 0.001 0.001" />
+        </geometry>
+    </visual>
+  </link>
+ 
+  <gazebo reference="base_footprint">
+    <turnGravityOff>false</turnGravityOff>
+  </gazebo>
+ 
+  <!-- BASE-LINK -->
+  <!--Actual body/chassis of the robot-->
+  <link name="base_link">
+    <inertial>
+      <mass value="30" />
+      <origin xyz="0 0 0" />
+      <!--The 3x3 rotational inertia matrix. -->
+      <inertia ixx = "0.0225" ixy = "0" ixz = "0"
+               iyy = "0.176" iyz = "0" 
+               izz = "0.189" /> 
+    </inertial>    
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <box size="0.37 0.12 0.06"/>
+      </geometry>
+      <material name="Yellow" />
+    </visual>  
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0 " />
+      <geometry>
+        <box size="0.37 0.12 0.06"/>
+      </geometry>
+    </collision>     
+  </link>
+  <gazebo reference="base_link">
+    <material>Gazebo/Yellow</material>
+    <turnGravityOff>false</turnGravityOff>
+  </gazebo>
+  
+  
+  <joint name="base_footprint_joint" type="fixed">
+    <origin xyz="0 0 0.04" rpy="0 0 0" />
+    <parent link="base_footprint"/>
+    <child link="base_link" />
+  </joint>
+ 
+ 
+  <!-- Left-Front-Wheel-LINK -->
+  <link name="front_left_wheel">
+    <visual>
+      <origin xyz="0 0 0" rpy="-1.571 0 0" />
+      <geometry>
+        <cylinder length="0.03" radius="0.035" />
+      </geometry>
+      <material name="DarkGray" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="-1.571 0 0" />
+      <geometry>
+        <cylinder length="0.03" radius="0.035" />
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1" />
+      <origin xyz="0 0 0" />
+      <inertia ixx = "0.038" ixy = "0" ixz = "0"
+               iyy = "0.038" iyz = "0" 
+               izz = "0.0611" /> 
+    </inertial>
+  </link>
+  
+  <gazebo reference="front_left_wheel">
+    <mu1 value="1.0"/>
+    <mu2 value="1.0"/>
+    <kp  value="10000000.0"/>
+    <kd  value="1.0"/>
+    <fdir1 value="1 0 0"/>
+    <material>Gazebo/Grey</material>
+    <turnGravityOff>false</turnGravityOff>
+  </gazebo>
+  
+  <joint name="front_left_wheel_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="front_left_wheel"/>
+    <origin xyz="0.13 0.08 -0.005" rpy="0 0 0"/>
+    <axis xyz="0 1 0" rpy="0 0 0"/>
+    <limit effort="100" velocity="100"/>
+    <joint_properties damping="0.0" friction="0.0"/>
+  </joint>
+  
+  <!-- Transmission -->
+  <transmission name="front_left_wheel_joint_trans">
+    <type> transmission_interface/SimpleTransmission</type>
+    <joint name="front_left_wheel_joint">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="front_left_wheel_joint_motor">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <!-- Right-Front-Wheel-LINK -->
+  <link name="front_right_wheel">
+    <visual>
+      <origin xyz="0 0 0" rpy="-1.571 0 0" />
+      <geometry>
+        <cylinder length="0.03" radius="0.035" />
+      </geometry>
+      <material name="DarkGray" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="-1.571 0 0" />
+      <geometry>
+        <cylinder length="0.03" radius="0.035" />
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1" />
+      <origin xyz="0 0 0" />
+      <inertia ixx = "0.038" ixy = "0" ixz = "0"
+               iyy = "0.038" iyz = "0" 
+               izz = "0.0611" /> 
+    </inertial>
+  </link>
+  
+  <gazebo reference="front_right_wheel">
+    <mu1 value="1.0"/>
+    <mu2 value="1.0"/>
+    <kp  value="10000000.0"/>
+    <kd  value="1.0"/>
+    <fdir1 value="1 0 0"/>
+    <material>Gazebo/Grey</material>
+    <turnGravityOff>false</turnGravityOff>
+  </gazebo>
+  
+  <joint name="front_right_wheel_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="front_right_wheel"/>
+    <origin xyz="0.13 -0.08 -0.005" rpy="0 0 0"/>
+    <axis xyz="0 1 0" rpy="0 0 0"/>
+    <limit effort="100" velocity="100"/>
+    <joint_properties damping="0.0" friction="0.0"/>
+  </joint>
+  
+  <!-- Transmission -->
+  <transmission name="front_right_wheel_joint_trans">
+    <type> transmission_interface/SimpleTransmission</type>
+    <joint name="front_right_wheel_joint">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="front_right_wheel_joint_motor">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <!-- left-rear-Wheel-LINK -->
+  <link name="rear_left_wheel">
+    <visual>
+      <origin xyz="0 0 0" rpy="-1.571 0 0" />
+      <geometry>
+        <cylinder length="0.03" radius="0.035" />
+      </geometry>
+      <material name="DarkGray" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="-1.571 0 0" />
+      <geometry>
+        <cylinder length="0.03" radius="0.035" />
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1" />
+      <origin xyz="0 0 0" />
+      <inertia ixx = "0.038" ixy = "0" ixz = "0"
+               iyy = "0.038" iyz = "0" 
+               izz = "0.0611" /> 
+    </inertial>
+  </link>
+  
+  <gazebo reference="rear_left_wheel">
+    <mu1 value="1.0"/>
+    <mu2 value="1.0"/>
+    <kp  value="10000000.0"/>
+    <kd  value="1.0"/>
+    <fdir1 value="1 0 0"/>
+    <material>Gazebo/Grey</material>
+    <turnGravityOff>false</turnGravityOff>
+  </gazebo>
+  
+  <joint name="rear_left_wheel_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="rear_left_wheel"/>
+    <origin xyz="-0.13 0.08 -0.005" rpy="0 0 0"/>
+    <axis xyz="0 1 0" rpy="0 0 0"/>
+    <limit effort="100" velocity="100"/>
+    <joint_properties damping="0.0" friction="0.0"/>
+  </joint>
+  
+  <!-- Transmission -->
+  <transmission name="rear_left_wheel_joint_trans">
+    <type> transmission_interface/SimpleTransmission</type>
+    <joint name="rear_left_wheel_joint">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="rear_left_wheel_joint_motor">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <!-- Right-rear-Wheel-LINK -->
+  <link name="rear_right_wheel">
+    <visual>
+      <origin xyz="0 0 0" rpy="-1.571 0 0" />
+      <geometry>
+        <cylinder length="0.03" radius="0.035" />
+      </geometry>
+      <material name="DarkGray" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="-1.571 0 0" />
+      <geometry>
+        <cylinder length="0.03" radius="0.035" />
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1" />
+      <origin xyz="0 0 0" />
+      <inertia ixx = "0.038" ixy = "0" ixz = "0"
+               iyy = "0.038" iyz = "0" 
+               izz = "0.0611" /> 
+    </inertial>
+  </link>
+  
+  <gazebo reference="rear_right_wheel">
+    <mu1 value="1.0"/>
+    <mu2 value="1.0"/>
+    <kp  value="10000000.0"/>
+    <kd  value="1.0"/>
+    <fdir1 value="1 0 0"/>
+    <material>Gazebo/Grey</material>
+    <turnGravityOff>false</turnGravityOff>
+  </gazebo>
+  
+  <joint name="rear_right_wheel_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="rear_right_wheel"/>
+    <origin xyz="-0.13 -0.08 -0.005" rpy="0 0 0"/>
+    <axis xyz="0 1 0" rpy="0 0 0"/>
+    <limit effort="100" velocity="100"/>
+    <joint_properties damping="0.0" friction="0.0"/>
+  </joint>
+  
+  <!-- Transmission -->
+  <transmission name="rear_right_wheel_joint_trans">
+    <type> transmission_interface/SimpleTransmission</type>
+    <joint name="rear_right_wheel_joint">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="rear_right_wheel_joint_motor">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <gazebo>
+    <plugin name="skid_steer_drive_controller" filename="libgazebo_ros_skid_steer_drive.so">
+      <alwaysOn>true</alwaysOn>
+      <updateRate>100.0</updateRate>
+      <leftFrontJoint>front_left_wheel_joint</leftFrontJoint>
+      <rightFrontJoint>front_right_wheel_joint</rightFrontJoint>
+      <leftRearJoint>rear_left_wheel_joint</leftRearJoint>
+      <rightRearJoint>rear_right_wheel_joint</rightRearJoint>
+      <wheelSeparation>0.16</wheelSeparation>
+      <wheelDiameter>0.07</wheelDiameter>
+      <torque>100</torque>
+      <broadcastTF>1</broadcastTF>
+      <odometryFrame>map</odometryFrame>
+      <commandTopic>cmd_vel</commandTopic>
+      <odometryTopic>odom</odometryTopic>
+      <robotBaseFrame>base_footprint</robotBaseFrame>
+    </plugin>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so" />
+  </gazebo>
+ 
+</robot>

@@ -1,0 +1,2 @@
+tutorial1
+-DCATKIN_DEVEL_PREFIX=/home/shiozaki/git/ai_race/catkin_ws/devel -DCMAKE_INSTALL_PREFIX=/home/shiozaki/git/ai_race/catkin_ws/install -G Unix Makefiles

@@ -1,0 +1,8 @@
+prefix=/home/shiozaki/git/ai_race/catkin_ws/devel
+
+Name: tutorial1
+Description: Description of tutorial1
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 
