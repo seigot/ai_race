@@ -8,6 +8,14 @@ ai_race repository
 
 記載予定
 
+### その他、パッケージのインストール
+
+記載予定
+
+```
+sudo apt-get install xxx
+```
+
 ### 初期設定
 
 記載予定
