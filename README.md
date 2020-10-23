@@ -13,7 +13,7 @@ ai_race repository
 記載予定
 
 ```
-sudo apt-get install xxx
+sudo apt install -y ros-melodic-ros-control ros-melodic-ros-controllers  ros-melodic-joint-state-controller ros-melodic-effort-controllers ros-melodic-position-controllers ros-melodic-joint-trajectory-controller
 ```
 
 ### 初期設定
