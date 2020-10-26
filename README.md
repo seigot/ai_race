@@ -45,6 +45,8 @@ sudo apt install -y ros-melodic-ros-control ros-melodic-ros-controllers  ros-mel
 記載予定
 
 ```
+source /opt/ros/melodic/setup.bash
+echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc
 rm -r ~/catkin_ws
 mkdir -p ~/catkin_ws/src
 cd ~/catkin_ws/src
