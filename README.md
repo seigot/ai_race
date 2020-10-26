@@ -41,8 +41,8 @@ sudo apt install -y ros-melodic-ros-control ros-melodic-ros-controllers  ros-mel
 sudo apt-get install -y gazebo9
 sudo sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable `lsb_release -cs` main" > /etc/apt/sources.list.d/gazebo-stable.list'
 wget http://packages.osrfoundation.org/gazebo.key -O - | sudo apt-key add -
-sudo apt-get update
-sudo apt-get install ros-melodic-gazebo-ros-pkgs ros-melodic-gazebo-ros-control
+sudo apt-get update -y
+sudo apt-get install -y ros-melodic-gazebo-ros-pkgs ros-melodic-gazebo-ros-control
 ```
 
 ### 1.4 初期設定
