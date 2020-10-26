@@ -20,7 +20,17 @@ https://developer.nvidia.com/jetpack-43-archive
 
 ### 1.2 ROS(melodic)のインストール
 
-記載予定
+terminalから以下を実行する。
+
+```
+git clone https://github.com/karaage0703/jetson-nano-tools
+cd jetson-nano-tools
+./install-ros-melodic.sh
+```
+
+参考 <br>
+[Jetson NanoにROSをインストールする方法](https://qiita.com/karaage0703/items/aa54e086f0a2f165d3e9)
+
 
 ### 1.3 その他、パッケージのインストール
 
@@ -65,3 +75,6 @@ roslaunch tutrual1 wheel_robot.launch
 ## 3. 備考
 
 記載予定
+
+## 参考
+[Jetson NanoにROSをインストールする方法](https://qiita.com/karaage0703/items/aa54e086f0a2f165d3e9)
