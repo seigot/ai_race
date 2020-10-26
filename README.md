@@ -38,6 +38,7 @@ cd jetson-nano-tools
 
 ```
 sudo apt install -y ros-melodic-ros-control ros-melodic-ros-controllers  ros-melodic-joint-state-controller ros-melodic-effort-controllers ros-melodic-position-controllers ros-melodic-joint-trajectory-controller
+sudo apt-get install -y gazebo9
 ```
 
 ### 1.4 初期設定
