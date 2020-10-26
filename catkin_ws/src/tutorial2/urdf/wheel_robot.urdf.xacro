@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<robot name="wheel_robot_base" xmlns:xacro="http://www.ros.org/wiki/xacro">
+ 
+  <!-- Included URDF/XACRO Files -->
+  <xacro:include filename="$(find robot_pkg)/urdf/materials.urdf.xacro" />
+  <xacro:include filename="$(find robot_pkg)/urdf/wheel.urdf.xacro" />
+
+  <!-- PROPERTY LIST -->
+  <!--All units in m-kg-s-radians unit system -->
+  <property name="M_PI" value="3.1415926535897931" />
+
+  <!-- Main Body-base -->
+  <property name="base_x_size" value="0.37" /> 
+  <property name="base_y_size" value="0.12" /> 
+  <property name="base_z_size" value="0.06" />
+  <property name="base_mass" value="30.0" /> <!-- in kg-->
+
+  <!--Inertial macros for the box and cylinder. Units are kg*m^2-->
+  <macro name="box_inertia" params="m x y z">
+    <inertia  ixx="${m*(y*y+z*z)/12}" ixy = "0" ixz = "0"
+              iyy="${m*(x*x+z*z)/12}" iyz = "0"
+              izz="${m*(x*x+z*z)/12}" /> 
+  </macro>
+
+  <!-- BASE-FOOTPRINT -->
+  <!-- base_footprint is a fictitious link(frame) that is on the ground right below base_link origin -->
+  <link name="base_footprint">
+    <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+            <box size="0.001 0.001 0.001" />
+        </geometry>
+    </visual>
+  </link>
+ 
+  <gazebo reference="base_footprint">
+    <turnGravityOff>false</turnGravityOff>
+  </gazebo>
+ 
+  <!-- BASE-LINK -->
+  <!--Actual body/chassis of the robot-->
+  <link name="base_link">
+    <inertial>
+      <!--<mass value="${base_mass}" />-->
+      <mass value="30.0" />
+      <origin xyz="0 0 0" />
+      <!--The 3x3 rotational inertia matrix. -->
+      <box_inertia  m="${base_mass}" x="${base_x_size}" y="${base_y_size}" z="${base_z_size}"/> 
+    </inertial>    
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <box size="${base_x_size} ${base_y_size} ${base_z_size}"/>
+      </geometry>
+      <material name="Yellow" />
+    </visual>  
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0 " />
+      <geometry>
+        <box size="${base_x_size} ${base_y_size} ${base_z_size}"/>
+      </geometry>
+    </collision>     
+  </link>
+  <gazebo reference="base_link">
+    <material>Gazebo/Yellow</material>
+    <turnGravityOff>false</turnGravityOff>
+  </gazebo>
+  
+  
+  <joint name="base_footprint_joint" type="fixed">
+    <origin xyz="0 0 0.04" rpy="0 0 0" />
+    <parent link="base_footprint"/>
+    <child link="base_link" />
+  </joint>
+ 
+ <!--wheels-->
+  <wheel fb="front" lr="right" parent="base_link" translateX="1" translateY="-1" flipY="-1"/>
+  <wheel fb="front" lr="left" parent="base_link" translateX="1" translateY="1" flipY="-1"/>
+  <wheel fb="rear" lr="right" parent="base_link" translateX="-1" translateY="-1" flipY="-1"/>
+  <wheel fb="rear" lr="left" parent="base_link" translateX="-1" translateY="1" flipY="-1"/>
+ 
+  <gazebo>
+    <plugin name="skid_steer_drive_controller" filename="libgazebo_ros_skid_steer_drive.so">
+      <alwaysOn>true</alwaysOn>
+      <updateRate>100.0</updateRate>
+      <leftFrontJoint>front_left_wheel_joint</leftFrontJoint>
+      <rightFrontJoint>front_right_wheel_joint</rightFrontJoint>
+      <leftRearJoint>rear_left_wheel_joint</leftRearJoint>
+      <rightRearJoint>rear_right_wheel_joint</rightRearJoint>
+      <wheelSeparation>0.16</wheelSeparation>
+      <wheelDiameter>0.07</wheelDiameter>
+      <torque>100</torque>
+      <broadcastTF>1</broadcastTF>
+      <odometryFrame>map</odometryFrame>
+      <commandTopic>cmd_vel</commandTopic>
+      <odometryTopic>odom</odometryTopic>
+      <robotBaseFrame>base_footprint</robotBaseFrame>
+    </plugin>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so" />
+  </gazebo>
+ 
+</robot>

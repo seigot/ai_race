@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<robot name="hinge" xmlns:xacro="http://www.ros.org/wiki/xacro">
+ 
+  <!-- Wheels -->
+  <property name="hinge_radius" value="0.02" /> 
+  <property name="hinge_height" value="0.01" />
+  <property name="hinge_mass" value="0.100" /> <!-- in kg-->
+  
+  <property name="base_x_origin_to_hinge_origin" value="0.13" />
+  <property name="base_y_origin_to_hinge_origin" value="0.055" />
+  <property name="base_z_origin_to_hinge_origin" value="0.0" />
+ 
+  <macro name="box_inertia" params="m x y z">
+    <inertia  ixx="${m*(y*y+z*z)/12}" ixy = "0" ixz = "0"
+              iyy="${m*(x*x+z*z)/12}" iyz = "0"
+              izz="${m*(x*x+z*z)/12}" /> 
+  </macro>
+  <macro name="sphere_inertia" params="m r">
+    <inertia  ixx="${m*(r*r)*2.0/5.0}" ixy = "0" ixz = "0"
+              iyy="${m*(r*r)*2.0/5.0}" iyz = "0"
+              izz="${m*(r*r)*2.0/5.0}" /> 
+  </macro>
+  <xacro:macro name="hinge" params="lr parent translateX translateY flipY"> <!--lr: left, ${lr} -->
+    <link name="front_${lr}_hinge">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 ${flipY*M_PI/2}" /> 
+        <geometry>
+          <sphere radius="0.01"/>
+          <!--<box size="0.01 0.01 0.01"/>-->
+          <!--<cylinder length="${hinge_height}" radius="${hinge_radius}" />-->
+        </geometry>
+        <material name="DarkGray" />
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 ${flipY*M_PI/2}" />
+        <geometry>
+          <sphere radius="0.01"/>
+          <!--<box size="0.01 0.01 0.01"/>-->
+          <!--<cylinder length="${hinge_height}" radius="${hinge_radius}" />-->
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="${hinge_mass}" />
+        <origin xyz="0 0 0" />
+        <sphere_inertia  m="${hinge_mass}" r="0.01" />
+      </inertial>
+    </link>
+ 
+    <gazebo reference="front_${lr}_hinge">
+      <material>Gazebo/Grey</material>
+      <turnGravityOff>false</turnGravityOff>
+    </gazebo>
+ 
+ 
+ 
+    <joint name="front_${lr}_hinge_joint" type="revolute">
+      <parent link="${parent}"/>
+      <child link="front_${lr}_hinge"/>
+      <origin xyz="${translateX * base_x_origin_to_hinge_origin} ${translateY * base_y_origin_to_hinge_origin} ${base_z_origin_to_hinge_origin}" rpy="0 0 0" /> 
+      <axis xyz="0 0 1" rpy="0 -1.5708 0" />
+      <limit lower="-0.5" upper="0.5" effort="10" velocity="100"/>
+      <joint_properties damping="0.0" friction="0.0"/>
+    </joint>
+ 
+    <!-- Transmission is important to link the joints and the controller -->
+    <transmission name="front_${lr}_hinge_joint_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="front_${lr}_hinge_joint">
+        <hardwareInterface>EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="front_${lr}_hinge_joint_motor">
+        <hardwareInterface>EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+ 
+  </xacro:macro>
+</robot>
