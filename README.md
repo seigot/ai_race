@@ -4,6 +4,20 @@ ai_race repository
 
 ## 準備
 
+### jetson起動
+
+以下からイメージファイルを入手して下さい。
+
+```
+Jetpack 4.3 Archive
+https://developer.nvidia.com/jetpack-43-archive
+ -> JetPack 4.3 - Installing JetPack:
+ -> https://developer.nvidia.com/jetson-nano-sd-card-imager-3231
+```
+
+入手後、イメージファイルをSDカードに書き込んで、JetsonNanoに挿して起動する。
+
+
 ### ROS(melodic)のインストール
 
 記載予定
