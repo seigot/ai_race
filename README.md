@@ -2,11 +2,11 @@
 ai_race repository
 
 
-## 準備
+## 1.準備
 
-### jetson起動
+### 1.1 jetson起動
 
-以下からイメージファイルを入手して下さい。
+以下からイメージファイルを入手する。
 
 ```
 Jetpack 4.3 Archive
@@ -18,11 +18,11 @@ https://developer.nvidia.com/jetpack-43-archive
 入手後、イメージファイルをSDカードに書き込んで、JetsonNanoに挿して起動する。
 
 
-### ROS(melodic)のインストール
+### 1.2 ROS(melodic)のインストール
 
 記載予定
 
-### その他、パッケージのインストール
+### 1.3 その他、パッケージのインストール
 
 記載予定
 
@@ -30,7 +30,7 @@ https://developer.nvidia.com/jetpack-43-archive
 sudo apt install -y ros-melodic-ros-control ros-melodic-ros-controllers  ros-melodic-joint-state-controller ros-melodic-effort-controllers ros-melodic-position-controllers ros-melodic-joint-trajectory-controller
 ```
 
-### 初期設定
+### 1.4 初期設定
 
 記載予定
 
@@ -44,15 +44,17 @@ catkin_make
 source devel/setup.sh
 ```
 
-### 起動
+## 2. サンプルコードの実行
 
-記載予定
+### 2.1 コマンドからの実行手順
+
+以下を実行して下さい（仮）
 
 ```
 roslaunch tutrual1 wheel_robot.launch
 ```
 
-### サンプルコードの実行
+### 2.2 サンプルコードの説明
 
 記載予定
 
@@ -60,6 +62,6 @@ roslaunch tutrual1 wheel_robot.launch
 
 記載予定
 
-## 備考
+## 3. 備考
 
 記載予定
