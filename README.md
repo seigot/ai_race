@@ -47,9 +47,9 @@ sudo apt install -y ros-melodic-ros-control ros-melodic-ros-controllers  ros-mel
 ```
 rm -r ~/catkin_ws
 mkdir -p ~/catkin_ws/src
-cd catkin_ws/src
+cd ~/catkin_ws/src
 git clone http://github.com/seigot/ai_race
-cd catkin_ws/src
+cd ~/catkin_ws
 catkin_make
 source devel/setup.sh
 ```
