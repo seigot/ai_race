@@ -70,6 +70,11 @@ source devel/setup.sh
 
 ```
 roslaunch tutrual1 wheel_robot.launch
+roslaunch tutrual2 wheel_robot.launch
+roslaunch tutrual3 wheel_robot.launch
+roslaunch tutrual4 wheel_robot.launch
+roslaunch tutrual5 wheel_robot.launch
+roslaunch tutrual6 wheel_robot.launch
 ```
 
 ### 2.2 サンプルコードの説明
