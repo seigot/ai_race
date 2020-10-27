@@ -34,8 +34,6 @@ cd jetson-nano-tools
 
 ### 1.3 その他、パッケージのインストール
 
-記載予定
-
 ```
 sudo apt install -y ros-melodic-ros-control ros-melodic-ros-controllers  ros-melodic-joint-state-controller ros-melodic-effort-controllers ros-melodic-position-controllers ros-melodic-joint-trajectory-controller
 sudo apt-get install -y gazebo9
@@ -43,22 +41,18 @@ sudo sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable `ls
 wget http://packages.osrfoundation.org/gazebo.key -O - | sudo apt-key add -
 sudo apt-get update -y
 sudo apt-get install -y ros-melodic-gazebo-ros-pkgs ros-melodic-gazebo-ros-control
-export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:~/ai_race/catkin_ws/src:~/ai_race/catkin_ws/src/sim_world/models
 echo "export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:~/ai_race/catkin_ws/src:~/ai_race/catkin_ws/src/sim_world/models" >> ~/.bashrc
+export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:~/ai_race/catkin_ws/src:~/ai_race/catkin_ws/src/sim_world/models
 ```
 
 ### 1.4 初期設定
 
-記載予定
-
 ```
-source /opt/ros/melodic/setup.bash
 echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc
-rm -r ~/catkin_ws
-mkdir -p ~/catkin_ws/src
-cd ~/catkin_ws/src
+source /opt/ros/melodic/setup.bash
+cd ~
 git clone http://github.com/seigot/ai_race
-cd ~/catkin_ws
+cd ~/ai_race/catkin_ws
 catkin_make
 source devel/setup.sh
 ```
