@@ -1,7 +1,7 @@
 # ai_race docker環境
 
-検討中
-TODO
+検討中<br>
+TODO<br>
 * jetpack4.3標準のDockerイメージがあるか調べる
 * AIのライブラリ（tensorflow/pytorchなど）のインストール手順を調べる
 
