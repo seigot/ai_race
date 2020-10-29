@@ -2,7 +2,7 @@
 
 検討中
 TODO
-* まず、AIが何に使えるのか調べる
+* jetpack4.3標準のDockerイメージがあるか調べる
 * AIのライブラリ（tensorflow/pytorchなど）のインストール手順を調べる
 
 # 参考（にする予定）
