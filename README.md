@@ -62,7 +62,7 @@ catkin_make
 source devel/setup.sh
 ```
 
-#### Docker環境
+* Docker環境
 
 [こちら](docker/README.md)で検討中
 
@@ -85,7 +85,7 @@ roslaunch tutrual6 wheel_robot.launch
 
 記載予定
 
-### 審判サーバ
+### 2.3 審判サーバ
 
 記載予定
 
