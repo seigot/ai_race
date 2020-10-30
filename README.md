@@ -89,10 +89,6 @@ roslaunch tutrual6 wheel_robot.launch
 
 記載予定
 
-## 3. 備考
-
-記載予定
-
 ## ルール
 
 [こちら](document/rule.md)に記載予定
@@ -100,6 +96,10 @@ roslaunch tutrual6 wheel_robot.launch
 ## FAQ
 
 [こちら](document/FAQ.md)に記載予定
+
+## 備考
+
+記載予定
 
 ## 参考
 [Jetson NanoにROSをインストールする方法](https://qiita.com/karaage0703/items/aa54e086f0a2f165d3e9)
