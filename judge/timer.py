@@ -70,12 +70,12 @@ class Window(QMainWindow):
         reset.pressed.connect(self.Reset) 
 
         # create lap_count button 
-        reset = QPushButton("LapCount", self) 
-        reset_upper_left = (300, 150)
-        reset_width_height = (90, 40)
-        reset.setGeometry(reset_upper_left[0], reset_upper_left[1],
-                          reset_width_height[0], reset_width_height[1])
-        reset.pressed.connect(self.LapCount) 
+        lapcount = QPushButton("LapCount", self) 
+        lapcount_upper_left = (300, 150)
+        lapcount_width_height = (90, 40)
+        lapcount.setGeometry(lapcount_upper_left[0], lapcount_upper_left[1],
+                             lapcount_width_height[0], lapcount_width_height[1])
+        lapcount.pressed.connect(self.LapCount) 
   
         # creating a timer object 
         timer = QTimer(self) 
@@ -84,13 +84,13 @@ class Window(QMainWindow):
 
     # timer callback function 
     def callback_showTime(self):
-        # update timer_conut
-        if self.timer_flag == True:
-            self.timer_count+= 1
-
         # check lap count
         if self.lap_count >= self.lap_count_max:
             self.timer_flag = False
+
+        # update timer_conut
+        if self.timer_flag == True:
+            self.timer_count+= 1
 
         # showing text 
         self.label.setText(self.gettimertext())
