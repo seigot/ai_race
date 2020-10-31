@@ -31,6 +31,7 @@ Jetson_Zoo<br>
 [https://elinux.org/Jetson_Zoo](https://elinux.org/Jetson_Zoo)<br>
 Machine Learning Container for Jetson and JetPack<br>
 [https://ngc.nvidia.com/catalog/containers/nvidia:l4t-ml](https://ngc.nvidia.com/catalog/containers/nvidia:l4t-ml)<br>
+> note: the l4t-ml containers require JetPack 4.4 or newer
 <br>
 以下を参考にすればDockerコンテナ内からホスト側のディスプレイに表示できる<br>
 nvidia-docker/wiki <br>
