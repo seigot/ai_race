@@ -26,3 +26,6 @@ Nvidia jetson-nano camera <br>
  <br>
 Jetson forums <br>
 [forums.developer.nvidia.com](https://forums.developer.nvidia.com/c/agx-autonomous-machines/jetson-embedded-systems/jetson-nano/76/l/latest) <br>
+<br>
+Jetson_Zoo<br>
+[Jetson_Zoo](https://elinux.org/Jetson_Zoo)<br>
