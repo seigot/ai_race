@@ -73,12 +73,12 @@ source devel/setup.sh
 以下を実行して下さい（仮）
 
 ```
-roslaunch tutrual1 wheel_robot.launch
-roslaunch tutrual2 wheel_robot.launch
-roslaunch tutrual3 wheel_robot.launch
-roslaunch tutrual4 wheel_robot.launch
-roslaunch tutrual5 wheel_robot.launch
-roslaunch tutrual6 wheel_robot.launch
+roslaunch tutorial1 wheel_robot.launch
+roslaunch tutorial2 wheel_robot.launch
+roslaunch tutorial3 wheel_robot.launch
+roslaunch tutorial4 wheel_robot.launch
+roslaunch tutorial5 wheel_robot.launch
+roslaunch tutorial6 wheel_robot.launch
 ```
 
 ### 2.2 サンプルコードの説明
