@@ -36,4 +36,10 @@ Machine Learning Container for Jetson and JetPack<br>
 以下を参考にすればDockerコンテナ内からホスト側のディスプレイに表示できる<br>
 nvidia-docker/wiki <br>
 [nvidia-docker/wiki](https://github.com/NVIDIA/nvidia-docker/wiki/NVIDIA-Container-Runtime-on-Jetson) <br>
-Hello World!!
+Hello World!!<br>
+<br>
+すっぴんのdocker<br>
+tensorflow<br>
+[https://hub.docker.com/r/tensorflow/tensorflow](https://hub.docker.com/r/tensorflow/tensorflow)<br>
+pytorch<br>
+[https://hub.docker.com/r/pytorch/pytorch](https://hub.docker.com/r/pytorch/pytorch)<br>
