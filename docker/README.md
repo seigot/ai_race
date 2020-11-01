@@ -30,7 +30,7 @@ Jetson forums <br>
 Jetson_Zoo<br>
 [https://elinux.org/Jetson_Zoo](https://elinux.org/Jetson_Zoo)<br>
 Machine Learning Container for Jetson and JetPack<br>
-[https://ngc.nvidia.com/catalog/containers/nvidia:l4t-ml](https://ngc.nvidia.com/catalog/containers/nvidia:l4t-ml)<br>
+[https://ngc.nvidia.com/catalog/containers/nvidia:l4t-ml](https://ngc.nvidia.com/catalog/containers/nvidia:l4t-ml) <br>
 > note: the l4t-ml containers require JetPack 4.4 or newer
 <br>
 以下を参考にすればDockerコンテナ内からホスト側のディスプレイに表示できる<br>
@@ -40,6 +40,6 @@ Hello World!!<br>
 <br>
 すっぴんのdocker<br>
 tensorflow<br>
-[https://hub.docker.com/r/tensorflow/tensorflow](https://hub.docker.com/r/tensorflow/tensorflow)<br>
+[https://hub.docker.com/r/tensorflow/tensorflow](https://hub.docker.com/r/tensorflow/tensorflow) <br>
 pytorch<br>
-[https://hub.docker.com/r/pytorch/pytorch](https://hub.docker.com/r/pytorch/pytorch)<br>
+[https://hub.docker.com/r/pytorch/pytorch](https://hub.docker.com/r/pytorch/pytorch) <br>
