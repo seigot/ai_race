@@ -4,9 +4,23 @@ ai_race repository
 
 ## 1.準備
 
+### 1.0 jetson nano準備
+
+記載予定
+（シミュレータや機械学習は通常のPCでできなくもないが、以降の環境構築や動作確認はjetson nanoを基準に行う）
+
 ### 1.1 jetson起動
 
 以下からイメージファイルを入手する。
+
+Jetpack 4.4.1が良いと思われる（検証中）
+
+```
+Jetpack 4.4.1
+https://developer.nvidia.com/embedded/jetpack
+```
+
+以下は、Jetpack 4.3 Archive
 
 ```
 Jetpack 4.3 Archive
