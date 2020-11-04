@@ -89,6 +89,18 @@ roslaunch tutorial6 wheel_robot.launch
 
 記載予定
 
+```
+# install pyqt5 and NumPy
+sudo apt-get install -y python3-pip
+sudo apt-get install -y python3-pyqt5
+pip3 install --upgrade pip
+pip3 install numpy
+```
+
+```
+python3 judge/timer.py
+```
+
 ## ルール
 
 [こちら](document/rule.md)に記載予定
