@@ -29,8 +29,8 @@ RUN sudo apt install -y ros-melodic-ros-control ros-melodic-ros-controllers  ros
     wget http://packages.osrfoundation.org/gazebo.key -O - | sudo apt-key add - && \
     sudo apt-get update -y && \
     sudo apt-get install -y ros-melodic-gazebo-ros-pkgs ros-melodic-gazebo-ros-control && \
-    echo "export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:~/ai_race/catkin_ws/src:~/ai_race/catkin_ws/src/sim_world/models" >> ~/.bashrc && \
-    export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:~/ai_race/catkin_ws/src:~/ai_race/catkin_ws/src/sim_world/models && \
+    echo "export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:/home/jetson/ai_race/catkin_ws/src:/home/jetson/ai_race/catkin_ws/src/sim_world/models" >> /home/jetson/.bashrc && \
+    export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:/home/jetson/ai_race/catkin_ws/src:/home/jetson/ai_race/catkin_ws/src/sim_world/models && \
     sudo apt-get install -y ros-melodic-uvc-camera && \
     sudo apt-get install -y ros-melodic-image-*
 

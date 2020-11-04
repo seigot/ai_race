@@ -26,7 +26,7 @@ HOME=/home/jetson
 #}
 
 function setup_package(){
-    echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc
+    echo "source /opt/ros/melodic/setup.bash" >> $HOME/.bashrc
     source /opt/ros/melodic/setup.bash
     cd $HOME
     git clone http://github.com/seigot/ai_race
