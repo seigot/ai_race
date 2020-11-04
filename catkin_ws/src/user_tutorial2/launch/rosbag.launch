@@ -1,0 +1,4 @@
+<launch>
+    <node pkg="rosbag" type="record" name="rosbag_record" args="record -o /home/shiozaki/ /cmd_vel /front_camera/image_raw" />
+</launch>
+

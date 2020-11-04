@@ -1,0 +1,53 @@
+<launch>
+  <!-- roslaunch arguments -->
+  <arg name="show_rviz" default="true"/>
+  <arg name="paused" default="false"/>
+  <arg name="debug" default="false"/>
+  <arg name="gui" default="true"/>
+ 
+  <!-- We resume the logic in empty_world.launch, changing only the name of 
+    the world to be launched -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find sim_world)/worlds/medium_track_w_asphalt.world" />
+    <arg name="paused" value="$(arg paused)" />
+    <arg name="debug" value="$(arg debug)" />
+    <arg name="gui" value="$(arg gui)" />    
+    <arg name="use_sim_time" value="true" />
+    <arg name="headless" value="false" />
+  </include>
+  
+  <!-- urdf xml robot description loaded on the Parameter Server-->
+  <param name="robot_description" command="$(find xacro)/xacro.py '$(find user_tutorial2)/urdf/wheel_robot.urdf.xacro'" />
+
+  <!-- push robot_description to factory and spawn robot in gazebo -->
+  <node name="wheel_robot_spawn" pkg="gazebo_ros" type="spawn_model" output="screen" 
+    args="-urdf -x 1.6 -y 0.0 -z 0.0 -Y 1.57  -param robot_description -model wheel_robot" />
+ 
+  <!-- robot visualization in Rviz -->
+  <group if="$(arg show_rviz)">
+    <node name="rviz" pkg="rviz" type="rviz" output="screen" args="-d $(find user_tutorial2)/launch/wheel_robot.rviz"/> 
+  </group> 
+
+  <!-- load joint controller configurations from YAML file to parameter server -->
+  <rosparam file="$(find user_tutorial2)/config/joint_position_control.yaml" command="load" />
+  <!-- load the controllers -->
+  <node name="controller_manager" pkg="controller_manager" type="spawner" respawn="false"
+    output="screen" args="rear_left_wheel_velocity_controller rear_right_wheel_velocity_controller
+                                        front_left_wheel_velocity_controller front_right_wheel_velocity_controller
+                                        front_left_hinge_position_controller front_right_hinge_position_controller
+                                        joint_state_controller obj_wheel_controller"/>
+
+  <!-- publish all the frames to TF -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher">
+    <param name="publish_frequency" value="50"/> <!-- Hz -->
+  </node>
+  <!--<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" ></node>-->
+  
+  <!--<node name="rqt_gui" pkg="rqt_gui" type="rqt_gui"/>-->
+  <node name="image_view" pkg="image_view" type="image_view" args="image:=/front_camera/image_raw" />
+
+  <!-- servo node -->
+    <node pkg="user_tutorial2" type="servo_commands.py" name="servo_commands" output="screen" />
+  <!-- joycon node -->
+    <!--<node pkg="wheel_robot" type="joycon.py" name="joycon" output="screen" />-->
+</launch>
