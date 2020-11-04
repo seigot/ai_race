@@ -114,5 +114,5 @@ python3 judge/timer.py
 記載予定
 
 ## 参考
-[Jetson NanoにROSをインストールする方法](https://qiita.com/karaage0703/items/aa54e086f0a2f165d3e9)
-[Jetson Nanoにスワップ領域を作成する](https://www.henjins-toolbox.tech/entry/jetsonnano_make-swap)
+[Jetson NanoにROSをインストールする方法](https://qiita.com/karaage0703/items/aa54e086f0a2f165d3e9) <br>
+[Jetson Nanoにスワップ領域を作成する](https://www.henjins-toolbox.tech/entry/jetsonnano_make-swap) <br>
