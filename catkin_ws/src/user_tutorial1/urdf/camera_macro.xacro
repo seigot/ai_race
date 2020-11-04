@@ -22,8 +22,8 @@
           <!--<horizontal_fov>1.3962634</horizontal_fov>-->
           <horizontal_fov>2</horizontal_fov>
           <image>
-            <width>1200</width>
-            <height>600</height>
+            <width>320</width>
+            <height>240</height>
             <format>R8G8B8</format>
           </image>
           <clip>
