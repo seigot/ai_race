@@ -3,13 +3,13 @@
 <br>
 ## 1. 準備
 
-### 1.0 jetson nano準備
+### 1.0. jetson nano準備
 
 記載予定 <br>
 [こちら](https://qiita.com/seigot/items/115e25d0ae7149047760)にjetson nanoの備品を記載<br>
 （シミュレータや機械学習は通常のPCでできなくもないが、環境統一のため、以降の環境構築や動作確認はjetson nanoを基準に行う） <br>
 
-### 1.1 jetson起動
+### 1.1. jetson起動
 
 以下からイメージファイルを入手する。 <br>
  <br>
@@ -32,7 +32,7 @@ https://developer.nvidia.com/jetpack-43-archive
 入手後、イメージファイルをSDカードに書き込んで、JetsonNanoに挿して起動する。
 
 
-### 1.2 ROS(melodic)のインストール
+### 1.2. ROS(melodic)のインストール
 
 terminalから以下を実行する。
 
@@ -46,7 +46,7 @@ cd jetson-nano-tools
 [Jetson NanoにROSをインストールする方法](https://qiita.com/karaage0703/items/aa54e086f0a2f165d3e9)
 
 
-### 1.3 その他、パッケージのインストール
+### 1.3. その他、パッケージのインストール
 
 ```
 # joint state controller
@@ -81,7 +81,7 @@ sudo apt-get install -y ros-melodic-image-*
 # pandas
 ```
 
-### 1.4 初期設定
+### 1.4. 初期設定
 
 ```
 echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc
@@ -99,7 +99,7 @@ source devel/setup.sh
 
 ## 2. サンプルコードの実行
 
-### 2.1 コマンドからの実行手順
+### 2.1. コマンドからの実行手順
 
 以下を実行して下さい（仮）
 
@@ -112,7 +112,7 @@ roslaunch tutorial5 wheel_robot.launch
 roslaunch tutorial6 wheel_robot.launch
 ```
 
-### 2.2 サンプルコードの説明
+### 2.2. サンプルコードの説明
 
 記載予定
 
@@ -134,7 +134,7 @@ xxx
 xxx
 ```
 
-### 2.3 走行タイム計測器
+### 2.3. 走行タイム計測器
 
 記載予定
 
@@ -150,7 +150,7 @@ pip3 install numpy
 python3 judge/timer.py
 ```
 
-## ルール
+## 3. ルール
 
 [こちら](document/rule.md)に記載予定
 
