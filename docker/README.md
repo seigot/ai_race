@@ -5,7 +5,19 @@ TODO<br>
 * jetpack4.3標準のDockerイメージがあるか調べる
 * AIのライブラリ（tensorflow/pytorchなど）のインストール手順を調べる
 
-# ビルド手順
+## dockerコンテナ起動手順（仮）
+
+以下を実行（仮）
+
+```
+sudo xhost +si:localuser:root
+sudo docker run --runtime nvidia --network host -it -e DISPLAY=$DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix seigott/ai_race_docker
+```
+
+以下を参考 <br>
+[nvidia-docker/wiki](https://github.com/NVIDIA/nvidia-docker/wiki/NVIDIA-Container-Runtime-on-Jetson) <br>
+
+## ビルド手順
 
 以下を実行
 
@@ -21,7 +33,7 @@ docker push seigott/ai_race_docker .
 docker logout
 ```
 
-# 参考（にする予定）
+## 参考（にする予定）
 JetPack4.3 <br>
 [https://developer.nvidia.com/jetpack-43-archive](https://developer.nvidia.com/jetpack-43-archive) <br>
 JetPack 4.4 includes L4T 32.4.3 with these highlights: <br>
