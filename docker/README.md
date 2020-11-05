@@ -5,6 +5,22 @@ TODO<br>
 * jetpack4.3標準のDockerイメージがあるか調べる
 * AIのライブラリ（tensorflow/pytorchなど）のインストール手順を調べる
 
+# ビルド手順
+
+以下を実行
+
+```
+docker build -t seigott/ai_race_docker .
+```
+
+pushする場合は以下
+
+```
+docker login
+docker push seigott/ai_race_docker .
+docker logout
+```
+
 # 参考（にする予定）
 JetPack4.3 <br>
 [https://developer.nvidia.com/jetpack-43-archive](https://developer.nvidia.com/jetpack-43-archive) <br>
