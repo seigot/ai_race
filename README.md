@@ -6,7 +6,8 @@
 ### 1.0 jetson nano準備
 
 記載予定 <br>
-（シミュレータや機械学習は通常のPCでできなくもないが、以降の環境構築や動作確認はjetson nanoを基準に行う） <br>
+[こちら](https://qiita.com/seigot/items/115e25d0ae7149047760)にjetson nanoの備品を記載<br>
+（シミュレータや機械学習は通常のPCでできなくもないが、環境統一のため、以降の環境構築や動作確認はjetson nanoを基準に行う） <br>
 
 ### 1.1 jetson起動
 
@@ -69,12 +70,15 @@ sudo apt-get install -y ros-melodic-image-*
 # opencv
 #pip3 install -U pip
 #python3 -m pip install opencv-python
+# ### opencv はソースからビルドする必要があるみたいなので確認中
+
 # sklearn
 #pip3 install scikit-learn
 #pip3 install matplotlib
 #sudo apt-get -y install python3-tk
 # pytorch v1.6
 # tensorflow
+# pandas
 ```
 
 ### 1.4 初期設定
@@ -112,7 +116,25 @@ roslaunch tutorial6 wheel_robot.launch
 
 記載予定
 
-### 2.3 審判サーバ
+シミュレータ起動
+
+```
+xxx
+```
+
+学習
+
+```
+xxx
+```
+
+推論
+
+```
+xxx
+```
+
+### 2.3 走行タイム計測器
 
 記載予定
 
@@ -143,3 +165,8 @@ python3 judge/timer.py
 ## 参考
 [Jetson NanoにROSをインストールする方法](https://qiita.com/karaage0703/items/aa54e086f0a2f165d3e9) <br>
 [Jetson Nanoにスワップ領域を作成する](https://www.henjins-toolbox.tech/entry/jetsonnano_make-swap) <br>
+[NVIDIA Jetson Nanoで OpenCV 3をビルドしてインストールする方法、NVCaffe等の OpenCV 4未対応を動かす](http://www.neko.ne.jp/~freewing/raspberry_pi/nvidia_jetson_nano_build_opencv_3410/) <br>
+
+## Finnaly
+
+~~ HAVE FUN ! ~~
