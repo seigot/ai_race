@@ -1,12 +1,25 @@
 # ai_race
-ai_race repository
-
-
+機械学習を学ぶことを目的とした、AIで車両を操作して走行タイムを競うゲームです。 <br>
+<br>
 ## 1.準備
+
+### 1.0 jetson nano準備
+
+記載予定 <br>
+（シミュレータや機械学習は通常のPCでできなくもないが、以降の環境構築や動作確認はjetson nanoを基準に行う） <br>
 
 ### 1.1 jetson起動
 
-以下からイメージファイルを入手する。
+以下からイメージファイルを入手する。 <br>
+ <br>
+Jetpack 4.4.1が良いと思われる（検証中） <br>
+
+```
+Jetpack 4.4.1
+https://developer.nvidia.com/embedded/jetpack
+```
+
+以下は、Jetpack 4.3 Archive
 
 ```
 Jetpack 4.3 Archive
@@ -48,6 +61,20 @@ export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:~/ai_race/catkin_ws/src:~/ai_race/ca
 # camera image
 sudo apt-get install -y ros-melodic-uvc-camera
 sudo apt-get install -y ros-melodic-image-*
+```
+
+機械学習用ライブラリ（仮）
+
+```
+# opencv
+#pip3 install -U pip
+#python3 -m pip install opencv-python
+# sklearn
+#pip3 install scikit-learn
+#pip3 install matplotlib
+#sudo apt-get -y install python3-tk
+# pytorch v1.6
+# tensorflow
 ```
 
 ### 1.4 初期設定

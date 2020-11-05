@@ -27,34 +27,47 @@ from torch2trt import TRTModule
 import cv2
 from cv_bridge import CvBridge
 
-flag_move = 0
-
-twist_pub = None
+model = models.resnet18()
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
+def init_inference():
 
-model = models.resnet18()
-model.fc = torch.nn.Linear(512, 512)
-model.eval()
-model.load_state_dict(torch.load('/home/shiozaki/work/experiments/models/checkpoints/sim_race_ResNet18_epoch=34.pth'))
-trt = True
-if trt == True :
-    if False :
-        model = model.cuda()
-        x = torch.ones((1, 3, 240, 320)).cuda()
-        from torch2trt import torch2trt
-		#model_trt = torch2trt(model, [x], max_batch_size=100, fp16_mode=True)
-        model_trt = torch2trt(model, [x], max_batch_size=100)
-		#print(type(model_trt))
-		#print(model_trt)
-        torch.save(model_trt.state_dict(), 'road_following_model_trt.pth')
-    model_trt = TRTModule()
-    model_trt.load_state_dict(torch.load('road_following_model_trt.pth'))
+    flag_move = 0
 
-    model = model_trt.to(device)
-else :
-    model = model.to(device)
-#print(model)
+    twist_pub = None
+
+    global model
+    global device
+    model.fc = torch.nn.Linear(512, 3)
+    model.eval()
+    #model.load_state_dict(torch.load('/home/shiozaki/work/experiments/models/checkpoints/sim_race_ResNet18_epoch=34.pth'))
+    #model.load_state_dict(torach.load(args.pretrained_model))
+    
+    if args.trt_module :
+        if args.trt_conversion :
+            model.load_state_dict(torch.load('/home/shiozaki/work/experiments/models/checkpoints/sim_race_joycon_ResNet18_6_epoch=20.pth'))
+            #model.load_state_dict(torach.load(args.pretrained_model))
+            model = model.cuda()
+            x = torch.ones((1, 3, 240, 320)).cuda()
+            from torch2trt import torch2trt
+            model_trt = torch2trt(model, [x], max_batch_size=100, fp16_mode=True)
+            #model_trt = torch2trt(model, [x], max_batch_size=100)
+            #print(type(model_trt))
+            #print(model_trt)
+            torch.save(model_trt.state_dict(), args.trt_model)
+            #torch.save(model_trt.state_dict(), 'road_following_model_trt_half.pth')
+            exit()
+        model_trt = TRTModule()
+        #model_trt.load_state_dict(torch.load('road_following_model_trt_half.pth'))
+        model_trt.load_state_dict(torch.load(args.trt_model))
+        #model_trt.load_state_dict(torch.load('road_following_model_trt.pth'))
+
+        model = model_trt.to(device)
+    else :
+        model.load_state_dict(torch.load('/home/shiozaki/work/experiments/models/checkpoints/sim_race_joycon_ResNet18_6_epoch=20.pth'))
+        #model.load_state_dict(torach.load(args.pretrained_model))
+        model = model.to(device)
+    #print(model)
 
 i=0
 pre = time.time()
@@ -70,6 +83,8 @@ def set_throttle_steer(data):
     global tmp
     global bridge
     global twist
+    global model
+    global device
 
     i=i+1
     if i == 100 :
@@ -93,9 +108,9 @@ def set_throttle_steer(data):
     #print(outputs_np)
     output = np.argmax(outputs_np, axis=1)
     print(output)
-    angular_z = (float(output)-256)/100
-    #angular_z = (float(output)-1)
-    twist.linear.x = 1.6
+    #angular_z = (float(output)-256)/100
+    angular_z = (float(output)-1)
+    twist.linear.x = 1.4
     twist.linear.y = 0.0
     twist.linear.z = 0.0
     twist.angular.x = 0.0
@@ -104,8 +119,6 @@ def set_throttle_steer(data):
     twist_pub.publish(twist)
     end = time.time()
     print ("time_each:{0:.3f}".format((end - start)) + "[sec]")
-
-
 
 
 def inference_from_image():
@@ -119,7 +132,22 @@ def inference_from_image():
     # spin() simply keeps python from exiting until this node is stopped
     #rospy.spin()
 
+def parse_args():
+	# Set arguments.
+	arg_parser = argparse.ArgumentParser(description="Autonomous with inference")
+	
+	arg_parser.add_argument("--trt_conversion", action='store_true')
+	arg_parser.add_argument("--trt_module", action='store_true')
+	arg_parser.add_argument("--pretrained_model", type=str)
+	arg_parser.add_argument("--trt_model", type=str, default='road_following_model_trt.pth' )
+
+	args = arg_parser.parse_args()
+
+	return args
+
 if __name__ == '__main__':
+    args = parse_args()
+    init_inference()
     try:
         inference_from_image()
     except rospy.ROSInterruptException:
