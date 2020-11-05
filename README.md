@@ -1,7 +1,6 @@
 # ai_race
-ai_race repository
-
-
+機械学習を学ぶことを目的とした、AIで車両を操作して走行タイムを競うゲームです。 <br>
+<br>
 ## 1.準備
 
 ### 1.0 jetson nano準備
