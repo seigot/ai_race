@@ -63,6 +63,20 @@ sudo apt-get install -y ros-melodic-uvc-camera
 sudo apt-get install -y ros-melodic-image-*
 ```
 
+機械学習用ライブラリ（仮）
+
+```
+# opencv
+#pip3 install -U pip
+#python3 -m pip install opencv-python
+# sklearn
+#pip3 install scikit-learn
+#pip3 install matplotlib
+#sudo apt-get -y install python3-tk
+# pytorch v1.6
+# tensorflow
+```
+
 ### 1.4 初期設定
 
 ```
