@@ -4,10 +4,12 @@ LABEL maintainer="seigot<s.takada.3o3@gmail.com>"
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && \
-    apt-get install -yq wget curl git build-essential vim sudo lsb-release locales bash-completion tzdata && \
-    apt-get install -yq emacs && \
-    apt-get install -yq gnupg gnupg2 gnupg1 && \
-    apt-get install -yq gosu
+    apt-get install -yq wget curl git build-essential vim sudo lsb-release locales bash-completion tzdata \
+    emacs \
+    gnupg gnupg2 gnupg1 \
+    gosu \
+    unzip \
+    less
 
 # Replace 1000 with your user / group id
 RUN export uid=1000 gid=1000 && \
@@ -33,6 +35,18 @@ RUN sudo apt install -y ros-melodic-ros-control ros-melodic-ros-controllers  ros
     export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:/home/jetson/ai_race/catkin_ws/src:/home/jetson/ai_race/catkin_ws/src/sim_world/models && \
     sudo apt-get install -y ros-melodic-uvc-camera && \
     sudo apt-get install -y ros-melodic-image-*
+
+# install pyqt5 and Numpy for timer
+RUN sudo apt-get install -y python3-pip && \
+    sudo apt-get install -y python3-pyqt5 && \
+    pip3 install --upgrade pip && \
+    pip3 install numpy
+
+# install opencv python3
+RUN git clone https://github.com/mdegans/nano_build_opencv /tmp/nano_build_opencv && \
+    cp /tmp/nano_build_opencv/build_opencv.sh . && \
+    gosu jetson ./build_opencv.sh && \
+    rm ./build_opencv.sh
 
 #USER jetson
 #ENV HOME /home/jetson
