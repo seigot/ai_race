@@ -126,6 +126,9 @@ sudo apt-get install -y ros-melodic-image-*
 |  pandas  |  0.22.0(1.1.3必須かも)  |
 |  cv2  |  xxx(3.4.10必須かも)  |
 
+参考 <br>
+[pytorchとtensoflowのバージョンをコマンドラインから調べる](https://qiita.com/seigot/items/0b81f601e5c9e30d0e46) <br>
+
 ### 1.4. 初期設定
 
 ```
