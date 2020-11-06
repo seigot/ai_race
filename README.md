@@ -31,7 +31,7 @@ https://developer.nvidia.com/jetpack-43-archive
 
 入手後、イメージファイルをSDカードに書き込んで、JetsonNanoに挿して起動する。<br>
 <br>
-初回起動時に[[Jetson Nano関係のTIPSまとめ Swapファイルの設定](https://qiita.com/karaage0703/items/b14c249aa33112669ee4)を参考に、SWAPファイル6GB追加 <br>
+初回起動時に[[Jetson Nano関係のTIPSまとめ Swapファイルの設定](https://qiita.com/karaage0703/items/b14c249aa33112669ee4)]を参考に、SWAPファイル6GB追加 <br>
 
 ```
 git clone https://github.com/JetsonHacksNano/installSwapfile
@@ -177,7 +177,7 @@ python3 judge/timer.py
 
 ## 参考
 [Jetson NanoにROSをインストールする方法](https://qiita.com/karaage0703/items/aa54e086f0a2f165d3e9) <br>
-[Jetson Nanoにスワップ領域を作成する](https://www.henjins-toolbox.tech/entry/jetsonnano_make-swap) <br>
+[Jetson Nano関係のTIPSまとめ Swapファイルの設定](https://qiita.com/karaage0703/items/b14c249aa33112669ee4) <br>
 [NVIDIA Jetson Nanoで OpenCV 3をビルドしてインストールする方法、NVCaffe等の OpenCV 4未対応を動かす](http://www.neko.ne.jp/~freewing/raspberry_pi/nvidia_jetson_nano_build_opencv_3410/) <br>
 
 ## Finnaly
