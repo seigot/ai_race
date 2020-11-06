@@ -114,7 +114,7 @@ mv yhlmaie35hu8jv2xzvtxsh0rrpcu97yj.whl  torch-1.4.0-cp27-cp27mu-linux_aarch64.w
 pip install torch-1.4.0-cp27-cp27mu-linux_aarch64.whl
 ### torch vision
 pip install future
-pip install torchvision
+pip install torchvision==0.2.2
 ### torch2trt
 git clone https://github.com/NVIDIA-AI-IOT/torch2trt
 cd torch2trt
@@ -270,6 +270,7 @@ python3 judge/timer.py
 [NVIDIA Jetson Nanoで OpenCV 3をビルドしてインストールする方法、NVCaffe等の OpenCV 4未対応を動かす](http://www.neko.ne.jp/~freewing/raspberry_pi/nvidia_jetson_nano_build_opencv_3410/) <br>
 [https://github.com/mdegans/nano_build_opencv](https://github.com/mdegans/nano_build_opencv) <br>
 [PyTorch for Jetson](https://forums.developer.nvidia.com/t/pytorch-for-jetson-version-1-7-0-now-available/72048) <br>
+[https://github.com/NVIDIA-AI-IOT/torch2trt](https://github.com/NVIDIA-AI-IOT/torch2trt) <br>
 
 ## Finnaly
 
