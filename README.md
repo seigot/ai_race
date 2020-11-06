@@ -89,6 +89,7 @@ python3用ライブラリ
 ```
 # opencv python2,3
 # ### opencv python はソースからビルドする必要がある
+cd ~
 git clone https://github.com/mdegans/nano_build_opencv
 cd nano_build_opencv
 ./build_opencv.sh 3.4.10
