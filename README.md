@@ -110,11 +110,17 @@ cd nano_build_opencv
 #cd jetson-inference/build
 #./install-pytorch.sh
 #
+### pytorch
 wget https://nvidia.box.com/shared/static/yhlmaie35hu8jv2xzvtxsh0rrpcu97yj.whl
 mv yhlmaie35hu8jv2xzvtxsh0rrpcu97yj.whl  torch-1.4.0-cp27-cp27mu-linux_aarch64.whl
 pip install torch-1.4.0-cp27-cp27mu-linux_aarch64.whl
+### torch vision
 pip install future
 pip install torchvision
+### torch2trt
+git clone https://github.com/NVIDIA-AI-IOT/torch2trt
+cd torch2trt
+python setup.py install
 ```
 
 - ライブラリバージョン <br>
