@@ -107,19 +107,22 @@ cd nano_build_opencv
 
 # pytorch v1.4 python2,3
 ### pytorch
-wget https://nvidia.box.com/shared/static/c3d7vm4gcs9m728j6o5vjay2jdedqb55.whl
-mv c3d7vm4gcs9m728j6o5vjay2jdedqb55.whl torch-1.4.0-cp36-cp36m-linux_aarch64.whl
-pip3 install torch-1.4.0-cp36-cp36m-linux_aarch64.whl
 wget https://nvidia.box.com/shared/static/yhlmaie35hu8jv2xzvtxsh0rrpcu97yj.whl
 mv yhlmaie35hu8jv2xzvtxsh0rrpcu97yj.whl  torch-1.4.0-cp27-cp27mu-linux_aarch64.whl
 pip install torch-1.4.0-cp27-cp27mu-linux_aarch64.whl
+wget https://nvidia.box.com/shared/static/c3d7vm4gcs9m728j6o5vjay2jdedqb55.whl
+mv c3d7vm4gcs9m728j6o5vjay2jdedqb55.whl torch-1.4.0-cp36-cp36m-linux_aarch64.whl
+pip3 install torch-1.4.0-cp36-cp36m-linux_aarch64.whl
 ### torch vision
 pip install future
 pip install torchvision==0.2.2
+#pip3 install future
+#pip3 install torchvision==0.2.2
 ### torch2trt
 git clone https://github.com/NVIDIA-AI-IOT/torch2trt
 cd torch2trt
 python setup.py install
+python3 setup.py install
 ```
 
 - ライブラリバージョン <br>
