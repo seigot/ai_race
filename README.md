@@ -32,7 +32,7 @@ https://developer.nvidia.com/jetpack-43-archive
 入手後、イメージファイルをSDカードに書き込んで、JetsonNanoに挿して起動する。<br>
 起動後、ネットワークに接続する。<br>
 
-- SWAPファイル追加
+- SWAPファイル追加 <br>
 初回起動時に[[Jetson Nano関係のTIPSまとめ Swapファイルの設定](https://qiita.com/karaage0703/items/b14c249aa33112669ee4)]を参考に、SWAPファイル6GB追加 <br>
 
 ```
@@ -45,6 +45,7 @@ cd installSwapfile
 
 ```
 free -mh
+# SWAP領域が増えていることを確認
 ```
 
 ### 1.2. ROS(melodic)のインストール
