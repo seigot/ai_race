@@ -104,13 +104,11 @@ cd nano_build_opencv
 # pip3 install numpy
 # pip3 install -U pandas
 
-# pytorch python2,3
-### Installing PyTorch
-#https://github.com/dusty-nv/jetson-inference
-#cd jetson-inference/build
-#./install-pytorch.sh
-#
+# pytorch v1.4 python2,3
 ### pytorch
+wget https://nvidia.box.com/shared/static/c3d7vm4gcs9m728j6o5vjay2jdedqb55.whl
+mv c3d7vm4gcs9m728j6o5vjay2jdedqb55.whl torch-1.4.0-cp36-cp36m-linux_aarch64.whl
+pip3 install torch-1.4.0-cp36-cp36m-linux_aarch64.whl
 wget https://nvidia.box.com/shared/static/yhlmaie35hu8jv2xzvtxsh0rrpcu97yj.whl
 mv yhlmaie35hu8jv2xzvtxsh0rrpcu97yj.whl  torch-1.4.0-cp27-cp27mu-linux_aarch64.whl
 pip install torch-1.4.0-cp27-cp27mu-linux_aarch64.whl
@@ -269,6 +267,7 @@ python3 judge/timer.py
 [Jetson Nano関係のTIPSまとめ Swapファイルの設定](https://qiita.com/karaage0703/items/b14c249aa33112669ee4) <br>
 [NVIDIA Jetson Nanoで OpenCV 3をビルドしてインストールする方法、NVCaffe等の OpenCV 4未対応を動かす](http://www.neko.ne.jp/~freewing/raspberry_pi/nvidia_jetson_nano_build_opencv_3410/) <br>
 [https://github.com/mdegans/nano_build_opencv](https://github.com/mdegans/nano_build_opencv) <br>
+[PyTorch for Jetson](https://forums.developer.nvidia.com/t/pytorch-for-jetson-version-1-7-0-now-available/72048) <br>
 
 ## Finnaly
 
