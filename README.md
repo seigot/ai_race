@@ -85,8 +85,8 @@ sudo apt-get install -y ros-melodic-image-*
 
 ```
 # opencv
---#pip3 install -U pip--
---#python3 -m pip install opencv-python--
+#pip3 install -U pip
+#python3 -m pip install opencv-python
 # ### opencv はソースからビルドする必要があるみたいなので確認中
 # git clone https://github.com/mdegans/nano_build_opencv
 # cd nano_build_opencv
@@ -99,6 +99,10 @@ sudo apt-get install -y ros-melodic-image-*
 # pytorch v1.6
 # tensorflow
 # pandas
+# pip3 install cython
+# pip3 install numpy
+# pip3 install -U pandas
+
 ```
 
 - ライブラリバージョン <br>
@@ -142,6 +146,8 @@ source devel/setup.sh
 ### 2.1. コマンドからの実行手順
 
 以下を実行して下さい（仮）
+<br>
+ROS動作確認用（仮） <br>
 
 ```
 roslaunch tutorial1 wheel_robot.launch
@@ -150,6 +156,36 @@ roslaunch tutorial3 wheel_robot.launch
 roslaunch tutorial4 wheel_robot.launch
 roslaunch tutorial5 wheel_robot.launch
 roslaunch tutorial6 wheel_robot.launch
+```
+
+機械学習の動作確認用（仮） <br>
+
+```
+## rosbag取得
+roslaunch user_tutorial1 wheel_robot.launch
+roslaunch user_tutorial1 rosbag.launch output_path:=/home/ubuntu
+rqt # robot steering -> v,rad指定
+
+## rosbag --> image/command 変換
+cd ~/ai_race/catkin_ws/src/utility/scripts
+mkdir -p /Images_from_rosbag
+sudo chmod 777 /Images_from_rosbag
+python rosbag_to_images_and_commands.py **.bag   # bagファイルから画像とコマンドを取得
+python listup_all_rosbag_timestamp.py *.bag               # 時刻表示できる
+
+## 学習 
+cd learning (学習用フォルダへ移動) 
+python3 train.py --data_csv <csvのパス> --model_name <保存するモデル名>  
+
+##  推論(trtなし) 
+roscd user_tutorial2/scripts 
+python inference_from_image.py --pretrained_model <学習させたモデル>  
+
+## 推論(trtあり） 
+#### 準備（準備は最初の一回でOK） 
+python3 inference_from_image.py --trt_conversion --pretrained_model <学習させたモデル> --trt_model <保存するtrtモデル名>   
+#### 実行 
+python inference_from_image.py --trt_module --trt_model <保存したtrtモデル名> 
 ```
 
 ### 2.2. サンプルコードの説明
