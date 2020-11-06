@@ -104,15 +104,16 @@ cd nano_build_opencv
 # pip3 install numpy
 # pip3 install -U pandas
 
-# pytorch v1.6 python2,3
+# pytorch python2,3
 ### Installing PyTorch
 #https://github.com/dusty-nv/jetson-inference
 #cd jetson-inference/build
 #./install-pytorch.sh
 #
-#wget https://nvidia.box.com/shared/static/yhlmaie35hu8jv2xzvtxsh0rrpcu97yj.whl
-#mv yhlmaie35hu8jv2xzvtxsh0rrpcu97yj.whl  torch-1.4.0-cp27-cp27mu-linux_aarch64.whl
-#pip install torch-1.4.0-cp27-cp27mu-linux_aarch64.whl
+wget https://nvidia.box.com/shared/static/yhlmaie35hu8jv2xzvtxsh0rrpcu97yj.whl
+mv yhlmaie35hu8jv2xzvtxsh0rrpcu97yj.whl  torch-1.4.0-cp27-cp27mu-linux_aarch64.whl
+pip install torch-1.4.0-cp27-cp27mu-linux_aarch64.whl
+pip install future
 
 ```
 
