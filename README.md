@@ -125,21 +125,23 @@ python setup.py install
 <br>
 検証環境（マスター） <br>
 
-|  ライブラリ  |  バージョン  |
-| ---- | ---- |
-|  pytorch  |  1.3  |
-|  sklearn  |  0.19.1  |
-|  pandas  |  1.1.3  |
-|  cv2  |  3.4.10  |
+|  ライブラリ  |  バージョン(python3)  |　 バージョン(python)  |
+| ---- | ---- | ---- |
+|  pytorch  |  1.3  |  -  |
+|  torchvision  |  -  |  -  |
+|  sklearn  |  0.19.1  |  -  |
+|  pandas  |  1.1.3  |  -  |
+|  cv2  |  3.4.10  |  -  |
 
 検証環境（マスター追従のテスト用１） <br>
 
-|  ライブラリ  |  バージョン  |
-| ---- | ---- |
-|  pytorch  |  1.6.0  |
-|  sklearn  |  0.23.2  |
-|  pandas  |  0.22.0(1.1.3必須かも)  |
-|  cv2  |  xxx(3.4.10必須かも)  |
+|  ライブラリ  |  バージョン(python3)  |　 バージョン(python)  |
+| ---- | ---- | ---- |
+|  pytorch  |  ~~1.6.0~~ 1.4.0  |  1.4.0  |
+|  torchvision  |  0.2.2  |  0.2.2  |
+|  sklearn  |  0.23.2  |  -  |
+|  pandas  |  0.22.0 ~~(1.1.3必須かも)~~  |  -  |
+|  cv2  |  3.4.10  |  3.4.10   |
 
 参考 <br>
 [pytorchとtensoflowのバージョンをコマンドラインから調べる](https://qiita.com/seigot/items/0b81f601e5c9e30d0e46) <br>
