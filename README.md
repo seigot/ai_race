@@ -30,7 +30,9 @@ https://developer.nvidia.com/jetpack-43-archive
 ```
 
 入手後、イメージファイルをSDカードに書き込んで、JetsonNanoに挿して起動する。<br>
-<br>
+起動後、ネットワークに接続する。<br>
+
+- SWAPファイル追加
 初回起動時に[[Jetson Nano関係のTIPSまとめ Swapファイルの設定](https://qiita.com/karaage0703/items/b14c249aa33112669ee4)]を参考に、SWAPファイル6GB追加 <br>
 
 ```
@@ -94,6 +96,26 @@ sudo apt-get install -y ros-melodic-image-*
 # pandas
 ```
 
+- ライブラリバージョン <br>
+<br>
+検証環境（マスター） <br>
+
+|  ライブラリ  |  バージョン  |
+| ---- | ---- |
+|  pytorch  |  1.3  |
+|  sklearn  |  0.19.1  |
+|  pandas  |  1.1.3  |
+|  cv2  |  3.4.10  |
+
+検証環境（マスター追従のテスト用１） <br>
+
+|  ライブラリ  |  バージョン  |
+| ---- | ---- |
+|  pytorch  |  1.6.0  |
+|  sklearn  |  0.23.2  |
+|  pandas  |  0.22.0(1.1.3必須かも)  |
+|  cv2  |  xxx(3.4.10必須かも)  |
+
 ### 1.4. 初期設定
 
 ```
@@ -132,19 +154,22 @@ roslaunch tutorial6 wheel_robot.launch
 シミュレータ起動
 
 ```
-xxx
+ex.)
+bash scripts/prepare.sh
 ```
 
 学習
 
 ```
-xxx
+ex.)
+bash scripts/start.sh 1
 ```
 
 推論
 
 ```
-xxx
+ex.)
+bash scripts/start.sh 2
 ```
 
 ### 2.3. 走行タイム計測器
