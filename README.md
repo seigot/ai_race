@@ -32,7 +32,7 @@ https://developer.nvidia.com/jetpack-43-archive
 入手後、イメージファイルをSDカードに書き込んで、JetsonNanoに挿して起動する。<br>
 起動後、ネットワークに接続する。<br>
 
-- SWAPファイル追加 <br>
+- SWAPファイル追加【必須】 <br>
 初回起動時に[[Jetson Nano関係のTIPSまとめ Swapファイルの設定](https://qiita.com/karaage0703/items/b14c249aa33112669ee4)]を参考に、SWAPファイル6GB追加 <br>
 
 ```
@@ -84,22 +84,22 @@ sudo apt-get install -y ros-melodic-image-*
 
 - 機械学習用ライブラリ（仮）
 
-```
-# opencv
-#pip3 install -U pip
-#python3 -m pip install opencv-python
-# ### opencv はソースからビルドする必要があるみたいなので確認中
-# git clone https://github.com/mdegans/nano_build_opencv
-# cd nano_build_opencv
-# ./build_opencv.sh 3.4.10
+python3用ライブラリ
 
-# sklearn
+```
+# opencv python2,3
+# ### opencv python はソースからビルドする必要がある
+git clone https://github.com/mdegans/nano_build_opencv
+cd nano_build_opencv
+./build_opencv.sh 3.4.10
+
+# sklearn python3
 #pip3 install scikit-learn
 #pip3 install matplotlib
 #sudo apt-get -y install python3-tk
-# pytorch v1.6
-# tensorflow
-# pandas
+# pytorch v1.6 python2,3
+# tensorflow python2,3
+# pandas python2,3
 # pip3 install cython
 # pip3 install numpy
 # pip3 install -U pandas
@@ -181,7 +181,7 @@ python listup_all_rosbag_timestamp.py *.bag               # 時刻表示でき�
 cd learning (学習用フォルダへ移動) 
 python3 train.py --data_csv <csvのパス> --model_name <保存するモデル名>  
 
-##  推論(trtなし) 
+## 推論(trtなし trt=比較的軽量なモデル) 
 roscd user_tutorial2/scripts 
 python inference_from_image.py --pretrained_model <学習させたモデル>  
 
