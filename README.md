@@ -63,6 +63,8 @@ cd jetson-nano-tools
 
 ### 1.3. その他、パッケージのインストール
 
+- ROS関連のパッケージ
+
 ```
 # joint state controller
 sudo apt install -y ros-melodic-ros-control ros-melodic-ros-controllers  ros-melodic-joint-state-controller ros-melodic-effort-controllers ros-melodic-position-controllers ros-melodic-joint-trajectory-controller
@@ -79,13 +81,16 @@ sudo apt-get install -y ros-melodic-uvc-camera
 sudo apt-get install -y ros-melodic-image-*
 ```
 
-機械学習用ライブラリ（仮）
+- 機械学習用ライブラリ（仮）
 
 ```
 # opencv
-#pip3 install -U pip
-#python3 -m pip install opencv-python
+--#pip3 install -U pip--
+--#python3 -m pip install opencv-python--
 # ### opencv はソースからビルドする必要があるみたいなので確認中
+# git clone https://github.com/mdegans/nano_build_opencv
+# cd nano_build_opencv
+# ./build_opencv.sh 3.4.10
 
 # sklearn
 #pip3 install scikit-learn
