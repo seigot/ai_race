@@ -98,12 +98,21 @@ cd nano_build_opencv
 #pip3 install scikit-learn
 #pip3 install matplotlib
 #sudo apt-get -y install python3-tk
-# pytorch v1.6 python2,3
 # tensorflow python2,3
 # pandas python2,3
 # pip3 install cython
 # pip3 install numpy
 # pip3 install -U pandas
+
+# pytorch v1.6 python2,3
+### Installing PyTorch
+#https://github.com/dusty-nv/jetson-inference
+#cd jetson-inference/build
+#./install-pytorch.sh
+#
+#wget https://nvidia.box.com/shared/static/yhlmaie35hu8jv2xzvtxsh0rrpcu97yj.whl
+#mv yhlmaie35hu8jv2xzvtxsh0rrpcu97yj.whl  torch-1.4.0-cp27-cp27mu-linux_aarch64.whl
+#pip install torch-1.4.0-cp27-cp27mu-linux_aarch64.whl
 
 ```
 
@@ -180,7 +189,9 @@ python listup_all_rosbag_timestamp.py *.bag               # 時刻表示でき�
 
 ## 学習 
 cd learning (学習用フォルダへ移動) 
-python3 train.py --data_csv <csvのパス> --model_name <保存するモデル名>  
+python3 train.py --data_csv <csvのパス> --model_name <保存するモデル名>  
+#### 以下のような形式でモデルファイルが保存されます
+ls ~/ai_race/catkin_ws/srcexperiments/models/checkpoints/sim_race_test.model_epoch=*.pth
 
 ## 推論(trtなし trt=比較的軽量なモデル) 
 roscd user_tutorial2/scripts 
