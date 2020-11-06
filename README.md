@@ -69,6 +69,7 @@ cd jetson-nano-tools
 ```
 # joint state controller, and ros package
 sudo apt install -y ros-melodic-ros-control ros-melodic-ros-controllers  ros-melodic-joint-state-controller ros-melodic-effort-controllers ros-melodic-position-controllers ros-melodic-joint-trajectory-controller
+sudo apt install -y python-rospkg 
 sudo apt install -y python3-rospkg 
 # gazebo
 sudo apt-get install -y gazebo9
