@@ -29,8 +29,15 @@ https://developer.nvidia.com/jetpack-43-archive
  -> https://developer.nvidia.com/jetson-nano-sd-card-imager-3231
 ```
 
-入手後、イメージファイルをSDカードに書き込んで、JetsonNanoに挿して起動する。
+入手後、イメージファイルをSDカードに書き込んで、JetsonNanoに挿して起動する。<br>
+<br>
+初回起動時に[[Jetson Nano関係のTIPSまとめ Swapファイルの設定](https://qiita.com/karaage0703/items/b14c249aa33112669ee4)を参考に、SWAPファイル6GB追加 <br>
 
+```
+git clone https://github.com/JetsonHacksNano/installSwapfile
+cd installSwapfile
+./installSwapfile.sh
+```
 
 ### 1.2. ROS(melodic)のインストール
 
