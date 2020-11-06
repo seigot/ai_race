@@ -114,7 +114,7 @@ wget https://nvidia.box.com/shared/static/yhlmaie35hu8jv2xzvtxsh0rrpcu97yj.whl
 mv yhlmaie35hu8jv2xzvtxsh0rrpcu97yj.whl  torch-1.4.0-cp27-cp27mu-linux_aarch64.whl
 pip install torch-1.4.0-cp27-cp27mu-linux_aarch64.whl
 pip install future
-
+pip install torchvision
 ```
 
 - ライブラリバージョン <br>
