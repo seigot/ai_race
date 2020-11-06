@@ -39,6 +39,12 @@ cd installSwapfile
 ./installSwapfile.sh
 ```
 
+メモリ追加されていることを以下コマンドで確認
+
+```
+free -mh
+```
+
 ### 1.2. ROS(melodic)のインストール
 
 terminalから以下を実行する。
