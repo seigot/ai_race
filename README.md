@@ -139,8 +139,8 @@ python setup.py install
 | ---- | ---- | ---- |
 |  pytorch  |  ~~1.6.0~~ 1.4.0  |  1.4.0  |
 |  torchvision  |  0.2.2  |  0.2.2  |
-|  sklearn  |  0.23.2  |  -  |
-|  pandas  |  0.22.0 ~~(1.1.3必須かも)~~  |  -  |
+|  sklearn  |  0.23.2  |  Not_Installed  |
+|  pandas  |  0.22.0 ~~(1.1.3必須かも)~~  |  Not_Installed  |
 |  cv2  |  3.4.10  |  3.4.10   |
 
 参考 <br>
