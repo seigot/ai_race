@@ -43,6 +43,8 @@ free -mh
 
 ## 2. インストール
 
+結構時間が掛かります。
+
 ### 2.1 基本的なパッケージをインストール <br>
 
 ```
@@ -55,9 +57,9 @@ pip3 install --upgrade pip
 pip3 install numpy
 ```
 
-### 2.2. ROS(melodic)のインストール
+### 2.2. ROSのインストール
 
-terminalから以下を実行する。
+- ROS(melodic)のインストール
 
 ```
 git clone https://github.com/karaage0703/jetson-nano-tools
@@ -133,6 +135,7 @@ cd nano_build_opencv
 | ---- | ---- | ---- | ---- |
 |  pytorch  |  1.3  |  -  |  -  |
 |  torchvision  |  -  |  -  |  -  |
+|  torch2trt  |  -  |  -  |  -  |
 |  sklearn  |  0.19.1  |  -  |  -  |
 |  pandas  |  1.1.3  |  -  |  -  |
 |  cv2  |  3.4.10  |  -  |  -  |
@@ -143,6 +146,7 @@ cd nano_build_opencv
 | ---- | ---- | ---- | ---- |
 |  pytorch  |  ~~1.6.0~~ 1.4.0  |  1.4.0  |  -  |
 |  torchvision  |  0.2.2  |  0.2.2  |  -  |
+|  torch2trt  |  -  |  -  |  -  |
 |  sklearn  |  0.23.2  |  Not_Installed  |  -  |
 |  pandas  |  0.22.0 ~~(1.1.3必須かも)~~  |  Not_Installed  |  -  |
 |  cv2  |  3.4.10  |  3.4.10   |  -  |
@@ -223,32 +227,18 @@ python inference_from_image.py --trt_module --trt_model <保存したtrtモデ�
 
 記載予定
 
-準備：シミュレータ起動
+シミュレータ起動
 
 ```
 ex.)
 bash scripts/prepare.sh
 ```
 
-step1：学習データの取得
+学習モデルによる推論
 
 ```
 ex.)
-bash scripts/start.sh 1
-```
-
-step2：学習モデル作成
-
-```
-ex.)
-bash scripts/start.sh 2
-```
-
-step3：学習モデルにより推論
-
-```
-ex.)
-bash scripts/start.sh 3
+bash scripts/start.sh
 ```
 
 ## 4. ルール
