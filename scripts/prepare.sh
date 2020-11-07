@@ -1,5 +1,5 @@
-#!/bin/bash
+#!/bin/bash -x
 
-echo "prepare"
+echo "start prepare.sh"
 
-
+roslaunch user_tutorial2 wheel_robot.launch
