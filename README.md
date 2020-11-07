@@ -33,9 +33,13 @@ cd installSwapfile
 free -mh
 ```
 
-* Docker環境【任意】
+* Docker環境【検討中】
 
 [こちら](docker/README.md)で検討中
+
+* 学習用データ、学習モデル【検討中】
+
+[こちら](https://github.com/seigot/ai_race_data)で扱うことを検討中
 
 ## 2. インストール
 
@@ -43,6 +47,11 @@ free -mh
 
 ```
 sudo apt-get install -y net-tools git
+# install pyqt5 and NumPy
+sudo apt-get install -y python3-pip
+sudo apt-get install -y python3-pyqt5
+pip3 install --upgrade pip
+pip3 install numpy
 ```
 
 ### 2.2. ROS(melodic)のインストール
@@ -53,6 +62,8 @@ terminalから以下を実行する。
 git clone https://github.com/karaage0703/jetson-nano-tools
 cd jetson-nano-tools
 ./install-ros-melodic.sh
+echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc
+source /opt/ros/melodic/setup.bash
 ```
 
 - ROS関連パッケージのインストール
@@ -141,8 +152,6 @@ cd nano_build_opencv
 ### 2.4. ai_raceリポジトリの取得とビルド
 
 ```
-echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc
-source /opt/ros/melodic/setup.bash
 cd ~
 git clone http://github.com/seigot/ai_race
 cd ~/ai_race/catkin_ws
@@ -211,46 +220,48 @@ python inference_from_image.py --trt_module --trt_model <保存したtrtモデ�
 
 記載予定
 
-シミュレータ起動
+準備：シミュレータ起動
 
 ```
 ex.)
 bash scripts/prepare.sh
 ```
 
-学習
+step1：学習データの取得
 
 ```
 ex.)
 bash scripts/start.sh 1
 ```
 
-推論
+step2：学習モデル作成
 
 ```
 ex.)
 bash scripts/start.sh 2
 ```
 
-### 3.3. 走行タイム計測器
+step3：学習モデルにより推論
+
+```
+ex.)
+bash scripts/start.sh 3
+```
+
+## 4. ルール
+
+学習モデルにより推論し、車両を操作して走行タイムを競います。<br>
+<br>
+[こちら](document/rule.md)に記載予定 <br>
+
+### 4.x. 走行タイム計測器
 
 記載予定
-
-```
-# install pyqt5 and NumPy
-sudo apt-get install -y python3-pip
-sudo apt-get install -y python3-pyqt5
-pip3 install --upgrade pip
-pip3 install numpy
-```
 
 ```
 python3 judge/timer.py
 ```
 
-## 4. ルール
-
-[こちら](document/rule.md)に記載予定
 
 ## FAQ
 
