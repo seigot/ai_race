@@ -1,8 +1,10 @@
 #!/bin/bash -x
 
 # torch2trt setup
-python /tmp/torch2trt/setup.py install
-python3 /tmp/torch2trt/setup.py install
+pushd /tmp/torch2trt
+python setup.py install
+python3 setup.py install
+popd
 
 # tmp
 pip3 install future
