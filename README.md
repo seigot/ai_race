@@ -46,6 +46,7 @@ free -mh
 ### 2.1 基本的なパッケージをインストール <br>
 
 ```
+sudo apt-get update
 sudo apt-get install -y net-tools git
 # install pyqt5 and NumPy
 sudo apt-get install -y python3-pip
