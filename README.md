@@ -21,10 +21,9 @@ https://developer.nvidia.com/embedded/jetpack
 ```
 
 取得後、イメージファイルをSDカードに書き込んで、JetsonNanoに挿して起動する。<br>
-起動後、ネットワークに接続する。<br>
-その後、準備として以下を実施する。<br>
-
-参考
+起動後、ネットワークに接続し、以下を準備する。<br>
+<br>
+参考 <br>
 [https://raspi-japan.com/2018/10/16/sd-format-etcher/](https://raspi-japan.com/2018/10/16/sd-format-etcher/)
 
 - SWAPファイル追加してメモリ増強【必須】 <br>
@@ -37,12 +36,13 @@ cd installSwapfile
 free -mh
 ```
 
-参考
+参考 <br>
 [Jetson Nano関係のTIPSまとめ Swapファイルの設定](https://qiita.com/karaage0703/items/b14c249aa33112669ee4)
 
 - 基本的なパッケージをインストール <br>
 
 ```
+sudo apt-get install -y net-tools git
 ```
 
 ### 1.2. ROS(melodic)のインストール
