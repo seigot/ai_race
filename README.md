@@ -9,7 +9,7 @@
 [こちら](https://qiita.com/seigot/items/115e25d0ae7149047760)にjetson nanoの備品を記載<br>
 （シミュレータや機械学習は通常のPCでできなくもないが、環境統一のため、以降の環境構築や動作確認はjetson nanoを基準に行う） <br>
 
-### 1.1. jetson起動
+### 1.1. jetson nano起動
 
 以下からイメージファイルを取得する。 <br>
  <br>
