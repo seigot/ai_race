@@ -22,9 +22,6 @@ https://developer.nvidia.com/embedded/jetpack
 
 取得後、イメージファイルをSDカードに書き込んで、JetsonNanoに挿して起動する。<br>
 起動後、ネットワークに接続し、以下を準備する。<br>
-<br>
-参考 <br>
-[https://raspi-japan.com/2018/10/16/sd-format-etcher/](https://raspi-japan.com/2018/10/16/sd-format-etcher/)
 
 - SWAPファイル追加してメモリ増強【必須】 <br>
 
@@ -66,8 +63,6 @@ cd jetson-nano-tools
 ```
 # joint state controller, and ros package
 sudo apt install -y ros-melodic-ros-control ros-melodic-ros-controllers  ros-melodic-joint-state-controller ros-melodic-effort-controllers ros-melodic-position-controllers ros-melodic-joint-trajectory-controller
-#sudo apt install -y python-rospkg 
-#sudo apt install -y python3-rospkg 
 # gazebo
 sudo apt-get install -y gazebo9
 sudo sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable `lsb_release -cs` main" > /etc/apt/sources.list.d/gazebo-stable.list'
@@ -83,67 +78,65 @@ sudo apt-get install -y ros-melodic-image-*
 
 - 機械学習用ライブラリ（仮）
 
-python3用ライブラリ
-
 ```
-# opencv python2,3
-# ### opencv python はソースからビルドする必要がある
-cd ~
-git clone https://github.com/mdegans/nano_build_opencv
-cd nano_build_opencv
-./build_opencv.sh 3.4.10
-
-# sklearn python3
-#pip3 install scikit-learn
-#pip3 install matplotlib
-#sudo apt-get -y install python3-tk
-# tensorflow python2,3
-# pandas python2,3
-# pip3 install cython
-# pip3 install numpy
-# pip3 install -U pandas
-
-# pytorch v1.4 python2,3
-### pytorch
+### pytorch from pip image (v1.4)
 wget https://nvidia.box.com/shared/static/yhlmaie35hu8jv2xzvtxsh0rrpcu97yj.whl
 mv yhlmaie35hu8jv2xzvtxsh0rrpcu97yj.whl  torch-1.4.0-cp27-cp27mu-linux_aarch64.whl
 pip install torch-1.4.0-cp27-cp27mu-linux_aarch64.whl
 wget https://nvidia.box.com/shared/static/c3d7vm4gcs9m728j6o5vjay2jdedqb55.whl
 mv c3d7vm4gcs9m728j6o5vjay2jdedqb55.whl torch-1.4.0-cp36-cp36m-linux_aarch64.whl
 pip3 install torch-1.4.0-cp36-cp36m-linux_aarch64.whl
-### torch vision
+
+### torch vision (v0.2.2)
 pip install future
 pip install torchvision==0.2.2
 #pip3 install future
 #pip3 install torchvision==0.2.2
+
 ### torch2trt
 git clone https://github.com/NVIDIA-AI-IOT/torch2trt
 cd torch2trt
 python setup.py install
 python3 setup.py install
+
+### opencv python
+### opencv python はソースからビルドする必要がある. 8～10時間ほど掛かる.
+cd ~
+git clone https://github.com/mdegans/nano_build_opencv
+cd nano_build_opencv
+./build_opencv.sh 3.4.10
+
+### sklearn python3 (trial)
+#pip3 install scikit-learn
+#pip3 install matplotlib
+#sudo apt-get -y install python3-tk
+### pandas python2,3 (trial)
+#pip3 install cython
+#pip3 install numpy
+#pip3 install -U pandas
+
 ```
 
 - ライブラリバージョン <br>
-<br>
 検証環境（マスター） <br>
 
-|  ライブラリ  |  バージョン(python3)  |　 バージョン(python)  |
-| ---- | ---- | ---- |
-|  pytorch  |  1.3  |  -  |
-|  torchvision  |  -  |  -  |
-|  sklearn  |  0.19.1  |  -  |
-|  pandas  |  1.1.3  |  -  |
-|  cv2  |  3.4.10  |  -  |
+|  ライブラリ  |  バージョン(python3)  |　 バージョン(python)  |　 備考  |
+| ---- | ---- | ---- | ---- |
+|  pytorch  |  1.3  |  -  |  -  |
+|  torchvision  |  -  |  -  |  -  |
+|  sklearn  |  0.19.1  |  -  |  -  |
+|  pandas  |  1.1.3  |  -  |  -  |
+|  cv2  |  3.4.10  |  -  |  -  |
 
 検証環境（マスター追従のテスト用１） <br>
 
-|  ライブラリ  |  バージョン(python3)  |　 バージョン(python)  |
-| ---- | ---- | ---- |
-|  pytorch  |  ~~1.6.0~~ 1.4.0  |  1.4.0  |
-|  torchvision  |  0.2.2  |  0.2.2  |
-|  sklearn  |  0.23.2  |  Not_Installed  |
-|  pandas  |  0.22.0 ~~(1.1.3必須かも)~~  |  Not_Installed  |
-|  cv2  |  3.4.10  |  3.4.10   |
+|  ライブラリ  |  バージョン(python3)  |　 バージョン(python)  |　 備考  |
+| ---- | ---- | ---- | ---- |
+|  pytorch  |  ~~1.6.0~~ 1.4.0  |  1.4.0  |  -  |
+|  torchvision  |  0.2.2  |  0.2.2  |  -  |
+|  sklearn  |  0.23.2  |  Not_Installed  |  -  |
+|  pandas  |  0.22.0 ~~(1.1.3必須かも)~~  |  Not_Installed  |  -  |
+|  cv2  |  3.4.10  |  3.4.10   |  -  |
 
 参考 <br>
 [pytorchとtensoflowのバージョンをコマンドラインから調べる](https://qiita.com/seigot/items/0b81f601e5c9e30d0e46) <br>
@@ -206,8 +199,8 @@ ls ~/ai_race/catkin_ws/srcexperiments/models/checkpoints/sim_race_test.model_epo
 roscd user_tutorial2/scripts 
 python inference_from_image.py --pretrained_model <学習させたモデル>  
 
-## 推論(trtあり） 
-#### 準備（準備は最初の一回でOK） 
+## 推論(trtあり） ### 検証中
+#### 準備（準備は最初の一回でOK） 
 python3 inference_from_image.py --trt_conversion --pretrained_model <学習させたモデル> --trt_model <保存するtrtモデル名>   
 #### 実行 
 python inference_from_image.py --trt_module --trt_model <保存したtrtモデル名> 
@@ -261,10 +254,6 @@ python3 judge/timer.py
 ## FAQ
 
 [こちら](document/FAQ.md)に記載予定
-
-## 備考
-
-記載予定
 
 ## 参考
 [Jetson NanoにROSをインストールする方法](https://qiita.com/karaage0703/items/aa54e086f0a2f165d3e9) <br>
