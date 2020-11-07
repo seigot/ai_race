@@ -3,6 +3,7 @@ LABEL maintainer="seigot<s.takada.3o3@gmail.com>"
 
 ENV DEBIAN_FRONTEND=noninteractive
 
+# install basic package
 RUN apt-get update && \
     apt-get install -yq wget curl git build-essential vim sudo lsb-release locales bash-completion tzdata \
     emacs \
@@ -36,22 +37,58 @@ RUN sudo apt install -y ros-melodic-ros-control ros-melodic-ros-controllers  ros
     sudo apt-get install -y ros-melodic-uvc-camera && \
     sudo apt-get install -y ros-melodic-image-*
 
+# install python package
+RUN sudo apt-get install -y python3-pip && \
+    sudo apt-get install -y python-pip
+
 # install pyqt5 and Numpy for timer
 RUN sudo apt-get install -y python3-pip && \
     sudo apt-get install -y python3-pyqt5 && \
     pip3 install --upgrade pip && \
     pip3 install numpy
 
+# pytorch
+RUN pip --version && \
+    pip3 --version
+RUN wget https://nvidia.box.com/shared/static/c3d7vm4gcs9m728j6o5vjay2jdedqb55.whl && \
+    mv c3d7vm4gcs9m728j6o5vjay2jdedqb55.whl torch-1.4.0-cp36-cp36m-linux_aarch64.whl && \
+    pip3 install torch-1.4.0-cp36-cp36m-linux_aarch64.whl
+RUN wget https://nvidia.box.com/shared/static/yhlmaie35hu8jv2xzvtxsh0rrpcu97yj.whl && \	
+    mv yhlmaie35hu8jv2xzvtxsh0rrpcu97yj.whl torch-1.4.0-cp27-cp27mu-linux_aarch64.whl && \
+    python -m pip install torch-1.4.0-cp27-cp27mu-linux_aarch64.whl
+
+# torch vision
+RUN sudo apt-get install -y libopenblas-base libopenmpi-dev && \
+    sudo apt-get install -y libjpeg-dev zlib1g-dev && \
+    python -m pip install 'pillow<7' && \
+    python -m pip install future && \
+    python -m pip install torchvision==0.2.2
+    #pip3 install future && \
+    #pip3 install torchvision==0.2.2
+
+# torch2trt
+RUN git clone https://github.com/NVIDIA-AI-IOT/torch2trt /tmp/torch2trt
+#    gosu jetson python3 /tmp/torch2trt/setup.py install && \
+#    gosu jetson python /tmp/torch2trt/setup.py install
+
 # install opencv python3
-RUN git clone https://github.com/mdegans/nano_build_opencv /tmp/nano_build_opencv && \
-    cp /tmp/nano_build_opencv/build_opencv.sh . && \
-    gosu jetson ./build_opencv.sh && \
-    rm ./build_opencv.sh
+RUN git clone https://github.com/mdegans/nano_build_opencv /tmp/nano_build_opencv
+ADD build_opencv.patch /.
+RUN patch -p0 < /build_opencv.patch && \
+    cat /tmp/nano_build_opencv/build_opencv.sh && \
+    gosu jetson /tmp/nano_build_opencv/build_opencv.sh 3.4.10
 
 #USER jetson
 #ENV HOME /home/jetson
 
+# install & build this repository
 ADD install.sh  /
 RUN /install.sh
-ADD start.sh /
+
+# install additional package
+RUN apt-get update && \
+    apt-get install -yq \
+    	    net-tools \
+	    openssh-server
+
 ENTRYPOINT ["/start.sh"]
