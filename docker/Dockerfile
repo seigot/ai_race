@@ -10,7 +10,8 @@ RUN apt-get update && \
     gnupg gnupg2 gnupg1 \
     gosu \
     unzip \
-    less
+    less \
+    gnome-terminal
 
 # Replace 1000 with your user / group id
 RUN export uid=1000 gid=1000 && \
