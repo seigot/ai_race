@@ -82,7 +82,7 @@ RUN patch -p0 < /build_opencv.patch && \
 #ENV HOME /home/jetson
 
 # install & build this repository
-ADD install.sh  /
+COPY install.sh  /
 RUN /install.sh
 
 # install additional package
@@ -91,4 +91,5 @@ RUN apt-get update && \
     	    net-tools \
 	    openssh-server
 
+COPY start.sh  /
 ENTRYPOINT ["/start.sh"]
