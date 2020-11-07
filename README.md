@@ -36,13 +36,15 @@ free -mh
 参考 <br>
 [Jetson Nano関係のTIPSまとめ Swapファイルの設定](https://qiita.com/karaage0703/items/b14c249aa33112669ee4)
 
-- 基本的なパッケージをインストール <br>
+## 2. インストール
+
+### 2.1 基本的なパッケージをインストール <br>
 
 ```
 sudo apt-get install -y net-tools git
 ```
 
-### 1.2. ROS(melodic)のインストール
+### 2.2. ROS(melodic)のインストール
 
 terminalから以下を実行する。
 
@@ -55,10 +57,7 @@ cd jetson-nano-tools
 参考 <br>
 [Jetson NanoにROSをインストールする方法](https://qiita.com/karaage0703/items/aa54e086f0a2f165d3e9)
 
-
-### 1.3. その他、パッケージのインストール
-
-- ROS関連のパッケージ（仮）
+- ROS関連パッケージのインストール
 
 ```
 # joint state controller, and ros package
@@ -76,7 +75,7 @@ sudo apt-get install -y ros-melodic-uvc-camera
 sudo apt-get install -y ros-melodic-image-*
 ```
 
-- 機械学習用ライブラリ（仮）
+### 2.3. 機械学習ライブラリのインストール
 
 ```
 ### pytorch from pip image (v1.4)
@@ -99,22 +98,22 @@ cd torch2trt
 python setup.py install
 python3 setup.py install
 
+### sklearn python3 (trial)
+pip3 install scikit-learn
+pip3 install matplotlib
+sudo apt-get -y install python3-tk
+
+### pandas python2,3 (defultを使えばよい)
+#pip3 install cython
+#pip3 install numpy
+#pip3 install -U pandas
+
 ### opencv python
 ### opencv python はソースからビルドする必要がある. 8～10時間ほど掛かる.
 cd ~
 git clone https://github.com/mdegans/nano_build_opencv
 cd nano_build_opencv
 ./build_opencv.sh 3.4.10
-
-### sklearn python3 (trial)
-#pip3 install scikit-learn
-#pip3 install matplotlib
-#sudo apt-get -y install python3-tk
-### pandas python2,3 (trial)
-#pip3 install cython
-#pip3 install numpy
-#pip3 install -U pandas
-
 ```
 
 - ライブラリバージョン <br>
@@ -141,7 +140,7 @@ cd nano_build_opencv
 参考 <br>
 [pytorchとtensoflowのバージョンをコマンドラインから調べる](https://qiita.com/seigot/items/0b81f601e5c9e30d0e46) <br>
 
-### 1.4. 初期設定
+### 2.4. ai_raceリポジトリの取得とビルド
 
 ```
 echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc
@@ -157,9 +156,9 @@ source devel/setup.sh
 
 [こちら](docker/README.md)で検討中
 
-## 2. サンプルコードの実行
+## 3. サンプルコードの実行
 
-### 2.1. コマンドからの実行手順
+### 3.1. コマンドからの実行手順
 
 以下を実行して下さい（仮）
 <br>
@@ -206,7 +205,7 @@ python3 inference_from_image.py --trt_conversion --pretrained_model <学習さ�
 python inference_from_image.py --trt_module --trt_model <保存したtrtモデル名> 
 ```
 
-### 2.2. サンプルコードの説明
+### 3.2. サンプルコードの説明
 
 記載予定
 
@@ -231,7 +230,7 @@ ex.)
 bash scripts/start.sh 2
 ```
 
-### 2.3. 走行タイム計測器
+### 3.3. 走行タイム計測器
 
 記載予定
 
@@ -247,7 +246,7 @@ pip3 install numpy
 python3 judge/timer.py
 ```
 
-## 3. ルール
+## 4. ルール
 
 [こちら](document/rule.md)に記載予定
 
