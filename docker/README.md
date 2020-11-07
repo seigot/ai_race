@@ -17,6 +17,25 @@ sudo docker run --runtime nvidia --network host -it -e DISPLAY=$DISPLAY -v /tmp/
 以下を参考 <br>
 [nvidia-docker/wiki](https://github.com/NVIDIA/nvidia-docker/wiki/NVIDIA-Container-Runtime-on-Jetson) <br>
 
+## Dockerコマンドをsudoなしで実行する
+
+```
+# dockerグループがなければ作る
+sudo groupadd docker
+
+# 現行ユーザをdockerグループに所属させる
+sudo gpasswd -a $USER docker
+
+# dockerデーモンを再起動する (CentOS7の場合)
+sudo systemctl restart docker
+
+# exitして再ログインすると反映される。
+exit
+```
+
+参考 <br>
+[Dockerコマンドをsudoなしで実行する方法](https://qiita.com/DQNEO/items/da5df074c48b012152ee) <br>
+
 ## ビルド手順
 
 以下を実行
