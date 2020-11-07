@@ -21,7 +21,7 @@ https://developer.nvidia.com/embedded/jetpack
 ```
 
 取得後、イメージファイルをSDカードに書き込んで、JetsonNanoに挿して起動する。<br>
-起動後、ネットワークに接続し、以下を準備する。<br>
+起動後、ネットワークに接続する。<br>
 
 * SWAPファイル追加してメモリ増強【必須】 <br>
 
@@ -33,7 +33,7 @@ cd installSwapfile
 free -mh
 ```
 
-* Docker環境
+* Docker環境【オプション】
 
 [こちら](docker/README.md)で検討中
 
