@@ -33,9 +33,6 @@ cd installSwapfile
 free -mh
 ```
 
-参考 <br>
-[Jetson Nano関係のTIPSまとめ Swapファイルの設定](https://qiita.com/karaage0703/items/b14c249aa33112669ee4)
-
 * Docker環境
 
 [こちら](docker/README.md)で検討中
@@ -57,9 +54,6 @@ git clone https://github.com/karaage0703/jetson-nano-tools
 cd jetson-nano-tools
 ./install-ros-melodic.sh
 ```
-
-参考 <br>
-[Jetson NanoにROSをインストールする方法](https://qiita.com/karaage0703/items/aa54e086f0a2f165d3e9)
 
 - ROS関連パッケージのインストール
 
