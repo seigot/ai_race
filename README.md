@@ -174,24 +174,32 @@ roslaunch tutorial6 wheel_robot.launch
 roslaunch user_tutorial1 wheel_robot.launch
 roslaunch user_tutorial1 rosbag.launch output_path:=/home/ubuntu
 rqt # robot steering -> v,rad指定
+```
 
+```
 ## rosbag --> image/command 変換
 cd ~/ai_race/catkin_ws/src/utility/scripts
 mkdir -p /Images_from_rosbag
 sudo chmod 777 /Images_from_rosbag
 python rosbag_to_images_and_commands.py **.bag   # bagファイルから画像とコマンドを取得
 python listup_all_rosbag_timestamp.py *.bag               # 時刻表示できる
+```
 
+```
 ## 学習 
 cd learning (学習用フォルダへ移動) 
 python3 train.py --data_csv <csvのパス> --model_name <保存するモデル名>  
 #### 以下のような形式でモデルファイルが保存されます
 ls ~/ai_race/catkin_ws/srcexperiments/models/checkpoints/sim_race_test.model_epoch=*.pth
+```
 
+```
 ## 推論(trtなし trt=比較的軽量なモデル) 
 roscd user_tutorial2/scripts 
 python inference_from_image.py --pretrained_model <学習させたモデル>  
+```
 
+```
 ## 推論(trtあり） ### 検証中
 #### 準備（準備は最初の一回でOK） 
 python3 inference_from_image.py --trt_conversion --pretrained_model <学習させたモデル> --trt_model <保存するtrtモデル名>   
