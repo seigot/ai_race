@@ -197,15 +197,15 @@ python listup_all_rosbag_timestamp.py *.bag               # 時刻表示でき�
 ```
 ## 学習 
 cd learning (学習用フォルダへ移動) 
-python3 train.py --data_csv <csvのパス> --model_name <保存するモデル名>  
-#### 以下のような形式でモデルファイルが保存されます
-ls ~/ai_race/catkin_ws/srcexperiments/models/checkpoints/sim_race_test.model_epoch=*.pth
+python3 train.py --data_csv <csvのパス フルパス指定> --model_name <保存するモデル名>  
+#### 以下のディレクトリにモデルが保存されます
+ls ~/ai_race/catkin_ws/srcexperiments/models/checkpoints/*.pth
 ```
 
 ```
 ## 推論(trtなし trt=比較的軽量なモデル) 
 roscd user_tutorial2/scripts 
-python inference_from_image.py --pretrained_model <学習させたモデル>  
+python inference_from_image.py --pretrained_model <学習させたモデル フルパス指定> 
 ```
 
 ```
