@@ -76,7 +76,7 @@ RUN git clone https://github.com/mdegans/nano_build_opencv /tmp/nano_build_openc
 ADD build_opencv.patch /.
 RUN patch -p0 < /build_opencv.patch && \
     cat /tmp/nano_build_opencv/build_opencv.sh && \
-    gosu jetson /tmp/nano_build_opencv/build_opencv.sh 3.4.10
+    yes | gosu jetson /tmp/nano_build_opencv/build_opencv.sh 3.4.10
 
 #USER jetson
 #ENV HOME /home/jetson
