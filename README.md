@@ -33,7 +33,7 @@ cd installSwapfile
 free -mh
 ```
 
-* Docker環境【オプション】
+* Docker環境【任意】
 
 [こちら](docker/README.md)で検討中
 
@@ -87,8 +87,8 @@ pip3 install torch-1.4.0-cp36-cp36m-linux_aarch64.whl
 ### torch vision (v0.2.2)
 pip install future
 pip install torchvision==0.2.2
-#pip3 install future
-#pip3 install torchvision==0.2.2
+#pip3 install future   #たぶん要る？
+#pip3 install torchvision==0.2.2   #たぶん要る？
 
 ### torch2trt
 git clone https://github.com/NVIDIA-AI-IOT/torch2trt
@@ -98,8 +98,8 @@ python3 setup.py install
 
 ### sklearn python3 (trial)
 pip3 install scikit-learn
-pip3 install matplotlib
-sudo apt-get -y install python3-tk
+#pip3 install matplotlib   #たぶん要る？
+#sudo apt-get -y install python3-tk   #たぶん要る？
 
 ### pandas python2,3 (defultを使えばよい)
 #pip3 install cython
