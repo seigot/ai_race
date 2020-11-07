@@ -211,9 +211,10 @@ python inference_from_image.py --pretrained_model <学習させたモデル フ�
 ```
 ## 推論(trtあり） ### 検証中
 #### 準備（準備は最初の一回でOK） 
-python3 inference_from_image.py --trt_conversion --pretrained_model <学習させたモデル> --trt_model <保存するtrtモデル名>   
+roscd user_tutorial2/scripts 
+python3 trt_conversion.py --pretrained_model <学習させたモデル フルパス指定> --trt_model <保存するtrtモデル名>   
 #### 実行 
-python inference_from_image.py --trt_module --trt_model <保存したtrtモデル名> 
+python inference_from_image.py --trt_module --trt_model <保存したtrtモデル名 フルパス指定> 
 ```
 
 ### 3.2. サンプルコードの説明
