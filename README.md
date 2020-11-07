@@ -23,7 +23,7 @@ https://developer.nvidia.com/embedded/jetpack
 取得後、イメージファイルをSDカードに書き込んで、JetsonNanoに挿して起動する。<br>
 起動後、ネットワークに接続し、以下を準備する。<br>
 
-- SWAPファイル追加してメモリ増強【必須】 <br>
+* SWAPファイル追加してメモリ増強【必須】 <br>
 
 ```
 git clone https://github.com/JetsonHacksNano/installSwapfile
@@ -35,6 +35,10 @@ free -mh
 
 参考 <br>
 [Jetson Nano関係のTIPSまとめ Swapファイルの設定](https://qiita.com/karaage0703/items/b14c249aa33112669ee4)
+
+* Docker環境
+
+[こちら](docker/README.md)で検討中
 
 ## 2. インストール
 
@@ -151,10 +155,6 @@ cd ~/ai_race/catkin_ws
 catkin_make
 source devel/setup.sh
 ```
-
-* Docker環境
-
-[こちら](docker/README.md)で検討中
 
 ## 3. サンプルコードの実行
 
