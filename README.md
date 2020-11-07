@@ -38,6 +38,7 @@ free -mh
 [こちら](docker/README.md)で検討中
 
 * 学習用データ、学習モデル【検討中】
+
 [こちら](https://github.com/seigot/ai_race_data)で扱うことを検討中
 
 ## 2. インストール
