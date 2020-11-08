@@ -24,7 +24,8 @@ RUN export uid=1000 gid=1000 && \
 
 # install ROS
 RUN git clone https://github.com/karaage0703/jetson-nano-tools /tmp/jetson-nano-tools && \
-    gosu jetson /tmp/jetson-nano-tools/install-ros-melodic.sh
+    gosu jetson /tmp/jetson-nano-tools/install-ros-melodic.sh && \
+    echo "source /opt/ros/melodic/setup.bash" >> /home/jetson/.bashrc
 
 # install package
 RUN sudo apt install -y ros-melodic-ros-control ros-melodic-ros-controllers  ros-melodic-joint-state-controller ros-melodic-effort-controllers ros-melodic-position-controllers ros-melodic-joint-trajectory-controller && \
@@ -34,7 +35,6 @@ RUN sudo apt install -y ros-melodic-ros-control ros-melodic-ros-controllers  ros
     sudo apt-get update -y && \
     sudo apt-get install -y ros-melodic-gazebo-ros-pkgs ros-melodic-gazebo-ros-control && \
     echo "export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:/home/jetson/ai_race/catkin_ws/src:/home/jetson/ai_race/catkin_ws/src/sim_world/models" >> /home/jetson/.bashrc && \
-    export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:/home/jetson/ai_race/catkin_ws/src:/home/jetson/ai_race/catkin_ws/src/sim_world/models && \
     sudo apt-get install -y ros-melodic-uvc-camera && \
     sudo apt-get install -y ros-melodic-image-*
 
@@ -53,19 +53,21 @@ RUN pip --version && \
     pip3 --version
 RUN wget https://nvidia.box.com/shared/static/c3d7vm4gcs9m728j6o5vjay2jdedqb55.whl && \
     mv c3d7vm4gcs9m728j6o5vjay2jdedqb55.whl torch-1.4.0-cp36-cp36m-linux_aarch64.whl && \
-    pip3 install torch-1.4.0-cp36-cp36m-linux_aarch64.whl
+    pip3 install torch-1.4.0-cp36-cp36m-linux_aarch64.whl && \
+    rm torch-1.4.0-cp36-cp36m-linux_aarch64.whl
 RUN wget https://nvidia.box.com/shared/static/yhlmaie35hu8jv2xzvtxsh0rrpcu97yj.whl && \	
     mv yhlmaie35hu8jv2xzvtxsh0rrpcu97yj.whl torch-1.4.0-cp27-cp27mu-linux_aarch64.whl && \
-    python -m pip install torch-1.4.0-cp27-cp27mu-linux_aarch64.whl
+    python -m pip install torch-1.4.0-cp27-cp27mu-linux_aarch64.whl && \
+    rm torch-1.4.0-cp27-cp27mu-linux_aarch64.whl
 
 # torch vision
 RUN sudo apt-get install -y libopenblas-base libopenmpi-dev && \
     sudo apt-get install -y libjpeg-dev zlib1g-dev && \
     python -m pip install 'pillow<7' && \
     python -m pip install future && \
-    python -m pip install torchvision==0.2.2
-    #pip3 install future && \
-    #pip3 install torchvision==0.2.2
+    python -m pip install torchvision==0.2.2 && \
+    pip3 install future && \
+    pip3 install torchvision==0.2.2
 
 # torch2trt
 RUN git clone https://github.com/NVIDIA-AI-IOT/torch2trt /tmp/torch2trt
@@ -74,8 +76,8 @@ RUN git clone https://github.com/NVIDIA-AI-IOT/torch2trt /tmp/torch2trt
 
 # install opencv python3
 RUN git clone https://github.com/mdegans/nano_build_opencv /tmp/nano_build_opencv
-ADD build_opencv.patch /.
-RUN patch -p0 < /build_opencv.patch && \
+COPY build_opencv.patch /tmp/.
+RUN patch -p0 < /tmp/build_opencv.patch && \
     cat /tmp/nano_build_opencv/build_opencv.sh && \
     yes | gosu jetson /tmp/nano_build_opencv/build_opencv.sh 3.4.10
 
@@ -83,8 +85,8 @@ RUN patch -p0 < /build_opencv.patch && \
 #ENV HOME /home/jetson
 
 # install & build this repository
-COPY install.sh  /
-RUN /install.sh
+COPY install.sh /tmp/.
+RUN /tmp/install.sh
 
 # install additional package
 RUN apt-get update && \
@@ -92,5 +94,5 @@ RUN apt-get update && \
     	    net-tools \
 	    openssh-server
 
-COPY start.sh  /
-ENTRYPOINT ["/start.sh"]
+COPY start.sh  /tmp/.
+ENTRYPOINT ["/tmp/start.sh"]

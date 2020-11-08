@@ -6,10 +6,6 @@ python setup.py install
 python3 setup.py install
 popd
 
-# tmp
-pip3 install future
-pip3 install torchvision==0.2.2
-
 python3 -c 'import torch; print(torch.__version__) '
 python3 -c "import torchvision;print(torchvision.__version__);"
 python3 -c "import sklearn;print(sklearn.__version__);"
