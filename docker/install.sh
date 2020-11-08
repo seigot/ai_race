@@ -8,7 +8,7 @@ function setup_package(){
     git clone http://github.com/seigot/ai_race
     pushd $HOME_JETSON/ai_race/catkin_ws
     catkin_make
-    echo "bash $HOME_JETSON/ai_race/catkin_ws/devel/setup.sh" >> $HOME_JETSON/.bashrc
+    echo "source $HOME_JETSON/ai_race/catkin_ws/devel/setup.sh" >> $HOME_JETSON/.bashrc
     source devel/setup.sh
     popd
 }
