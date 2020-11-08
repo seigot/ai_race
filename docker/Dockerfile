@@ -82,17 +82,17 @@ RUN patch -p0 < /tmp/build_opencv.patch && \
     yes | gosu jetson /tmp/nano_build_opencv/build_opencv.sh 3.4.10
 
 #USER jetson
-#ENV HOME /home/jetson
-
-# install & build this repository
-COPY install.sh /tmp/.
-RUN /tmp/install.sh
+ENV HOME /home/jetson
 
 # install additional package
 RUN apt-get update && \
     apt-get install -yq \
     	    net-tools \
 	    openssh-server
+
+# install & build this repository
+COPY install.sh /tmp/.
+RUN /tmp/install.sh
 
 COPY start.sh  /tmp/.
 ENTRYPOINT ["/tmp/start.sh"]

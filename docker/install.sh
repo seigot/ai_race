@@ -1,18 +1,21 @@
 #!/bin/bash
 
-export HOME=/home/jetson
+export HOME_JETSON=/home/jetson
+source $HOME_JETSON/.bashrc
 
 function setup_package(){
-    cd $HOME
+    cd $HOME_JETSON
     git clone http://github.com/seigot/ai_race
-    cd $HOME/ai_race/catkin_ws
+    pushd $HOME_JETSON/ai_race/catkin_ws
     catkin_make
-    echo "$HOME/ai_race/catkin_ws/devel/setup.sh" >> $HOME/.bashrc
+    echo "bash $HOME_JETSON/ai_race/catkin_ws/devel/setup.sh" >> $HOME_JETSON/.bashrc
     source devel/setup.sh
+    popd
 }
 
 function setup_ai_race_env(){
-    mkdir -p $HOME/Images_from_rosbag
+    mkdir -p $HOME_JETSON/Images_from_rosbag
+    #rm -fr $HOME_JETSON/catkin_ws # delete unnecessary directory..
 }
 
 setup_package
