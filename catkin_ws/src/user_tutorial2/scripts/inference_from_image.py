@@ -41,12 +41,12 @@ def init_inference():
     model.fc = torch.nn.Linear(512, 3)
     model.eval()
     #model.load_state_dict(torch.load('/home/shiozaki/work/experiments/models/checkpoints/sim_race_ResNet18_epoch=34.pth'))
-    #model.load_state_dict(torach.load(args.pretrained_model))
+    #model.load_state_dict(torch.load(args.pretrained_model))
     
     if args.trt_module :
         if args.trt_conversion :
-            model.load_state_dict(torch.load('/home/shiozaki/work/experiments/models/checkpoints/sim_race_joycon_ResNet18_6_epoch=20.pth'))
-            #model.load_state_dict(torach.load(args.pretrained_model))
+            #model.load_state_dict(torch.load('/home/shiozaki/work/experiments/models/checkpoints/sim_race_joycon_ResNet18_6_epoch=20.pth'))
+            model.load_state_dict(torch.load(args.pretrained_model))
             model = model.cuda()
             x = torch.ones((1, 3, 240, 320)).cuda()
             from torch2trt import torch2trt
@@ -64,8 +64,8 @@ def init_inference():
 
         model = model_trt.to(device)
     else :
-        model.load_state_dict(torch.load('/home/shiozaki/work/experiments/models/checkpoints/sim_race_joycon_ResNet18_6_epoch=20.pth'))
-        #model.load_state_dict(torach.load(args.pretrained_model))
+        #model.load_state_dict(torch.load('/home/shiozaki/work/experiments/models/checkpoints/sim_race_joycon_ResNet18_6_epoch=20.pth'))
+        model.load_state_dict(torch.load(args.pretrained_model))
         model = model.to(device)
     #print(model)
 
@@ -138,7 +138,7 @@ def parse_args():
 	
 	arg_parser.add_argument("--trt_conversion", action='store_true')
 	arg_parser.add_argument("--trt_module", action='store_true')
-	arg_parser.add_argument("--pretrained_model", type=str)
+	arg_parser.add_argument("--pretrained_model", type=str, default='/home/shiozaki/work/experiments/models/checkpoints/sim_race_joycon_ResNet18_6_epoch=20.pth')
 	arg_parser.add_argument("--trt_model", type=str, default='road_following_model_trt.pth' )
 
 	args = arg_parser.parse_args()
