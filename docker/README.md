@@ -11,7 +11,7 @@ TODO<br>
 
 ```
 sudo xhost +si:localuser:root
-sudo docker run --runtime nvidia --network host -it -e DISPLAY=$DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix seigott/ai_race_docker
+sudo docker run --runtime nvidia --network host -it -e DISPLAY=$DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix --name ai_race_docker seigott/ai_race_docker
 ```
 
 以下を参考 <br>
