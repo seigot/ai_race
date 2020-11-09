@@ -27,8 +27,9 @@ https://developer.nvidia.com/embedded/jetpack
 * お勧め設定 
 ユーザ名: jetson
 パスワード: (任意)
-...その他、追記予定
 ```
+
+※お勧め設定は、順次更新予定。
 
 * SWAPファイル追加してメモリ増強【必須】 <br>
 
