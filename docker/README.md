@@ -12,7 +12,7 @@
 
 ## dockerコンテナ使用手順
 
-jetson nano(Jetpack4.4以上)のterminalから実行して下さい。
+jetson nano（Jetpack4.4以上）の環境で、ターミナルから以下を実行して下さい。
 
 - コンテナ起動
 
@@ -47,6 +47,12 @@ python inference_from_image.py --pretrained_model /home/jetson/ai_race_data_samp
 ```
 cd ~/ai_race/catkin_ws/src/learning
 python3 train.py --data_csv /home/jetson/ai_race_data_sample/dataset/_2020-11-05-01-45-29_2/_2020-11-05-01-45-29.csv --model_name sample_model
+```
+
+データ取得
+
+```
+xxx
 ```
 
 - コンテナkill
