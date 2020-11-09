@@ -11,7 +11,7 @@
 
 ## dockerコンテナ使用手順
 
-terminalから実行して下さい。
+jetson nano(Jetpack4.4以上)のterminalから実行して下さい。
 
 - コンテナ起動
 
