@@ -38,11 +38,26 @@ roslaunch user_tutorial1 wheel_robot.launch
 学習モデルを利用した推論、車両操作
 
 ```
-roscd user_tutorial2/script
-python inference_from_image.py --pretrained_model /home/jetson/**(学習モデルのフルパス)
+cd ~/ai_race/catkin_ws/src/user_tutorial2/scripts
+python inference_from_image.py --pretrained_model /home/jetson/ai_race_data_sample/model/sample.pth
 ```
 
-以下を参考 <br>
+学習
+
+```
+cd ~/ai_race/catkin_ws/src/learning
+python3 train.py --data_csv /home/jetson/ai_race_data_sample/dataset/_2020-11-05-01-45-29_2/_2020-11-05-01-45-29.csv --model_name sample_model
+```
+
+- コンテナkill
+
+```
+sudo docker rm -f ai_race_docker
+```
+
+- 参考 <br>
+
+以下<br>
 [nvidia-docker/wiki](https://github.com/NVIDIA/nvidia-docker/wiki/NVIDIA-Container-Runtime-on-Jetson) <br>
 
 ## Dockerコマンドをsudoなしで実行する
