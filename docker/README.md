@@ -35,12 +35,16 @@ sudo docker exec -it ai_race_docker /bin/bash
 roslaunch user_tutorial1 wheel_robot.launch
 ```
 
+![simulator_sample.png](https://github.com/seigot/ai_race/blob/main/document/simulator_sample.png)
+
 学習モデルを利用した推論、車両操作
 
 ```
 cd ~/ai_race/catkin_ws/src/user_tutorial2/scripts
 python inference_from_image.py --pretrained_model /home/jetson/ai_race_data_sample/model/sample.pth
 ```
+
+![inference_simulator_sample.png](https://github.com/seigot/ai_race/blob/main/document/inference_sample.png)
 
 学習
 
