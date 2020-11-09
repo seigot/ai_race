@@ -27,9 +27,10 @@ https://developer.nvidia.com/embedded/jetpack
 * お勧め設定 
 ユーザ名: jetson
 パスワード: (任意)
-```
 
-※お勧め設定は、順次更新予定。
+
+# お勧め設定は、順次追記予定。
+```
 
 * SWAPファイル追加してメモリ増強【必須】 <br>
 
@@ -137,16 +138,6 @@ cd nano_build_opencv
 ```
 
 - ライブラリバージョン <br>
-検証環境（マスター） <br>
-
-|  ライブラリ  |  バージョン(python3)  |　 バージョン(python)  |  備考  |
-| ---- | ---- | ---- | ---- |
-|  pytorch  |  1.3  |  -  |  -  |
-|  torchvision  |  -  |  -  |  -  |
-|  torch2trt  |  -  |  -  |  -  |
-|  sklearn  |  0.19.1  |  -  |  -  |
-|  pandas  |  1.1.3  |  -  |  -  |
-|  cv2  |  3.4.10  |  -  |  -  |
 
 検証環境（マスター追従のテスト用１） <br>
 
@@ -268,7 +259,7 @@ python3 train.py --data_csv $HOME/ai_race_data_sample/dataset/_2020-11-05-01-45-
 
 学習モデルにより推論し、車両を操作して走行タイムを競います。<br>
 <br>
-2020/11/9現在、ルール作成中<br>
+2020/11/9現在、ルール作成中、ご意見募集<br>
 [こちら](document/rule.md)に記載予定 <br>
 
 ### 4.x. 走行タイム計測器
