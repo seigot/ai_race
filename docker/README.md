@@ -21,13 +21,13 @@ sudo xhost +si:localuser:root
 sudo docker run --runtime nvidia --network host -it -e DISPLAY=$DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix --name ai_race_docker seigott/ai_race_docker
 ```
 
-- コンテナに入るコマンド（複数のターミナル画面からでも実行可能）
+- コンテナに入るコマンド（コンテナ起動とは別のターミナルで実行）
 
 ```
 sudo docker exec -it ai_race_docker /bin/bash
 ```
 
-- 動作確認用
+- コンテナ内での動作確認用
 
 シミュレータ起動
 
@@ -57,6 +57,8 @@ python3 train.py --data_csv /home/jetson/ai_race_data_sample/dataset/_2020-11-05
 
 - コンテナ破棄
 
+（注意）誤ってコンテナ破棄した場合、コンテナ内のデータが消えてしまいます。
+
 ```
 sudo docker rm -f ai_race_docker
 ```
@@ -68,9 +70,9 @@ sudo docker rm -f ai_race_docker
 
 ## dockerコンテナ使用注意事項
 
-* 誤ってコンテナ破棄した場合、コンテナ内のデータが消えてしまいます。
 * コンテナ内の本リポジトリが最新版になっていない事があります。git pullして下さい。
 * ネイティブ環境と比べて動作が遅いかもしれません。
+* もしパッケージ追加したい場合、コンテナ起動毎にインストールが必要です。
 
 ## Dockerコマンドをsudoなしで実行する
 
