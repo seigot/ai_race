@@ -56,7 +56,7 @@ python3 train.py --data_csv /home/jetson/ai_race_data_sample/dataset/_2020-11-05
 学習用データ取得
 
 ```
-確認中
+確認中、コンテナから物理コントローラにアクセスできないかも
 ```
 
 - コンテナ破棄
@@ -69,7 +69,6 @@ sudo docker rm -f ai_race_docker
 
 - 参考 <br>
 
-以下<br>
 [nvidia-docker/wiki](https://github.com/NVIDIA/nvidia-docker/wiki/NVIDIA-Container-Runtime-on-Jetson) <br>
 
 ## dockerコンテナ使用注意事項
