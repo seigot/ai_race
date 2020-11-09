@@ -23,6 +23,13 @@ https://developer.nvidia.com/embedded/jetpack
 取得後、イメージファイルをSDカードに書き込んで、JetsonNanoに挿して起動する。<br>
 起動後、ネットワークに接続する。<br>
 
+```
+* お勧め設定 
+ユーザ名: jetson
+パスワード: (任意)
+...その他、追記予定
+```
+
 * SWAPファイル追加してメモリ増強【必須】 <br>
 
 ```
@@ -156,6 +163,8 @@ cd nano_build_opencv
 
 ### 2.4. ai_raceリポジトリの取得とビルド
 
+（例）https://github.com/seigot/ai_race リポジトリの場合
+
 ```
 cd ~
 git clone http://github.com/seigot/ai_race
@@ -166,7 +175,7 @@ source devel/setup.sh
 
 ## 3. サンプルコードの実行
 
-### 3.1. コマンドからの実行手順
+### 3.1. コマンド使用方法
 
 以下を実行して下さい（仮）
 <br>
@@ -223,28 +232,42 @@ python3 trt_conversion.py --pretrained_model <学習させたモデル フルパ
 python inference_from_image.py --trt_module --trt_model <保存したtrtモデル名 フルパス指定> 
 ```
 
-### 3.2. サンプルコードの説明
+### 3.2. サンプルコードの実行
 
-記載予定
+記載予定 <br>
+<br>
+サンプルデータ取得 <br>
+
+```
+cd $HOME
+git clone http://github.com/seigot/ai_race_data_sample
+```
 
 シミュレータ起動
 
 ```
-ex.)
-bash scripts/prepare.sh
+roslaunch user_tutorial1 wheel_robot.launch
 ```
 
-学習モデルによる推論
+学習モデルを利用した推論、車両操作
 
 ```
-ex.)
-bash scripts/start.sh
+cd $HOME/ai_race/catkin_ws/src/user_tutorial2/scripts
+python inference_from_image.py --pretrained_model $HOME/ai_race_data_sample/model/sample.pth
+```
+
+学習
+
+```
+cd /home/jetson/ai_race/catkin_ws/src/learning
+python3 train.py --data_csv $HOME/ai_race_data_sample/dataset/_2020-11-05-01-45-29_2/_2020-11-05-01-45-29.csv --model_name sample_model
 ```
 
 ## 4. ルール
 
 学習モデルにより推論し、車両を操作して走行タイムを競います。<br>
 <br>
+2020/11/9現在、ルール作成中<br>
 [こちら](document/rule.md)に記載予定 <br>
 
 ### 4.x. 走行タイム計測器
