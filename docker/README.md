@@ -52,10 +52,10 @@ python3 train.py --data_csv /home/jetson/ai_race_data_sample/dataset/_2020-11-05
 データ取得
 
 ```
-xxx
+確認中
 ```
 
-- コンテナkill
+- コンテナ破棄
 
 ```
 sudo docker rm -f ai_race_docker
@@ -65,6 +65,12 @@ sudo docker rm -f ai_race_docker
 
 以下<br>
 [nvidia-docker/wiki](https://github.com/NVIDIA/nvidia-docker/wiki/NVIDIA-Container-Runtime-on-Jetson) <br>
+
+## dockerコンテナ使用注意事項
+
+* 誤ってコンテナ破棄した場合、コンテナ内のデータが消えてしまいます。
+* コンテナ内の本リポジトリが最新版になっていない事があります。git pullして下さい。
+* ネイティブ環境と比べて動作が遅いかもしれません。
 
 ## Dockerコマンドをsudoなしで実行する
 
