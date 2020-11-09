@@ -115,7 +115,7 @@ pip3 install scikit-learn
 #pip3 install matplotlib
 #sudo apt-get -y install python3-tk
 
-### pandas python2,3 (defultを使えばよい)
+### pandas python2,3 (defaultを使えばよい)
 #pip3 install cython
 #pip3 install numpy
 #pip3 install -U pandas
@@ -268,6 +268,6 @@ python3 judge/timer.py
 [PyTorch for Jetson](https://forums.developer.nvidia.com/t/pytorch-for-jetson-version-1-7-0-now-available/72048) <br>
 [https://github.com/NVIDIA-AI-IOT/torch2trt](https://github.com/NVIDIA-AI-IOT/torch2trt) <br>
 
-## Finnaly
+## Finally
 
 ~~ HAVE FUN ! ~~
