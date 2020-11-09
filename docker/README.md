@@ -5,6 +5,7 @@
 ~~* jetpack4.3標準のDockerイメージがあるか調べる~~ なかった
 * 今回使用するROS(melodic)環境一式
 * 今回使用する機械学習ライブラリ（pytorchなど）一式
+* 本リポジトリ
 * 基本的なエディタ（vi,emacs）
 
 詳しくは[Dockerfile](Dockerfile)をご参照
