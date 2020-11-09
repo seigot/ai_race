@@ -27,8 +27,6 @@ https://developer.nvidia.com/embedded/jetpack
 * お勧め設定 
 ユーザ名: jetson
 パスワード: (任意)
-
-
 # お勧め設定は、順次追記予定。
 ```
 
@@ -139,7 +137,7 @@ cd nano_build_opencv
 
 - ライブラリバージョン <br>
 
-検証環境（マスター追従のテスト用１） <br>
+推奨環境 <br>
 
 |  ライブラリ  |  バージョン(python3)  |　 バージョン(python)  |  備考  |
 | ---- | ---- | ---- | ---- |
@@ -169,7 +167,7 @@ source devel/setup.sh
 
 ### 3.1. コマンド使用方法
 
-以下を実行して下さい（仮）
+以下を実行して下さい（仮）<br>
 <br>
 ROS動作確認用（仮） <br>
 
