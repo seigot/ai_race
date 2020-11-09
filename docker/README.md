@@ -23,7 +23,7 @@ sudo docker run --runtime nvidia --network host -it -e DISPLAY=$DISPLAY -v /tmp/
 - コンテナに入るコマンド（複数のターミナル画面からでも実行可能）
 
 ```
-docker exec -it ai_race_docker /bin/bash
+sudo docker exec -it ai_race_docker /bin/bash
 ```
 
 - 動作確認用
