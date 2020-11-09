@@ -1,17 +1,42 @@
-# ai_race docker環境
+# ai_race 全部入りdocker環境
 
-検討中<br>
-TODO<br>
-* jetpack4.3標準のDockerイメージがあるか調べる
-* AIのライブラリ（tensorflow/pytorchなど）のインストール手順を調べる
+## 全部入りdocker環境に事前インストールしているもの
 
-## dockerコンテナ起動手順（仮）
+~~* jetpack4.3標準のDockerイメージがあるか調べる~~ なかった
+* 今回使用するROS(melodic)環境一式
+* 今回使用する機械学習ライブラリ（pytorchなど）一式
+* 基本的なエディタ（vi,emacs）
 
-以下を実行（仮）
+詳しくは[Dockerfile](Dockerfile)をご参照
+
+## dockerコンテナ使用手順
+
+- コンテナ起動
 
 ```
 sudo xhost +si:localuser:root
 sudo docker run --runtime nvidia --network host -it -e DISPLAY=$DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix --name ai_race_docker seigott/ai_race_docker
+```
+
+- コンテナに入るコマンド（複数のターミナル画面からでも実行可能）
+
+```
+docker exec -it ai_race_docker /bin/bash
+```
+
+- 動作確認用
+
+シミュレータ起動
+
+```
+roslaunch user_tutorial1 wheel_robot.launch
+```
+
+学習モデルを利用した推論、車両操作
+
+```
+roscd user_tutorial2/script
+python inference_from_image.py --pretrained_model /home/jetson/**(学習モデルのフルパス)
 ```
 
 以下を参考 <br>
