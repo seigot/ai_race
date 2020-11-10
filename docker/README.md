@@ -44,6 +44,20 @@ cd ~/ai_race/catkin_ws/src/user_tutorial2/scripts
 python inference_from_image.py --pretrained_model /home/jetson/ai_race_data_sample/model/sample.pth
 ```
 
+以下のようなログが出力されます。
+
+```
+python inference_from_image.py --pretrained_model /home/jetson/ai_race_data_sample/model/sample.pth
+WARNING: TensorRT Python 2 support is deprecated, and will be dropped in a future version!
+[1]
+time_each:155.262[sec]
+[1]
+time_each:9.121[sec]
+[1]
+time_each:0.378[sec]
+...
+```
+
 ![inference_simulator_sample.png](https://github.com/seigot/ai_race/blob/main/document/inference_sample.png)
 
 * 学習モデル作成
@@ -53,10 +67,10 @@ cd ~/ai_race/catkin_ws/src/learning
 python3 train.py --data_csv /home/jetson/ai_race_data_sample/dataset/_2020-11-05-01-45-29_2/_2020-11-05-01-45-29.csv --model_name sample_model
 ```
 
-以下のようなログが出力されるはずです。
+以下のようなログが出力されます。
 
 ```
-python3 train.py --data_csv /home/jetson/Images_from_rosbag/2020-11-05-01-45-29_2/_2020-11-05-01-45-29.csv --modelname 20201107-r1.model --n_epoch 2
+python3 train.py --data_csv /home/jetson/Images_from_rosbag/2020-11-05-01-45-29_2/_2020-11-05-01-45-29.csv --modelname sample_model
 data set
 model set
 optimizer set
@@ -67,11 +81,7 @@ batch: 30/56 , train acc: 0.619355, train loss: 0.019649
 batch: 40/56 , train acc: 0.634146, train loss: 0.025403
 batch: 50/56 , train acc: 0.622549, train loss: 0.031364
 epoch: 1, train acc: 0.627823, train loss: 0.034228
-Saved a model checkpoint at ../experiments/models/checkpoints/sim_race_20201107-r1.model_epoch=1.pth
-
-batch: 10/56 , train acc: 0.672727, train loss: 0.006076
-^[[Bbatch: 20/56 , train acc: 0.669048, train loss: 0.011831
-batch: 30/56 , train acc: 0.696774, train loss: 0.016803
+Saved a model checkpoint at ../experiments/models/checkpoints/sim_race_sample_model_epoch=1.pth
 ...
 ```
 
