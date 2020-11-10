@@ -40,11 +40,11 @@ cd installSwapfile
 free -mh
 ```
 
-* 学習用データ、学習モデル【sample】
+* 学習用データ、学習モデル【参考】
 
 [こちら](https://github.com/seigot/ai_race_data_sample)にsampleデータを置いています。運営の動作確認用です。
 
-* Docker環境
+* Docker環境【参考】
 
 [こちら](docker/README.md)にDocker環境の利用手順を置いています。運営の動作確認用です。
 
