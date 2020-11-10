@@ -87,8 +87,8 @@ sudo sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable `ls
 wget http://packages.osrfoundation.org/gazebo.key -O - | sudo apt-key add -
 sudo apt-get update -y
 sudo apt-get install -y ros-melodic-gazebo-ros-pkgs ros-melodic-gazebo-ros-control
-echo "export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:~/ai_race/catkin_ws/src:~/ai_race/catkin_ws/src/sim_world/models" >> ~/.bashrc
-export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:~/ai_race/catkin_ws/src:~/ai_race/catkin_ws/src/sim_world/models
+echo "export GAZEBO_MODEL_PATH=:/home/jetson/catkin_ws/src/ai_race/ai_race:/home/jetson/catkin_ws/src/ai_race/ai_race/sim_world/models" >> ~/.bashrc
+export GAZEBO_MODEL_PATH=:/home/jetson/catkin_ws/src/ai_race/ai_race:/home/jetson/catkin_ws/src/ai_race/ai_race/sim_world/models
 # camera image
 sudo apt-get install -y ros-melodic-uvc-camera
 sudo apt-get install -y ros-melodic-image-*
@@ -156,10 +156,10 @@ cd nano_build_opencv
 （例）https://github.com/seigot/ai_race リポジトリの場合
 
 ```
-cd ~
+cd ~/catkin_ws/src
 git clone http://github.com/seigot/ai_race
-cd ~/ai_race/catkin_ws
-catkin_make
+cd ~/catkin_ws
+catkin build
 source devel/setup.sh
 ```
 
@@ -241,14 +241,14 @@ roslaunch user_tutorial1 wheel_robot.launch
 学習モデルを利用した推論、車両操作
 
 ```
-cd $HOME/ai_race/catkin_ws/src/user_tutorial2/scripts
+cd $HOME/catkin_ws/src/ai_race/ai_race/user_tutorial2/scripts
 python inference_from_image.py --pretrained_model $HOME/ai_race_data_sample/model/sample.pth
 ```
 
 学習
 
 ```
-cd $HOME/ai_race/catkin_ws/src/learning
+cd $HOME/catkin_ws/src/ai_race/ai_race/learning
 python3 train.py --data_csv $HOME/ai_race_data_sample/dataset/_2020-11-05-01-45-29_2/_2020-11-05-01-45-29.csv --model_name sample_model
 ```
 
