@@ -21,6 +21,9 @@ sudo xhost +si:localuser:root
 sudo docker run --runtime nvidia --network host -it -e DISPLAY=$DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix --name ai_race_docker seigott/ai_race_docker
 ```
 
+参考 <br>
+[nvidia-docker/wiki](https://github.com/NVIDIA/nvidia-docker/wiki/NVIDIA-Container-Runtime-on-Jetson) <br>
+
 ### コンテナに入るコマンド（コンテナ起動とは別のターミナルで実行）
 
 ```
@@ -141,7 +144,6 @@ docker logout
 ```
 
 ### 参考（にする予定）
-[nvidia-docker/wiki](https://github.com/NVIDIA/nvidia-docker/wiki/NVIDIA-Container-Runtime-on-Jetson) <br>
 JetPack4.3 <br>
 [https://developer.nvidia.com/jetpack-43-archive](https://developer.nvidia.com/jetpack-43-archive) <br>
 JetPack 4.4 includes L4T 32.4.3 with these highlights: <br>
