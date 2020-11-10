@@ -27,7 +27,7 @@ https://developer.nvidia.com/embedded/jetpack
 * お勧め設定 
 ユーザ名: jetson
 パスワード: (任意)
-# お勧め設定は、順次追記予定。
+# お勧め設定は、順次追記予定。ユーザ名を共通化するとフルパス指定が要る時にハマる確率が減る。
 ```
 
 * SWAPファイル追加してメモリ増強【必須】 <br>
@@ -40,13 +40,13 @@ cd installSwapfile
 free -mh
 ```
 
-* Docker環境【検討中】
+* 学習用データ、学習モデル【sample】
 
-[こちら](docker/README.md)で検討中
+[こちら](https://github.com/seigot/ai_race_data_sample)にsampleデータを置いています。運営の動作確認用です。
 
-* 学習用データ、学習モデル【検討中】
+* Docker環境
 
-[こちら](https://github.com/seigot/ai_race_data)で扱うことを検討中
+[こちら](docker/README.md)にDocker環境の利用手順を置いています。運営の動作確認用です。
 
 ## 2. インストール
 
@@ -165,11 +165,9 @@ source devel/setup.sh
 
 ## 3. サンプルコードの実行
 
-### 3.1. コマンド使用方法
+### 3.1. 各種コマンドの説明
 
-以下を実行して下さい（仮）<br>
-<br>
-ROS動作確認用（仮） <br>
+ROS動作確認用コマンド（仮） <br>
 
 ```
 roslaunch tutorial1 wheel_robot.launch
@@ -178,23 +176,23 @@ roslaunch tutorial3 wheel_robot.launch
 roslaunch tutorial4 wheel_robot.launch
 roslaunch tutorial5 wheel_robot.launch
 roslaunch tutorial6 wheel_robot.launch
+roslaunch tutorial7 wheel_robot.launch
 ```
 
-機械学習の動作確認用（仮） <br>
+機械学習の動作確認用コマンド（仮） <br>
 
 ```
+## 学習用データ取得
 ## rosbag取得
 roslaunch user_tutorial1 wheel_robot.launch
-roslaunch user_tutorial1 rosbag.launch output_path:=/home/ubuntu
-rqt # robot steering -> v,rad指定
-```
+roslaunch user_tutorial1 rosbag.launch output_path:=<出力ファイルのディレクトリ 絶対パス指定>
+rqt # rqtを使う場合。robot steering -> 車両制御パラメータ（v,rad）指定
 
-```
 ## rosbag --> image/command 変換
 cd ~/ai_race/catkin_ws/src/utility/scripts
 mkdir -p /Images_from_rosbag
 sudo chmod 777 /Images_from_rosbag
-python rosbag_to_images_and_commands.py **.bag   # bagファイルから画像とコマンドを取得
+python rosbag_to_images_and_commands.py **.bag   # bagファイルから学習用データ（画像と車両制御パラメータ）を取得
 python listup_all_rosbag_timestamp.py *.bag               # 時刻表示できる
 ```
 
@@ -207,6 +205,7 @@ ls ~/ai_race/catkin_ws/srcexperiments/models/checkpoints/*.pth
 ```
 
 ```
+## 学習モデルを利用した推論、車両操作
 ## 推論(trtなし trt=比較的軽量なモデル) 
 roscd user_tutorial2/scripts 
 python inference_from_image.py --pretrained_model <学習させたモデル フルパス指定> 
@@ -224,7 +223,7 @@ python inference_from_image.py --trt_module --trt_model <保存したtrtモデ�
 
 ### 3.2. サンプルコードの実行
 
-記載予定 <br>
+別々のターミナルで実行して下さい。<br>
 <br>
 サンプルデータ取得 <br>
 
@@ -249,18 +248,27 @@ python inference_from_image.py --pretrained_model $HOME/ai_race_data_sample/mode
 学習
 
 ```
-cd /home/jetson/ai_race/catkin_ws/src/learning
+cd $HOME/ai_race/catkin_ws/src/learning
 python3 train.py --data_csv $HOME/ai_race_data_sample/dataset/_2020-11-05-01-45-29_2/_2020-11-05-01-45-29.csv --model_name sample_model
 ```
+
+学習用データ取得
+
+```
+### 検証中、rqt, joystick, 各種コントローラーを使って取得する
+roslaunch user_tutorial1 rosbag.launch output_path:=$HOME
+```
+
+
 
 ## 4. ルール
 
 学習モデルにより推論し、車両を操作して走行タイムを競います。<br>
 <br>
-2020/11/9現在、ルール作成中、ご意見募集<br>
+2020/11/9-20、ルール作成中、ご意見募集中!!<br>
 [こちら](document/rule.md)に記載予定 <br>
 
-### 4.x. 走行タイム計測器
+### 4.x. 走行タイム計測方法
 
 記載予定
 
