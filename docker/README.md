@@ -14,22 +14,22 @@
 
 jetson nano（Jetpack4.4以上）の環境で、ターミナルから以下を実行して下さい。
 
-- コンテナ起動
+### コンテナ起動
 
 ```
 sudo xhost +si:localuser:root
 sudo docker run --runtime nvidia --network host -it -e DISPLAY=$DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix --name ai_race_docker seigott/ai_race_docker
 ```
 
-- コンテナに入るコマンド（コンテナ起動とは別のターミナルで実行）
+### コンテナに入るコマンド（コンテナ起動とは別のターミナルで実行）
 
 ```
 sudo docker exec -it ai_race_docker /bin/bash
 ```
 
-- コンテナ内での動作確認用
+### コンテナ内での動作確認用
 
-シミュレータ起動
+* シミュレータ起動
 
 ```
 roslaunch user_tutorial1 wheel_robot.launch
@@ -37,7 +37,7 @@ roslaunch user_tutorial1 wheel_robot.launch
 
 ![simulator_sample.png](https://github.com/seigot/ai_race/blob/main/document/simulator_sample.png)
 
-学習モデルを利用した推論、車両操作
+* 学習モデルを利用した推論、車両操作
 
 ```
 cd ~/ai_race/catkin_ws/src/user_tutorial2/scripts
@@ -46,20 +46,42 @@ python inference_from_image.py --pretrained_model /home/jetson/ai_race_data_samp
 
 ![inference_simulator_sample.png](https://github.com/seigot/ai_race/blob/main/document/inference_sample.png)
 
-学習モデル作成
+* 学習モデル作成
 
 ```
 cd ~/ai_race/catkin_ws/src/learning
 python3 train.py --data_csv /home/jetson/ai_race_data_sample/dataset/_2020-11-05-01-45-29_2/_2020-11-05-01-45-29.csv --model_name sample_model
 ```
 
-学習用データ取得
+以下のようなログが出力されるはずです。
+
+```
+python3 train.py --data_csv /home/jetson/Images_from_rosbag/2020-11-05-01-45-29_2/_2020-11-05-01-45-29.csv --modelname 20201107-r1.model --n_epoch 2
+data set
+model set
+optimizer set
+Train starts
+batch: 10/56 , train acc: 0.577273, train loss: 0.008003
+batch: 20/56 , train acc: 0.592857, train loss: 0.01414
+batch: 30/56 , train acc: 0.619355, train loss: 0.019649
+batch: 40/56 , train acc: 0.634146, train loss: 0.025403
+batch: 50/56 , train acc: 0.622549, train loss: 0.031364
+epoch: 1, train acc: 0.627823, train loss: 0.034228
+Saved a model checkpoint at ../experiments/models/checkpoints/sim_race_20201107-r1.model_epoch=1.pth
+
+batch: 10/56 , train acc: 0.672727, train loss: 0.006076
+^[[Bbatch: 20/56 , train acc: 0.669048, train loss: 0.011831
+batch: 30/56 , train acc: 0.696774, train loss: 0.016803
+...
+```
+
+* 学習用データ取得
 
 ```
 確認中、コンテナから物理コントローラにアクセスできないかも
 ```
 
-- コンテナ破棄
+### コンテナ破棄
 
 （注意）誤ってコンテナ破棄した場合、コンテナ内のデータが消えてしまいます。
 
@@ -67,17 +89,13 @@ python3 train.py --data_csv /home/jetson/ai_race_data_sample/dataset/_2020-11-05
 sudo docker rm -f ai_race_docker
 ```
 
-- 参考 <br>
-
-[nvidia-docker/wiki](https://github.com/NVIDIA/nvidia-docker/wiki/NVIDIA-Container-Runtime-on-Jetson) <br>
-
-## dockerコンテナ使用注意事項
+### dockerコンテナ使用注意事項
 
 * コンテナ内の本リポジトリが最新版になっていない事があります。git pullして下さい。
 * ネイティブ環境と比べて動作が遅いかもしれません。
 * もしパッケージ追加したい場合、コンテナ起動毎にインストールが必要です。
 
-## Dockerコマンドをsudoなしで実行する
+### Dockerコマンドをsudoなしで実行する
 
 ```
 # dockerグループがなければ作る
@@ -96,7 +114,7 @@ exit
 参考 <br>
 [Dockerコマンドをsudoなしで実行する方法](https://qiita.com/DQNEO/items/da5df074c48b012152ee) <br>
 
-## ビルド手順
+### Dockerコンテナ ビルド手順
 
 以下を実行
 
@@ -112,7 +130,8 @@ docker push seigott/ai_race_docker .
 docker logout
 ```
 
-## 参考（にする予定）
+### 参考（にする予定）
+[nvidia-docker/wiki](https://github.com/NVIDIA/nvidia-docker/wiki/NVIDIA-Container-Runtime-on-Jetson) <br>
 JetPack4.3 <br>
 [https://developer.nvidia.com/jetpack-43-archive](https://developer.nvidia.com/jetpack-43-archive) <br>
 JetPack 4.4 includes L4T 32.4.3 with these highlights: <br>
