@@ -1,4 +1,4 @@
-# ai_race 全部入りdocker環境
+# ai_race 全部入りdocker環境 運営の動作確認用
 
 ## 全部入りdocker環境に事前インストールしているもの
 
