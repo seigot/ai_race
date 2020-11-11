@@ -33,6 +33,7 @@ https://developer.nvidia.com/embedded/jetpack
 * SWAPファイル追加してメモリ増強【必須】 <br>
 
 ```
+
 git clone https://github.com/JetsonHacksNano/installSwapfile
 cd installSwapfile
 ./installSwapfile.sh
