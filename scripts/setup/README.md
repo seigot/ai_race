@@ -18,6 +18,8 @@ $ sudo visudo    # user:jetsonの場合
 
 ### 対話処理は先に実行しておく
 
+[How To Install "gdm3" Package on Ubuntu](https://zoomadmin.com/HowToInstall/UbuntuPackage/gdm3)
+
 ```
 sudo apt-get update -y
 sudo apt-get install -y gdm3  ## 対話ウィンドウが出たら --> OK --> gdm3 を選択
