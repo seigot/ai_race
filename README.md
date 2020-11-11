@@ -108,16 +108,24 @@ mv c3d7vm4gcs9m728j6o5vjay2jdedqb55.whl torch-1.4.0-cp36-cp36m-linux_aarch64.whl
 pip3 install torch-1.4.0-cp36-cp36m-linux_aarch64.whl
 
 ### torch vision (v0.2.2)
+# https://forums.developer.nvidia.com/t/pytorch-for-jetson-version-1-7-0-now-available/72048
 pip install future
-pip install torchvision==0.2.2
 pip3 install future
-pip3 install torchvision==0.2.2
+sudo apt-get install libjpeg-dev zlib1g-dev libpython3-dev libavcodec-dev libavformat-dev libswscale-dev
+cd ~
+git clone --branch v0.5.0 https://github.com/pytorch/vision torchvision
+cd torchvision
+export BUILD_VERSION=0.2.2
+sudo python setup.py install
+sudo python3 setup.py install
+cd ../
+pip install 'pillow<7'
 
 ### torch2trt
 git clone https://github.com/NVIDIA-AI-IOT/torch2trt
 cd torch2trt
-python setup.py install
-python3 setup.py install
+sudo python setup.py install
+sudo python3 setup.py install
 
 ### sklearn python3
 pip3 install scikit-learn
