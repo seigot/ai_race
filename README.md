@@ -71,6 +71,7 @@ pip3 install numpy
 - ROS(melodic)のインストール
 
 ```
+cd ~
 git clone https://github.com/karaage0703/jetson-nano-tools
 cd jetson-nano-tools
 ./install-ros-melodic.sh
@@ -122,6 +123,7 @@ cd ../
 pip install 'pillow<7'
 
 ### torch2trt
+cd ~
 git clone https://github.com/NVIDIA-AI-IOT/torch2trt
 cd torch2trt
 sudo python setup.py install
