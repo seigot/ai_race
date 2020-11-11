@@ -51,9 +51,10 @@ free -mh
 
 ## 2. インストール
 
-結構時間が掛かります。
+結構時間が掛かります。<br>
+[こちら](https://github.com/seigot/ai_race/blob/main/scripts/setup/README.md)で、以下2.1.～2.4. を自動実行するスクリプトを作成中 <br>
 
-### 2.1 基本的なパッケージをインストール <br>
+### 2.1. 基本的なパッケージをインストール <br>
 
 ```
 sudo apt-get update
