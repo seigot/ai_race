@@ -154,8 +154,8 @@ function check_lib_version(){
 
 echo "start install"
 setup_swap_file
-#install_basic_package
-#install_ros
+install_basic_package
+install_ros
 install_ros_related_packages
 install_torch
 install_torchvision
