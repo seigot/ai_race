@@ -4,11 +4,11 @@ export HOME_JETSON=/home/jetson
 source $HOME_JETSON/.bashrc
 
 function setup_package(){
-    cd $HOME_JETSON
+    cd $HOME_JETSON/catkin_ws/src
     git clone http://github.com/seigot/ai_race
-    pushd $HOME_JETSON/ai_race/catkin_ws
-    catkin_make
-    echo "source $HOME_JETSON/ai_race/catkin_ws/devel/setup.sh" >> $HOME_JETSON/.bashrc
+    pushd $HOME_JETSON/catkin_ws
+    catkin build
+    echo "source $HOME_JETSON/catkin_ws/devel/setup.bash" >> $HOME_JETSON/.bashrc
     source devel/setup.sh
     popd
 }
