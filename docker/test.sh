@@ -3,12 +3,6 @@
 # エラーが起こったら異常終了させる
 set -E
 
-if [ -z ${PASSWORD} ];then
-    "please set PASSWORD for sudo, as.."
-    "export PASSWORD=<your password>"
-    exit 1
-fi
-
 function failure(){
     echo "error end!!"
     exit 1
@@ -33,19 +27,19 @@ function setup_swap_file(){
 }
 
 function install_basic_package(){
-    echo $PASSWORD | sudo -S apt-get update
-    echo $PASSWORD | sudo -S apt-get install -y net-tools git
-    echo $PASSWORD | sudo -S apt-get install -y python-pip
+    sudo apt-get update
+    sudo apt-get install -y net-tools git
+    sudo apt-get install -y python-pip
     # install pyqt5 and NumPy
-    echo $PASSWORD | sudo -S apt-get install -y python3-pip
-    echo $PASSWORD | sudo -S apt-get install -y python3-pyqt5
+    sudo apt-get install -y python3-pip
+    sudo apt-get install -y python3-pyqt5
     pip3 install --upgrade pip
     pip3 install numpy
 }
 
 function install_ros(){
     cd ~
-    echo $PASSWORD | sudo -S rm -rf jetson-nano-tools
+    sudo rm -rf jetson-nano-tools
     git clone https://github.com/karaage0703/jetson-nano-tools
     cd jetson-nano-tools
     ./install-ros-melodic.sh
@@ -55,27 +49,27 @@ function install_ros(){
 
 function install_ros_related_packages(){
     # joint state controller, and ros package
-    echo $PASSWORD | sudo -Sapt install -y ros-melodic-ros-control ros-melodic-ros-controllers  ros-melodic-joint-state-controller ros-melodic-effort-controllers ros-melodic-position-controllers ros-melodic-joint-trajectory-controller
+    sudo -Sapt install -y ros-melodic-ros-control ros-melodic-ros-controllers  ros-melodic-joint-state-controller ros-melodic-effort-controllers ros-melodic-position-controllers ros-melodic-joint-trajectory-controller
     # gazebo
-    echo $PASSWORD | sudo -S apt-get install -y gazebo9
-    echo $PASSWORD | sudo -S sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable `lsb_release -cs` main" > /etc/apt/sources.list.d/gazebo-stable.list'
+    sudo apt-get install -y gazebo9
+    sudo sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable `lsb_release -cs` main" > /etc/apt/sources.list.d/gazebo-stable.list'
     wget http://packages.osrfoundation.org/gazebo.key -O - | sudo apt-key add -
-    echo $PASSWORD | sudo -S apt-get update -y
-    echo $PASSWORD | sudo -S apt-get install -y ros-melodic-gazebo-ros-pkgs ros-melodic-gazebo-ros-control
+    sudo apt-get update -y
+    sudo apt-get install -y ros-melodic-gazebo-ros-pkgs ros-melodic-gazebo-ros-control
     echo "export GAZEBO_MODEL_PATH=:/home/jetson/catkin_ws/src/ai_race/ai_race:/home/jetson/catkin_ws/src/ai_race/ai_race/sim_world/models" >> ~/.bashrc
     export GAZEBO_MODEL_PATH=:/home/jetson/catkin_ws/src/ai_race/ai_race:/home/jetson/catkin_ws/src/ai_race/ai_race/sim_world/models
     # camera image
-    echo $PASSWORD | sudo -S apt-get install -y ros-melodic-uvc-camera
-    echo $PASSWORD | sudo -S apt-get install -y ros-melodic-image-*
+    sudo apt-get install -y ros-melodic-uvc-camera
+    sudo apt-get install -y ros-melodic-image-*
 }
 
 function install_torch(){
     ### pytorch from pip image (v1.4)
     wget https://nvidia.box.com/shared/static/yhlmaie35hu8jv2xzvtxsh0rrpcu97yj.whl -O torch-1.4.0-cp27-cp27mu-linux_aarch64.whl
-    echo $PASSWORD | sudo -S apt-get install -y python-pip libopenblas-base libopenmpi-dev
+    sudo apt-get install -y python-pip libopenblas-base libopenmpi-dev
     pip install torch-1.4.0-cp27-cp27mu-linux_aarch64.whl
     wget https://nvidia.box.com/shared/static/c3d7vm4gcs9m728j6o5vjay2jdedqb55.whl -O torch-1.4.0-cp36-cp36m-linux_aarch64.whl
-    echo $PASSWORD | sudo -S apt-get install -y python3-pip libopenblas-base libopenmpi-dev
+    sudo apt-get install -y python3-pip libopenblas-base libopenmpi-dev
     pip3 install torch-1.4.0-cp36-cp36m-linux_aarch64.whl
 }
 
@@ -84,15 +78,15 @@ function install_torchvision(){
     # https://forums.developer.nvidia.com/t/pytorch-for-jetson-version-1-7-0-now-available/72048
     pip install future
     pip3 install future
-    echo $PASSWORD | sudo -S apt-get install libjpeg-dev zlib1g-dev libpython3-dev libavcodec-dev libavformat-dev libswscale-dev
+    sudo apt-get install libjpeg-dev zlib1g-dev libpython3-dev libavcodec-dev libavformat-dev libswscale-dev
 
     cd ~
-    echo $PASSWORD | sudo -S rm -rf torchvision
+    sudo rm -rf torchvision
     git clone --branch v0.5.0 https://github.com/pytorch/vision torchvision
     cd torchvision
     export BUILD_VERSION=0.2.2
-    echo $PASSWORD | sudo -S python setup.py install
-    echo $PASSWORD | sudo -S python3 setup.py install
+    sudo python setup.py install
+    sudo python3 setup.py install
     cd ../
     pip install 'pillow<7'
     
@@ -105,11 +99,11 @@ function install_torchvision(){
 function install_torch2trt(){
     ### torch2trt
     cd ~
-    echo $PASSWORD | sudo -S rm -f torch2trt
+    sudo rm -f torch2trt
     git clone https://github.com/NVIDIA-AI-IOT/torch2trt
     cd torch2trt
-    echo $PASSWORD | sudo -S python setup.py install
-    echo $PASSWORD | sudo -S python3 setup.py install
+    sudo python setup.py install
+    sudo python3 setup.py install
 }
 
 function install_sklearn(){
@@ -131,7 +125,7 @@ function install_opencv(){
     ### opencv python
     ### opencv python はソースからビルドする必要がある. 8～10時間ほど掛かる.
     cd ~
-    echo $PASSWORD | sudo -S rm -rf nano_build_opencv
+    sudo rm -rf nano_build_opencv
     git clone https://github.com/mdegans/nano_build_opencv
     cd nano_build_opencv
     yes | ./build_opencv.sh 3.4.10
@@ -139,12 +133,12 @@ function install_opencv(){
 
 function setup_this_repository(){
     cd ~/catkin_ws/src
-    echo $PASSWORD | sudo -S rm -rf ai_race
+    sudo rm -rf ai_race
     git clone http://github.com/seigot/ai_race
     cd ~/catkin_ws
     catkin build
     source devel/setup.bash
-    echo "source ~/catkin_ws/src/devel/setup.bash" >> ~/.bashrc
+    echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
 }
 
 function check_lib_version(){
@@ -159,15 +153,15 @@ function check_lib_version(){
 }
 
 echo "start install"
-#setup_swap_file
-#install_basic_package
-#install_ros
-#install_ros_related_packages
-#install_torch
-#install_torchvision
-#install_torch2trt
-#install_sklearn
-#install_numpy
+setup_swap_file
+install_basic_package
+install_ros
+install_ros_related_packages
+install_torch
+install_torchvision
+install_torch2trt
+install_sklearn
+install_numpy
 install_opencv
 setup_this_repository
 check_lib_version
