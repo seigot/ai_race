@@ -179,7 +179,49 @@ echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
 
 ## 3. サンプルコードの実行
 
-### 3.1. 各種コマンドの説明
+### 3.1. サンプルコードの実行
+
+別々のターミナルで実行して下さい。<br>
+<br>
+#### サンプルデータのダウンロード <br>
+
+```
+cd $HOME
+git clone http://github.com/seigot/ai_race_data_sample
+```
+
+#### シミュレータ起動
+
+```
+roslaunch user_tutorial1 wheel_robot.launch
+```
+
+![simulator_sample.png](https://github.com/seigot/ai_race/blob/main/document/simulator_sample.png)
+
+#### 学習モデルを利用した推論、車両操作
+
+```
+cd $HOME/catkin_ws/src/ai_race/ai_race/user_tutorial2/scripts
+python inference_from_image.py --pretrained_model $HOME/ai_race_data_sample/model/sample.pth
+```
+
+![inference_simulator_sample.png](https://github.com/seigot/ai_race/blob/main/document/inference_sample.png)
+
+#### 学習
+
+```
+cd $HOME/catkin_ws/src/ai_race/ai_race/learning
+python3 train.py --data_csv $HOME/ai_race_data_sample/dataset/_2020-11-05-01-45-29_2/_2020-11-05-01-45-29.csv --model_name sample_model
+```
+
+#### 学習用データ取得
+
+```
+### 検証中、rqt, joystick, 各種コントローラーを使って取得する
+roslaunch user_tutorial1 rosbag.launch output_path:=$HOME
+```
+
+### 3.2. 各種コマンドの説明
 
 ROS動作確認用コマンド（仮） <br>
 
@@ -234,50 +276,6 @@ python3 trt_conversion.py --pretrained_model <学習させたモデル フルパ
 #### 実行 
 python inference_from_image.py --trt_module --trt_model <保存したtrtモデル名 フルパス指定> 
 ```
-
-### 3.2. サンプルコードの実行
-
-別々のターミナルで実行して下さい。<br>
-<br>
-#### サンプルデータのダウンロード <br>
-
-```
-cd $HOME
-git clone http://github.com/seigot/ai_race_data_sample
-```
-
-#### シミュレータ起動
-
-```
-roslaunch user_tutorial1 wheel_robot.launch
-```
-
-![simulator_sample.png](https://github.com/seigot/ai_race/blob/main/document/simulator_sample.png)
-
-#### 学習モデルを利用した推論、車両操作
-
-```
-cd $HOME/catkin_ws/src/ai_race/ai_race/user_tutorial2/scripts
-python inference_from_image.py --pretrained_model $HOME/ai_race_data_sample/model/sample.pth
-```
-
-![inference_simulator_sample.png](https://github.com/seigot/ai_race/blob/main/document/inference_sample.png)
-
-#### 学習
-
-```
-cd $HOME/catkin_ws/src/ai_race/ai_race/learning
-python3 train.py --data_csv $HOME/ai_race_data_sample/dataset/_2020-11-05-01-45-29_2/_2020-11-05-01-45-29.csv --model_name sample_model
-```
-
-#### 学習用データ取得
-
-```
-### 検証中、rqt, joystick, 各種コントローラーを使って取得する
-roslaunch user_tutorial1 rosbag.launch output_path:=$HOME
-```
-
-
 
 ## 4. ルール
 
