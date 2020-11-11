@@ -19,7 +19,7 @@ function setup_swap_file(){
 	echo "skip"
 	return 0
     fi
-    git clone https://github.com/JetsonHacksNano/
+    git clone https://github.com/JetsonHacksNano/installSwapfile
     cd installSwapfile
     ./installSwapfile.sh
     # SWAP領域が増えていることを確認
