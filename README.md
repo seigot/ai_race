@@ -162,7 +162,8 @@ cd ~/catkin_ws/src
 git clone http://github.com/seigot/ai_race
 cd ~/catkin_ws
 catkin build
-source devel/setup.sh
+source devel/setup.bash
+echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
 ```
 
 ## 3. サンプルコードの実行
