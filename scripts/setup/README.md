@@ -16,6 +16,15 @@ $ sudo visudo    # user:jetsonの場合
 
 備考： "esc+:wq" でエディタを終了
 
+### 対話処理は先に実行しておく
+
+```
+sudo apt-get update -y
+sudo apt-get install -y gdm3  ## 対話ウィンドウが出たら --> OK --> gdm3 を選択
+```
+
+備考：自動化したい
+
 ### スクリプト実行
 
 ```
