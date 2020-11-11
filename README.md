@@ -33,6 +33,7 @@ https://developer.nvidia.com/embedded/jetpack
 * SWAPファイル追加してメモリ増強【必須】 <br>
 
 ```
+cd ~
 git clone https://github.com/JetsonHacksNano/installSwapfile
 cd installSwapfile
 ./installSwapfile.sh
@@ -57,6 +58,7 @@ free -mh
 ```
 sudo apt-get update
 sudo apt-get install -y net-tools git
+sudo apt-get install -y python-pip
 # install pyqt5 and NumPy
 sudo apt-get install -y python3-pip
 sudo apt-get install -y python3-pyqt5
