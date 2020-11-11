@@ -177,7 +177,7 @@ source devel/setup.bash
 echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
 ```
 
-## 3. サンプルコードの実行
+## 3. サンプルコード
 
 ### 3.1. サンプルコードの実行
 
@@ -286,12 +286,31 @@ python inference_from_image.py --trt_module --trt_model <保存したtrtモデ�
 
 ### 4.x. 走行タイム計測方法
 
-記載予定
+記載予定 <br>
+<br>
+以下のタイマーを使う予定<br>
 
 ```
 python3 judge/timer.py
 ```
 
+### 4.x コース
+
+いくつかコースを準備しようと試みています <br>
+
+|  -  |  level1  |　 level2  |  level3  |
+| ---- | ---- | ---- | ---- |
+|  特徴  |  xxx  |  xxx  |  xxx  |
+|  xxx  |  xxx  |  xxx  |  xxx  |
+|  xxx  |  xxx  |  xxx  |  xxx  |
+|  xxx  |  xxx  |  xxx  |  xxx  |
+|  xxx  |  xxx  |  xxx  |  xxx  |
+
+### 4.x 評価するもの
+
+* 最終的に、学習モデルを評価する予定 <br>
+* 本リポジトリをforkして頂き、各ユーザのリポジトリで学習モデルを作成して頂く予定 <br>　
+* 評価タイムはどこかに載せたい（途中経過含む）<br>
 
 ## FAQ
 
