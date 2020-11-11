@@ -203,7 +203,7 @@ roslaunch user_tutorial1 rosbag.launch output_path:=<出力ファイルのディ
 rqt # rqtを使う場合。robot steering -> 車両制御パラメータ（v,rad）指定
 
 ## rosbag --> image/command 変換
-cd ~/ai_race/catkin_ws/src/utility/scripts
+cd ~/catkin_ws/src/ai_race/ai_race/utility/scripts
 mkdir -p /Images_from_rosbag
 sudo chmod 777 /Images_from_rosbag
 python rosbag_to_images_and_commands.py **.bag   # bagファイルから学習用データ（画像と車両制御パラメータ）を取得
@@ -215,7 +215,7 @@ python listup_all_rosbag_timestamp.py *.bag               # 時刻表示でき�
 cd learning (学習用フォルダへ移動) 
 python3 train.py --data_csv <csvのパス フルパス指定> --model_name <保存するモデル名>  
 #### 以下のディレクトリにモデルが保存されます
-ls ~/ai_race/catkin_ws/srcexperiments/models/checkpoints/*.pth
+ls ~/catkin_ws/src/ai_race/ai_raceexperiments/models/checkpoints/*.pth
 ```
 
 ```
