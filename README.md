@@ -239,34 +239,38 @@ python inference_from_image.py --trt_module --trt_model <保存したtrtモデ�
 
 別々のターミナルで実行して下さい。<br>
 <br>
-サンプルデータ取得 <br>
+#### サンプルデータのダウンロード <br>
 
 ```
 cd $HOME
 git clone http://github.com/seigot/ai_race_data_sample
 ```
 
-シミュレータ起動
+#### シミュレータ起動
 
 ```
 roslaunch user_tutorial1 wheel_robot.launch
 ```
 
-学習モデルを利用した推論、車両操作
+![simulator_sample.png](https://github.com/seigot/ai_race/blob/main/document/simulator_sample.png)
+
+#### 学習モデルを利用した推論、車両操作
 
 ```
 cd $HOME/catkin_ws/src/ai_race/ai_race/user_tutorial2/scripts
 python inference_from_image.py --pretrained_model $HOME/ai_race_data_sample/model/sample.pth
 ```
 
-学習
+![inference_simulator_sample.png](https://github.com/seigot/ai_race/blob/main/document/inference_sample.png)
+
+#### 学習
 
 ```
 cd $HOME/catkin_ws/src/ai_race/ai_race/learning
 python3 train.py --data_csv $HOME/ai_race_data_sample/dataset/_2020-11-05-01-45-29_2/_2020-11-05-01-45-29.csv --model_name sample_model
 ```
 
-学習用データ取得
+#### 学習用データ取得
 
 ```
 ### 検証中、rqt, joystick, 各種コントローラーを使って取得する
