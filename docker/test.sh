@@ -11,7 +11,8 @@ function failure(){
 # エラー発生時にコールする関数を設定 
 trap failure ERR
 
-function set_swap_file(){
+function setup_swap_file(){
+    cd ~
     git clone https://github.com/JetsonHacksNano/installSwapfile
     cd installSwapfile
     ./installSwapfile.sh
@@ -22,6 +23,7 @@ function set_swap_file(){
 function install_basic_package(){
     sudo apt-get update
     sudo apt-get install -y net-tools git
+    sudo apt-get install -y python-pip
     # install pyqt5 and NumPy
     sudo apt-get install -y python3-pip
     sudo apt-get install -y python3-pyqt5
@@ -53,43 +55,66 @@ function install_ros_related_packages(){
     sudo apt-get install -y ros-melodic-image-*
 }
 
-function install_machine_learning_lib(){
+function install_torch(){
     ### pytorch from pip image (v1.4)
-    wget https://nvidia.box.com/shared/static/yhlmaie35hu8jv2xzvtxsh0rrpcu97yj.whl
-    mv yhlmaie35hu8jv2xzvtxsh0rrpcu97yj.whl  torch-1.4.0-cp27-cp27mu-linux_aarch64.whl
+    wget https://nvidia.box.com/shared/static/yhlmaie35hu8jv2xzvtxsh0rrpcu97yj.whl -O torch-1.4.0-cp27-cp27mu-linux_aarch64.whl
+    sudo apt-get install -y python-pip libopenblas-base libopenmpi-dev
     pip install torch-1.4.0-cp27-cp27mu-linux_aarch64.whl
-    wget https://nvidia.box.com/shared/static/c3d7vm4gcs9m728j6o5vjay2jdedqb55.whl
-    mv c3d7vm4gcs9m728j6o5vjay2jdedqb55.whl torch-1.4.0-cp36-cp36m-linux_aarch64.whl
+    wget https://nvidia.box.com/shared/static/c3d7vm4gcs9m728j6o5vjay2jdedqb55.whl -O torch-1.4.0-cp36-cp36m-linux_aarch64.whl
+    sudo apt-get install -y python3-pip libopenblas-base libopenmpi-dev
     pip3 install torch-1.4.0-cp36-cp36m-linux_aarch64.whl
+}
 
+function install_torchvision(){
     ### torch vision (v0.2.2)
+    # https://forums.developer.nvidia.com/t/pytorch-for-jetson-version-1-7-0-now-available/72048
     pip install future
-    pip install torchvision==0.2.2
     pip3 install future
-    pip3 install torchvision==0.2.2
+    sudo apt-get install libjpeg-dev zlib1g-dev libpython3-dev libavcodec-dev libavformat-dev libswscale-dev
+    git clone --branch v0.5.0 https://github.com/pytorch/vision torchvision
+    cd torchvision
+    export BUILD_VERSION=0.2.2
+    sudo python setup.py install
+    sudo python3 setup.py install
+    cd ../
+    pip install 'pillow<7'
+    
+    #pip install future
+    #pip install torchvision==0.2.2
+    #pip3 install future
+    #pip3 install torchvision==0.2.2
+}
 
+function install_torch2trt(){
     ### torch2trt
     git clone https://github.com/NVIDIA-AI-IOT/torch2trt
     cd torch2trt
-    python setup.py install
-    python3 setup.py install
+    sudo python setup.py install
+    sudo python3 setup.py install
+}
 
+function install_sklearn(){
     ### sklearn python3
     pip3 install scikit-learn
     #pip3 install matplotlib
     #sudo apt-get -y install python3-tk
+}
 
+function install_numpy(){
+    echo "skip"
     ### pandas python2,3 (defaultを使えばよい)
     #pip3 install cython
     #pip3 install numpy
     #pip3 install -U pandas
+}
 
+function install_opencv(){
     ### opencv python
     ### opencv python はソースからビルドする必要がある. 8～10時間ほど掛かる.
     cd ~
     git clone https://github.com/mdegans/nano_build_opencv
     cd nano_build_opencv
-    ./build_opencv.sh 3.4.10
+    yes | ./build_opencv.sh 3.4.10
 }
 
 function setup_this_repository(){
@@ -97,7 +122,8 @@ function setup_this_repository(){
     git clone http://github.com/seigot/ai_race
     cd ~/catkin_ws
     catkin build
-    source devel/setup.sh
+    source devel/setup.bash
+    echo "source ~/catkin_ws/src/devel/setup.bash" >> ~/.bashrc
 }
 
 function check_lib_version(){
@@ -112,10 +138,16 @@ function check_lib_version(){
 }
 
 echo "start install"
-install_basic_package
-install_ros
-install_ros_related_packages
-install_machine_learning_lib
+#setup_swap_file
+#install_basic_package
+#install_ros
+#install_ros_related_packages
+#install_torch
+#install_torchvision
+#install_torch2trt
+#install_sklearn
+#install_numpy
+install_opencv
 setup_this_repository
 check_lib_version
 echo "finish install"
