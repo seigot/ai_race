@@ -38,4 +38,4 @@ time ./auto_setup.sh
 ```
 
 ## Tips
-* opencvインストール時はgdmを選択
+* 6時間以上掛かる
