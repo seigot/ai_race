@@ -9,7 +9,7 @@
 ### sudo apt-get update 時にパスワードを聞かれないようにする（[参考](https://www.hiroom2.com/2018/10/23/ubuntu-1810-sudo-ja/)）
 
 ```
-$ sudo visudo    # user:jetsonの場合
+$ sudo visudo    # 以下の行に追加する
 # Allow members of group sudo to execute any command
 %sudo  ALL=(ALL:ALL) NOPASSWD:ALL
 ```
