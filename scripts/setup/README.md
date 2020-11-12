@@ -39,3 +39,10 @@ time ./auto_setup.sh
 
 ## Tips
 * 6時間以上掛かる
+
+```
+$ time ./auto_setup.sh
+real 405m14.993s
+user 350m6.152s
+sys 19m4.228s
+```
