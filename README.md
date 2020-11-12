@@ -103,11 +103,11 @@ sudo apt-get install -y ros-melodic-image-*
 
 ```
 ### pytorch from pip image (v1.4)
-wget https://nvidia.box.com/shared/static/yhlmaie35hu8jv2xzvtxsh0rrpcu97yj.whl
-mv yhlmaie35hu8jv2xzvtxsh0rrpcu97yj.whl  torch-1.4.0-cp27-cp27mu-linux_aarch64.whl
+wget https://nvidia.box.com/shared/static/yhlmaie35hu8jv2xzvtxsh0rrpcu97yj.whl -O torch-1.4.0-cp27-cp27mu-linux_aarch64.whl
+sudo apt-get install -y python-pip libopenblas-base libopenmpi-dev
 pip install torch-1.4.0-cp27-cp27mu-linux_aarch64.whl
-wget https://nvidia.box.com/shared/static/c3d7vm4gcs9m728j6o5vjay2jdedqb55.whl
-mv c3d7vm4gcs9m728j6o5vjay2jdedqb55.whl torch-1.4.0-cp36-cp36m-linux_aarch64.whl
+wget https://nvidia.box.com/shared/static/c3d7vm4gcs9m728j6o5vjay2jdedqb55.whl -O torch-1.4.0-cp36-cp36m-linux_aarch64.whl
+sudo apt-get install -y python3-pip libopenblas-base libopenmpi-dev
 pip3 install torch-1.4.0-cp36-cp36m-linux_aarch64.whl
 
 ### torch vision (v0.2.2)
@@ -201,6 +201,9 @@ roslaunch user_tutorial1 wheel_robot.launch
 
 #### 学習モデルを利用した推論、車両操作
 
+サンプルデータのダウンロードして使う場合の例。<br>
+以下の通り実行する。
+
 ```
 cd $HOME/catkin_ws/src/ai_race/ai_race/user_tutorial2/scripts
 python inference_from_image.py --pretrained_model $HOME/ai_race_data_sample/model/sample.pth
@@ -208,7 +211,20 @@ python inference_from_image.py --pretrained_model $HOME/ai_race_data_sample/mode
 
 ![inference_simulator_sample.png](https://github.com/seigot/ai_race/blob/main/document/inference_sample.png)
 
+比較的軽量なモデルを使う場合（通称：trtあり版）は以下の通り実行する。
+
+```
+# trtデータ準備(分割しているsample_trtデータを結合する)
+cd $HOME/ai_race_data_sample/model
+cat sample_trt_p* > sample_trt.pth
+# 推論
+cd $HOME/catkin_ws/src/ai_race/ai_race/user_tutorial2/scripts
+python inference_from_image.py --trt_module --trt_model $HOME/ai_race_data_sample/model/sample_trt.pth
+```
+
 #### 学習
+
+サンプルデータのダウンロードして使う場合の例。
 
 ```
 cd $HOME/catkin_ws/src/ai_race/ai_race/learning
@@ -217,31 +233,26 @@ python3 train.py --data_csv $HOME/ai_race_data_sample/dataset/_2020-11-05-01-45-
 
 #### 学習用データ取得
 
+rqt, joystick, 各種コントローラーで車両操作し、rosbagを取得する
+
 ```
-### 検証中、rqt, joystick, 各種コントローラーを使って取得する
+### rqt, joystick, 各種コントローラーを使って取得する
 roslaunch user_tutorial1 rosbag.launch output_path:=$HOME
 ```
 
 ### 3.2. 各種コマンドの説明
 
-ROS動作確認用コマンド（仮） <br>
+#### 機械学習の動作確認用コマンド（仮） <br>
 
-```
-roslaunch tutorial1 wheel_robot.launch
-roslaunch tutorial2 wheel_robot.launch
-roslaunch tutorial3 wheel_robot.launch
-roslaunch tutorial4 wheel_robot.launch
-roslaunch tutorial5 wheel_robot.launch
-roslaunch tutorial6 wheel_robot.launch
-roslaunch tutorial7 wheel_robot.launch
-```
+主に学習用データの取得、学習、学習モデルを利用した推論用です。<br>
+<br>
+Step1.学習用データの取得
 
-機械学習の動作確認用コマンド（仮） <br>
+`roslaunch user_tutorial1 wheel_robot.launch`を実行した状態で、別ターミナルから以下を実行
 
 ```
 ## 学習用データ取得
 ## rosbag取得
-roslaunch user_tutorial1 wheel_robot.launch
 roslaunch user_tutorial1 rosbag.launch output_path:=<出力ファイルのディレクトリ 絶対パス指定>
 rqt # rqtを使う場合。robot steering -> 車両制御パラメータ（v,rad）指定
 
@@ -253,6 +264,8 @@ python rosbag_to_images_and_commands.py **.bag   # bagファイルから学習�
 python listup_all_rosbag_timestamp.py *.bag               # 時刻表示できる
 ```
 
+Step2.学習用データから、学習モデルを作成
+
 ```
 ## 学習 
 cd learning (学習用フォルダへ移動) 
@@ -261,12 +274,18 @@ python3 train.py --data_csv <csvのパス フルパス指定> --model_name <保�
 ls ~/catkin_ws/src/ai_race/ai_raceexperiments/models/checkpoints/*.pth
 ```
 
+Step3.学習モデルを使って推論、車両操作
+
+`roslaunch user_tutorial1 wheel_robot.launch`を実行した状態で、別ターミナルから以下を実行
+
 ```
 ## 学習モデルを利用した推論、車両操作
 ## 推論(trtなし trt=比較的軽量なモデル) 
 roscd user_tutorial2/scripts 
 python inference_from_image.py --pretrained_model <学習させたモデル フルパス指定> 
 ```
+
+Step3+.学習モデルを軽量化して推論、車両操作
 
 ```
 ## 推論(trtあり）
@@ -276,6 +295,20 @@ python3 trt_conversion.py --pretrained_model <学習させたモデル フルパ
 #### 指定したディレクトリにモデルが保存されます
 #### 実行 
 python inference_from_image.py --trt_module --trt_model <保存したtrtモデル名 フルパス指定> 
+```
+
+#### ROS動作確認用コマンド <br>
+
+主に環境構築の動作確認用です。
+
+```
+roslaunch tutorial1 wheel_robot.launch
+roslaunch tutorial2 wheel_robot.launch
+roslaunch tutorial3 wheel_robot.launch
+roslaunch tutorial4 wheel_robot.launch
+roslaunch tutorial5 wheel_robot.launch
+roslaunch tutorial6 wheel_robot.launch
+roslaunch tutorial7 wheel_robot.launch
 ```
 
 ## 4. ルール
