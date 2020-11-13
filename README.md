@@ -254,10 +254,8 @@ roslaunch user_tutorial1 rosbag.launch output_path:=$HOME
 
 ### 3.2. 各種コマンドの説明
 
-#### 機械学習の動作確認用コマンド（仮） <br>
+#### 学習用データの取得、学習、学習モデルを利用した推論用コマンド（仮） <br>
 
-主に学習用データの取得、学習、学習モデルを利用した推論用です。<br>
-<br>
 Step1.学習用データの取得
 
 `roslaunch user_tutorial1 wheel_robot.launch`を実行した状態で、別ターミナルから以下を実行
