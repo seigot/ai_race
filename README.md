@@ -52,7 +52,9 @@ free -mh
 ## 2. インストール
 
 結構時間が掛かります。<br>
-[こちら](https://github.com/seigot/ai_race/blob/main/scripts/setup/README.md)で、以下2.1.～2.4. を自動実行するスクリプトを作成中 <br>
+[こちら](https://github.com/seigot/ai_race/blob/main/scripts/setup/README.md)で、以下 2.1.～2.4. を自動実行するスクリプトを作成 <br>
+とりあえず動かしたい方は[こちら](docker/README.md)のDocker環境をお試し頂いてもOKです。 <br>
+「#」から始まる行はコメントです。 <br>
 
 ### 2.1. 基本的なパッケージをインストール <br>
 
@@ -72,6 +74,10 @@ pip3 install numpy
 - ROS(melodic)のインストール
 
 ```
+# インストール手順参考:
+# https://www.stereolabs.com/blog/ros-and-nvidia-jetson-nano/
+# こちらの手順を自動化している、karaage0703さんのjetson-nano-toolsを使わせて頂きます。
+# catkin_wsも自動で作成してくれます。
 cd ~
 git clone https://github.com/karaage0703/jetson-nano-tools
 cd jetson-nano-tools
@@ -101,12 +107,19 @@ sudo apt-get install -y ros-melodic-image-*
 ### 2.3. 機械学習ライブラリのインストール
 
 ```
+# インストール手順参考:
+# https://forums.developer.nvidia.com/t/pytorch-for-jetson-version-1-7-0-now-available/72048
+# https://github.com/NVIDIA-AI-IOT/torch2trt
+# https://github.com/mdegans/nano_build_opencv
+# 上記のサイト等を参考にした上で、必要なコマンドを下記に記載しています。
+
+
 ### pytorch from pip image (v1.4)
-wget https://nvidia.box.com/shared/static/yhlmaie35hu8jv2xzvtxsh0rrpcu97yj.whl
-mv yhlmaie35hu8jv2xzvtxsh0rrpcu97yj.whl  torch-1.4.0-cp27-cp27mu-linux_aarch64.whl
+wget https://nvidia.box.com/shared/static/yhlmaie35hu8jv2xzvtxsh0rrpcu97yj.whl -O torch-1.4.0-cp27-cp27mu-linux_aarch64.whl
+sudo apt-get install -y python-pip libopenblas-base libopenmpi-dev
 pip install torch-1.4.0-cp27-cp27mu-linux_aarch64.whl
-wget https://nvidia.box.com/shared/static/c3d7vm4gcs9m728j6o5vjay2jdedqb55.whl
-mv c3d7vm4gcs9m728j6o5vjay2jdedqb55.whl torch-1.4.0-cp36-cp36m-linux_aarch64.whl
+wget https://nvidia.box.com/shared/static/c3d7vm4gcs9m728j6o5vjay2jdedqb55.whl -O torch-1.4.0-cp36-cp36m-linux_aarch64.whl
+sudo apt-get install -y python3-pip libopenblas-base libopenmpi-dev
 pip3 install torch-1.4.0-cp36-cp36m-linux_aarch64.whl
 
 ### torch vision (v0.2.2)
@@ -177,28 +190,79 @@ source devel/setup.bash
 echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
 ```
 
-## 3. サンプルコードの実行
+## 3. サンプルコード
 
-### 3.1. 各種コマンドの説明
+### 3.1. サンプルコードの実行
 
-ROS動作確認用コマンド（仮） <br>
+別々のターミナルで実行して下さい。<br>
+<br>
+#### サンプルデータのダウンロード <br>
 
 ```
-roslaunch tutorial1 wheel_robot.launch
-roslaunch tutorial2 wheel_robot.launch
-roslaunch tutorial3 wheel_robot.launch
-roslaunch tutorial4 wheel_robot.launch
-roslaunch tutorial5 wheel_robot.launch
-roslaunch tutorial6 wheel_robot.launch
-roslaunch tutorial7 wheel_robot.launch
+cd $HOME
+git clone http://github.com/seigot/ai_race_data_sample
 ```
 
-機械学習の動作確認用コマンド（仮） <br>
+#### シミュレータ起動
+
+```
+roslaunch user_tutorial1 wheel_robot.launch
+```
+
+![simulator_sample.png](https://github.com/seigot/ai_race/blob/main/document/simulator_sample.png)
+
+#### 学習モデルを利用した推論、車両操作
+
+サンプルデータのダウンロードして使う場合の例。<br>
+以下の通り実行する。
+
+```
+cd $HOME/catkin_ws/src/ai_race/ai_race/user_tutorial2/scripts
+python inference_from_image.py --pretrained_model $HOME/ai_race_data_sample/model/sample.pth
+```
+
+![inference_simulator_sample.png](https://github.com/seigot/ai_race/blob/main/document/inference_sample.png)
+
+比較的軽量なモデルを使う場合（通称：trtあり版）は以下の通り実行する。
+
+```
+# trtデータ準備(分割しているsample_trtデータを結合する)
+cd $HOME/ai_race_data_sample/model
+cat sample_trt_p* > sample_trt.pth
+# 推論
+cd $HOME/catkin_ws/src/ai_race/ai_race/user_tutorial2/scripts
+python inference_from_image.py --trt_module --trt_model $HOME/ai_race_data_sample/model/sample_trt.pth
+```
+
+#### 学習モデルを作成
+
+サンプルデータのダウンロードして使う場合の例。
+
+```
+cd $HOME/catkin_ws/src/ai_race/ai_race/learning
+python3 train.py --data_csv $HOME/ai_race_data_sample/dataset/_2020-11-05-01-45-29_2/_2020-11-05-01-45-29.csv --model_name sample_model
+```
+
+#### 学習用データの取得
+
+rqt, joystick, 各種コントローラーで車両操作し、rosbagを取得する
+
+```
+### rqt, joystick, 各種コントローラーを使って取得する
+roslaunch user_tutorial1 rosbag.launch output_path:=$HOME
+```
+
+### 3.2. 各種コマンドの説明
+
+#### 学習用データの取得、学習モデルを作成、学習モデルを利用した推論用コマンド <br>
+
+* Step1.学習用データの取得
+
+`roslaunch user_tutorial1 wheel_robot.launch`を実行した状態で、別ターミナルから以下を実行
 
 ```
 ## 学習用データ取得
 ## rosbag取得
-roslaunch user_tutorial1 wheel_robot.launch
 roslaunch user_tutorial1 rosbag.launch output_path:=<出力ファイルのディレクトリ 絶対パス指定>
 rqt # rqtを使う場合。robot steering -> 車両制御パラメータ（v,rad）指定
 
@@ -210,6 +274,8 @@ python rosbag_to_images_and_commands.py **.bag   # bagファイルから学習�
 python listup_all_rosbag_timestamp.py *.bag               # 時刻表示できる
 ```
 
+* Step2.学習用データから、学習モデルを作成
+
 ```
 ## 学習 
 cd learning (学習用フォルダへ移動) 
@@ -218,12 +284,18 @@ python3 train.py --data_csv <csvのパス フルパス指定> --model_name <保�
 ls ~/catkin_ws/src/ai_race/ai_raceexperiments/models/checkpoints/*.pth
 ```
 
+* Step3.学習モデルを使って推論、車両操作
+
+`roslaunch user_tutorial1 wheel_robot.launch`を実行した状態で、別ターミナルから以下を実行
+
 ```
 ## 学習モデルを利用した推論、車両操作
 ## 推論(trtなし trt=比較的軽量なモデル) 
 roscd user_tutorial2/scripts 
 python inference_from_image.py --pretrained_model <学習させたモデル フルパス指定> 
 ```
+
+* Step3+.学習モデルを軽量化して推論、車両操作
 
 ```
 ## 推論(trtあり）
@@ -235,45 +307,19 @@ python3 trt_conversion.py --pretrained_model <学習させたモデル フルパ
 python inference_from_image.py --trt_module --trt_model <保存したtrtモデル名 フルパス指定> 
 ```
 
-### 3.2. サンプルコードの実行
+#### ROS動作確認用コマンド <br>
 
-別々のターミナルで実行して下さい。<br>
-<br>
-サンプルデータ取得 <br>
+主に環境構築の動作確認用です。
 
 ```
-cd $HOME
-git clone http://github.com/seigot/ai_race_data_sample
+roslaunch tutorial1 wheel_robot.launch
+roslaunch tutorial2 wheel_robot.launch
+roslaunch tutorial3 wheel_robot.launch
+roslaunch tutorial4 wheel_robot.launch
+roslaunch tutorial5 wheel_robot.launch
+roslaunch tutorial6 wheel_robot.launch
+roslaunch tutorial7 wheel_robot.launch
 ```
-
-シミュレータ起動
-
-```
-roslaunch user_tutorial1 wheel_robot.launch
-```
-
-学習モデルを利用した推論、車両操作
-
-```
-cd $HOME/catkin_ws/src/ai_race/ai_race/user_tutorial2/scripts
-python inference_from_image.py --pretrained_model $HOME/ai_race_data_sample/model/sample.pth
-```
-
-学習
-
-```
-cd $HOME/catkin_ws/src/ai_race/ai_race/learning
-python3 train.py --data_csv $HOME/ai_race_data_sample/dataset/_2020-11-05-01-45-29_2/_2020-11-05-01-45-29.csv --model_name sample_model
-```
-
-学習用データ取得
-
-```
-### 検証中、rqt, joystick, 各種コントローラーを使って取得する
-roslaunch user_tutorial1 rosbag.launch output_path:=$HOME
-```
-
-
 
 ## 4. ルール
 
@@ -284,12 +330,31 @@ roslaunch user_tutorial1 rosbag.launch output_path:=$HOME
 
 ### 4.x. 走行タイム計測方法
 
-記載予定
+記載予定 <br>
+<br>
+以下のタイマーを使う予定<br>
 
 ```
 python3 judge/timer.py
 ```
 
+### 4.x コース
+
+いくつかコースを準備しようと試みています <br>
+
+|  -  |  level1  |　 level2  |  level3  |
+| ---- | ---- | ---- | ---- |
+|  特徴  |  xxx  |  xxx  |  xxx  |
+|  xxx  |  xxx  |  xxx  |  xxx  |
+|  xxx  |  xxx  |  xxx  |  xxx  |
+|  xxx  |  xxx  |  xxx  |  xxx  |
+|  xxx  |  xxx  |  xxx  |  xxx  |
+
+### 4.x 評価するもの
+
+* 最終的に、学習モデルを評価する予定 <br>
+* 本リポジトリをforkして頂き、各ユーザのリポジトリで学習モデルを作成して頂く予定 <br>　
+* 評価タイムはどこかに載せたい（途中経過含む）<br>
 
 ## FAQ
 
