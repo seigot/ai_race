@@ -67,7 +67,7 @@ function install_torch(){
     ### pytorch from pip image (v1.4)
     wget https://nvidia.box.com/shared/static/yhlmaie35hu8jv2xzvtxsh0rrpcu97yj.whl -O torch-1.4.0-cp27-cp27mu-linux_aarch64.whl
     sudo apt-get install -y python-pip libopenblas-base libopenmpi-dev
-    pip install torch-1.4.0-cp27-cp27mu-linux_aarch64.whl
+    python -m pip install torch-1.4.0-cp27-cp27mu-linux_aarch64.whl
     wget https://nvidia.box.com/shared/static/c3d7vm4gcs9m728j6o5vjay2jdedqb55.whl -O torch-1.4.0-cp36-cp36m-linux_aarch64.whl
     sudo apt-get install -y python3-pip libopenblas-base libopenmpi-dev
     pip3 install torch-1.4.0-cp36-cp36m-linux_aarch64.whl
