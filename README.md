@@ -106,6 +106,13 @@ sudo apt-get install -y ros-melodic-image-*
 ### 2.3. 機械学習ライブラリのインストール
 
 ```
+# インストール手順参考:
+# https://forums.developer.nvidia.com/t/pytorch-for-jetson-version-1-7-0-now-available/72048
+# https://github.com/NVIDIA-AI-IOT/torch2trt
+# https://github.com/mdegans/nano_build_opencv
+# 上記のサイト等を参考にした上で、必要なコマンドを下記に記載しています。
+
+
 ### pytorch from pip image (v1.4)
 wget https://nvidia.box.com/shared/static/yhlmaie35hu8jv2xzvtxsh0rrpcu97yj.whl -O torch-1.4.0-cp27-cp27mu-linux_aarch64.whl
 sudo apt-get install -y python-pip libopenblas-base libopenmpi-dev
