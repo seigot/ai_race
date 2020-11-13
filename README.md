@@ -73,6 +73,10 @@ pip3 install numpy
 - ROS(melodic)のインストール
 
 ```
+# インストール手順参考:
+# https://www.stereolabs.com/blog/ros-and-nvidia-jetson-nano/
+# こちらの手順を自動化している、karaage0703さんのjetson-nano-toolsを使わせて頂きます。
+# catkin_wsも自動で作成してくれます。
 cd ~
 git clone https://github.com/karaage0703/jetson-nano-tools
 cd jetson-nano-tools
