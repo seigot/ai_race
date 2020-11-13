@@ -234,7 +234,7 @@ cd $HOME/catkin_ws/src/ai_race/ai_race/user_tutorial2/scripts
 python inference_from_image.py --trt_module --trt_model $HOME/ai_race_data_sample/model/sample_trt.pth
 ```
 
-#### 学習
+#### 学習モデルを作成
 
 サンプルデータのダウンロードして使う場合の例。
 
@@ -243,7 +243,7 @@ cd $HOME/catkin_ws/src/ai_race/ai_race/learning
 python3 train.py --data_csv $HOME/ai_race_data_sample/dataset/_2020-11-05-01-45-29_2/_2020-11-05-01-45-29.csv --model_name sample_model
 ```
 
-#### 学習用データ取得
+#### 学習用データの取得
 
 rqt, joystick, 各種コントローラーで車両操作し、rosbagを取得する
 
