@@ -254,9 +254,9 @@ roslaunch user_tutorial1 rosbag.launch output_path:=$HOME
 
 ### 3.2. 各種コマンドの説明
 
-* 学習用データの取得、学習、学習モデルを利用した推論用コマンド <br>
+#### 学習用データの取得、学習、学習モデルを利用した推論用コマンド <br>
 
-#### Step1.学習用データの取得
+* Step1.学習用データの取得
 
 `roslaunch user_tutorial1 wheel_robot.launch`を実行した状態で、別ターミナルから以下を実行
 
@@ -274,7 +274,7 @@ python rosbag_to_images_and_commands.py **.bag   # bagファイルから学習�
 python listup_all_rosbag_timestamp.py *.bag               # 時刻表示できる
 ```
 
-#### Step2.学習用データから、学習モデルを作成
+* Step2.学習用データから、学習モデルを作成
 
 ```
 ## 学習 
@@ -284,7 +284,7 @@ python3 train.py --data_csv <csvのパス フルパス指定> --model_name <保�
 ls ~/catkin_ws/src/ai_race/ai_raceexperiments/models/checkpoints/*.pth
 ```
 
-#### Step3.学習モデルを使って推論、車両操作
+* Step3.学習モデルを使って推論、車両操作
 
 `roslaunch user_tutorial1 wheel_robot.launch`を実行した状態で、別ターミナルから以下を実行
 
@@ -295,7 +295,7 @@ roscd user_tutorial2/scripts 
 python inference_from_image.py --pretrained_model <学習させたモデル フルパス指定> 
 ```
 
-#### Step3+.学習モデルを軽量化して推論、車両操作
+* Step3+.学習モデルを軽量化して推論、車両操作
 
 ```
 ## 推論(trtあり）
@@ -307,7 +307,7 @@ python3 trt_conversion.py --pretrained_model <学習させたモデル フルパ
 python inference_from_image.py --trt_module --trt_model <保存したtrtモデル名 フルパス指定> 
 ```
 
-* ROS動作確認用コマンド <br>
+#### ROS動作確認用コマンド <br>
 
 主に環境構築の動作確認用です。
 
