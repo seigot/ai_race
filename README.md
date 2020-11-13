@@ -54,6 +54,7 @@ free -mh
 結構時間が掛かります。<br>
 [こちら](https://github.com/seigot/ai_race/blob/main/scripts/setup/README.md)で、以下 2.1.～2.4. を自動実行するスクリプトを作成 <br>
 とりあえず動かしたい方は[こちら](docker/README.md)のDocker環境をお試し頂いてもOKです。 <br>
+「#」から始まる行はコメントです。 <br>
 
 ### 2.1. 基本的なパッケージをインストール <br>
 
