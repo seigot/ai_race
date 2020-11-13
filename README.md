@@ -196,14 +196,14 @@ echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
 
 別々のターミナルで実行して下さい。<br>
 <br>
-* サンプルデータのダウンロード <br>
+#### サンプルデータのダウンロード <br>
 
 ```
 cd $HOME
 git clone http://github.com/seigot/ai_race_data_sample
 ```
 
-* シミュレータ起動
+#### シミュレータ起動
 
 ```
 roslaunch user_tutorial1 wheel_robot.launch
@@ -211,7 +211,7 @@ roslaunch user_tutorial1 wheel_robot.launch
 
 ![simulator_sample.png](https://github.com/seigot/ai_race/blob/main/document/simulator_sample.png)
 
-* 学習モデルを利用した推論、車両操作
+#### 学習モデルを利用した推論、車両操作
 
 サンプルデータのダウンロードして使う場合の例。<br>
 以下の通り実行する。
@@ -234,7 +234,7 @@ cd $HOME/catkin_ws/src/ai_race/ai_race/user_tutorial2/scripts
 python inference_from_image.py --trt_module --trt_model $HOME/ai_race_data_sample/model/sample_trt.pth
 ```
 
-* 学習
+#### 学習
 
 サンプルデータのダウンロードして使う場合の例。
 
@@ -243,7 +243,7 @@ cd $HOME/catkin_ws/src/ai_race/ai_race/learning
 python3 train.py --data_csv $HOME/ai_race_data_sample/dataset/_2020-11-05-01-45-29_2/_2020-11-05-01-45-29.csv --model_name sample_model
 ```
 
-* 学習用データ取得
+#### 学習用データ取得
 
 rqt, joystick, 各種コントローラーで車両操作し、rosbagを取得する
 
