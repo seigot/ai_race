@@ -35,6 +35,8 @@ function install_basic_package(){
     sudo apt-get install -y python3-pyqt5
     pip3 install --upgrade pip
     pip3 install numpy
+    # for judge server
+    pip3 install flask
 }
 
 function install_ros(){
@@ -99,7 +101,7 @@ function install_torchvision(){
 function install_torch2trt(){
     ### torch2trt
     cd ~
-    sudo rm -f torch2trt
+    sudo rm -rf torch2trt
     git clone https://github.com/NVIDIA-AI-IOT/torch2trt
     cd torch2trt
     sudo python setup.py install
