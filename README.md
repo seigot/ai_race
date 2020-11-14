@@ -67,6 +67,8 @@ sudo apt-get install -y python3-pip
 sudo apt-get install -y python3-pyqt5
 pip3 install --upgrade pip
 pip3 install numpy
+# for judge server
+pip3 install flask
 ```
 
 ### 2.2. ROSのインストール
