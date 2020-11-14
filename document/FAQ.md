@@ -17,4 +17,9 @@ https://developer.nvidia.com/jetpack-43-archive
  -> https://developer.nvidia.com/jetson-nano-sd-card-imager-3231
 ```
 
+## Jetson nanoにVNC接続するにはどうすればよい？
+
+以下のJetson開発者向けサイトの通り実施すればよさそうです。（MacOSでの実績あり）<br>
+[Setting Up VNC](https://developer.nvidia.com/embedded/learn/tutorials/vnc-setup)<br>
+
 ## xxx
