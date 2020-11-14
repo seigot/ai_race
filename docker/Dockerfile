@@ -7,11 +7,13 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && \
     apt-get install -yq wget curl git build-essential vim sudo lsb-release locales bash-completion tzdata \
     emacs \
+    terminator \
     gnupg gnupg2 gnupg1 \
     gosu \
     unzip \
     less \
-    gnome-terminal
+    gnome-terminal \
+    dbus-x11
 
 # Replace 1000 with your user / group id
 RUN export uid=1000 gid=1000 && \
@@ -46,7 +48,8 @@ RUN sudo apt-get install -y python3-pip && \
 RUN sudo apt-get install -y python3-pip && \
     sudo apt-get install -y python3-pyqt5 && \
     pip3 install --upgrade pip && \
-    pip3 install numpy
+    pip3 install numpy && \
+    pip3 install flask
 
 # pytorch
 RUN pip --version && \
