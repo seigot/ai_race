@@ -54,6 +54,7 @@ free -mh
 結構時間が掛かります。<br>
 [こちら](https://github.com/seigot/ai_race/blob/main/scripts/setup/README.md)で、以下 2.1.～2.4. を自動実行するスクリプトを作成 <br>
 とりあえず動かしたい方は[こちら](docker/README.md)のDocker環境をお試し頂いてもOKです。 <br>
+「#」から始まる行はコメントです。 <br>
 
 ### 2.1. 基本的なパッケージをインストール <br>
 
@@ -73,6 +74,10 @@ pip3 install numpy
 - ROS(melodic)のインストール
 
 ```
+# インストール手順参考:
+# https://www.stereolabs.com/blog/ros-and-nvidia-jetson-nano/
+# こちらの手順を自動化している、karaage0703さんのjetson-nano-toolsを使わせて頂きます。
+# catkin_wsも自動で作成してくれます。
 cd ~
 git clone https://github.com/karaage0703/jetson-nano-tools
 cd jetson-nano-tools
@@ -102,6 +107,13 @@ sudo apt-get install -y ros-melodic-image-*
 ### 2.3. 機械学習ライブラリのインストール
 
 ```
+# インストール手順参考:
+# https://forums.developer.nvidia.com/t/pytorch-for-jetson-version-1-7-0-now-available/72048
+# https://github.com/NVIDIA-AI-IOT/torch2trt
+# https://github.com/mdegans/nano_build_opencv
+# 上記のサイト等を参考にした上で、必要なコマンドを下記に記載しています。
+
+
 ### pytorch from pip image (v1.4)
 wget https://nvidia.box.com/shared/static/yhlmaie35hu8jv2xzvtxsh0rrpcu97yj.whl -O torch-1.4.0-cp27-cp27mu-linux_aarch64.whl
 sudo apt-get install -y python-pip libopenblas-base libopenmpi-dev
@@ -222,7 +234,7 @@ cd $HOME/catkin_ws/src/ai_race/ai_race/user_tutorial2/scripts
 python inference_from_image.py --trt_module --trt_model $HOME/ai_race_data_sample/model/sample_trt.pth
 ```
 
-#### 学習
+#### 学習モデルを作成
 
 サンプルデータのダウンロードして使う場合の例。
 
@@ -231,7 +243,7 @@ cd $HOME/catkin_ws/src/ai_race/ai_race/learning
 python3 train.py --data_csv $HOME/ai_race_data_sample/dataset/_2020-11-05-01-45-29_2/_2020-11-05-01-45-29.csv --model_name sample_model
 ```
 
-#### 学習用データ取得
+#### 学習用データの取得
 
 rqt, joystick, 各種コントローラーで車両操作し、rosbagを取得する
 
@@ -242,11 +254,9 @@ roslaunch user_tutorial1 rosbag.launch output_path:=$HOME
 
 ### 3.2. 各種コマンドの説明
 
-#### 機械学習の動作確認用コマンド（仮） <br>
+#### 学習用データの取得、学習モデルを作成、学習モデルを利用した推論用コマンド <br>
 
-主に学習用データの取得、学習、学習モデルを利用した推論用です。<br>
-<br>
-Step1.学習用データの取得
+* Step1.学習用データの取得
 
 `roslaunch user_tutorial1 wheel_robot.launch`を実行した状態で、別ターミナルから以下を実行
 
@@ -264,7 +274,7 @@ python rosbag_to_images_and_commands.py **.bag   # bagファイルから学習�
 python listup_all_rosbag_timestamp.py *.bag               # 時刻表示できる
 ```
 
-Step2.学習用データから、学習モデルを作成
+* Step2.学習用データから、学習モデルを作成
 
 ```
 ## 学習 
@@ -274,7 +284,7 @@ python3 train.py --data_csv <csvのパス フルパス指定> --model_name <保�
 ls ~/catkin_ws/src/ai_race/ai_raceexperiments/models/checkpoints/*.pth
 ```
 
-Step3.学習モデルを使って推論、車両操作
+* Step3.学習モデルを使って推論、車両操作
 
 `roslaunch user_tutorial1 wheel_robot.launch`を実行した状態で、別ターミナルから以下を実行
 
@@ -285,7 +295,7 @@ roscd user_tutorial2/scripts 
 python inference_from_image.py --pretrained_model <学習させたモデル フルパス指定> 
 ```
 
-Step3+.学習モデルを軽量化して推論、車両操作
+* Step3+.学習モデルを軽量化して推論、車両操作
 
 ```
 ## 推論(trtあり）
