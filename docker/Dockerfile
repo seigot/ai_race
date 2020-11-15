@@ -3,17 +3,20 @@ LABEL maintainer="seigot<s.takada.3o3@gmail.com>"
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-# install basic package
-RUN apt-get update && \
-    apt-get install -yq wget curl git build-essential vim sudo lsb-release locales bash-completion tzdata \
-    emacs \
-    terminator \
-    gnupg gnupg2 gnupg1 \
-    gosu \
-    unzip \
-    less \
-    gnome-terminal \
-    dbus-x11
+# update
+RUN apt-get update ;\
+    apt-get -y upgrade ;\
+    apt-get install -yq wget curl git build-essential vim sudo lsb-release locales bash-completion tzdata gosu
+
+# environment setting
+#RUN locale-gen en_US.UTF-8
+#ENV LANG en_US.UTF-8
+#ENV LANGUAGE en_US:en
+#ENV LC_ALL en_US.UTF-8
+RUN locale-gen ja_JP.UTF-8
+ENV LANG ja_JP.UTF-8
+ENV LANGUAGE ja_JP:jp
+ENV LC_ALL ja_JP.UTF-8
 
 # Replace 1000 with your user / group id
 RUN export uid=1000 gid=1000 && \
@@ -23,6 +26,16 @@ RUN export uid=1000 gid=1000 && \
     echo "jetson ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/jetson && \
     chmod 0440 /etc/sudoers.d/jetson && \
     chown ${uid}:${gid} -R /home/jetson
+
+# install basic package
+RUN apt-get update && \
+    apt-get install -yq \
+    emacs \
+    terminator \
+    gnupg gnupg2 gnupg1 \
+    unzip \
+    less \
+    gnome-terminal
 
 # install ROS
 RUN git clone https://github.com/karaage0703/jetson-nano-tools /tmp/jetson-nano-tools && \
@@ -86,6 +99,10 @@ RUN patch -p0 < /tmp/build_opencv.patch && \
 
 #USER jetson
 ENV HOME /home/jetson
+
+# gnome-terminal
+RUN apt-get install -yq dbus-x11; \
+    echo 'eval `dbus-launch --sh-syntax`' >> /home/jetson/.bashrc
 
 # install additional package
 RUN apt-get update && \

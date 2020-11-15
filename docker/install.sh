@@ -15,14 +15,12 @@ function setup_package(){
 
 function setup_ai_race_env(){
 
+    # general praparation
     mkdir -p $HOME_JETSON/Images_from_rosbag
 
     # setup ai_race_data_sample
     cd $HOME_JETSON
     git clone http://github.com/seigot/ai_race_data_sample
-
-    # delete unnecessary file
-    #rm -fr $HOME_JETSON/catkin_ws # delete unnecessary directory..
 }
 
 setup_package
