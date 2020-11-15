@@ -87,7 +87,7 @@ class Window(QMainWindow):
         # creating a timer object 
         timer = QTimer(self) 
         timer.timeout.connect(self.callback_showTime)
-        timer.start(100) # update the timer by n(msec)
+        timer.start(500) # update the timer by n(msec)
 
     # timer callback function 
     def callback_showTime(self):

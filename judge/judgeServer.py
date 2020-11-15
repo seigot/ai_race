@@ -79,7 +79,7 @@ class GameManagerClass:
         return True
 
     def updateTime(self):
-        app.logger.info("updateTime")
+        #app.logger.info("updateTime")
         if self.judgestate == "init":
             self.passed_time = 0.00
             return False
@@ -90,7 +90,7 @@ class GameManagerClass:
         if self.passed_time >= self.time_max:
             self.stopGame()
 
-        app.logger.info("passed_Time {}".format(self.passed_time))
+        #app.logger.info("passed_Time {}".format(self.passed_time))
         return True
 
     def updateData(self, body):
@@ -174,7 +174,7 @@ def updateData():
 
 @app.route('/judgeserver/getState', methods=['GET'])
 def getState():
-    print("request to GET /judgeserver/getState")
+    #print("request to GET /judgeserver/getState")
     ip = request.remote_addr
     #app.logger.info("GET /judgeserver/getState " + str(ip))
     state_json = GameManager.getGameStateJson()
@@ -194,12 +194,16 @@ if __name__ == '__main__':
     GameManager = GameManagerClass(parse_argument())
 
     # app for debug
-    now = datetime.datetime.now()
-    now_str = now.strftime("%y%m%d_%H%M%S")
-    script_dir = os.path.dirname(os.path.abspath(__file__))
-    log_file_path = script_dir + "/log/" + now_str + ".log"
-    handler = RotatingFileHandler(log_file_path, maxBytes = 1000000, backupCount=100)
-    handler.setLevel(logging.INFO)
-    app.logger.setLevel(logging.INFO)
-    app.logger.addHandler(handler)
+    #now = datetime.datetime.now()
+    #now_str = now.strftime("%y%m%d_%H%M%S")
+    #script_dir = os.path.dirname(os.path.abspath(__file__))
+    #log_file_path = script_dir + "/log/" + now_str + ".log"
+    #handler = RotatingFileHandler("/dev/null")
+    #handler = RotatingFileHandler(log_file_path, maxBytes = 1000000, backupCount=100)
+    #handler.setLevel(logging.INFO)
+    #app.logger.setLevel(logging.INFO)
+    #app.logger.addHandler(handler)
+    l = logging.getLogger()
+    l.addHandler(logging.FileHandler("/dev/null"))
     app.run(debug=True, host='0.0.0.0', port=5000)
+    #app.run(debug=False, host='0.0.0.0', port=5000)
