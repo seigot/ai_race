@@ -41,7 +41,7 @@ class Window(QMainWindow):
         # creating a label to show the time 
         self.label = QLabel(self)
         label_upper_left = (20, 10)
-        label_width_height = (350, 130)
+        label_width_height = (360, 130)
         self.label.setGeometry(label_upper_left[0], label_upper_left[1], 
                                label_width_height[0], label_width_height[1]) 
         self.label.setStyleSheet("border : 4px solid black;") 
