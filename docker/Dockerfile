@@ -88,7 +88,6 @@ RUN sudo apt-get install -y libopenblas-base libopenmpi-dev && \
 # torch2trt
 RUN git clone https://github.com/NVIDIA-AI-IOT/torch2trt /tmp/torch2trt
 #    gosu jetson python3 /tmp/torch2trt/setup.py install && \
-#    gosu jetson python /tmp/torch2trt/setup.py install
 
 # install opencv python3
 RUN git clone https://github.com/mdegans/nano_build_opencv /tmp/nano_build_opencv

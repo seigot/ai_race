@@ -2,7 +2,6 @@
 
 # torch2trt setup
 pushd /tmp/torch2trt
-python setup.py install
 python3 setup.py install
 popd
 

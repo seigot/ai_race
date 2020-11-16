@@ -142,7 +142,6 @@ pip install 'pillow<7'
 cd ~
 git clone https://github.com/NVIDIA-AI-IOT/torch2trt
 cd torch2trt
-sudo python setup.py install
 sudo python3 setup.py install
 
 ### sklearn python3
