@@ -5,6 +5,11 @@
 11/15 serve化お試し<br>
 
 ## 動作確認コマンド
+準備
+
+```
+pip3 install flask
+```
 
 judge server起動
 
