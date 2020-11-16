@@ -17,6 +17,7 @@ from sklearn.metrics import f1_score
 from sklearn.model_selection import train_test_split
 from MyDataSet import MyDataset
 
+
 def main():
 	# Parse arguments.
 	args = parse_args()
@@ -28,8 +29,10 @@ def main():
 	# Load dataset.
 	#train_loader, test_loader, class_names = cifar10.load_data(args.data_dir)
 	train_data, test_data = train_test_split(imgDataset, test_size=0.2)
+	pd.to_pickle(test_data, "test_data.pkl")
+	del test_data
 	train_loader = torch.utils.data.DataLoader(train_data, batch_size=20, shuffle=True)
-	test_loader = torch.utils.data.DataLoader(test_data, batch_size=30, shuffle=True)
+	
 	print('data set')
 	# Set a model.
 	#model = get_model(args.model_name)
@@ -51,11 +54,25 @@ def main():
 	for epoch in range(args.n_epoch):
 		# Train and test a model.
 		train_acc, train_loss = train(model, device, train_loader, criterion, optimizer)
-		#test_acc, test_loss = test(model, device, test_loader, criterion)
 		
 		# Output score.
-		stdout_temp = 'epoch: {:>3}, train acc: {:<8}, train loss: {:<8}' #, test acc: {:<8}, test loss: {:<8}'
-		print(stdout_temp.format(epoch+1, train_acc, train_loss)) #, test_acc, test_loss))
+		# if(epoch%5==0):
+		pd.to_pickle(train_data, "train_data.pkl")
+		del train_data
+		
+		test_data = pd.read_pickle("test_data.pkl")
+		test_loader = torch.utils.data.DataLoader(test_data, batch_size=20, shuffle=True)
+		del test_data
+		test_acc, test_loss = test(model, device, test_loader, criterion)
+		del test_loader
+
+		stdout_temp = 'epoch: {:>3}, train acc: {:<8}, train loss: {:<8}, test acc: {:<8}, test loss: {:<8}'
+		print(stdout_temp.format(epoch+1, train_acc, train_loss, test_acc, test_loss))
+
+		train_data = pd.read_pickle("train_data.pkl")
+		# else:	
+		# 	stdout_temp = 'epoch: {:>3}, train acc: {:<8}, train loss: {:<8}' #, test acc: {:<8}, test loss: {:<8}'
+		# 	print(stdout_temp.format(epoch+1, train_acc, train_loss)) #, test_acc, test_loss))
 
 		# Save a model checkpoint.
 		model_ckpt_path = args.model_ckpt_path_temp.format(args.dataset_name, args.model_name, epoch+1)
@@ -178,7 +195,7 @@ def parse_args():
 	arg_parser = argparse.ArgumentParser(description="Image Classification")
 	
 	arg_parser.add_argument("--dataset_name", type=str, default='sim_race')
-	arg_parser.add_argument("--data_csv", type=str, default='/home/shiozaki/Images_from_rosbag/_2020-11-05-01-45-29_2/_2020-11-05-01-45-29.csv')
+	arg_parser.add_argument("--data_csv", type=str, default='/home/nano/Images_from_rosbag/_2020-11-05-01-45-29_2/_2020-11-05-01-45-29.csv')
 	#arg_parser.add_argument("--data_dir", type=str, default='../data/')
 	arg_parser.add_argument("--model_name", type=str, default='joycon_ResNet18_6')
 	arg_parser.add_argument("--model_ckpt_dir", type=str, default='../experiments/models/checkpoints/')
@@ -192,6 +209,7 @@ def parse_args():
 	#os.makedirs(args.data_dir, exist_ok=True)
 	os.makedirs(args.model_ckpt_dir, exist_ok=True)
 
+	print(args.data_csv)
 	# Validate paths.
 	assert os.path.exists(args.data_csv)
 	assert os.path.exists(args.model_ckpt_dir)
