@@ -8,10 +8,7 @@ import sys
 import requests
 from time import sleep
 import json
-import numpy as np
-import cv2
 import os
-import copy
 import datetime
 
 JUDGESERVER_REQUEST_URL="http://127.0.0.1:5000/judgeserver/request"
