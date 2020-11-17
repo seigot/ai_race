@@ -23,7 +23,7 @@ import time
 from PIL import Image as IMG
 #from models import *
 #from datasets import cifar10
-from torch2trt import TRTModule
+
 import cv2
 from cv_bridge import CvBridge
 
@@ -44,6 +44,7 @@ def init_inference():
     #model.load_state_dict(torch.load(args.pretrained_model))
     
     if args.trt_module :
+        from torch2trt import TRTModule
         if args.trt_conversion :
             #model.load_state_dict(torch.load('/home/shiozaki/work/experiments/models/checkpoints/sim_race_joycon_ResNet18_6_epoch=20.pth'))
             model.load_state_dict(torch.load(args.pretrained_model))
