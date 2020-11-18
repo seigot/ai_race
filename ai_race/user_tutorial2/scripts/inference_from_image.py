@@ -111,7 +111,7 @@ def set_throttle_steer(data):
     print(output)
     #angular_z = (float(output)-256)/100
     angular_z = (float(output)-1)
-    twist.linear.x = 1.4
+    twist.linear.x = 1.6
     twist.linear.y = 0.0
     twist.linear.z = 0.0
     twist.angular.x = 0.0

@@ -58,7 +58,4 @@ def parse_args():
 if __name__ == '__main__':
     args = parse_args()
     init_inference()
-    try:
-        inference_from_image()
-    except rospy.ROSInterruptException:
-        pass
+    inference_from_image()
