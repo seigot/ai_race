@@ -34,7 +34,7 @@
   </light>
 
   <include>
-    <uri>model://sim_world/models//medium_track</uri>
+    <uri>model://sim_world/models//medium_track_plane</uri>
     <pose>0 0 0 0 0 0</pose>
     <name>racetrack</name>
   </include>
