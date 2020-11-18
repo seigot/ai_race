@@ -3,12 +3,12 @@
   <arg name="show_rviz" default="false"/>
   <arg name="paused" default="false"/>
   <arg name="debug" default="false"/>
-  <arg name="gui" default="true"/>
+  <arg name="gui" default="false"/>
  
   <!-- We resume the logic in empty_world.launch, changing only the name of 
     the world to be launched -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    <arg name="world_name" value="$(find sim_world)/worlds/medium_track_w_car.world" />
+    <arg name="world_name" value="$(find sim_world)/worlds/medium_track.world" />
     <arg name="paused" value="$(arg paused)" />
     <arg name="debug" value="$(arg debug)" />
     <arg name="gui" value="$(arg gui)" />    
@@ -18,10 +18,16 @@
   
   <!-- urdf xml robot description loaded on the Parameter Server-->
   <param name="robot_description" command="$(find xacro)/xacro.py '$(find user_tutorial1)/urdf/wheel_robot.urdf.xacro'" />
+  <param name="camera_description" command="$(find xacro)/xacro.py '$(find user_tutorial1)/urdf/surveillance_camera.urdf.xacro'" />
+  <param name="godeye_description" command="$(find xacro)/xacro.py '$(find user_tutorial1)/urdf/godeye.urdf.xacro'" />
 
   <!-- push robot_description to factory and spawn robot in gazebo -->
   <node name="wheel_robot_spawn" pkg="gazebo_ros" type="spawn_model" output="screen" 
     args="-urdf -x 1.6 -y 0.0 -z 0.0 -Y 1.57  -param robot_description -model wheel_robot" />
+  <node name="camera_spawn" pkg="gazebo_ros" type="spawn_model" output="screen" 
+    args="-urdf -x 1.0 -y 0.0 -z 0.0 -Y 0  -param camera_description -model surveillance_camera" />
+  <node name="godeye_spawn" pkg="gazebo_ros" type="spawn_model" output="screen" 
+    args="-urdf -x 0.0 -y 0.0 -z 0.0   -param godeye_description -model godeye_camera" />
  
   <!-- robot visualization in Rviz -->
   <group if="$(arg show_rviz)">
@@ -45,8 +51,14 @@
   
   <!--<node name="rqt_gui" pkg="rqt_gui" type="rqt_gui"/>-->
   <node name="image_view" pkg="image_view" type="image_view" args="image:=/front_camera/image_raw" />
+  <node name="image_view_sur_camera" pkg="image_view" type="image_view" args="image:=/surveillance_camera/image_raw" />
+  <node name="image_view_godeye_camera" pkg="image_view" type="image_view" args="image:=/godeye_camera/image_raw" />
 
   <!-- servo node -->
     <node pkg="user_tutorial1" type="servo_commands.py" name="servo_commands" output="screen" />
-    
+  <!-- timing surveillance node-->
+    <node pkg="user_tutorial1" type="timing_surveillance.py" name="timing_surveillance" output="screen" />
+
+
+
 </launch>

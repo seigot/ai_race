@@ -1,0 +1,55 @@
+<robot name="surveillance_camera" xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:macro name="ir_sensor_macro" params="parent prefix xyz">
+    <joint name="${prefix}_joint" type="fixed">
+      <parent link="${parent}"/>
+      <child  link="${prefix}_link"/>
+      <origin xyz="${xyz}" rpy="${radians(-90)} 0 0"/>
+    </joint>
+    <link name="${prefix}_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <box size="0.01 0.01 0.03" />
+        </geometry>
+        <material name="Green" />
+      </visual>
+    </link>
+    <gazebo reference="${prefix}_link">        
+      <sensor type="ray" name="TeraRanger">
+        <pose>0 0 0 0 0 0</pose>
+        <visualize>true</visualize>
+        <update_rate>50</update_rate>
+        <ray>
+          <scan>
+              <horizontal>
+                <samples>1</samples>
+                <resolution>1</resolution> 
+                <min_angle>-0.014835</min_angle>
+                <max_angle>0.014835</max_angle>
+              </horizontal>
+              <vertical>
+                <samples>1</samples>
+                <resolution>1</resolution> 
+                <min_angle>-0.014835</min_angle>
+                <max_angle>0.014835</max_angle> 
+              </vertical>
+          </scan>
+          <range>
+              <min>0.01</min>
+              <max>2</max>
+              <resolution>0.02</resolution>
+          </range>
+        </ray>
+        <plugin filename="libgazebo_ros_range.so" name="gazebo_ros_range">
+          <gaussianNoise>0.005</gaussianNoise>
+          <alwaysOn>true</alwaysOn>
+          <updateRate>50</updateRate>
+          <topicName>ir_sensor</topicName>
+          <frameName>${prefix}_link</frameName>
+          <radiation>INFRARED</radiation>
+          <fov>0.02967</fov>
+        </plugin>
+    </sensor>  
+   </gazebo>
+  </xacro:macro> 
+</robot>
