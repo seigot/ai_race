@@ -1,5 +1,5 @@
 <launch>
-    <arg name="output_path" default="/home/shiozaki/"/>
+    <arg name="output_path" default="$(env HOME)/"/>
     
     <node pkg="rosbag" type="record" name="rosbag_record" args="record -o $(arg output_path) /cmd_vel /front_camera/image_raw" />
 </launch>

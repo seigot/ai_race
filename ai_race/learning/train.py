@@ -76,6 +76,7 @@ def main():
 
 		# Save a model checkpoint.
 		model_ckpt_path = args.model_ckpt_path_temp.format(args.dataset_name, args.model_name, epoch+1)
+		print(model_ckpt_path)
 		torch.save(model.state_dict(), model_ckpt_path)
 		print('Saved a model checkpoint at {}'.format(model_ckpt_path))
 		print('')
@@ -195,11 +196,11 @@ def parse_args():
 	arg_parser = argparse.ArgumentParser(description="Image Classification")
 	
 	arg_parser.add_argument("--dataset_name", type=str, default='sim_race')
-	arg_parser.add_argument("--data_csv", type=str, default='/home/nano/Images_from_rosbag/_2020-11-05-01-45-29_2/_2020-11-05-01-45-29.csv')
+	arg_parser.add_argument("--data_csv", type=str, default=os.environ['HOME'] + '/Images_from_rosbag/_2020-11-05-01-45-29_2/_2020-11-05-01-45-29.csv')
 	#arg_parser.add_argument("--data_dir", type=str, default='../data/')
-	arg_parser.add_argument("--model_name", type=str, default='joycon_ResNet18_6')
-	arg_parser.add_argument("--model_ckpt_dir", type=str, default='../experiments/models/checkpoints/')
-	arg_parser.add_argument("--model_ckpt_path_temp", type=str, default='../experiments/models/checkpoints/{}_{}_epoch={}.pth')
+	arg_parser.add_argument("--model_name", type=str, default='joycon_ResNet18')
+	arg_parser.add_argument("--model_ckpt_dir", type=str, default=os.environ['HOME'] + '/work/experiments/models/checkpoints/')
+	arg_parser.add_argument("--model_ckpt_path_temp", type=str, default=os.environ['HOME'] + '/work/experiments/models/checkpoints/{}_{}_epoch={}.pth')
 	arg_parser.add_argument('--n_epoch', default=20, type=int, help='The number of epoch')
 	arg_parser.add_argument('--lr', default=0.1, type=float, help='Learning rate')
 
