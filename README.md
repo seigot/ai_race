@@ -3,6 +3,8 @@
 <br>
 ## 1. 準備
 
+準備に関するご質問は、[FAQ](FAQ.md)に集約します。
+
 ### 1.0. jetson nano準備
 
 記載予定 <br>
@@ -355,7 +357,7 @@ roslaunch tutorial7 wheel_robot.launch
 
 ## FAQ
 
-[こちら](document/FAQ.md)に記載予定
+[こちら](FAQ.md)に記載
 
 ## 参考
 [Jetson NanoにROSをインストールする方法](https://qiita.com/karaage0703/items/aa54e086f0a2f165d3e9) <br>
