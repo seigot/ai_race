@@ -13,13 +13,13 @@
 ## イメージファイルをSDカードに書き込みはどうすればよい？
 
 以下が参考になります。ddコマンドでも書込み可能と思います。 <br>
-[Etcherを使ってSDカードにラズパイのOSイメージを書き込む方法](https://raspi-japan.com/2018/10/16/sd-format-etcher/)
+[Etcherを使ってSDカードにラズパイのOSイメージを書き込む方法](https://raspi-japan.com/2018/10/16/sd-format-etcher/) <br>
 [etcher](https://www.balena.io/etcher/)
 
 ## Jetpack 4.3で環境構築は可能？
 
-Jetpack 4.4 以降を推奨している理由は、公式にdockerコンテナや各種ライブラリが多くサポートされているためです。 <br>
 Jetpack 4.3 自体も環境構築可能とは思いますが、cut&tryが必要です。Jetpack 4.3 自体は、以下Archiveから取得可能です。 <br>
+Jetpack 4.4 以降を推奨している理由は、公式にdockerコンテナや各種ライブラリが多くサポートされているためです。何か特別な理由がない限りは、Jetpack 4.4以降をお勧めします。 <br>
 
 ```
 Jetpack 4.3 Archive
@@ -32,5 +32,9 @@ https://developer.nvidia.com/jetpack-43-archive
 
 以下のJetson開発者向けサイトの通り実施すればよさそうです。（MacOSでの実績あり）<br>
 [Setting Up VNC](https://developer.nvidia.com/embedded/learn/tutorials/vnc-setup)<br>
+以下、tigerVNCや、デスクトップ共有を使った手順でも実績があるようです。よりよい手順があれば教えて頂けると助かります。<br>
+[Jetson Nanoにリモートデスクトップ(VNC)環境を用意する](https://qiita.com/iwatake2222/items/a3bd8d0527dec431ef0f) <br>
+[5Getting Started with the NVIDIA Jetson Nano Developer Kit](https://www.hackster.io/news/getting-started-with-the-nvidia-jetson-nano-developer-kit-43aa7c298797) <br>
+
 
 ## xxx
