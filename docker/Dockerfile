@@ -64,6 +64,14 @@ RUN sudo apt-get install -y python3-pip && \
     pip3 install numpy && \
     pip3 install flask
 
+# pygame
+RUN apt-get update -y && \
+    apt-get install -y libsdl-dev libsdl-image1.2-dev libsdl-mixer1.2-dev libsdl-ttf2.0-dev && \
+    apt-get install -y libsmpeg-dev libportmidi-dev libavformat-dev libswscale-dev && \
+    apt-get install -y libfreetype6-dev && \
+    apt-get install -y libportmidi-dev && \
+    pip3 install pgzero
+
 # pytorch
 RUN pip --version && \
     pip3 --version
