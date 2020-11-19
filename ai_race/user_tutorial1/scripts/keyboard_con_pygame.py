@@ -42,7 +42,7 @@ class keyboardController:
         # pygameに初期化
         pygame.init()
         pgscreen=pygame.display.set_mode((1, 1))
-        pygame.display.set_caption('keyboard')
+        pygame.display.set_caption('keyboardcon')
 
         #コントロール方法表示
         print 
