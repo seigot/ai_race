@@ -9,7 +9,7 @@ set -u
 LEVEL=1
 
 # option
-while getopts l:a: OPT
+while getopts l: OPT
 do
     case $OPT in
         "l" ) LEVEL=$OPTARG; echo "LEVEL: $LEVEL";;
