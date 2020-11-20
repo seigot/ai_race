@@ -1,5 +1,10 @@
 #!/bin/bash -x
 
+# cuda10.1, cudnn7のdocker環境でshが通ることを確認
+# train.pyの動作も確認済み
+# Docker imageはnvidia/cuda:10.1-cudnn7-devel-ubuntu18.04を使用
+# 参考 https://qiita.com/nakasuke_/items/ec1b0636416df3c72db3#docker%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB
+
 # エラーが起こったら異常終了させる
 set -E
 
@@ -33,7 +38,10 @@ function install_basic_package(){
     # install pyqt5 and NumPy
     sudo apt-get install -y python3-pip
     sudo apt-get install -y python3-pyqt5
+    pip install future
+    pip3 install future
     pip3 install --upgrade pip
+    pip install numpy
     pip3 install numpy
     # for judge server
     pip3 install flask
@@ -49,7 +57,7 @@ function install_ros(){
     sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu bionic main" > /etc/apt/sources.list.d/ros-latest.list'
     sudo apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
     sudo apt update
-    sudo apt install ros-melodic-desktop-full
+    sudo apt install -y ros-melodic-desktop-full
     sudo apt-get install -y python-catkin-tools
     mkdir -p ~/catkin_ws/src
     cd ~/catkin_ws
@@ -83,35 +91,13 @@ function install_ros_related_packages(){
 
 function install_torch(){
     ### pytorch from pip image (v1.4)
-    wget https://nvidia.box.com/shared/static/yhlmaie35hu8jv2xzvtxsh0rrpcu97yj.whl -O torch-1.4.0-cp27-cp27mu-linux_aarch64.whl
-    sudo apt-get install -y python-pip libopenblas-base libopenmpi-dev
-    python -m pip install torch-1.4.0-cp27-cp27mu-linux_aarch64.whl
-    wget https://nvidia.box.com/shared/static/c3d7vm4gcs9m728j6o5vjay2jdedqb55.whl -O torch-1.4.0-cp36-cp36m-linux_aarch64.whl
-    sudo apt-get install -y python3-pip libopenblas-base libopenmpi-dev
-    pip3 install torch-1.4.0-cp36-cp36m-linux_aarch64.whl
-}
-
-function install_torchvision(){
-    ### torch vision (v0.2.2)
-    # https://forums.developer.nvidia.com/t/pytorch-for-jetson-version-1-7-0-now-available/72048
-    pip install future
-    pip3 install future
-    sudo apt-get install libjpeg-dev zlib1g-dev libpython3-dev libavcodec-dev libavformat-dev libswscale-dev
-
-    cd ~
-    sudo rm -rf torchvision
-    git clone --branch v0.5.0 https://github.com/pytorch/vision torchvision
-    cd torchvision
-    export BUILD_VERSION=0.2.2
-    sudo python setup.py install
-    sudo python3 setup.py install
-    cd ../
-    pip install 'pillow<7'
+    sudo apt-get install -y libopenblas-base libopenmpi-dev
+    sudo apt-get -y install libjpeg-dev zlib1g-dev libpython3-dev libavcodec-dev libavformat-dev libswscale-dev
     
-    #pip install future
-    #pip install torchvision==0.2.2
-    #pip3 install future
-    #pip3 install torchvision==0.2.2
+    python -m pip install https://download.pytorch.org/whl/cu101/torch-1.4.0-cp27-cp27mu-linux_x86_64.whl
+    python -m pip install torchvision==0.2.2
+    pip3 install torch==1.4.0 torchvision==0.2.2
+    pip install 'pillow<7'
 }
 
 function install_torch2trt(){
@@ -140,7 +126,7 @@ function install_numpy(){
 }
 
 function install_opencv(){
-    pip3 install opencv-python==3.4.10
+    pip3 install opencv-python==3.4.10.37
     ### opencv python
     ### opencv python はソースからビルドする必要がある. 8～10時間ほど掛かる.
     # cd ~
@@ -177,7 +163,7 @@ install_basic_package
 install_ros
 install_ros_related_packages
 install_torch
-install_torchvision
+# install_torchvision
 # install_torch2trt
 install_sklearn
 install_numpy
