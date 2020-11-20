@@ -71,6 +71,13 @@ pip3 install --upgrade pip
 pip3 install numpy
 # for judge server
 pip3 install flask
+# pygame
+sudo apt-get update -y
+sudo apt-get install -y libsdl-dev libsdl-image1.2-dev libsdl-mixer1.2-dev libsdl-ttf2.0-dev
+sudo apt-get install -y libsmpeg-dev libportmidi-dev libavformat-dev libswscale-dev
+sudo apt-get install -y libfreetype6-dev
+sudo apt-get install -y libportmidi-dev
+sudo pip3 install pgzero
 ```
 
 ### 2.2. ROSのインストール
