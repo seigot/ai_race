@@ -5,6 +5,17 @@ set -e
 # 未定義変数参照時はエラーにする
 set -u
 
+# default option parameter
+LEVEL=1
+
+# option
+while getopts l:a: OPT
+do
+    case $OPT in
+        "l" ) LEVEL=$OPTARG; echo "LEVEL: $LEVEL";;
+    esac
+done
+
 echo "start prepare.sh"
 
 # init judge server, timer window, etc
