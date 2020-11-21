@@ -62,7 +62,9 @@ RUN sudo apt-get install -y python3-pip && \
     sudo apt-get install -y python3-pyqt5 && \
     pip3 install --upgrade pip && \
     pip3 install numpy && \
-    pip3 install flask
+    pip3 install flask && \
+    pip3 install requests && \
+    python -m pip install requests
 
 # pygame
 RUN apt-get update -y && \
@@ -70,7 +72,8 @@ RUN apt-get update -y && \
     apt-get install -y libsmpeg-dev libportmidi-dev libavformat-dev libswscale-dev && \
     apt-get install -y libfreetype6-dev && \
     apt-get install -y libportmidi-dev && \
-    pip3 install pgzero
+    pip3 install pgzero && \
+    python -m pip install pygame==1.9.6
 
 # pytorch
 RUN pip --version && \
