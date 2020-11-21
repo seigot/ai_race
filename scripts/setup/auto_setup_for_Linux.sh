@@ -45,6 +45,8 @@ function install_basic_package(){
     pip3 install numpy
     # for judge server
     pip3 install flask
+    pip3 install requests
+    python -m pip install requests
     # pygame
     sudo apt-get update -y
     sudo apt-get install -y libsdl-dev libsdl-image1.2-dev libsdl-mixer1.2-dev libsdl-ttf2.0-dev
