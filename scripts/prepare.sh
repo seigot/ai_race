@@ -19,9 +19,9 @@ done
 echo "start prepare.sh"
 
 # init judge server, timer window, etc
-gnome-terminal -e "python3 judge/judgeServer.py"
+gnome-terminal -- python3 ../judge/judgeServer.py
 sleep 1
-gnome-terminal -e "python3 judge/timer.py"
+gnome-terminal -- python3 ../judge/timer.py
 # [future work] if necessary, register some data to server here.
 
 # init simulator, course and vehicle
