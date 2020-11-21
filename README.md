@@ -80,6 +80,7 @@ sudo apt-get install -y libsmpeg-dev libportmidi-dev libavformat-dev libswscale-
 sudo apt-get install -y libfreetype6-dev
 sudo apt-get install -y libportmidi-dev
 sudo pip3 install pgzero
+python -m pip install pygame==1.9.6
 ```
 
 ### 2.2. ROSのインストール
@@ -185,6 +186,7 @@ cd nano_build_opencv
 |  sklearn  |  0.23.2  |  Not_Installed  |  -  |
 |  pandas  |  0.22.0 ~~(1.1.3必須かも)~~  |  Not_Installed  |  -  |
 |  cv2  |  3.4.10  |  3.4.10   |  -  |
+|  pygame  |  1.9.6  |  1.9.6  |  -  |
 
 参考 <br>
 [pytorchとtensoflowのバージョンをコマンドラインから調べる](https://qiita.com/seigot/items/0b81f601e5c9e30d0e46) <br>
