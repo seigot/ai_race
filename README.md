@@ -196,6 +196,7 @@ cd nano_build_opencv
 （例）https://github.com/seigot/ai_race リポジトリの場合
 
 ```
+mkdir -p ~/Images_from_rosbag
 cd ~/catkin_ws/src
 git clone http://github.com/seigot/ai_race
 cd ~/catkin_ws

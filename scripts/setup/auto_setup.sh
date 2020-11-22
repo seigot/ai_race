@@ -143,6 +143,7 @@ function install_opencv(){
 }
 
 function setup_this_repository(){
+    mkdir -p ~/Images_from_rosbag
     cd ~/catkin_ws/src
     sudo rm -rf ai_race
     git clone http://github.com/seigot/ai_race
