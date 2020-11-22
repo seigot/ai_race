@@ -46,3 +46,28 @@ real 405m14.993s
 user 350m6.152s
 sys 19m4.228s
 ```
+
+* 2020/11/15以降の追加処理（主に、それ以前に`auto_setup.sh`実行した人むけ）
+
+```
+# for judge server
+pip3 install flask
+
+# pygame
+sudo apt-get update -y
+sudo apt-get install -y libsdl-dev libsdl-image1.2-dev libsdl-mixer1.2-dev libsdl-ttf2.0-dev
+sudo apt-get install -y libsmpeg-dev libportmidi-dev libavformat-dev libswscale-dev
+sudo apt-get install -y libfreetype6-dev
+sudo apt-get install -y libportmidi-dev
+sudo pip3 install pgzero
+
+# requests
+pip3 install requests
+python -m pip install requests
+
+# pygame python
+python -m pip install pygame==1.9.6
+
+# mkdir
+mkdir -p ~/Images_from_rosbag
+```
