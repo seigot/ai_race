@@ -49,13 +49,13 @@ free -mh
 
 * Docker環境【参考】
 
-[こちら](docker/README.md)にDocker環境の利用手順を置いています。運営の動作確認用です。
+[こちら](docker/jetson/README.md)にDocker環境の利用手順を置いています。運営の動作確認用です。
 
 ## 2. インストール
 
 結構時間が掛かります。<br>
 [こちら](https://github.com/seigot/ai_race/blob/main/scripts/setup/README.md)で、以下 2.1.～2.4. を自動実行するスクリプトを作成 <br>
-とりあえず動かしたい方は[こちら](docker/README.md)のDocker環境をお試し頂いてもOKです。 <br>
+とりあえず動かしたい方は[こちら](docker/jetson/README.md)のDocker環境をお試し頂いてもOKです。 <br>
 「#」から始まる行はコメントです。 <br>
 
 ### 2.1. 基本的なパッケージをインストール <br>
