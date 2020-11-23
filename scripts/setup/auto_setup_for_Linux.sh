@@ -58,6 +58,14 @@ function install_basic_package(){
 }
 
 function install_ros(){
+    # check if already install ros
+    rosversion -d
+    ret=$?
+    if [ $ret -eq 0 ];then
+	echo "ros already installed, skip install ros"
+	return 0
+    fi
+
     cd ~
     # sudo rm -rf jetson-nano-tools
     # git clone https://github.com/karaage0703/jetson-nano-tools
