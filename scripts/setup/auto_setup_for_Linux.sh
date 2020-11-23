@@ -54,7 +54,7 @@ function install_basic_package(){
     sudo apt-get install -y libfreetype6-dev
     sudo apt-get install -y libportmidi-dev
     sudo pip3 install pgzero
-    python -m pip install pygame==1.9.6
+    #python -m pip install pygame==1.9.6
 }
 
 function install_ros(){
@@ -69,6 +69,9 @@ function install_ros(){
     # git clone https://github.com/karaage0703/jetson-nano-tools
     # cd jetson-nano-tools
     # ./install-ros-melodic.sh
+    # [future work memo] install lsb-release, then use..
+    # apt-get update -y;apt-get install -y lsb-release;
+    # sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
     ROS_DISTRO=melodic
     sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu bionic main" > /etc/apt/sources.list.d/ros-latest.list'
     sudo apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
