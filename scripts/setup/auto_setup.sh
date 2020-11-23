@@ -51,9 +51,7 @@ function install_basic_package(){
 
 function install_ros(){
     # check if already install ros
-    rosversion -d
-    ret=$?
-    if [ $ret -eq 0 ];then
+    if [ ! -z `env | grep "ROS_DISTRO"` ];then
 	echo "ros already installed, skip install ros"
 	return 0
     fi
