@@ -44,6 +44,7 @@ class GameManagerClass:
         self.start_time = 0.00
         self.passed_time = 0.00
         self.lap_count = 0
+        self.courseout_count = 0
 
     def startGame(self):
         self.setJudgeState("start")
@@ -80,7 +81,7 @@ class GameManagerClass:
 
     def updateTime(self):
         #app.logger.info("updateTime")
-        if self.judgestate == "init":
+        if self.start_time == 0:
             self.passed_time = 0.00
             return False
 
@@ -100,6 +101,8 @@ class GameManagerClass:
         ## lap count
         if "lap_count" in body:
             self.lap_count = self.lap_count + int(body["lap_count"])
+        elif "courseout_count" in body:
+            self.courseout_count = self.courseout_count + int(body["courseout_count"])
         else:
             print("invalid RaceData")
             return False
@@ -121,6 +124,7 @@ class GameManagerClass:
                 "time": self.passed_time,
                 "time_max": self.time_max,
                 "lap_count": self.lap_count,
+                "courseout_count": self.courseout_count,
                 "judgestate": self.judgestate,
             },
             "debug_info": {
