@@ -19,11 +19,14 @@
   
   <!-- urdf xml robot description loaded on the Parameter Server-->
   <param name="robot_description" command="$(find xacro)/xacro.py '$(find user_tutorial1)/urdf/wheel_robot.urdf.xacro'" />
+  <param name="camera_description" command="$(find xacro)/xacro.py '$(find user_tutorial1)/urdf/surveillance_camera.urdf.xacro'" />
 
   <!-- push robot_description to factory and spawn robot in gazebo -->
   <node name="wheel_robot_spawn" pkg="gazebo_ros" type="spawn_model" output="screen" 
     args="-urdf -x 1.6 -y 0.0 -z 0.0 -Y 1.57  -param robot_description -model wheel_robot" />
- 
+  <node name="camera_spawn" pkg="gazebo_ros" type="spawn_model" output="screen" 
+    args="-urdf -x 1.0 -y 0.0 -z 0.0 -Y 0  -param camera_description -model surveillance_camera" />
+
   <!-- robot visualization in Rviz -->
   <group if="$(arg show_rviz)">
     <node name="rviz" pkg="rviz" type="rviz" output="screen" args="-d $(find user_tutorial1)/launch/wheel_robot.rviz"/> 
@@ -46,6 +49,7 @@
   
   <!--<node name="rqt_gui" pkg="rqt_gui" type="rqt_gui"/>-->
   <node name="image_view" pkg="image_view" type="image_view" args="image:=/front_camera/image_raw" />
+  <node name="image_view_sur_camera" pkg="image_view" type="image_view" args="image:=/surveillance_camera/image_raw" />
 
   <!-- servo node -->
     <node pkg="user_tutorial1" type="servo_commands.py" name="servo_commands" output="screen" />
