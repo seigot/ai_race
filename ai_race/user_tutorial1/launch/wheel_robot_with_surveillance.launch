@@ -4,11 +4,12 @@
   <arg name="paused" default="false"/>
   <arg name="debug" default="false"/>
   <arg name="gui" default="false"/>
- 
+  <arg name="track_name" default="medium_track.world"/>
+
   <!-- We resume the logic in empty_world.launch, changing only the name of 
     the world to be launched -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    <arg name="world_name" value="$(find sim_world)/worlds/medium_track.world" />
+    <arg name="world_name" value="$(find sim_world)/worlds/$(arg track_name)" />
     <arg name="paused" value="$(arg paused)" />
     <arg name="debug" value="$(arg debug)" />
     <arg name="gui" value="$(arg gui)" />    
