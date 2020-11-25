@@ -43,7 +43,7 @@ roslaunch user_tutorial1 wheel_robot.launch
 * 学習モデルを利用した推論、車両操作
 
 ```
-cd ~/catkin_ws/src/ai_race/ai_race/user_tutorial2/scripts
+cd ~/catkin_ws/src/ai_race/ai_race/learning
 python inference_from_image.py --pretrained_model /home/jetson/ai_race_data_sample/model/sample/sample.pth
 ```
 

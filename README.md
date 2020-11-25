@@ -233,7 +233,7 @@ roslaunch user_tutorial1 wheel_robot.launch
 以下の通り実行する。
 
 ```
-cd $HOME/catkin_ws/src/ai_race/ai_race/user_tutorial2/scripts
+cd ~/catkin_ws/src/ai_race/ai_race/learning
 python inference_from_image.py --pretrained_model $HOME/ai_race_data_sample/model/sample/sample.pth
 ```
 
@@ -246,7 +246,7 @@ python inference_from_image.py --pretrained_model $HOME/ai_race_data_sample/mode
 cd $HOME/ai_race_data_sample/model/sample
 cat sample_trt_p* > sample_trt.pth
 # 推論
-cd $HOME/catkin_ws/src/ai_race/ai_race/user_tutorial2/scripts
+cd ~/catkin_ws/src/ai_race/ai_race/learning
 python inference_from_image.py --trt_module --trt_model $HOME/ai_race_data_sample/model/sample/sample_trt.pth
 ```
 
@@ -255,7 +255,7 @@ python inference_from_image.py --trt_module --trt_model $HOME/ai_race_data_sampl
 サンプルデータのダウンロードして使う場合の例。
 
 ```
-cd $HOME/catkin_ws/src/ai_race/ai_race/learning
+cd ~/catkin_ws/src/ai_race/ai_race/learning
 python3 train.py --data_csv $HOME/ai_race_data_sample/dataset/sample/_2020-11-05-01-45-29_2/_2020-11-05-01-45-29.csv --model_name sample_model
 ```
 
@@ -307,7 +307,7 @@ ls ~/catkin_ws/src/ai_race/ai_raceexperiments/models/checkpoints/*.pth
 ```
 ## 学習モデルを利用した推論、車両操作
 ## 推論(trtなし trt=比較的軽量なモデル) 
-roscd user_tutorial2/scripts 
+cd ~/catkin_ws/src/ai_race/ai_race/learning
 python inference_from_image.py --pretrained_model <学習させたモデル フルパス指定> 
 ```
 
@@ -316,7 +316,7 @@ python inference_from_image.py --pretrained_model <学習させたモデル フ�
 ```
 ## 推論(trtあり）
 #### 準備（準備は最初の一回でOK） 
-roscd user_tutorial2/scripts 
+cd ~/catkin_ws/src/ai_race/ai_race/learning
 python3 trt_conversion.py --pretrained_model <学習させたモデル フルパス指定> --trt_model <保存するtrtモデル名>   
 #### 指定したディレクトリにモデルが保存されます
 #### 実行 
