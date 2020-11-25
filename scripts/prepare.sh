@@ -26,3 +26,5 @@ gnome-terminal -- python3 ../judge/timer.py
 
 # init simulator, course and vehicle
 roslaunch user_tutorial1 wheel_robot.launch
+#roslaunch user_tutorial1 wheel_robot_with_surveillance.launch
+#roslaunch user_tutorial1 wheel_robot_with_surveillance.launch track_name:="medium_track_plane.world"
