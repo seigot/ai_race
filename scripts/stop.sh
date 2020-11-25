@@ -12,7 +12,8 @@ function try_kill_process(){
 	return 0
     fi
     echo "kill process ... ${PROCESS_NAME}"
-    kill -KILL $PROCESS_ID
+    kill $PROCESS_ID
+    
 }
 
 function stop_process(){    
