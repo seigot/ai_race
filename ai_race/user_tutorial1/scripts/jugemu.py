@@ -1,7 +1,32 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-
+'''
+rosservice call /jugemu/teleport "model_state:
+  model_name: ''
+  pose:
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.3
+    orientation:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 0.0
+  twist:
+    linear:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    angular:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  reference_frame: ''"
+'''
+# このsrvを呼ぶことで
+# 任意の位置に移動
 import rospy
 import rosservice
 from gazebo_msgs.srv import SetModelState, SetModelStateRequest, SetModelStateResponse
@@ -32,10 +57,15 @@ class jugemu:
         if res.success == True:
             rospy.sleep(1)
             self.param_client.update_configuration({"gravity_z": -9.8})
-            return
+            res = SetModelStateResponse()
+            res.status_message = 'success'
+            return res
         else:
             self.gazebo_stop(EmptyRequest())
             rospy.logerr('can not teleport !!! stop sim !!')
+            res = SetModelStateResponse()
+            res.status_message = 'can not teleport !!! stop sim !!'
+            return res
         
 
 def main():
