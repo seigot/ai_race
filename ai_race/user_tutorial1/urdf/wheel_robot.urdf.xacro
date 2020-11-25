@@ -2,10 +2,10 @@
 <robot name="wheel_robot_base" xmlns:xacro="http://www.ros.org/wiki/xacro">
  
   <!-- Included URDF/XACRO Files -->
-  <xacro:include filename="$(find tutorial3)/urdf/materials.urdf.xacro" />
-  <xacro:include filename="$(find tutorial3)/urdf/wheel.urdf.xacro" />
-  <xacro:include filename="$(find tutorial3)/urdf/wheel_f.urdf.xacro" />
-  <xacro:include filename="$(find tutorial3)/urdf/hinge.urdf.xacro" />
+  <xacro:include filename="$(find user_tutorial1)/urdf/materials.urdf.xacro" />
+  <xacro:include filename="$(find user_tutorial1)/urdf/wheel.urdf.xacro" />
+  <xacro:include filename="$(find user_tutorial1)/urdf/wheel_f.urdf.xacro" />
+  <xacro:include filename="$(find user_tutorial1)/urdf/hinge.urdf.xacro" />
   <xacro:include filename="$(find user_tutorial1)/urdf/camera_macro.xacro" />
 
   <!-- PROPERTY LIST -->
