@@ -6,7 +6,7 @@
   <xacro:include filename="$(find tutorial3)/urdf/wheel.urdf.xacro" />
   <xacro:include filename="$(find tutorial3)/urdf/wheel_f.urdf.xacro" />
   <xacro:include filename="$(find tutorial3)/urdf/hinge.urdf.xacro" />
-  <xacro:include filename="$(find robot_pkg)/urdf/camera_macro.xacro" />
+  <xacro:include filename="$(find tutorial7)/urdf/camera_macro.xacro" />
 
   <!-- PROPERTY LIST -->
   <!--All units in m-kg-s-radians unit system -->
