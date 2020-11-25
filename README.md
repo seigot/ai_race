@@ -234,7 +234,7 @@ roslaunch user_tutorial1 wheel_robot.launch
 
 ```
 cd ~/catkin_ws/src/ai_race/ai_race/learning
-python inference_from_image.py --pretrained_model $HOME/ai_race_data_sample/model/sample/sample.pth
+python inference_from_image.py --pretrained_model $HOME/ai_race_data_sample/model/medium/sample.pth
 ```
 
 ![inference_simulator_sample.png](https://github.com/seigot/ai_race/blob/main/document/inference_sample.png)
@@ -243,11 +243,11 @@ python inference_from_image.py --pretrained_model $HOME/ai_race_data_sample/mode
 
 ```
 # trtデータ準備(分割しているsample_trtデータを結合する)
-cd $HOME/ai_race_data_sample/model/sample
+cd $HOME/ai_race_data_sample/model/medium
 cat sample_trt_p* > sample_trt.pth
 # 推論
 cd ~/catkin_ws/src/ai_race/ai_race/learning
-python inference_from_image.py --trt_module --trt_model $HOME/ai_race_data_sample/model/sample/sample_trt.pth
+python inference_from_image.py --trt_module --trt_model $HOME/ai_race_data_sample/model/medium/sample_trt.pth
 ```
 
 #### 学習モデルを作成
@@ -256,7 +256,7 @@ python inference_from_image.py --trt_module --trt_model $HOME/ai_race_data_sampl
 
 ```
 cd ~/catkin_ws/src/ai_race/ai_race/learning
-python3 train.py --data_csv $HOME/ai_race_data_sample/dataset/sample/_2020-11-05-01-45-29_2/_2020-11-05-01-45-29.csv --model_name sample_model
+python3 train.py --data_csv $HOME/ai_race_data_sample/dataset/medium/_2020-11-05-01-45-29_2/_2020-11-05-01-45-29.csv --model_name sample_model
 ```
 
 #### 学習用データの取得

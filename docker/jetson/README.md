@@ -44,13 +44,13 @@ roslaunch user_tutorial1 wheel_robot.launch
 
 ```
 cd ~/catkin_ws/src/ai_race/ai_race/learning
-python inference_from_image.py --pretrained_model /home/jetson/ai_race_data_sample/model/sample/sample.pth
+python inference_from_image.py --pretrained_model /home/jetson/ai_race_data_sample/model/medium/sample.pth
 ```
 
 以下のようなログが出力されます。
 
 ```
-python inference_from_image.py --pretrained_model /home/jetson/ai_race_data_sample/model/sample/sample.pth
+python inference_from_image.py --pretrained_model /home/jetson/ai_race_data_sample/model/medium/sample.pth
 WARNING: TensorRT Python 2 support is deprecated, and will be dropped in a future version!
 [1]
 time_each:155.262[sec]
@@ -67,13 +67,13 @@ time_each:0.378[sec]
 
 ```
 cd ~/catkin_ws/src/ai_race/ai_race/learning
-python3 train.py --data_csv /home/jetson/ai_race_data_sample/dataset/sample/_2020-11-05-01-45-29_2/_2020-11-05-01-45-29.csv --model_name sample_model
+python3 train.py --data_csv /home/jetson/ai_race_data_sample/dataset/medium/_2020-11-05-01-45-29_2/_2020-11-05-01-45-29.csv --model_name sample_model
 ```
 
 以下のようなログが出力されます。
 
 ```
-python3 train.py --data_csv /home/jetson/Images_from_rosbag/2020-11-05-01-45-29_2/_2020-11-05-01-45-29.csv --modelname sample_model
+python3 train.py --data_csv /home/jetson/ai_race_data_sample/dataset/medium/_2020-11-05-01-45-29_2/_2020-11-05-01-45-29.csv --model_name sample_model
 data set
 model set
 optimizer set
