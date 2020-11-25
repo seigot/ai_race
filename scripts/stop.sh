@@ -11,7 +11,8 @@ function try_kill_process(){
 	echo "no process like... ${PROCESS_NAME}"
 	return 0
     fi
-    kill $PROCESS_ID
+    echo "kill process ... ${PROCESS_NAME}"
+    kill -KILL $PROCESS_ID
 }
 
 function stop_process(){    
@@ -21,6 +22,8 @@ function stop_process(){
     try_kill_process "window_management"
     try_kill_process "keyboard_con_pygame"
     try_kill_process "wheel_robot"
+    try_kill_process "prepare"
+    try_kill_process "inference"
 }
 
 stop_process
