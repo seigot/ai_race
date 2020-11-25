@@ -59,7 +59,7 @@ function install_basic_package(){
 
 function install_ros(){
     # check if already install ros
-    if [ ! -z `env | grep "ROS_DISTRO"` ];then
+    if [ ! -z `rosversion -d` ];then
 	echo "ros already installed, skip install ros"
 	return 0
     fi
@@ -158,7 +158,12 @@ function install_opencv(){
 function setup_this_repository(){
     mkdir -p ~/Images_from_rosbag
     cd ~/catkin_ws/src
-    sudo rm -rf ai_race
+
+    if [ -d "./ai_race" ]; then
+	echo "skip ai_race directory already exist.."
+	return 0
+    fi
+    echo "clone sample repository.."
     git clone http://github.com/seigot/ai_race
     cd ~/catkin_ws
     catkin build
