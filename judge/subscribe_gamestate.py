@@ -19,10 +19,12 @@ class Sample():
         dic = json.loads(state.data)
         self.time = int(dic["judge_info"]["time"])
         self.lap_count = int(dic["judge_info"]["lap_count"])
+        self.courseout_count = int(dic["judge_info"]["courseout_count"])
 
         print('time=%d' % self.time)
         print('lap_count=%d' % self.lap_count)
-        
+        print('courseout_count=%d' % self.courseout_count)
+
         self.FLAG = 1
         
     def strategy(self):
