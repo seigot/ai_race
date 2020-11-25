@@ -4,11 +4,12 @@
   <arg name="paused" default="false"/>
   <arg name="debug" default="false"/>
   <arg name="gui" default="true"/>
- 
+  <arg name="track_name" default="medium_track.world"/>
+
   <!-- We resume the logic in empty_world.launch, changing only the name of 
     the world to be launched -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    <arg name="world_name" value="$(find sim_world)/worlds/medium_track_w_car.world" />
+    <arg name="world_name" value="$(find sim_world)/worlds/$(arg track_name)" />
     <arg name="paused" value="$(arg paused)" />
     <arg name="debug" value="$(arg debug)" />
     <arg name="gui" value="$(arg gui)" />    
@@ -48,5 +49,15 @@
 
   <!-- servo node -->
     <node pkg="user_tutorial1" type="servo_commands.py" name="servo_commands" output="screen" />
-    
+
+  <!-- field information manamegent node -->
+  <!-- timing surveillance node-->
+    <node pkg="user_tutorial1" type="judge_communication_d.py" name="judge_communication_d" output="screen" />  
+  <!-- timing surveillance node-->
+    <node pkg="user_tutorial1" type="timing_surveillance.py" name="timing_surveillance" output="screen" />
+  <!-- courseout recovery node-->
+    <node pkg="user_tutorial1" type="jugemu.py" name="jugemu" output="screen" />  
+
+
+
 </launch>

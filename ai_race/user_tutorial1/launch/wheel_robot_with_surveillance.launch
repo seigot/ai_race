@@ -63,7 +63,7 @@
     <node pkg="user_tutorial1" type="judge_communication_d.py" name="judge_communication_d" output="screen" />  
   <!-- timing surveillance node-->
     <node pkg="user_tutorial1" type="timing_surveillance.py" name="timing_surveillance" output="screen" />
-  <!-- vehicle recovery node-->
+  <!-- courseout recovery node-->
     <node pkg="user_tutorial1" type="jugemu.py" name="jugemu" output="screen" />  
 
 
