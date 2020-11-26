@@ -35,22 +35,23 @@ sudo docker exec -it ai_race_docker /bin/bash
 * シミュレータ起動
 
 ```
-roslaunch user_tutorial1 wheel_robot.launch
+cd ~/catkin_ws/src/ai_race/scripts
+bash prepare.sh
 ```
 
-![simulator_sample.png](https://github.com/seigot/ai_race/blob/main/document/simulator_sample.png)
+![simulator_sample_plane.png](https://github.com/seigot/ai_race/blob/main/document/simulator_sample_plane.png)
 
 * 学習モデルを利用した推論、車両操作
 
 ```
 cd ~/catkin_ws/src/ai_race/ai_race/learning
-python inference_from_image.py --pretrained_model /home/jetson/ai_race_data_sample/model/medium/sample.pth
+python inference_from_image.py --pretrained_model /home/jetson/ai_race_data_sample/model/plane/sample_plane.pth
 ```
 
 以下のようなログが出力されます。
 
 ```
-python inference_from_image.py --pretrained_model /home/jetson/ai_race_data_sample/model/medium/sample.pth
+python inference_from_image.py --pretrained_model /home/jetson/ai_race_data_sample/model/plane/sample_plane.pth
 WARNING: TensorRT Python 2 support is deprecated, and will be dropped in a future version!
 [1]
 time_each:155.262[sec]
@@ -61,19 +62,19 @@ time_each:0.378[sec]
 ...
 ```
 
-![inference_simulator_sample.png](https://github.com/seigot/ai_race/blob/main/document/inference_sample.png)
+![inference_sample_plane.png](https://github.com/seigot/ai_race/blob/main/document/inference_sample_plane.png)
 
 * 学習モデル作成
 
 ```
 cd ~/catkin_ws/src/ai_race/ai_race/learning
-python3 train.py --data_csv /home/jetson/ai_race_data_sample/dataset/medium/_2020-11-05-01-45-29_2/_2020-11-05-01-45-29.csv --model_name sample_model
+python3 train.py --data_csv /home/jetson/ai_race_data_sample/dataset/plane/_2020-11-17-01-34-45/_2020-11-17-01-34-45.csv --model_name sample_model
 ```
 
 以下のようなログが出力されます。
 
 ```
-python3 train.py --data_csv /home/jetson/ai_race_data_sample/dataset/medium/_2020-11-05-01-45-29_2/_2020-11-05-01-45-29.csv --model_name sample_model
+python3 train.py --data_csv /home/jetson/ai_race_data_sample/dataset/plane/_2020-11-17-01-34-45/_2020-11-17-01-34-45.csv --model_name sample_model
 data set
 model set
 optimizer set
