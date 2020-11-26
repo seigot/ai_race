@@ -7,7 +7,15 @@ import requests
 import json
 from time import sleep
 
-class GameStatePublisher(object):
+import rosservice
+from gazebo_msgs.srv import SetModelState
+from gazebo_msgs.msg import ModelState
+
+JUDGESERVER_REQUEST_URL="http://127.0.0.1:5000/judgeserver/request"
+JUDGESERVER_UPDATEDATA_URL="http://127.0.0.1:5000/judgeserver/updateData"
+JUDGESERVER_GETSTATE_URL="http://127.0.0.1:5000/judgeserver/getState"
+
+class JudgeCommunicationd(object):
     #jsonの内容
         # judge_info
 
@@ -17,6 +25,15 @@ class GameStatePublisher(object):
         #print(GameStateCallback_timer_duration)
         rospy.Timer(rospy.Duration(GameStateCallback_timer_duration),
                     self.publishGameStateCallback)
+        self.tryCourseRecoveryCallback = rospy.Subscriber('gamestate', String, self.tryCourseRecoveryCallback)
+
+    # http request
+    def httpPostReqToURL(self, url, data):
+        res = requests.post(url,
+                            json.dumps(data),
+                            headers={'Content-Type': 'application/json'}
+                            )
+        return res
 
     def publishGameStateCallback(self, state):
         resp = requests.get(self.judge_url)
@@ -25,6 +42,41 @@ class GameStatePublisher(object):
         self.vel_pub.publish(msg)
         return msg
 
+    def tryCourseRecoveryCallback(self, state):
+        # get status
+        dic = json.loads(state.data)
+        is_courseout = int(dic["judge_info"]["is_courseout"])
+
+        if is_courseout != 0:
+
+            ## it's better to use semaphore--->
+            ## post to judge server
+            url = JUDGESERVER_UPDATEDATA_URL
+            req_data = {
+                "is_courseout": 0
+            }
+            res = self.httpPostReqToURL(url, req_data)
+
+            ## courseout recovery (jugemu)
+            rospy.wait_for_service('/jugemu/teleport')
+            state_msg = ModelState()
+            state_msg.model_name = ''
+            state_msg.pose.position.x = 1.75
+            state_msg.pose.position.y = 0.50
+            state_msg.pose.position.z = 0.75
+            state_msg.pose.orientation.x = 0
+            state_msg.pose.orientation.y = 0
+            state_msg.pose.orientation.z = 0.3
+            state_msg.pose.orientation.w = 0.3
+            try:
+                JugeMu_Teleport = rospy.ServiceProxy('/jugemu/teleport', SetModelState)
+                resp = JugeMu_Teleport(state_msg)
+                print(resp)
+            except rospy.ServiceException, e:
+                print "Service call failed: %s"%e
+
+            return res
+            ## it's better to use semaphore---<
 
 if __name__ == "__main__":
     rospy.init_node("judge_communication_d")
@@ -33,7 +85,7 @@ if __name__ == "__main__":
     JUDGE_URL = rospy.get_param('~judge_url', 'http://127.0.0.1:5000')
     JUDGESERVER_GETSTATE_URL = JUDGE_URL + "/judgeserver/getState"
     TIMER_DURATION = rospy.get_param('~GameStateCallback_timer_duration', 0.25)
-    GAMESTATEPUBLISHER = GameStatePublisher(JUDGESERVER_GETSTATE_URL, TIMER_DURATION)
+    JUDGECOMMUNICATIOND = JudgeCommunicationd(JUDGESERVER_GETSTATE_URL, TIMER_DURATION)
 
     rospy.spin()
 

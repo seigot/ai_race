@@ -73,6 +73,15 @@ class Window(QMainWindow):
                           reset_width_height[0], reset_width_height[1])
         reset.pressed.connect(self.Stop)
 
+        # create CourseOut Recovery button 
+        CourseOutRecovery = QPushButton("CourseOut\nRecovery", self) 
+        reset_upper_left = (300, 150)
+        reset_width_height = (90, 40)
+        CourseOutRecovery.setGeometry(reset_upper_left[0], reset_upper_left[1],
+                          reset_width_height[0], reset_width_height[1])
+        CourseOutRecovery.pressed.connect(self.CourseOutRecovery)
+        CourseOutRecovery.setFont(QFont("Meiryo", 9))
+
         # create lap_count button 
         lapcount = QPushButton("Lap++", self) 
         lapcount_upper_left = (15, 195)
@@ -150,6 +159,16 @@ class Window(QMainWindow):
     def Stop(self):
         url = JUDGESERVER_REQUEST_URL
         req_data = {"change_state": "stop"}
+        res = self.httpPostReqToURL(url, req_data)
+        return res
+
+    # CourseOutRecovery button
+    def CourseOutRecovery(self):
+        url = JUDGESERVER_UPDATEDATA_URL
+        req_data = {
+            "courseout_count": 1,
+            "is_courseout": 1
+        }
         res = self.httpPostReqToURL(url, req_data)
         return res
 
