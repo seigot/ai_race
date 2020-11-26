@@ -222,10 +222,11 @@ git clone http://github.com/seigot/ai_race_data_sample
 #### シミュレータ起動
 
 ```
-roslaunch user_tutorial1 wheel_robot.launch
+cd ~/catkin_ws/src/ai_race/scripts
+bash prepare.sh
 ```
 
-![simulator_sample.png](https://github.com/seigot/ai_race/blob/main/document/simulator_sample.png)
+![simulator_sample_plane.png](https://github.com/seigot/ai_race/blob/main/document/simulator_sample_plane.png)
 
 #### 学習モデルを利用した推論、車両操作
 
@@ -234,20 +235,20 @@ roslaunch user_tutorial1 wheel_robot.launch
 
 ```
 cd ~/catkin_ws/src/ai_race/ai_race/learning
-python inference_from_image.py --pretrained_model $HOME/ai_race_data_sample/model/medium/sample.pth
+python inference_from_image.py --pretrained_model $HOME/ai_race_data_sample/model/plane/sample_plane.pth
 ```
 
-![inference_simulator_sample.png](https://github.com/seigot/ai_race/blob/main/document/inference_sample.png)
+![inference_sample_plane.png](https://github.com/seigot/ai_race/blob/main/document/inference_sample_plane.png)
 
 比較的軽量なモデルを使う場合（通称：trtあり版）は以下の通り実行する。
 
 ```
 # trtデータ準備(分割しているsample_trtデータを結合する)
-cd $HOME/ai_race_data_sample/model/medium
-cat sample_trt_p* > sample_trt.pth
+cd $HOME/ai_race_data_sample/model/plane
+cat sample_plane_trt_p* > sample_plane_trt.pth
 # 推論
 cd ~/catkin_ws/src/ai_race/ai_race/learning
-python inference_from_image.py --trt_module --trt_model $HOME/ai_race_data_sample/model/medium/sample_trt.pth
+python inference_from_image.py --trt_module --trt_model $HOME/ai_race_data_sample/model/plane/sample_plane_trt.pth
 ```
 
 #### 学習モデルを作成
@@ -256,10 +257,10 @@ python inference_from_image.py --trt_module --trt_model $HOME/ai_race_data_sampl
 
 ```
 cd ~/catkin_ws/src/ai_race/ai_race/learning
-python3 train.py --data_csv $HOME/ai_race_data_sample/dataset/medium/_2020-11-05-01-45-29_2/_2020-11-05-01-45-29.csv --model_name sample_model
+python3 train.py --data_csv $HOME/ai_race_data_sample/dataset/plane/_2020-11-17-01-34-45/_2020-11-17-01-34-45.csv --model_name sample_model
 ```
 
-#### 学習用データの取得
+#### 学習用データの取得 (Optional)
 
 rqt, joystick, 各種コントローラーで車両操作し、rosbagを取得する
 
