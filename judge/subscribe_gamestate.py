@@ -20,10 +20,12 @@ class Sample():
         self.time = int(dic["judge_info"]["time"])
         self.lap_count = int(dic["judge_info"]["lap_count"])
         self.courseout_count = int(dic["judge_info"]["courseout_count"])
+        self.is_courseout = int(dic["judge_info"]["is_courseout"])        
 
         print('time=%d' % self.time)
         print('lap_count=%d' % self.lap_count)
         print('courseout_count=%d' % self.courseout_count)
+        print('is_courseout=%d' % self.is_courseout)
 
         self.FLAG = 1
         
