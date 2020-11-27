@@ -18,7 +18,7 @@ sleep 1
 gnome-terminal --geometry=50x1 --title="judgeServer" -- python3 ../judge/judgeServer.py
 sleep  1
 
-gnome-terminal --geometry=50x2 --title="keyboard" -- python ../ai_race/user_tutorial1/scripts/keyboard_con_pygame.py
+gnome-terminal --geometry=50x2 --title="keyboard" -- python ../ai_race/utility/scripts/keyboard_con_pygame2.py
 sleep 1
 
 gnome-terminal --geometry=50x1 --title="timer" -- python3 ../judge/timer.py

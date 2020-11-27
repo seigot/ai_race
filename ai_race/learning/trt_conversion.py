@@ -20,20 +20,14 @@ import cv2
 from cv_bridge import CvBridge
 
 model = models.resnet18()
-
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
+
 def init_inference():
-
-    flag_move = 0
-
-    twist_pub = None
-
     global model
     global device
     model.fc = torch.nn.Linear(512, 3)
     model.eval()
     
-    #model.load_state_dict(torch.load('/home/shiozaki/work/experiments/models/checkpoints/sim_race_joycon_ResNet18_6_epoch=20.pth'))
     model.load_state_dict(torch.load(args.pretrained_model))
     model = model.cuda()
     x = torch.ones((1, 3, 240, 320)).cuda()

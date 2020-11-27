@@ -10,7 +10,7 @@ from pygame.locals import *
 import time
 import sys
 
-INFERENCE_TIME = 0.055/0.068
+INFERENCE_TIME = 0.055/0.68
 
 class keyboardController:
     def __init__(self):

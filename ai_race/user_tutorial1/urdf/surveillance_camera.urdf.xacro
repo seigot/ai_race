@@ -13,7 +13,7 @@
   <property name="base_x_size" value="0.05" /> 
   <property name="base_y_size" value="0.05" /> 
   <property name="base_z_size" value="0.3" />
-  <property name="base_mass" value="4.0" /> <!-- in kg-->
+  <property name="base_mass" value="1000" /> <!-- in kg-->
 
   <!--Inertial macros for the box and cylinder. Units are kg*m^2-->
   <macro name="box_inertia" params="m x y z">

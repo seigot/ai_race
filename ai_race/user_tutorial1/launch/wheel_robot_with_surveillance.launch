@@ -42,7 +42,7 @@
     output="screen" args="rear_left_wheel_velocity_controller rear_right_wheel_velocity_controller
                                         front_left_wheel_velocity_controller front_right_wheel_velocity_controller
                                         front_left_hinge_position_controller front_right_hinge_position_controller
-                                        joint_state_controller obj_wheel_controller"/>
+                                        joint_state_controller"/>
 
   <!-- publish all the frames to TF -->
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher">
