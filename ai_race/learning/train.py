@@ -27,7 +27,6 @@ def main():
 	ROOT_DIR = ""
 	imgDataset = MyDataset(args.data_csv, ROOT_DIR, transform=transforms.ToTensor())
 	# Load dataset.
-	#train_loader, test_loader, class_names = cifar10.load_data(args.data_dir)
 	train_data, test_data = train_test_split(imgDataset, test_size=0.2)
 	pd.to_pickle(test_data, "test_data.pkl")
 	del test_data
@@ -35,11 +34,9 @@ def main():
 	
 	print('data set')
 	# Set a model.
-	#model = get_model(args.model_name)
 	model = models.resnet18()
 	model.train()
 	model.fc = torch.nn.Linear(512, 3)
-	#model.load_state_dict(torch.load('/home/shiozaki/work/experiments/models/checkpoints/CIFAR10_ResNet18_epoch=44.pth'))
 	model = model.to(device)
 
 	print('model set')
@@ -89,16 +86,11 @@ def train(model, device, train_loader, criterion, optimizer):
 	target_list = []
 	running_loss = 0.0
 	for batch_idx, (inputs, targets) in enumerate(train_loader):
-		#print('new batch%d start' % batch_idx)
 		# Forward processing.
 		inputs, targets = inputs.to(device), targets.to(device)
 		outputs = model(inputs)
-		#print(inputs.shape)
-		#print(outputs)
-		#print(torch.argmax(outputs,1)[0].item())
-		#print(targets)
 		loss = criterion(outputs, targets)
-		#return 0
+
 		# Backward processing.
 		optimizer.zero_grad()
 		loss.backward()
@@ -143,47 +135,10 @@ def test(model, device, test_loader, criterion):
 	return test_acc, test_loss
 
 
-def get_model(model_name):
-	if model_name == 'VGG19':
-		model = VGG('VGG19')
-	elif model_name == 'ResNet18':
-		model = ResNet18()
-	elif model_name == 'PreActResNet18':
-		model = PreActResNet18()
-	elif model_name == 'GoogLeNet':
-		model = GoogLeNet()
-	elif model_name == 'DenseNet121':
-		model = DenseNet121()
-	elif model_name == 'ResNeXt29_2x64d':
-		model = ResNeXt29_2x64d()
-	elif model_name == 'MobileNet':
-		model = MobileNet()
-	elif model_name == 'MobileNetV2':
-		model = MobileNetV2()
-	elif model_name == 'DPN92':
-		model = DPN92()
-	elif model_name == 'ShuffleNetG2':
-		model = ShuffleNetG2()
-	elif model_name == 'SENet18':
-		model = SENet18()
-	elif model_name == 'ShuffleNetV2':
-		model = ShuffleNetV2(1)
-	elif model_name == 'EfficientNetB0':
-		model = EfficientNetB0()
-	else:
-		print('{} does NOT exist in repertory.'.format(model_name))
-		sys.exit(1)
-	
-	return model
-
 
 def calc_score(output_list, target_list, running_loss, data_loader):
 	# Calculate accuracy.
 	#result = classification_report(output_list, target_list) #, output_dict=True)
-	#print(result)
-	#print(type(result))
-	#print(len(result))
-	#print(result['6']['2'])
 	#acc = round(result['weighted avg']['f1-score'], 6)
 	acc = round(f1_score(output_list, target_list, average='micro'), 6)
 	loss = round(running_loss / len(data_loader.dataset), 6)
@@ -197,7 +152,6 @@ def parse_args():
 	
 	arg_parser.add_argument("--dataset_name", type=str, default='sim_race')
 	arg_parser.add_argument("--data_csv", type=str, default=os.environ['HOME'] + '/Images_from_rosbag/_2020-11-05-01-45-29_2/_2020-11-05-01-45-29.csv')
-	#arg_parser.add_argument("--data_dir", type=str, default='../data/')
 	arg_parser.add_argument("--model_name", type=str, default='joycon_ResNet18')
 	arg_parser.add_argument("--model_ckpt_dir", type=str, default=os.environ['HOME'] + '/work/experiments/models/checkpoints/')
 	arg_parser.add_argument("--model_ckpt_path_temp", type=str, default=os.environ['HOME'] + '/work/experiments/models/checkpoints/{}_{}_epoch={}.pth')
@@ -207,7 +161,6 @@ def parse_args():
 	args = arg_parser.parse_args()
 
 	# Make directory.
-	#os.makedirs(args.data_dir, exist_ok=True)
 	os.makedirs(args.model_ckpt_dir, exist_ok=True)
 
 	print(args.data_csv)

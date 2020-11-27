@@ -15,6 +15,8 @@ pub_vel_right_front_wheel = None
 pub_pos_left_steering_hinge = None
 pub_pos_right_steering_hinge = None
 
+Max_steer_angle = float(25)/float(180)*3.1415
+
 def set_throttle_steer(data):
 
     global flag_move
@@ -24,9 +26,15 @@ def set_throttle_steer(data):
     global pub_vel_right_front_wheel
     global pub_pos_left_steering_hinge
     global pub_pos_right_steering_hinge
+    global Max_steer_angle
 
     throttle = data.linear.x / (0.032*2*3.14) * 3.14 *2
-    steer = data.angular.z
+    if data.angular.z > Max_steer_angle:
+        steer = Max_steer_angle
+    elif data.angular.z < -Max_steer_angle:
+        steer = -Max_steer_angle
+    else :
+        steer = data.angular.z
 
     pub_vel_left_rear_wheel.publish(throttle)
     pub_vel_right_rear_wheel.publish(throttle)

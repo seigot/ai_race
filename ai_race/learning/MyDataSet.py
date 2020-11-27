@@ -19,9 +19,6 @@ class MyDataset(Dataset):
    
    def __getitem__(self, idx):
       label =[0]*3
-      #for n in range(len(label)):
-      #   label[n] = 0
-      #print(label)
       label=self.image_dataframe.iat[idx, LABEL_IDX]
       img_name = self.image_dataframe.iat[idx, IMG_IDX]
       
