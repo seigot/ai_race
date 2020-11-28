@@ -209,9 +209,8 @@ echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
 ## 3. サンプルコード
 
 ### 3.1. サンプルコードの実行
-
 別々のターミナルで実行して下さい。<br>
-<br>
+
 #### サンプルデータのダウンロード <br>
 
 ```
@@ -234,16 +233,7 @@ bash prepare.sh
 以下の通り実行する。
 
 ```
-cd ~/catkin_ws/src/ai_race/ai_race/learning/scripts
-python inference_from_image.py --pretrained_model $HOME/ai_race_data_sample/model/plane/sample_plane.pth
-```
-
-![inference_sample_plane.png](https://github.com/seigot/ai_race/blob/main/document/inference_sample_plane.png)
-
-比較的軽量なモデルを使う場合（通称：trtあり版）は以下の通り実行する。
-
-```
-# trtデータ準備(分割しているsample_trtデータを結合する)
+# 分割しているsampleデータを結合する
 cd $HOME/ai_race_data_sample/model/plane
 cat sample_plane_trt_p* > sample_plane_trt.pth
 # 推論
@@ -251,18 +241,31 @@ cd ~/catkin_ws/src/ai_race/ai_race/learning/scripts
 python inference_from_image.py --trt_module --trt_model $HOME/ai_race_data_sample/model/plane/sample_plane_trt.pth
 ```
 
+![inference_sample_plane.png](https://github.com/seigot/ai_race/blob/main/document/inference_sample_plane.png)
+
 #### 学習モデルを作成
 
-サンプルデータのダウンロードして使う場合の例。
+サンプルデータを使って学習モデルを作成する場合の例。一度実行すると結構時間が掛かります。<br>
 
 ```
 cd ~/catkin_ws/src/ai_race/ai_race/learning
 python3 train.py --data_csv $HOME/ai_race_data_sample/dataset/plane/_2020-11-17-01-34-45/_2020-11-17-01-34-45.csv --model_name sample_model
 ```
 
+JetsonNanoに合わせて学習モデルを最適化する。(参考：[torch2trt](https://github.com/NVIDIA-AI-IOT/torch2trt)) <br>
+作成した学習モデルのパスが、`$HOME/ai_race_data_sample/model/plane/sample_plane.pth` である場合の例。 <br>
+最適化した学習モデルに合わせてパスを指定下さい。 <br>
+
+```
+python3 trt_conversion.py --pretrained_model $HOME/ai_race_data_sample/model/plane/sample_plane.pth --trt_model sample_model_trt.pth
+```
+
+その後は前述同様、最適化した学習モデルを利用して推論、車両操作を行って下さい。
+
 #### 学習用データの取得 (Optional)
 
-rqt, joystick, 各種コントローラーで車両操作し、rosbagを取得する
+rqt, joystick, 各種コントローラーで車両操作し、rosbagを取得する。<br>
+サンプルデータでは期待する性能を出ない等、課題を感じた場合は、学習データを独自に取得することをお勧めします。<br>
 
 ```
 ### rqt, joystick, 各種コントローラーを使って取得する
@@ -323,6 +326,10 @@ python3 trt_conversion.py --pretrained_model <学習させたモデル フルパ
 #### 実行 
 python inference_from_image.py --trt_module --trt_model <保存したtrtモデル名 フルパス指定> 
 ```
+
+### 3.3 ディレクトリ構成
+
+xxx
 
 #### ROS動作確認用コマンド <br>
 
