@@ -266,7 +266,7 @@ rqt, joystick, 各種コントローラーで車両操作し、rosbagを取得�
 
 ```
 ### rqt, joystick, 各種コントローラーを使って取得する
-roslaunch user_tutorial1 rosbag.launch output_path:=$HOME
+roslaunch sim_environment rosbag.launch output_path:=$HOME
 ```
 
 ### 3.2. 各種コマンドの説明
@@ -280,7 +280,7 @@ roslaunch user_tutorial1 rosbag.launch output_path:=$HOME
 ```
 ## 学習用データ取得
 ## rosbag取得
-roslaunch user_tutorial1 rosbag.launch output_path:=<出力ファイルのディレクトリ 絶対パス指定>
+roslaunch sim_environment rosbag.launch output_path:=<出力ファイルのディレクトリ 絶対パス指定>
 rqt # rqtを使う場合。robot steering -> 車両制御パラメータ（v,rad）指定
 
 ## rosbag --> image/command 変換

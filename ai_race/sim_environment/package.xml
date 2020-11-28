@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>user_tutorial1</name>
+  <name>sim_environment</name>
   <version>0.0.0</version>
-  <description>The user_tutorial1 package</description>
+  <description>The sim_environment package</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag -->
   <!-- Example:  -->

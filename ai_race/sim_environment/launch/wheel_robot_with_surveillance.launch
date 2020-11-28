@@ -18,9 +18,9 @@
   </include>
   
   <!-- urdf xml robot description loaded on the Parameter Server-->
-  <param name="robot_description" command="$(find xacro)/xacro.py '$(find user_tutorial1)/urdf/wheel_robot.urdf.xacro'" />
-  <param name="camera_description" command="$(find xacro)/xacro.py '$(find user_tutorial1)/urdf/surveillance_camera.urdf.xacro'" />
-  <param name="godeye_description" command="$(find xacro)/xacro.py '$(find user_tutorial1)/urdf/godeye.urdf.xacro'" />
+  <param name="robot_description" command="$(find xacro)/xacro.py '$(find sim_environment)/urdf/wheel_robot.urdf.xacro'" />
+  <param name="camera_description" command="$(find xacro)/xacro.py '$(find sim_environment)/urdf/surveillance_camera.urdf.xacro'" />
+  <param name="godeye_description" command="$(find xacro)/xacro.py '$(find sim_environment)/urdf/godeye.urdf.xacro'" />
 
   <!-- push robot_description to factory and spawn robot in gazebo -->
   <node name="wheel_robot_spawn" pkg="gazebo_ros" type="spawn_model" output="screen" 
@@ -32,11 +32,11 @@
  
   <!-- robot visualization in Rviz -->
   <group if="$(arg show_rviz)">
-    <node name="rviz" pkg="rviz" type="rviz" output="screen" args="-d $(find user_tutorial1)/launch/wheel_robot.rviz"/> 
+    <node name="rviz" pkg="rviz" type="rviz" output="screen" args="-d $(find sim_environment)/launch/wheel_robot.rviz"/> 
   </group> 
 
   <!-- load joint controller configurations from YAML file to parameter server -->
-  <rosparam file="$(find user_tutorial1)/config/joint_position_control.yaml" command="load" />
+  <rosparam file="$(find sim_environment)/config/joint_position_control.yaml" command="load" />
   <!-- load the controllers -->
   <node name="controller_manager" pkg="controller_manager" type="spawner" respawn="false"
     output="screen" args="rear_left_wheel_velocity_controller rear_right_wheel_velocity_controller
@@ -56,15 +56,15 @@
   <node name="image_view_godeye_camera" pkg="image_view" type="image_view" args="image:=/godeye_camera/image_raw" />
 
   <!-- servo node -->
-    <node pkg="user_tutorial1" type="servo_commands.py" name="servo_commands" output="screen" />
+    <node pkg="sim_environment" type="servo_commands.py" name="servo_commands" output="screen" />
 
   <!-- field information manamegent node -->
   <!-- timing surveillance node-->
-    <node pkg="user_tutorial1" type="judge_communication_d.py" name="judge_communication_d" output="screen" />  
+    <node pkg="sim_environment" type="judge_communication_d.py" name="judge_communication_d" output="screen" />  
   <!-- timing surveillance node-->
-    <node pkg="user_tutorial1" type="timing_surveillance.py" name="timing_surveillance" output="screen" />
+    <node pkg="sim_environment" type="timing_surveillance.py" name="timing_surveillance" output="screen" />
   <!-- courseout recovery node-->
-    <node pkg="user_tutorial1" type="jugemu.py" name="jugemu" output="screen" />  
+    <node pkg="sim_environment" type="jugemu.py" name="jugemu" output="screen" />  
 
 
 

@@ -12,7 +12,7 @@ gnome-terminal --geometry=50x1 -- roscore
 sleep  1
 
 # init judge server, timer window, etc
-gnome-terminal --geometry=50x2 --title="windowManager" -- python ../ai_race/user_tutorial1/scripts/window_management.py
+gnome-terminal --geometry=50x2 --title="windowManager" -- python ../ai_race/sim_environment/scripts/window_management.py
 sleep 1
 
 gnome-terminal --geometry=50x1 --title="judgeServer" -- python3 ../judge/judgeServer.py
@@ -27,4 +27,4 @@ sleep 1
 # [future work] if necessary, register some data to server here.
 
 # init simulator, course and vehicle
-roslaunch user_tutorial1 wheel_robot_with_surveillance.launch
+roslaunch sim_environment wheel_robot_with_surveillance.launch

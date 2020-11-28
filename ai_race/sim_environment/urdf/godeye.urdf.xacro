@@ -2,7 +2,7 @@
 <robot name="godeye_base" xmlns:xacro="http://www.ros.org/wiki/xacro">
  
   <!-- Included URDF/XACRO Files -->
-  <xacro:include filename="$(find user_tutorial1)/urdf/camera_macro.xacro" />
+  <xacro:include filename="$(find sim_environment)/urdf/camera_macro.xacro" />
 
   <!-- PROPERTY LIST -->
   <!--All units in m-kg-s-radians unit system -->

@@ -1,22 +1,19 @@
 <?xml version="1.0"?>
-<robot name="wheel_robot_base" xmlns:xacro="http://www.ros.org/wiki/xacro">
+<robot name="surveillance_camera_base" xmlns:xacro="http://www.ros.org/wiki/xacro">
  
   <!-- Included URDF/XACRO Files -->
-  <xacro:include filename="$(find user_tutorial1)/urdf/materials.urdf.xacro" />
-  <xacro:include filename="$(find user_tutorial1)/urdf/wheel.urdf.xacro" />
-  <xacro:include filename="$(find user_tutorial1)/urdf/wheel_f.urdf.xacro" />
-  <xacro:include filename="$(find user_tutorial1)/urdf/hinge.urdf.xacro" />
-  <xacro:include filename="$(find user_tutorial1)/urdf/camera_macro.xacro" />
+  <xacro:include filename="$(find sim_environment)/urdf/camera_macro.xacro" />
+  <xacro:include filename="$(find sim_environment)/urdf/ir_sensor_macro.xacro" />
 
   <!-- PROPERTY LIST -->
   <!--All units in m-kg-s-radians unit system -->
   <property name="M_PI" value="3.1415926535897931" />
 
   <!-- Main Body-base -->
-  <property name="base_x_size" value="0.37" /> 
-  <property name="base_y_size" value="0.10" /> 
-  <property name="base_z_size" value="0.06" />
-  <property name="base_mass" value="4.0" /> <!-- in kg-->
+  <property name="base_x_size" value="0.05" /> 
+  <property name="base_y_size" value="0.05" /> 
+  <property name="base_z_size" value="0.3" />
+  <property name="base_mass" value="1000" /> <!-- in kg-->
 
   <!--Inertial macros for the box and cylinder. Units are kg*m^2-->
   <macro name="box_inertia" params="m x y z">
@@ -56,10 +53,9 @@
       <box_inertia  m="${base_mass}" x="${base_x_size}" y="${base_y_size}" z="${base_z_size}"/> 
     </inertial>    
     <visual>
-      <origin xyz="0.16 0 -0.02" rpy="0 0 ${-M_PI/2}" />
+      <origin xyz="0 0 0" rpy="0 0 ${-M_PI/2}" />
       <geometry>
-        <mesh filename="model://car_model/meshes/car_model3.dae" />
-        <!--<box size="${base_x_size} ${base_y_size} ${base_z_size}"/>-->
+        <box size="${base_x_size} ${base_y_size} ${base_z_size}"/>
       </geometry>
       <!--<material name="Yellow" />-->
     </visual>  
@@ -83,20 +79,9 @@
   </joint>
   
   <!-- camera -->
-  <camera_macro parent="base_link" prefix="front_camera" xyz="0.15 0.0 0.12"/>
+  <camera_macro parent="base_link" prefix="surveillance_camera" xyz="0.1 0.0 0.12"/>
+  <ir_sensor_macro parent="base_link" prefix="ir_sensor" xyz="0.1 0.0 -0.12"/>
  
-
-  <!-- hinges -->
-  <hinge lr="left" parent="base_link" translateX="1" translateY="1" flipY="-1"/>
-  <hinge lr="right" parent="base_link" translateX="1" translateY="-1" flipY="-1"/>
- 
-  <!-- WHEELs -->
-  <wheel_f lr="right" parent="front_right_hinge" translateX="1" translateY="-1" flipY="-1"/>
-  <wheel_f lr="left" parent="front_left_hinge" translateX="1" translateY="1" flipY="-1"/>
-  
-  <wheel fb="rear" lr="right" parent="base_link" translateX="-1" translateY="-1" flipY="-1"/>
-  <wheel fb="rear" lr="left" parent="base_link" translateX="-1" translateY="1" flipY="-1"/>
-
   <gazebo>
     <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so" />
   </gazebo>
