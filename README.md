@@ -370,12 +370,12 @@ git merge upstream/master
 ### 4.1. 概要
 
 学習モデルにより推論し、車両を操作して走行性能を競います。<br>
-2020/11/30時点で、今回は以下のルールを採用予定です。<br>
+今回は以下のルールを採用予定です。<br>
 * 制限時間4分以内に、コースを何週回れるかを競う。<br>
 * 後述するコースのうち、最もシンプルなlevel1を使う。<br>
 * コースアウトは何かしらのペナルティ有り。<br>
-<br>
-[こちら](https://github.com/seigot/ai_race/blob/main/document/rule.md)に詳細を記載予定 <br>
+
+[こちら](https://github.com/seigot/ai_race/blob/main/document/rule.md) に詳細を記載予定 <br>
 
 ### 4.2. 経過時間と周回回数の計測方法
 
