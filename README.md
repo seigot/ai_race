@@ -275,7 +275,7 @@ roslaunch user_tutorial1 rosbag.launch output_path:=$HOME
 
 * Step1.学習用データの取得
 
-`roslaunch user_tutorial1 wheel_robot.launch`を実行した状態で、別ターミナルから以下を実行
+`bash prepare.sh`を実行した状態で、別ターミナルから以下を実行
 
 ```
 ## 学習用データ取得
@@ -303,7 +303,7 @@ ls ~/catkin_ws/src/ai_race/ai_raceexperiments/models/checkpoints/*.pth
 
 * Step3.学習モデルを使って推論、車両操作
 
-`roslaunch user_tutorial1 wheel_robot.launch`を実行した状態で、別ターミナルから以下を実行
+`bash prepare.sh`を実行した状態で、別ターミナルから以下を実行
 
 ```
 ## 学習モデルを利用した推論、車両操作

@@ -28,16 +28,15 @@ gnome-terminal -- python3 ../judge/timer.py
 
 if [ "$LEVEL" -eq 1 ];then
     ## LEVEL1
-    roslaunch user_tutorial1 wheel_robot.launch track_name:="medium_track_plane.world"
+    roslaunch user_tutorial1 wheel_robot_with_surveillance.launch track_name:="medium_track_plane.world" gui:="true"
 elif [ "$LEVEL" -eq 2 ];then
     ## LEVEL2
-    roslaunch user_tutorial1 wheel_robot.launch track_name:="medium_track.world"
+    roslaunch user_tutorial1 wheel_robot_with_surveillance.launch track_name:="medium_track.world" gui:="true"
 elif [ "$LEVEL" -eq 3 ];then
     ## LEVEL3
     ## temporal, planning to update later..
     echo "temporal, planning to update later.."
-    roslaunch user_tutorial1 wheel_robot.launch track_name:="hard_track.world"
-    #roslaunch user_tutorial1 hard_track.launch
+    roslaunch user_tutorial1 wheel_robot_with_surveillance.launch track_name:="hard_track.world" gui:="true"
 else
     echo "invalid LEVEL option -l $LEVEL"
 fi
