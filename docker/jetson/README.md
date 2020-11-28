@@ -44,7 +44,7 @@ bash prepare.sh
 * 学習モデルを利用した推論、車両操作
 
 ```
-cd ~/catkin_ws/src/ai_race/ai_race/learning
+cd ~/catkin_ws/src/ai_race/ai_race/learning/scripts
 python inference_from_image.py --pretrained_model /home/jetson/ai_race_data_sample/model/plane/sample_plane.pth
 ```
 
@@ -67,7 +67,7 @@ time_each:0.378[sec]
 * 学習モデル作成
 
 ```
-cd ~/catkin_ws/src/ai_race/ai_race/learning
+cd ~/catkin_ws/src/ai_race/ai_race/learning/scripts
 python3 train.py --data_csv /home/jetson/ai_race_data_sample/dataset/plane/_2020-11-17-01-34-45/_2020-11-17-01-34-45.csv --model_name sample_model
 ```
 

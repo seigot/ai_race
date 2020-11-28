@@ -234,7 +234,7 @@ bash prepare.sh
 以下の通り実行する。
 
 ```
-cd ~/catkin_ws/src/ai_race/ai_race/learning
+cd ~/catkin_ws/src/ai_race/ai_race/learning/scripts
 python inference_from_image.py --pretrained_model $HOME/ai_race_data_sample/model/plane/sample_plane.pth
 ```
 
@@ -247,7 +247,7 @@ python inference_from_image.py --pretrained_model $HOME/ai_race_data_sample/mode
 cd $HOME/ai_race_data_sample/model/plane
 cat sample_plane_trt_p* > sample_plane_trt.pth
 # 推論
-cd ~/catkin_ws/src/ai_race/ai_race/learning
+cd ~/catkin_ws/src/ai_race/ai_race/learning/scripts
 python inference_from_image.py --trt_module --trt_model $HOME/ai_race_data_sample/model/plane/sample_plane_trt.pth
 ```
 
@@ -295,7 +295,7 @@ python listup_all_rosbag_timestamp.py *.bag               # 時刻表示でき�
 
 ```
 ## 学習 
-cd learning (学習用フォルダへ移動) 
+cd learning/scripts (学習用フォルダへ移動) 
 python3 train.py --data_csv <csvのパス フルパス指定> --model_name <保存するモデル名>  
 #### 以下のディレクトリにモデルが保存されます
 ls ~/catkin_ws/src/ai_race/ai_raceexperiments/models/checkpoints/*.pth
@@ -308,7 +308,7 @@ ls ~/catkin_ws/src/ai_race/ai_raceexperiments/models/checkpoints/*.pth
 ```
 ## 学習モデルを利用した推論、車両操作
 ## 推論(trtなし trt=比較的軽量なモデル) 
-cd ~/catkin_ws/src/ai_race/ai_race/learning
+cd ~/catkin_ws/src/ai_race/ai_race/learning/scripts
 python inference_from_image.py --pretrained_model <学習させたモデル フルパス指定> 
 ```
 
@@ -317,7 +317,7 @@ python inference_from_image.py --pretrained_model <学習させたモデル フ�
 ```
 ## 推論(trtあり）
 #### 準備（準備は最初の一回でOK） 
-cd ~/catkin_ws/src/ai_race/ai_race/learning
+cd ~/catkin_ws/src/ai_race/ai_race/learning/scripts
 python3 trt_conversion.py --pretrained_model <学習させたモデル フルパス指定> --trt_model <保存するtrtモデル名>   
 #### 指定したディレクトリにモデルが保存されます
 #### 実行 

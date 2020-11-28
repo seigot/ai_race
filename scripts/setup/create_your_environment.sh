@@ -19,11 +19,11 @@ cd your_environment
 mkdir config
 cp ../sim_environment/config/joint_position_control.yaml ./config
 
-mkdir learning
-#cp ../learning/inference_from_image.py ./learning
-#cp ../learning/road_following_model_trt.pth ./learning
-cp ../learning/MyDataSet.py ./learning
-cp ../learning/train.py ./learning
+mkdir -p learning/scripts
+#cp ../learning/scripts/inference_from_image.py ./learning/scripts
+#cp ../learning/scripts/road_following_model_trt.pth ./learning/scripts
+cp ../learning/scripts/MyDataSet.py ./learning/scripts
+cp ../learning/scripts/train.py ./learning/scripts
 
 mkdir launch
 cp ../sim_environment/launch/* ./launch
