@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- roslaunch arguments -->
+  <arg name="trt_model" default="default_path" />
+
+  <node pkg="learning" type="rosnode_inference_from_image.py" name="rosnode_inference_from_image" output="screen" >
+    <param name="trt_model" value="$(arg trt_model)" />
+  </node>
+
+</launch>
