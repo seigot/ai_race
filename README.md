@@ -199,7 +199,7 @@ cd nano_build_opencv
 ```
 mkdir -p ~/Images_from_rosbag
 cd ~/catkin_ws/src
-git clone http://github.com/seigot/ai_race
+git clone http://github.com/seigot/ai_race         # 自分のリポジトリを取得する場合は、ここのURLを変えて下さい。
 cd ~/catkin_ws
 catkin build
 source devel/setup.bash
