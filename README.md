@@ -340,20 +340,6 @@ python inference_from_image.py --trt_module --trt_model <保存したtrtモデ�
 |  ./docker  |  docker環境、等  |  主に運営向け  |
 |  ./ai_race/example  |  シミュレータ作成用サンプル  |  ROS/シミュレータ等、学びたい人向けチュートリアル  |
 
-#### ROS動作確認用コマンド <br>
-
-主に環境構築の動作確認用です。
-
-```
-roslaunch tutorial1 wheel_robot.launch
-roslaunch tutorial2 wheel_robot.launch
-roslaunch tutorial3 wheel_robot.launch
-roslaunch tutorial4 wheel_robot.launch
-roslaunch tutorial5 wheel_robot.launch
-roslaunch tutorial6 wheel_robot.launch
-roslaunch tutorial7 wheel_robot.launch
-```
-
 ## 4. ルール
 
 学習モデルにより推論し、車両を操作して走行性能を競います。<br>
