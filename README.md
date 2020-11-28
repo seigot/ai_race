@@ -391,7 +391,7 @@ git merge upstream/master
 |  外観  |  ![medium_track_plane-2.png](https://github.com/seigot/ai_race/blob/main/document/medium_track_plane-2.png)  |  ![medium_track-2.png](https://github.com/seigot/ai_race/blob/main/document/medium_track-2.png)  |  -  |
 |  特徴  |  地面：一様な模様です  |  地面：濃淡付きの模様です  |  地面：サーキット型の模様です。カーブが急で、速度を調整しないと曲がれない  |
 |  障害物  |  なし  |  なし  |  三角コーンを置くかも  |
-|  起動方法  |  bash prepare.sh -l 1  |  bash prepare.sh -l 2  |  bash prepare.sh -l 3  |
+|  起動コマンド  |  bash prepare.sh -l 1  |  bash prepare.sh -l 2  |  bash prepare.sh -l 3  |
 |  学習データのサンプル  |  あり（１週分）  |  あり（１週分）  |  なし  |
 |  備考  |  今回のルールで採用  |  optional  |  optional  |
 
