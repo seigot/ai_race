@@ -382,6 +382,7 @@ python inference_from_image.py --trt_module --trt_model <保存したtrtモデ�
 [https://github.com/mdegans/nano_build_opencv](https://github.com/mdegans/nano_build_opencv) <br>
 [PyTorch for Jetson](https://forums.developer.nvidia.com/t/pytorch-for-jetson-version-1-7-0-now-available/72048) <br>
 [https://github.com/NVIDIA-AI-IOT/torch2trt](https://github.com/NVIDIA-AI-IOT/torch2trt) <br>
+RESPECT  [OneNightRobocon](https://github.com/OneNightROBOCON) <br>
 
 ## Finally
 
