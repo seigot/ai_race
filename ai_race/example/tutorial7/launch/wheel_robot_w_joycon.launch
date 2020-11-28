@@ -49,5 +49,5 @@
   <!-- servo node -->
     <node pkg="tutorial3" type="servo_commands.py" name="servo_commands" output="screen" />
   <!-- joycon node -->
-    <!--<node pkg="wheel_robot" type="joycon.py" name="joycon" output="screen" />-->
+    <!--<node pkg="utility" type="joycon.py" name="joycon" output="screen" />-->
 </launch>
