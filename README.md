@@ -252,9 +252,8 @@ cd ~/catkin_ws/src/ai_race/ai_race/learning
 python3 train.py --data_csv $HOME/ai_race_data_sample/dataset/plane/_2020-11-17-01-34-45/_2020-11-17-01-34-45.csv --model_name sample_model
 ```
 
-JetsonNanoに合わせて学習モデルを最適化する。(参考：[torch2trt](https://github.com/NVIDIA-AI-IOT/torch2trt)) <br>
-作成した学習モデルのパスが、`$HOME/ai_race_data_sample/model/plane/sample_plane.pth` である場合の例。 <br>
-最適化した学習モデルに合わせてパスを指定下さい。 <br>
+次に、JetsonNanoに合わせて学習モデルを最適化する。(参考：[torch2trt](https://github.com/NVIDIA-AI-IOT/torch2trt)) <br>
+作成した学習モデルのパスが、`$HOME/ai_race_data_sample/model/plane/sample_plane.pth` である場合の例。<br>
 
 ```
 python3 trt_conversion.py --pretrained_model $HOME/ai_race_data_sample/model/plane/sample_plane.pth --trt_model sample_model_trt.pth
@@ -329,7 +328,17 @@ python inference_from_image.py --trt_module --trt_model <保存したtrtモデ�
 
 ### 3.3 ディレクトリ構成
 
-xxx
+|  ディレクトリ  |  内容  |　 備考  |
+| ---- | ---- | ---- |
+|  ./ai_race/learning  |  機械学習メインスクリプト  |  -  |
+|  ./ai_race/utility  |  学習データ取得用ツール　  |  -  |
+|  ./scripts  |  起動、終了スクリプト  |  -  |
+|  ./ai_race/sim_world  |  シミュレータ向けモデルデータ  |  主に運営向け  |
+|  ./ai_race/sim_environment  |  シミュレータ向けROSノード、等  |  主に運営向け  |
+|  ./judge  |  レース用サーバ、等  |  主に運営向け  |
+|  ./document  |  公開資料、等  |  主に運営向け  |
+|  ./docker  |  docker環境、等  |  主に運営向け  |
+|  ./ai_race/example  |  シミュレータ作成用サンプル  |  ROS/シミュレータ等、学びたい人向けチュートリアル  |
 
 #### ROS動作確認用コマンド <br>
 
