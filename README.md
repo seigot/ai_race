@@ -340,36 +340,65 @@ python inference_from_image.py --trt_module --trt_model <保存したtrtモデ�
 |  ./docker  |  docker環境、等  |  主に運営向け  |
 |  ./ai_race/example  |  シミュレータ作成用サンプル  |  ROS/シミュレータ等、学びたい人向けチュートリアル  |
 
+### 3.4 学習モデルチューニングのはじめかた
+
+まず、Githubアカウントを取得して本リポジトリを自リポジトリにforkして下さい。（確かforkはボタン1つでできたはず）<br>
+forkしたリポジトリで各々のローカル変更を加えて、チューニング等行ってください。<br>
+<br>
+ただし、本リポジトリもバージョンアップしていく可能性が高いです。<br>
+本リポジトリのバージョンアップ時は、以下手順で追従をお願い致します。<br>
+
+```
+- ローカルのmasterブランチに移動
+- fork元のリポジトリをupstream という名前でリモートリポジトリに登録（名前はなんでもいい。登録済みならスキップ）
+- upstream から最新のコードをfetch
+- upstream/master を ローカルのmaster にmarge
+```
+
+```
+git checkout master
+git remote add upstream https://github.com/seigot/ai_race
+git fetch upstream
+git merge upstream/master
+```
+
+[github で fork したリポジトリで本家に追従する](https://please-sleep.cou929.nu/track-original-at-forked-repo.html)
+
+
 ## 4. ルール
 
+### 4.1. 概要
+
 学習モデルにより推論し、車両を操作して走行性能を競います。<br>
+2020/11/30時点で、今回は以下のルールを採用予定です。<br>
+* 制限時間4分以内に、コースを何週回れるかを競う。<br>
+* 後述するコースのうち、最もシンプルなlevel1を使う。<br>
+* コースアウトは何かしらのペナルティ有り。<br>
 <br>
-2020/11/9-20、ルール作成中、ご意見募集中!!<br>
-[こちら](document/rule.md)に記載予定 <br>
+[こちら](document/rule.md)に詳細を記載予定 <br>
 
-### 4.x. 走行タイム計測方法
+### 4.2. 経過時間と周回回数の計測方法
 
-記載予定 <br>
-<br>
-タイマーと、周回カウンターを準備する予定<br>
+前述の`prepare.sh`実行時に起動するタイマーと、周回カウンターを使い自動計測します。<br>
 
-### 4.x コース
+### 4.3 コース
 
-いくつかコースを準備しようと試みています <br>
+以下のコースを用意しました。<br>
 
-|  -  |  level1  |　 level2  |  level3  |
+|  -  |  level1  |  level2  |  level3  |
 | ---- | ---- | ---- | ---- |
-|  特徴  |  xxx  |  xxx  |  xxx  |
-|  xxx  |  xxx  |  xxx  |  xxx  |
-|  xxx  |  xxx  |  xxx  |  xxx  |
-|  xxx  |  xxx  |  xxx  |  xxx  |
-|  xxx  |  xxx  |  xxx  |  xxx  |
+|  名称  |  Plane  |  Medium Track  |  Hard track  |
+|  特徴  |  地面：一様な模様です  |  地面：濃淡付きの模様です  |  地面：サーキット型の模様です。カーブが急で、速度を調整しないと曲がれない  |
+|  障害物  |  なし  |  なし  |  三角コーンを置くかも  |
+|  起動方法  |  bash prepare.sh -l 1  |  bash prepare.sh -l 2  |  bash prepare.sh -l 3  |
+|  学習データのサンプル  |  あり（１週分）  |  あり（１週分）  |  なし  |
+|  備考  |  今回のルールで採用  |  optional  |  optional  |
 
-### 4.x 評価するもの
+### 4.4 提出して頂くもの
 
-* 最終的に、学習モデルを評価する予定 <br>
-* 本リポジトリをforkして頂き、各ユーザのリポジトリで学習モデルを作成して頂く予定 <br>
-* 評価タイムはどこかに載せたい（途中経過含む）<br>
+* 最終的に、JetsonNano向けに最適化した学習モデルを提出して頂く予定（最適化は、前述したTorch2trtにより行ってください。） <br>
+* 提出方法は、Githubリリースの機能を使えば簡単かと思われます。この場合はGithubリリースのURLを教えて下さい。（難しい場合は、別の方法でもOKです。）<br>
+* 途中経過含めて、上位の結果はどこかに載せたいと考えています。<br>
 
 ## FAQ
 
