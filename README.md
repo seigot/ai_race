@@ -375,7 +375,7 @@ git merge upstream/master
 * 後述するコースのうち、最もシンプルなlevel1を使う。<br>
 * コースアウトは何かしらのペナルティ有り。<br>
 <br>
-[こちら](document/rule.md)に詳細を記載予定 <br>
+[こちら](https://github.com/seigot/ai_race/blob/main/document/rule.md)に詳細を記載予定 <br>
 
 ### 4.2. 経過時間と周回回数の計測方法
 
