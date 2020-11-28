@@ -7,16 +7,20 @@ set -u
 
 # default option parameter
 LEVEL=1
+PACKAGE_NAME="sim_environment"
 
 # option
-while getopts l: OPT
+while getopts l:p: OPT
 do
     case $OPT in
-        "l" ) LEVEL=$OPTARG; echo "LEVEL: $LEVEL";;
+        "l" ) LEVEL=$OPTARG ;;
+        "p" ) PACKAGE_NAME=$OPTARG ;;
     esac
 done
 
 echo "start prepare.sh"
+echo "LEVEL: ${LEVEL}"
+echo "PACKAGE_NAME: ${PACKAGE_NAME}"
 
 # init judge server, timer window, etc
 gnome-terminal -- python3 ../judge/judgeServer.py
@@ -28,15 +32,15 @@ gnome-terminal -- python3 ../judge/timer.py
 
 if [ "$LEVEL" -eq 1 ];then
     ## LEVEL1
-    roslaunch sim_environment wheel_robot_with_surveillance.launch track_name:="medium_track_plane.world" gui:="true"
+    roslaunch ${PACKAGE_NAME} wheel_robot_with_surveillance.launch track_name:="medium_track_plane.world" gui:="true"
 elif [ "$LEVEL" -eq 2 ];then
     ## LEVEL2
-    roslaunch sim_environment wheel_robot_with_surveillance.launch track_name:="medium_track.world" gui:="true"
+    roslaunch ${PACKAGE_NAME} wheel_robot_with_surveillance.launch track_name:="medium_track.world" gui:="true"
 elif [ "$LEVEL" -eq 3 ];then
     ## LEVEL3
     ## temporal, planning to update later..
     echo "temporal, planning to update later.."
-    roslaunch sim_environment wheel_robot_with_surveillance.launch track_name:="hard_track.world" gui:="true"
+    roslaunch ${PACKAGE_NAME} wheel_robot_with_surveillance.launch track_name:="hard_track.world" gui:="true"
 else
     echo "invalid LEVEL option -l $LEVEL"
 fi
