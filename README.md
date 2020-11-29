@@ -252,14 +252,14 @@ cd ~/catkin_ws/src/ai_race/ai_race/learning
 python3 train.py --data_csv $HOME/ai_race_data_sample/dataset/plane/_2020-11-17-01-34-45/_2020-11-17-01-34-45.csv --model_name sample_model
 ```
 
-次に、JetsonNanoに合わせて学習モデルを最適化する。(比較的軽量なtrtあり版と呼ばれるもの) <br>
+次に、JetsonNanoに合わせて学習モデルを軽量化する。(trtあり版と呼ばれるもの) <br>
 作成した学習モデルのパスが、`$HOME/ai_race_data_sample/model/plane/sample_plane.pth` である場合の例。<br>
 
 ```
 python3 trt_conversion.py --pretrained_model $HOME/ai_race_data_sample/model/plane/sample_plane.pth --trt_model sample_model_trt.pth
 ```
 
-その後は前述同様、最適化した学習モデルを利用して推論、車両操作を行って下さい。
+その後は前述同様、軽量化した学習モデルを利用して推論、車両操作を行って下さい。
 
 #### 学習用データの取得 (Optional)
 
@@ -404,7 +404,7 @@ git merge upstream/master
 
 ### 4.4 提出して頂くもの
 
-* level1コースで動作する学習モデルを提出して下さい。（学習モデルは、前述のJetsonNano向けに最適化したtrtあり版をお願いします） <br>
+* level1コースで動作する学習モデルを提出して下さい。（学習モデルは、前述のJetsonNano向けに軽量化したtrtあり版をお願いします） <br>
 * 提出方法は、Githubリリースの機能を使うことをお勧めします。この場合はGithubリポジトリ名/リリースURLを教えて下さい。<br>
 
 > バイナリリリースする場合の参考手順 <br>
