@@ -342,11 +342,18 @@ python inference_from_image.py --trt_module --trt_model <保存したtrtモデ�
 
 ### 3.4 学習モデルチューニングのはじめかた
 
-まず、Githubアカウントを取得して本リポジトリを自リポジトリにforkして下さい。（確かforkはボタン1つでできたはず）<br>
-forkしたリポジトリで各々のローカル変更を加えて、チューニング等行ってください。<br>
+まず、Githubアカウントを取得して本リポジトリを自リポジトリにforkして下さい。
+
+> リポジトリのフォークの例
+> 0. GitHubアカウントを作成/ログインする。
+> 1. GitHub で、[https://github.com/seigot/ai_race](https://github.com/seigot/ai_race)リポジトリに移動します
+> 2. ページの右上にある [Fork] をクリックします。
+> 参考：[リポジトリをフォークする](https://docs.github.com/ja/free-pro-team@latest/github/getting-started-with-github/fork-a-repo)
+
+forkしたリポジトリで各々のローカル変更、チューニング等行ってください。<br>
 <br>
-ただし、本リポジトリもバージョンアップしていく可能性が高いです。<br>
-本リポジトリのバージョンアップ時は、以下手順で追従をお願い致します。<br>
+今後、本リポジトリもバージョンアップしていく予定です。<br>
+本リポジトリのバージョンアップを取り込む場合は、以下手順を行って下さい。<br>
 
 ```
 - ローカルのmasterブランチに移動
@@ -362,7 +369,7 @@ git fetch upstream
 git merge upstream/master
 ```
 
-[github で fork したリポジトリで本家に追従する](https://please-sleep.cou929.nu/track-original-at-forked-repo.html)
+参考：[github で fork したリポジトリで本家に追従する](https://please-sleep.cou929.nu/track-original-at-forked-repo.html)
 
 
 ## 4. ルール
@@ -393,12 +400,17 @@ git merge upstream/master
 |  障害物  |  なし  |  なし  |  三角コーンを置くかも  |
 |  起動コマンド  |  bash prepare.sh -l 1  |  bash prepare.sh -l 2  |  bash prepare.sh -l 3  |
 |  学習データのサンプル  |  あり（１週分）  |  あり（１週分）  |  なし  |
-|  備考  |  今回のルールで採用  |  optional  |  optional  |
+|  備考  |  今回のルールで採用  |  optional  |  optional（準備中）  |
 
 ### 4.4 提出して頂くもの
 
-* 最終的に、JetsonNano向けに最適化した学習モデルを提出して頂く予定（最適化は、前述したTorch2trtにより行ってください。） <br>
-* 提出方法は、Githubリリースの機能を使えば簡単かと思われます。この場合はGithubリリースのURLを教えて下さい。（難しい場合は、別の方法でもOKです。）<br>
+* 最終的に、JetsonNano向けに最適化した学習モデルを提出して下さい。（最適化は、前述したTorch2trtにより行ってください。） <br>
+* 提出方法は、Githubリリースの機能を使うことをお勧めします。この場合はGithubリポジトリ名/リリースURLを教えて下さい。（難しい場合は、別の方法でもOKです。）<br>
+
+> バイナリリリースする場合の参考手順
+> [リポジトリのリリースを管理する](https://docs.github.com/ja/free-pro-team@latest/github/administering-a-repository/managing-releases-in-a-repository)
+> 7.オプションで、コンパイルされたプログラムなどのバイナリファイルをリリースに含めるには、ドラッグアンドドロップするかバイナリボックスで手動で選択します。
+
 * 途中経過含めて、上位の結果はどこかに載せたいと考えています。<br>
 
 ## FAQ
@@ -413,6 +425,9 @@ git merge upstream/master
 [PyTorch for Jetson](https://forums.developer.nvidia.com/t/pytorch-for-jetson-version-1-7-0-now-available/72048) <br>
 [https://github.com/NVIDIA-AI-IOT/torch2trt](https://github.com/NVIDIA-AI-IOT/torch2trt) <br>
 RESPECT  [OneNightRobocon](https://github.com/OneNightROBOCON) <br>
+[リポジトリをフォークする](https://docs.github.com/ja/free-pro-team@latest/github/getting-started-with-github/fork-a-repo) <br>
+[github で fork したリポジトリで本家に追従する](https://please-sleep.cou929.nu/track-original-at-forked-repo.html) <br>
+[リポジトリのリリースを管理する](https://docs.github.com/ja/free-pro-team@latest/github/administering-a-repository/managing-releases-in-a-repository) <br>
 
 ## Finally
 
