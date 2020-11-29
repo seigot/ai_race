@@ -46,6 +46,8 @@ class JudgeCommunicationd(object):
         # get status
         dic = json.loads(state.data)
         is_courseout = int(dic["judge_info"]["is_courseout"])
+        CourseOutRecoveryLocationList = dic["field_info"]["CourseOutRecoveryLocationList"]
+        LocationIdx = CourseOutRecoveryLocationList["index"]
 
         if is_courseout != 0:
 
@@ -61,13 +63,13 @@ class JudgeCommunicationd(object):
             rospy.wait_for_service('/jugemu/teleport')
             state_msg = ModelState()
             state_msg.model_name = ''
-            state_msg.pose.position.x = 1.75
-            state_msg.pose.position.y = 0.50
-            state_msg.pose.position.z = 0.75
-            state_msg.pose.orientation.x = 0
-            state_msg.pose.orientation.y = 0
-            state_msg.pose.orientation.z = 0.3
-            state_msg.pose.orientation.w = 0.3
+            state_msg.pose.position.x = LocationIdx[0][0]
+            state_msg.pose.position.y = LocationIdx[0][1]
+            state_msg.pose.position.z = LocationIdx[0][2]
+            state_msg.pose.orientation.x = LocationIdx[0][3]
+            state_msg.pose.orientation.y = LocationIdx[0][4]
+            state_msg.pose.orientation.z = LocationIdx[0][5]
+            state_msg.pose.orientation.w = LocationIdx[0][6]
             try:
                 JugeMu_Teleport = rospy.ServiceProxy('/jugemu/teleport', SetModelState)
                 resp = JugeMu_Teleport(state_msg)

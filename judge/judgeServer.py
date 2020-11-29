@@ -38,6 +38,16 @@ class GameManagerClass:
             return False
 
         self.judgestate = state
+
+        # [fixme] this data should be registered from prepare.sh
+        # for level1 data
+        # position x,y,z / orientation x,y,z,w
+        self.CourseOutRecoveryLocationList = {
+            "index": [
+                [1.75, 0.50, 0.75, 0, 0, 0.3, 0.3]
+            ]
+        }
+
         return True
 
     def initGameData(self):
@@ -117,6 +127,7 @@ class GameManagerClass:
         json = {
             "field_info": {
                 "description": "field information",
+                "CourseOutRecoveryLocationList": self.CourseOutRecoveryLocationList,
             },
             "vehicle_info": {
                 "description": "vehicle information",
