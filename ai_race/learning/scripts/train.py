@@ -53,30 +53,30 @@ def main():
 		train_acc, train_loss = train(model, device, train_loader, criterion, optimizer)
 		
 		# Output score.
-		# if(epoch%5==0):
-		pd.to_pickle(train_data, "train_data.pkl")
-		del train_data
-		
-		test_data = pd.read_pickle("test_data.pkl")
-		test_loader = torch.utils.data.DataLoader(test_data, batch_size=20, shuffle=True)
-		del test_data
-		test_acc, test_loss = test(model, device, test_loader, criterion)
-		del test_loader
+		if(epoch%args.test_interval == 0):
+			pd.to_pickle(train_data, "train_data.pkl")
+			del train_data
+			
+			test_data = pd.read_pickle("test_data.pkl")
+			test_loader = torch.utils.data.DataLoader(test_data, batch_size=20, shuffle=True)
+			del test_data
+			test_acc, test_loss = test(model, device, test_loader, criterion)
+			del test_loader
 
-		stdout_temp = 'epoch: {:>3}, train acc: {:<8}, train loss: {:<8}, test acc: {:<8}, test loss: {:<8}'
-		print(stdout_temp.format(epoch+1, train_acc, train_loss, test_acc, test_loss))
+			stdout_temp = 'epoch: {:>3}, train acc: {:<8}, train loss: {:<8}, test acc: {:<8}, test loss: {:<8}'
+			print(stdout_temp.format(epoch+1, train_acc, train_loss, test_acc, test_loss))
 
-		train_data = pd.read_pickle("train_data.pkl")
-		# else:	
-		# 	stdout_temp = 'epoch: {:>3}, train acc: {:<8}, train loss: {:<8}' #, test acc: {:<8}, test loss: {:<8}'
-		# 	print(stdout_temp.format(epoch+1, train_acc, train_loss)) #, test_acc, test_loss))
+			train_data = pd.read_pickle("train_data.pkl")
+		else:	
+			stdout_temp = 'epoch: {:>3}, train acc: {:<8}, train loss: {:<8}' #, test acc: {:<8}, test loss: {:<8}'
+			print(stdout_temp.format(epoch+1, train_acc, train_loss)) #, test_acc, test_loss))
 
 		# Save a model checkpoint.
-		model_ckpt_path = args.model_ckpt_path_temp.format(args.dataset_name, args.model_name, epoch+1)
-		print(model_ckpt_path)
-		torch.save(model.state_dict(), model_ckpt_path)
-		print('Saved a model checkpoint at {}'.format(model_ckpt_path))
-		print('')
+		if(epoch%args.save_model_interval == 0):
+			model_ckpt_path = args.model_ckpt_path_temp.format(args.dataset_name, args.model_name, epoch+1)
+			torch.save(model.state_dict(), model_ckpt_path)
+			print('Saved a model checkpoint at {}'.format(model_ckpt_path))
+			print('')
 
 
 def train(model, device, train_loader, criterion, optimizer):
@@ -157,6 +157,8 @@ def parse_args():
 	arg_parser.add_argument("--model_ckpt_path_temp", type=str, default=os.environ['HOME'] + '/work/experiments/models/checkpoints/{}_{}_epoch={}.pth')
 	arg_parser.add_argument('--n_epoch', default=20, type=int, help='The number of epoch')
 	arg_parser.add_argument('--lr', default=0.1, type=float, help='Learning rate')
+	arg_parser.add_argument('--test_interval', default=5, type=int, help='test interval')
+	arg_parser.add_argument('--save_model_interval', default=5, type=int, help='save model interval')
 
 	args = arg_parser.parse_args()
 
