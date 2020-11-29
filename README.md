@@ -395,7 +395,7 @@ git merge upstream/master
 |  -  |  level1  |  level2  |  level3  |
 | ---- | ---- | ---- | ---- |
 |  名称  |  Plane  |  Medium Track  |  Hard track  |
-|  外観  |  ![medium_track_plane-2.png](https://github.com/seigot/ai_race/blob/main/document/medium_track_plane-2.png)  |  ![medium_track-2.png](https://github.com/seigot/ai_race/blob/main/document/medium_track-2.png)  |  -  |
+|  外観  |  ![medium_track_plane-2.png](https://github.com/seigot/ai_race/blob/main/document/medium_track_plane-2.png)  |  ![medium_track-2.png](https://github.com/seigot/ai_race/blob/main/document/medium_track-2.png)  |  ![hard_track.png](https://github.com/seigot/ai_race/blob/main/document/hard_track.png)  |
 |  特徴  |  地面：一様な模様です  |  地面：濃淡付きの模様です  |  地面：サーキット型の模様です。カーブが急で、速度を調整しないと曲がれない  |
 |  障害物  |  なし  |  なし  |  三角コーンを置くかも  |
 |  起動コマンド  |  bash prepare.sh -l 1  |  bash prepare.sh -l 2  |  bash prepare.sh -l 3  |
