@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <launch>
-  <arg name="level" default="2"/>
+  <arg name="level" default="1"/>
 
   <!-- level 1 (default) -->
   <group if="$(eval level==1)"> 
