@@ -29,19 +29,6 @@ gnome-terminal -- python3 ../judge/timer.py
 # [future work] if necessary, register some data to server here.
 
 # init simulator, course and vehicle
+roslaunch ${PACKAGE_NAME} sim_environment.launch level:=${LEVEL}
 
-if [ "$LEVEL" -eq 1 ];then
-    ## LEVEL1
-    roslaunch ${PACKAGE_NAME} wheel_robot_with_surveillance.launch track_name:="medium_track_plane.world" gui:="true"
-elif [ "$LEVEL" -eq 2 ];then
-    ## LEVEL2
-    roslaunch ${PACKAGE_NAME} wheel_robot_with_surveillance.launch track_name:="medium_track.world" gui:="true"
-elif [ "$LEVEL" -eq 3 ];then
-    ## LEVEL3
-    ## temporal, planning to update later..
-    echo "temporal, planning to update later.."
-    roslaunch ${PACKAGE_NAME} wheel_robot_with_surveillance.launch track_name:="hard_track.world" gui:="true"
-else
-    echo "invalid LEVEL option -l $LEVEL"
-fi
 

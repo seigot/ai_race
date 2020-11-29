@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="level" default="2"/>
+
+  <!-- level 1 (default) -->
+  <group if="$(eval level==1)"> 
+    <include file="$(find sim_environment)/launch/wheel_robot_with_surveillance.launch">
+      <arg name="track_name" value="medium_track_plane.world" />
+      <arg name="gui" value="true" />
+    </include>  
+  </group>
+
+  <!-- level 2 (if you want to run , set launch arg level=2 --> 
+  <group if="$(eval level==2)"> 
+    <include file="$(find sim_environment)/launch/wheel_robot_with_surveillance.launch">
+      <arg name="track_name" value="medium_track.world" />
+      <arg name="gui" value="true" />
+    </include>  
+  </group>
+
+  <!-- level 3 (if you want to run , set launch arg level=3 --> 
+  <group if="$(eval level==3)"> 
+    <include file="$(find sim_environment)/launch/wheel_robot_with_surveillance.launch">
+      <arg name="track_name" value="hard_track.world" />
+      <arg name="gui" value="true" />
+    </include>  
+  </group>
+
+</launch>
+
