@@ -8,7 +8,7 @@ set -u
 # default option parameter
 LEVEL=1
 GAME_TIME=240
-PACKAGE_NAME="sim_environment"
+PACKAGE_NAME="your_environment"
 
 # option
 while getopts l:p:t: OPT
@@ -22,7 +22,9 @@ done
 
 echo "start prepare.sh"
 echo "LEVEL: ${LEVEL}"
+echo "PACKAGE_NAME: ${PACKAGE_NAME}"
 echo "GAME_TIME: ${GAME_TIME}"
+
 
 # init judge server, timer window, etc
 gnome-terminal -- python3 ../judge/judgeServer.py --gametime ${GAME_TIME}
@@ -31,7 +33,8 @@ gnome-terminal -- python3 ../judge/timer.py
 # [future work] if necessary, register some data to server here.
 
 # init simulator, course and vehicle
-roslaunch your_environment your_environment.launch level:=${LEVEL}
+roslaunch ${PACKAGE_NAME} sim_environment.launch level:=${LEVEL}
+#roslaunch your_environment your_environment.launch level:=${LEVEL}
 #roslaunch sim_environment sim_environment.launch level:=${LEVEL}
 
 
