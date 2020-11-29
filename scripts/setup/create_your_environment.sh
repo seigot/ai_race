@@ -29,4 +29,4 @@ mkdir launch
 cp ../sim_environment/launch/* ./launch
 
 mkdir utility
-cp ../utility/scripts/* ./utility
+cp ../utility/* ./utility

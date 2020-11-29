@@ -9,7 +9,10 @@ import csv
 from cv_bridge import CvBridge, CvBridgeError
 from sensor_msgs.msg import Image
 
-INFERENCE_TIME = 0.055
+sys.path.append(os.path.dirname(os.path.abspath(__file__)) + "/../config")
+import util_config
+
+INFERENCE_TIME = util_config.Inference_time
 TRANSMIT_MARGIN = 0.01
 
 def output_files(bagFilename):

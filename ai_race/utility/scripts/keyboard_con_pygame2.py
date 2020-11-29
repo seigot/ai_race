@@ -9,8 +9,12 @@ import pygame
 from pygame.locals import *
 import time
 import sys
+import os
 
-INFERENCE_TIME = 0.055
+sys.path.append(os.path.dirname(os.path.abspath(__file__)) + "/../config")
+import util_config
+
+INFERENCE_TIME = util_config.Inference_time
 
 class keyboardController:
     def __init__(self):
