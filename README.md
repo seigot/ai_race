@@ -359,7 +359,7 @@ forkしたリポジトリで各々のローカル変更、チューニング等�
 - ローカルのmasterブランチに移動
 - fork元のリポジトリをupstream という名前でリモートリポジトリに登録（名前はなんでもいい。登録済みならスキップ）
 - upstream から最新のコードをfetch
-- upstream/master を ローカルのmaster にmarge
+- upstream/master を ローカルのmaster にmrge
 ```
 
 ```
@@ -380,7 +380,7 @@ git merge upstream/master
 今回は以下のルールを採用予定です。<br>
 * 制限時間4分以内に、コースを何週回れるかを競う。<br>
 * 後述するコースのうち、最もシンプルなlevel1を使う。<br>
-* コースアウトは何かしらのペナルティ有り。<br>
+* コースアウトは、自力復帰困難な場合はスタート地点に復帰して走行を継続する。<br>
 
 [こちら](https://github.com/seigot/ai_race/blob/main/document/rule.md) に詳細を記載予定 <br>
 
@@ -399,7 +399,7 @@ git merge upstream/master
 |  特徴  |  地面：一様な模様です  |  地面：濃淡付きの模様です  |  地面：サーキット型の模様です。カーブが急で、速度を調整しないと曲がれない  |
 |  障害物  |  なし  |  なし  |  三角コーンを置くかも  |
 |  起動コマンド  |  bash prepare.sh -l 1  |  bash prepare.sh -l 2  |  bash prepare.sh -l 3  |
-|  学習データのサンプル  |  あり（１週分）  |  あり（１週分）  |  なし  |
+|  学習データのサンプル  |  あり（１週分）[url](https://github.com/seigot/ai_race_data_sample/tree/main/dataset/plane)  |  あり（１週分）[url](https://github.com/seigot/ai_race_data_sample/tree/main/dataset/medium) |  なし  |
 |  備考  |  今回のルールで採用  |  optional  |  optional（準備中）  |
 
 ### 4.4 提出して頂くもの
