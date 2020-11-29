@@ -12,8 +12,8 @@ function try_kill_process(){
 	return 0
     fi
     echo "kill process ... ${PROCESS_NAME}"
+    #kill -SIGINT $PROCESS_ID
     kill $PROCESS_ID
-    
 }
 
 function stop_process(){    
@@ -21,6 +21,8 @@ function stop_process(){
     try_kill_process "timer.py"
     try_kill_process "window_management"
     try_kill_process "keyboard_con_pygame"
+    try_kill_process "your_environment"
+    try_kill_process "sim_environment"
     try_kill_process "wheel_robot"
     try_kill_process "prepare"
     try_kill_process "inference"
