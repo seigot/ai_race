@@ -17,7 +17,6 @@ function try_kill_process(){
 }
 
 function stop_process(){    
-    try_kill_process "roscore"
     try_kill_process "judgeServer.py"
     try_kill_process "timer.py"
     try_kill_process "window_management"
@@ -25,6 +24,7 @@ function stop_process(){
     try_kill_process "wheel_robot"
     try_kill_process "prepare"
     try_kill_process "inference"
+    try_kill_process "roscore"
 }
 
 stop_process
