@@ -404,8 +404,8 @@ git merge upstream/master
 
 ### 4.4 提出して頂くもの
 
-* 最終的に、JetsonNano向けに最適化した学習モデルを提出して下さい。（最適化は、前述したTorch2trtにより行ってください。） <br>
-* 提出方法は、Githubリリースの機能を使うことをお勧めします。この場合はGithubリポジトリ名/リリースURLを教えて下さい。（難しい場合は、別の方法でもOKです。）<br>
+* 最終的に、JetsonNano向けに最適化した学習モデル（前述のtrtあり版を呼ばれるもの）を提出して下さい。 <br>
+* 提出方法は、Githubリリースの機能を使うことをお勧めします。この場合はGithubリポジトリ名/リリースURLを教えて下さい。<br>
 
 > バイナリリリースする場合の参考手順 <br>
 > [リポジトリのリリースを管理する](https://docs.github.com/ja/free-pro-team@latest/github/administering-a-repository/managing-releases-in-a-repository) <br>
