@@ -7,22 +7,25 @@ set -u
 
 # default option parameter
 LEVEL=1
+GAME_TIME=240
 PACKAGE_NAME="sim_environment"
 
 # option
-while getopts l:p: OPT
+while getopts l:p:t: OPT
 do
     case $OPT in
         "l" ) LEVEL=$OPTARG ;;
         "p" ) PACKAGE_NAME=$OPTARG ;;
+        "t" ) GAME_TIME=$OPTARG ;;
     esac
 done
 
 echo "start prepare.sh"
 echo "LEVEL: ${LEVEL}"
+echo "GAME_TIME: ${GAME_TIME}"
 
 # init judge server, timer window, etc
-gnome-terminal -- python3 ../judge/judgeServer.py
+gnome-terminal -- python3 ../judge/judgeServer.py --gametime ${GAME_TIME}
 sleep 1
 gnome-terminal -- python3 ../judge/timer.py
 # [future work] if necessary, register some data to server here.

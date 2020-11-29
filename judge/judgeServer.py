@@ -5,6 +5,7 @@ import time
 import argparse
 import json
 import threading
+import pprint
 ## flask
 from flask import Flask, request, jsonify, render_template
 from flask import send_from_directory
@@ -143,7 +144,8 @@ class GameManagerClass:
             jsondata = self.getGameStateJson()
             json.dump(jsondata, f)
             app.logger.info("Write Result {}".format(jsondata))
-
+            print("result log: " + log_file_path)
+            pprint.pprint(jsondata, compact = True)
 
 ### API definition
 @app.route('/')
