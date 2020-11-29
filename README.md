@@ -345,10 +345,10 @@ python inference_from_image.py --trt_module --trt_model <保存したtrtモデ�
 まず、Githubアカウントを取得して本リポジトリを自リポジトリにforkして下さい。
 
 > リポジトリのフォークの例 <br>
-> 0. GitHubアカウントを作成/ログインする。<br>
-> 1. GitHub で、[https://github.com/seigot/ai_race](https://github.com/seigot/ai_race)リポジトリに移動します<br>
-> 2. ページの右上にある [Fork] をクリックします。<br>
-> 参考：[リポジトリをフォークする](https://docs.github.com/ja/free-pro-team@latest/github/getting-started-with-github/fork-a-repo)<br>
+> 0. GitHubアカウントを作成/ログインする。 <br>
+> 1. GitHub で、[https://github.com/seigot/ai_race](https://github.com/seigot/ai_race)リポジトリに移動します <br>
+> 2. ページの右上にある [Fork] をクリックします。 <br>
+> 参考：[リポジトリをフォークする](https://docs.github.com/ja/free-pro-team@latest/github/getting-started-with-github/fork-a-repo) <br>
 
 forkしたリポジトリで各々のローカル変更、チューニング等行ってください。<br>
 <br>
@@ -407,9 +407,9 @@ git merge upstream/master
 * 最終的に、JetsonNano向けに最適化した学習モデルを提出して下さい。（最適化は、前述したTorch2trtにより行ってください。） <br>
 * 提出方法は、Githubリリースの機能を使うことをお勧めします。この場合はGithubリポジトリ名/リリースURLを教えて下さい。（難しい場合は、別の方法でもOKです。）<br>
 
-> バイナリリリースする場合の参考手順<br>
-> [リポジトリのリリースを管理する](https://docs.github.com/ja/free-pro-team@latest/github/administering-a-repository/managing-releases-in-a-repository)<br>
-> 7.オプションで、コンパイルされたプログラムなどのバイナリファイルをリリースに含めるには、ドラッグアンドドロップするかバイナリボックスで手動で選択します。<br>
+> バイナリリリースする場合の参考手順 <br>
+> [リポジトリのリリースを管理する](https://docs.github.com/ja/free-pro-team@latest/github/administering-a-repository/managing-releases-in-a-repository) <br>
+> 7.オプションで、コンパイルされたプログラムなどのバイナリファイルをリリースに含めるには、ドラッグアンドドロップするかバイナリボックスで手動で選択します。 <br>
 
 * 途中経過含めて、上位の結果はどこかに載せたいと考えています。<br>
 
