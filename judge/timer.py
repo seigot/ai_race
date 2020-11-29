@@ -49,70 +49,70 @@ class Window(QMainWindow):
         self.label.setFont(QFont('Arial', 25))
         self.label.setAlignment(Qt.AlignCenter) 
   
-        # create start button 
-        start = QPushButton("Init", self) 
-        start_upper_left = (15, 150)
+        # create init button 
+        init = QPushButton("Init", self) 
+        init_upper_left = (15, 150)
+        init_width_height = (90, 40)
+        init.setGeometry(init_upper_left[0], init_upper_left[1], 
+                         init_width_height[0], init_width_height[1])
+        init.pressed.connect(self.Init)
+
+        # create start button
+        start = QPushButton("Start", self) 
+        start_upper_left = (110, 150)
         start_width_height = (90, 40)
-        start.setGeometry(start_upper_left[0], start_upper_left[1], 
+        start.setGeometry(start_upper_left[0], start_upper_left[1],
                           start_width_height[0], start_width_height[1])
-        start.pressed.connect(self.Init)
+        start.pressed.connect(self.Start)
 
-        # create pause button
-        pause = QPushButton("Start", self) 
-        pause_upper_left = (110, 150)
-        pause_width_height = (90, 40)
-        pause.setGeometry(pause_upper_left[0], pause_upper_left[1],
-                          pause_width_height[0], pause_width_height[1])
-        pause.pressed.connect(self.Start)
+        # create stop button 
+        stop = QPushButton("Stop", self) 
+        stop_upper_left = (205, 150)
+        stop_width_height = (90, 40)
+        stop.setGeometry(stop_upper_left[0], stop_upper_left[1],
+                          stop_width_height[0], stop_width_height[1])
+        stop.pressed.connect(self.Stop)
 
-        # create reset button 
-        reset = QPushButton("Stop", self) 
-        reset_upper_left = (205, 150)
-        reset_width_height = (90, 40)
-        reset.setGeometry(reset_upper_left[0], reset_upper_left[1],
-                          reset_width_height[0], reset_width_height[1])
-        reset.pressed.connect(self.Stop)
-
-        # create CourseOut Recovery button 
+        # create CourseOut Recovery button
         CourseOutRecovery = QPushButton("CourseOut\nRecovery", self) 
-        reset_upper_left = (300, 150)
-        reset_width_height = (90, 40)
-        CourseOutRecovery.setGeometry(reset_upper_left[0], reset_upper_left[1],
-                          reset_width_height[0], reset_width_height[1])
+        CourseOutRecovery_upper_left = (300, 150)
+        CourseOutRecovery_width_height = (90, 40)
+        CourseOutRecovery.setGeometry(CourseOutRecovery_upper_left[0], CourseOutRecovery_upper_left[1],
+                          CourseOutRecovery_width_height[0], CourseOutRecovery_width_height[1])
         CourseOutRecovery.pressed.connect(self.CourseOutRecovery)
         CourseOutRecovery.setFont(QFont("Meiryo", 9))
 
-        # create lap_count button 
-        lapcount = QPushButton("Lap++", self) 
-        lapcount_upper_left = (15, 195)
-        lapcount_width_height = (90, 40)
-        lapcount.setGeometry(lapcount_upper_left[0], lapcount_upper_left[1],
-                             lapcount_width_height[0], lapcount_width_height[1])
-        lapcount.pressed.connect(self.LapCount_plus) 
+        # create lap_count Plus/Minus button 
+        lapcountPlus = QPushButton("Lap++", self) 
+        lapcountPlus_upper_left = (15, 195)
+        lapcountPlus_width_height = (90, 40)
+        lapcountPlus.setGeometry(lapcountPlus_upper_left[0], lapcountPlus_upper_left[1],
+                             lapcountPlus_width_height[0], lapcountPlus_width_height[1])
+        lapcountPlus.pressed.connect(self.LapCount_plus) 
 
-        lapcount = QPushButton("Lap--", self) 
-        lapcount_upper_left = (110, 195)
-        lapcount_width_height = (90, 40)
-        lapcount.setGeometry(lapcount_upper_left[0], lapcount_upper_left[1],
-                             lapcount_width_height[0], lapcount_width_height[1])
-        lapcount.pressed.connect(self.LapCount_minus)
+        lapcountMinus = QPushButton("Lap--", self) 
+        lapcountMinus_upper_left = (110, 195)
+        lapcountMinus_width_height = (90, 40)
+        lapcountMinus.setGeometry(lapcountMinus_upper_left[0], lapcountMinus_upper_left[1],
+                             lapcountMinus_width_height[0], lapcountMinus_width_height[1])
+        lapcountMinus.pressed.connect(self.LapCount_minus)
 
-        # create courseout_count button 
-        lapcount = QPushButton("CourseOut++", self) 
-        lapcount_upper_left = (205, 195)
-        lapcount_width_height = (90, 40)
-        lapcount.setGeometry(lapcount_upper_left[0], lapcount_upper_left[1],
-                             lapcount_width_height[0], lapcount_width_height[1])
-        lapcount.pressed.connect(self.CourseOutCount_plus) 
-        lapcount.setFont(QFont("Meiryo", 9))
+        # create CourseOutCount Plus/Minus button 
+        CourseOutCountPlus = QPushButton("CourseOut++", self) 
+        CourseOutCountPlus_upper_left = (205, 195)
+        CourseOutCountPlus_width_height = (90, 40)
+        CourseOutCountPlus.setGeometry(CourseOutCountPlus_upper_left[0], CourseOutCountPlus_upper_left[1],
+                             CourseOutCountPlus_width_height[0], CourseOutCountPlus_width_height[1])
+        CourseOutCountPlus.pressed.connect(self.CourseOutCount_plus) 
+        CourseOutCountPlus.setFont(QFont("Meiryo", 9))
 
-        lapcount = QPushButton("CourseOut--", self) 
-        lapcount_upper_left = (300, 195)
-        lapcount_width_height = (90, 40)
-        lapcount.setGeometry(lapcount_upper_left[0], lapcount_upper_left[1],
-                             lapcount_width_height[0], lapcount_width_height[1])
-        lapcount.pressed.connect(self.CourseOutCount_minus)
-        lapcount.setFont(QFont("Meiryo", 9))
+        CourseOutCountMinus = QPushButton("CourseOut--", self) 
+        CourseOutCountMinus_upper_left = (300, 195)
+        CourseOutCountMinus_width_height = (90, 40)
+        CourseOutCountMinus.setGeometry(CourseOutCountMinus_upper_left[0], CourseOutCountMinus_upper_left[1],
+                             CourseOutCountMinus_width_height[0], CourseOutCountMinus_width_height[1])
+        CourseOutCountMinus.pressed.connect(self.CourseOutCount_minus)
+        CourseOutCountMinus.setFont(QFont("Meiryo", 9))
 
         # creating a timer object 
         timer = QTimer(self) 
