@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="level" default="1"/>
+
+  <!-- This is your sim_environment setup launch file. -->
+  <!-- If you want to get dataset from your original world, use this file. -->
+  
+  <!-- launch default sim_environment -->
+  <include file="$(find sim_environment)/launch/sim_environment.launch">
+    <arg name="level" value="$(arg level)" />
+  </include>  
+
+</launch>
+
