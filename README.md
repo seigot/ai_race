@@ -349,25 +349,25 @@ python inference_from_image.py --trt_module --trt_model <保存したtrtモデ�
 
 ```
 (主要なファイルを抜粋)
-├── README.md                  # 本Readme
-├── ai_race                    
-│   ├── learning               # 機械学習スクリプト
-│   │   └── scripts
+├── README.md                           # 本Readme
+├── ai_race
+│   ├── learning
+│   │   └── scripts                     # 機械学習スクリプト
 │   │       ├── MyDataSet.py            # 学習モデル作成用スクリプト
 │   │       ├── train.py                # 学習モデル作成用スクリプト
 │   │       ├── inference_from_image.py # 推論による車両操作用スクリプト
 │   │       └── trt_conversion.py       # 学習モデル軽量化用スクリプト（TRT版に変換する用）
-│   ├── utility                # 学習データ取得ツール
-│   │   └── scripts
-│   │       ├── joycon.py                      # 車両操作用
-│   │       ├── keyboard_con_pygame2.py        # 車両操作用
-│   │       ├── listup_all_rosbag_timestamp.py # rosbag timestamp表示用
+│   ├── utility
+│   │   └── scripts                              # 学習データ取得ツール
+│   │       ├── joycon.py                        # 車両操作用
+│   │       ├── keyboard_con_pygame2.py          # 車両操作用
+│   │       ├── listup_all_rosbag_timestamp.py   # rosbag timestamp表示用
 │   │       └── rosbag_to_images_and_commands.py # rosbag-->image,comand変換用
 │   │  
 │   ├── your_environment       # 各参加者の作成コードを格納するためのディレクトリ
 │   │   │                      # （ここにコードを置くと運営側のアップデートとconflictしない）
 │   │   ├── launch
-│   │   │   └── sim_environment.launch  # 参加者独自で学習データ取得する場合のシミュレータモデル拡張用ファイル
+│   │   │   └── sim_environment.launch  # 参加者独自で学習データ取得する場合の、シミュレータモデル追加用ひな形ファイル
 │   │   └── scripts
 │   │       └── your_train.py           # 参加者独自でtrain.pyを作成する場合のひな形ファイル
 │   │   
@@ -376,11 +376,11 @@ python inference_from_image.py --trt_module --trt_model <保存したtrtモデ�
 │   ├── sim_environment           # シミュレータ用ROSノード等	
 │   └── sim_world                 # シミュレータ用モデルデータ
 │   
-├── FAQ.md         # FAQ
-├── docker         # docker環境
-├── document       # 公開資料
-├── judge          # 審判サーバ
-└── scripts        # 起動用スクリプト
+├── FAQ.md            # FAQ
+├── docker            # docker環境
+├── document          # 公開資料
+├── judge             # 審判サーバ
+└── scripts           # 起動用スクリプト
     ├── prepare.sh    # シミュレータ環境起動用(level1-3対応)
     ├── start.sh      # [大会用] 開始スクリプト
     └── stop.sh       # [大会用] 停止スクリプト
@@ -398,6 +398,16 @@ python inference_from_image.py --trt_module --trt_model <保存したtrtモデ�
 > 参考：[リポジトリをフォークする](https://docs.github.com/ja/free-pro-team@latest/github/getting-started-with-github/fork-a-repo) <br>
 
 forkしたリポジトリで各々のローカル変更、チューニング等行ってください。<br>
+
+```
+・機械学習モデルの作成を工夫する場合
+   --> train.py周りを参考にして、パラメータや各種処理の更新を行ってください。
+       変更ファイルは、運営とのconflictを避けるためにyour_environment下に格納することをお勧めします。
+・学習データの取得を工夫する場合
+   --> utility以下を参考に、手動で車両を操作して学習データを取得して下さい。
+       サイズの大きなデータは可能な限り、本リポジトリ以外でやりとりすることをお勧めします。（Githubの1ファイル最大が50MBまでという制約あり）
+```
+
 <br>
 今後、本リポジトリもバージョンアップしていく予定です。<br>
 本リポジトリのバージョンアップを取り込む場合は、以下手順を行って下さい。<br>
