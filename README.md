@@ -335,21 +335,23 @@ python inference_from_image.py --trt_module --trt_model <保存したtrtモデ�
 
 |  ディレクトリ  |  内容  |　 備考  |
 | ---- | ---- | ---- |
-|  ./ai_race/learning  |  機械学習メインスクリプト  |  -  |
-|  ./ai_race/utility  |  学習データ取得用ツール　  |  -  |
+|  ./ai_race/learning  |  機械学習スクリプト  |  -  |
+|  ./ai_race/utility  |  学習データ取得ツール　  |  -  |
+|  ./ai_race/your_environment  |  各参加者の作成コードを格納するためのディレクトリ（ここにコードを置くと運営側のアップデートとconflictしない）  |  主に参加者向け  |
 |  ./scripts  |  起動、終了スクリプト  |  -  |
-|  ./ai_race/sim_world  |  シミュレータ向けモデルデータ  |  主に運営向け  |
-|  ./ai_race/sim_environment  |  シミュレータ向けROSノード、等  |  主に運営向け  |
-|  ./judge  |  レース用サーバ、等  |  主に運営向け  |
-|  ./document  |  公開資料、等  |  主に運営向け  |
-|  ./docker  |  docker環境、等  |  主に運営向け  |
-|  ./ai_race/example  |  シミュレータ作成用サンプル  |  ROS/シミュレータ等、学びたい人向けチュートリアル  |
+|  ./ai_race/sim_world  |  シミュレータ用モデルデータ  |  主に運営向け  |
+|  ./ai_race/sim_environment  |  シミュレータ用ROSノード、等  |  主に運営向け  |
+|  ./judge  |  審判サーバ  |  主に運営向け  |
+|  ./document  |  公開資料  |  主に運営向け  |
+|  ./docker  |  docker環境  |  主に運営向け  |
+|  ./ai_race/example  |  シミュレータ用モデルデータのサンプル  |  ROS/シミュレータ等、学びたい人向けチュートリアル  |
 
 ### 3.4 学習モデルチューニングのはじめかた
 
 まず、Githubアカウントを取得して本リポジトリを自リポジトリにforkして下さい。
 
 > リポジトリのフォークの例 <br>
+> 
 > 0. GitHubアカウントを作成/ログインする。 <br>
 > 1. GitHub で、[https://github.com/seigot/ai_race](https://github.com/seigot/ai_race)リポジトリに移動します <br>
 > 2. ページの右上にある [Fork] をクリックします。 <br>
@@ -364,7 +366,7 @@ forkしたリポジトリで各々のローカル変更、チューニング等�
 - ローカルのmasterブランチに移動
 - fork元のリポジトリをupstream という名前でリモートリポジトリに登録（名前はなんでもいい。登録済みならスキップ）
 - upstream から最新のコードをfetch
-- upstream/master を ローカルのmaster にmrge
+- upstream/master を ローカルのmaster にmerge
 ```
 
 ```
@@ -410,9 +412,9 @@ git merge upstream/master
 ### 4.4 提出して頂くもの
 
 * level1コースで動作する学習モデルを提出して下さい。（学習モデルは、前述のJetsonNano向けに軽量化したtrtあり版をお願いします） <br>
-* 提出方法は、Githubリリースの機能を使うことをお勧めします。この場合はGithubリポジトリ名/リリースURLを教えて下さい。<br>
+* 提出方法は、Githubリリースの機能を使うと簡単なのでお勧めです。この場合はGithubリポジトリ名/リリースURLを教えて下さい。<br>
 
-> バイナリリリースする場合の参考手順 <br>
+> 学習モデルを提出（バイナリリリース）する場合の手順参考 <br>
 > [リポジトリのリリースを管理する](https://docs.github.com/ja/free-pro-team@latest/github/administering-a-repository/managing-releases-in-a-repository) <br>
 > 7.オプションで、コンパイルされたプログラムなどのバイナリファイルをリリースに含めるには、ドラッグアンドドロップするかバイナリボックスで手動で選択します。 <br>
 
