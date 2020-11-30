@@ -340,11 +340,51 @@ python inference_from_image.py --trt_module --trt_model <保存したtrtモデ�
 |  ./ai_race/your_environment  |  各参加者の作成コードを格納するためのディレクトリ（ここにコードを置くと運営側のアップデートとconflictしない）  |  主に参加者向け  |
 |  ./scripts  |  起動、終了スクリプト  |  -  |
 |  ./ai_race/sim_world  |  シミュレータ用モデルデータ  |  主に運営向け  |
-|  ./ai_race/sim_environment  |  シミュレータ用ROSノード、等  |  主に運営向け  |
+|  ./ai_race/sim_environment  |  シミュレータ用ROSノード等  |  主に運営向け  |
 |  ./judge  |  審判サーバ  |  主に運営向け  |
 |  ./document  |  公開資料  |  主に運営向け  |
 |  ./docker  |  docker環境  |  主に運営向け  |
 |  ./ai_race/example  |  シミュレータ用モデルデータのサンプル  |  ROS/シミュレータ等、学びたい人向けチュートリアル  |
+
+
+```
+(主要なファイルを抜粋)
+├── README.md                  # 本Readme
+├── ai_race                    
+│   ├── learning               # 機械学習スクリプト
+│   │   └── scripts
+│   │       ├── MyDataSet.py            # 学習モデル作成用スクリプト
+│   │       ├── train.py                # 学習モデル作成用スクリプト
+│   │       ├── inference_from_image.py # 推論による車両操作用スクリプト
+│   │       └── trt_conversion.py       # 学習モデル軽量化用スクリプト（TRT版に変換する用）
+│   ├── utility                # 学習データ取得ツール
+│   │   └── scripts
+│   │       ├── joycon.py                      # 車両操作用
+│   │       ├── keyboard_con_pygame2.py        # 車両操作用
+│   │       ├── listup_all_rosbag_timestamp.py # rosbag timestamp表示用
+│   │       └── rosbag_to_images_and_commands.py # rosbag-->image,comand変換用
+│   │  
+│   ├── your_environment       # 各参加者の作成コードを格納するためのディレクトリ
+│   │   │                      # （ここにコードを置くと運営側のアップデートとconflictしない）
+│   │   ├── launch
+│   │   │   └── sim_environment.launch  # 参加者独自で学習データ取得する場合のシミュレータモデル拡張用ファイル
+│   │   └── scripts
+│   │       └── your_train.py           # 参加者独自でtrain.pyを作成する場合のひな形ファイル
+│   │   
+│   ├── example                   # シミュレータ用モデルデータのサンプル	
+│   │   └── tutorial1-7 
+│   ├── sim_environment           # シミュレータ用ROSノード等	
+│   └── sim_world                 # シミュレータ用モデルデータ
+│   
+├── FAQ.md         # FAQ
+├── docker         # docker環境
+├── document       # 公開資料
+├── judge          # 審判サーバ
+└── scripts        # 起動用スクリプト
+    ├── prepare.sh    # シミュレータ環境起動用(level1-3対応)
+    ├── start.sh      # [大会用] 開始スクリプト
+    └── stop.sh       # [大会用] 停止スクリプト
+```
 
 ### 3.4 学習モデルチューニングのはじめかた
 
