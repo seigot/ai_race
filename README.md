@@ -32,17 +32,6 @@ https://developer.nvidia.com/embedded/jetpack
 # お勧め設定は、順次追記予定。ユーザ名を共通化するとフルパス指定が要る時にハマる確率が減る。
 ```
 
-* SWAPファイル追加してメモリ増強【必須】 <br>
-
-```
-cd ~
-git clone https://github.com/JetsonHacksNano/installSwapfile
-cd installSwapfile
-./installSwapfile.sh
-# SWAP領域が増えていることを確認
-free -mh
-```
-
 * 学習用データ、学習モデル【参考】
 
 [こちら](https://github.com/seigot/ai_race_data_sample)にsampleデータを置いています。運営の動作確認用です。
@@ -54,9 +43,25 @@ free -mh
 ## 2. インストール
 
 結構時間が掛かります。<br>
-[こちら](https://github.com/seigot/ai_race/blob/main/scripts/setup/README.md)で、以下 2.1.～2.4. を自動実行するスクリプトを作成 <br>
 とりあえず動かしたい方は[こちら](docker/jetson/README.md)のDocker環境をお試し頂いてもOKです。 <br>
 「#」から始まる行はコメントです。 <br>
+
+### 自動インストールスクリプト【推奨】
+
+[こちら](https://github.com/seigot/ai_race/blob/main/scripts/setup/README.md)に、以下 2.0.～2.4. を自動実行するスクリプトを用意しています。 <br>
+自動インストールスクリプトを使うか、以下の手順を手動で実行してインストールしてください。
+
+
+### 2.0 SWAPファイル追加してメモリ増強【必須】 <br>
+
+```
+cd ~
+git clone https://github.com/JetsonHacksNano/installSwapfile
+cd installSwapfile
+./installSwapfile.sh
+# SWAP領域が増えていることを確認
+free -mh
+```
 
 ### 2.1. 基本的なパッケージをインストール <br>
 
