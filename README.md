@@ -32,17 +32,6 @@ https://developer.nvidia.com/embedded/jetpack
 # お勧め設定は、順次追記予定。ユーザ名を共通化するとフルパス指定が要る時にハマる確率が減る。
 ```
 
-* SWAPファイル追加してメモリ増強【必須】 <br>
-
-```
-cd ~
-git clone https://github.com/JetsonHacksNano/installSwapfile
-cd installSwapfile
-./installSwapfile.sh
-# SWAP領域が増えていることを確認
-free -mh
-```
-
 * 学習用データ、学習モデル【参考】
 
 [こちら](https://github.com/seigot/ai_race_data_sample)にsampleデータを置いています。運営の動作確認用です。
@@ -54,9 +43,25 @@ free -mh
 ## 2. インストール
 
 結構時間が掛かります。<br>
-[こちら](https://github.com/seigot/ai_race/blob/main/scripts/setup/README.md)で、以下 2.1.～2.4. を自動実行するスクリプトを作成 <br>
 とりあえず動かしたい方は[こちら](docker/jetson/README.md)のDocker環境をお試し頂いてもOKです。 <br>
 「#」から始まる行はコメントです。 <br>
+
+### 自動インストールスクリプト【推奨】
+
+[こちら](https://github.com/seigot/ai_race/blob/main/scripts/setup/README.md)に、以下 2.0.～2.4. を自動実行するスクリプトを用意しています。 <br>
+自動インストールスクリプトを使うか、以下の手順を手動で実行してインストールしてください。
+
+
+### 2.0 SWAPファイル追加してメモリ増強【必須】 <br>
+
+```
+cd ~
+git clone https://github.com/JetsonHacksNano/installSwapfile
+cd installSwapfile
+./installSwapfile.sh
+# SWAP領域が増えていることを確認
+free -mh
+```
 
 ### 2.1. 基本的なパッケージをインストール <br>
 
@@ -330,27 +335,79 @@ python inference_from_image.py --trt_module --trt_model <保存したtrtモデ�
 
 |  ディレクトリ  |  内容  |　 備考  |
 | ---- | ---- | ---- |
-|  ./ai_race/learning  |  機械学習メインスクリプト  |  -  |
-|  ./ai_race/utility  |  学習データ取得用ツール　  |  -  |
+|  ./ai_race/learning  |  機械学習スクリプト  |  -  |
+|  ./ai_race/utility  |  学習データ取得ツール　  |  -  |
+|  ./ai_race/your_environment  |  各参加者の作成コードを格納するためのディレクトリ（ここにコードを置くと運営側のアップデートとconflictしない）  |  主に参加者向け  |
 |  ./scripts  |  起動、終了スクリプト  |  -  |
-|  ./ai_race/sim_world  |  シミュレータ向けモデルデータ  |  主に運営向け  |
-|  ./ai_race/sim_environment  |  シミュレータ向けROSノード、等  |  主に運営向け  |
-|  ./judge  |  レース用サーバ、等  |  主に運営向け  |
-|  ./document  |  公開資料、等  |  主に運営向け  |
-|  ./docker  |  docker環境、等  |  主に運営向け  |
-|  ./ai_race/example  |  シミュレータ作成用サンプル  |  ROS/シミュレータ等、学びたい人向けチュートリアル  |
+|  ./ai_race/sim_world  |  シミュレータ用モデルデータ  |  主に運営向け  |
+|  ./ai_race/sim_environment  |  シミュレータ用ROSノード等  |  主に運営向け  |
+|  ./judge  |  審判サーバ  |  主に運営向け  |
+|  ./document  |  公開資料  |  主に運営向け  |
+|  ./docker  |  docker環境  |  主に運営向け  |
+|  ./ai_race/example  |  シミュレータ用モデルデータのサンプル  |  ROS/シミュレータ等、学びたい人向けチュートリアル  |
+
+
+```
+(主要なファイルを抜粋)
+├── README.md                           # 本Readme
+├── ai_race
+│   ├── learning
+│   │   └── scripts                     # 機械学習スクリプト
+│   │       ├── MyDataSet.py            # 学習モデル作成用スクリプト
+│   │       ├── train.py                # 学習モデル作成用スクリプト
+│   │       ├── inference_from_image.py # 推論による車両操作用スクリプト
+│   │       └── trt_conversion.py       # 学習モデル軽量化用スクリプト（TRT版に変換する用）
+│   ├── utility
+│   │   └── scripts                              # 学習データ取得ツール
+│   │       ├── joycon.py                        # 車両操作用
+│   │       ├── keyboard_con_pygame2.py          # 車両操作用
+│   │       ├── listup_all_rosbag_timestamp.py   # rosbag timestamp表示用
+│   │       └── rosbag_to_images_and_commands.py # rosbag-->image,comand変換用
+│   │  
+│   ├── your_environment       # 各参加者の作成コードを格納するためのディレクトリ
+│   │   │                      # （ここにコードを置くと運営側のアップデートとconflictしない）
+│   │   ├── launch
+│   │   │   └── sim_environment.launch  # 参加者独自で学習データ取得する場合の、シミュレータモデル追加用ひな形ファイル
+│   │   └── scripts
+│   │       └── your_train.py           # 参加者独自でtrain.pyを作成する場合のひな形ファイル
+│   │   
+│   ├── example                   # シミュレータ用モデルデータのサンプル	
+│   │   └── tutorial1-7 
+│   ├── sim_environment           # シミュレータ用ROSノード等	
+│   └── sim_world                 # シミュレータ用モデルデータ
+│   
+├── FAQ.md            # FAQ
+├── docker            # docker環境
+├── document          # 公開資料
+├── judge             # 審判サーバ
+└── scripts           # 起動用スクリプト
+    ├── prepare.sh    # シミュレータ環境起動用(level1-3対応)
+    ├── start.sh      # [大会用] 開始スクリプト
+    └── stop.sh       # [大会用] 停止スクリプト
+```
 
 ### 3.4 学習モデルチューニングのはじめかた
 
 まず、Githubアカウントを取得して本リポジトリを自リポジトリにforkして下さい。
 
 > リポジトリのフォークの例 <br>
+> 
 > 0. GitHubアカウントを作成/ログインする。 <br>
 > 1. GitHub で、[https://github.com/seigot/ai_race](https://github.com/seigot/ai_race)リポジトリに移動します <br>
 > 2. ページの右上にある [Fork] をクリックします。 <br>
 > 参考：[リポジトリをフォークする](https://docs.github.com/ja/free-pro-team@latest/github/getting-started-with-github/fork-a-repo) <br>
 
 forkしたリポジトリで各々のローカル変更、チューニング等行ってください。<br>
+
+```
+・機械学習モデルの作成を工夫する場合
+   --> train.py周りを参考にして、パラメータや各種処理の更新を行ってください。
+       変更ファイルは、運営とのconflictを避けるためにyour_environment下に格納することをお勧めします。
+・学習データの取得を工夫する場合
+   --> utility以下を参考に、手動で車両を操作して学習データを取得して下さい。
+       サイズの大きなデータは可能な限り、本リポジトリ以外でやりとりすることをお勧めします。（Githubの1ファイル最大が50MBまでという制約あり）
+```
+
 <br>
 今後、本リポジトリもバージョンアップしていく予定です。<br>
 本リポジトリのバージョンアップを取り込む場合は、以下手順を行って下さい。<br>
@@ -359,7 +416,7 @@ forkしたリポジトリで各々のローカル変更、チューニング等�
 - ローカルのmasterブランチに移動
 - fork元のリポジトリをupstream という名前でリモートリポジトリに登録（名前はなんでもいい。登録済みならスキップ）
 - upstream から最新のコードをfetch
-- upstream/master を ローカルのmaster にmrge
+- upstream/master を ローカルのmaster にmerge
 ```
 
 ```
@@ -405,9 +462,9 @@ git merge upstream/master
 ### 4.4 提出して頂くもの
 
 * level1コースで動作する学習モデルを提出して下さい。（学習モデルは、前述のJetsonNano向けに軽量化したtrtあり版をお願いします） <br>
-* 提出方法は、Githubリリースの機能を使うことをお勧めします。この場合はGithubリポジトリ名/リリースURLを教えて下さい。<br>
+* 提出方法は、Githubリリースの機能を使うと簡単なのでお勧めです。この場合はGithubリポジトリ名/リリースURLを教えて下さい。<br>
 
-> バイナリリリースする場合の参考手順 <br>
+> 学習モデルを提出（バイナリリリース）する場合の手順参考 <br>
 > [リポジトリのリリースを管理する](https://docs.github.com/ja/free-pro-team@latest/github/administering-a-repository/managing-releases-in-a-repository) <br>
 > 7.オプションで、コンパイルされたプログラムなどのバイナリファイルをリリースに含めるには、ドラッグアンドドロップするかバイナリボックスで手動で選択します。 <br>
 

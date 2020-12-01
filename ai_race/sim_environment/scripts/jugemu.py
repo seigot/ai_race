@@ -33,6 +33,11 @@ from gazebo_msgs.srv import SetModelState, SetModelStateRequest, SetModelStateRe
 from std_srvs.srv import Empty, EmptyRequest
 import dynamic_reconfigure.client
 
+import json
+import requests
+
+JUDGESERVER_UPDATEDATA_URL="http://127.0.0.1:5000/judgeserver/updateData"
+
 class jugemu:
 
     def __init__(self):
@@ -47,25 +52,40 @@ class jugemu:
         # print config
         pass
 
+    # http request
+    def httpPostReqToURL(self, url, data):
+        res = requests.post(url,
+                            json.dumps(data),
+                            headers={'Content-Type': 'application/json'}
+                            )
+        return res
+
 
     def teleport(self, req):
         # まず重力を変更
-        self.param_client.update_configuration({"gravity_z": -1.0})
+        # self.param_client.update_configuration({"gravity_z": -1.0})
         # 任意の位置にteleport
         req.model_state.model_name = 'wheel_robot'
         res = self.gazebo_teleport.call(req)
-        if res.success == True:
-            rospy.sleep(1)
-            self.param_client.update_configuration({"gravity_z": -9.8})
-            res = SetModelStateResponse()
-            res.status_message = 'success'
-            return res
-        else:
+        
+        if res.success == False:
             self.gazebo_stop(EmptyRequest())
             rospy.logerr('can not teleport !!! stop sim !!')
-            res = SetModelStateResponse()
-            res.status_message = 'can not teleport !!! stop sim !!'
-            return res
+            srv_res = SetModelStateResponse()
+            srv_res.status_message = 'can not teleport !!! stop sim !!'
+            return srv_res
+        else:
+            url = JUDGESERVER_UPDATEDATA_URL
+            req_data = {
+                "courseout_count": 1
+            }
+            res = self.httpPostReqToURL(url, req_data)
+            # rospy.sleep(1)
+            # self.param_client.update_configuration({"gravity_z": -9.8})
+            srv_res = SetModelStateResponse()
+            srv_res.status_message = 'success'
+            srv_res.success = True
+            return srv_res
         
 
 def main():
