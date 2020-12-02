@@ -253,7 +253,7 @@ python inference_from_image.py --trt_module --trt_model $HOME/ai_race_data_sampl
 サンプルデータを使って学習モデルを作成する場合の例。一度実行すると結構時間が掛かります。<br>
 
 ```
-cd ~/catkin_ws/src/ai_race/ai_race/learning
+cd ~/catkin_ws/src/ai_race/ai_race/learning/scripts
 python3 train.py --data_csv $HOME/ai_race_data_sample/dataset/plane/_2020-11-17-01-34-45/_2020-11-17-01-34-45.csv --model_name sample_model
 ```
 
