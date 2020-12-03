@@ -166,7 +166,7 @@ class Window(QMainWindow):
     def CourseOutRecovery(self):
         url = JUDGESERVER_UPDATEDATA_URL
         req_data = {
-            "courseout_count": 1,
+            # "courseout_count": 1,
             "is_courseout": 1
         }
         res = self.httpPostReqToURL(url, req_data)
