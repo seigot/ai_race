@@ -37,6 +37,8 @@ def output_files(bagFilename):
     images = [];
     csv_out = [];
 
+    prev=""
+
     num = 0
     for topic, msg, t in  rosbag.Bag(bagFilename).read_messages():
         if topic == '/front_camera/image_raw':
