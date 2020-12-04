@@ -35,6 +35,35 @@
 インストール自動化スクリプトを作成しています。以下を参照下さい。<br>
 [setup](https://github.com/seigot/ai_race/blob/main/scripts/setup/README.md)<br>
 
+## シミュレータ起動しても、モデルが表示されずに終了する
+
+`GAZEBO_MODEL_PATH`が実際のパスに合っていない可能性があります。<br>
+パスは`cat ~/.bashrc`で確認可能です。<br>
+
+```
+cat ~/.bashrc
+GAZEBO_MODEL_PATH=xxx  # ここのパス
+```
+
+`~/.bashrc`のパスを変えるか、シンボリックリンクを作成することで解決すると思います。<br>
+（例）`/home/${USER_NAME}`へのシンボリックリンクを、`/home/jetson`に作成する場合。<br>
+
+```
+cd /home
+USER_NAME=`whoami`
+sudo ln -s ${USER_NAME} jetson
+```
+
+## catkin_wsを再buildするにはどうすればよい？
+
+以下の通り実行して下さい。（`~/catkin_ws`以下をcatkin buildする場合の例）<br>
+
+```
+cd ~/catkin_ws
+catkin clean -y
+catkin build
+source devel/setup.bash
+```
 
 ## 1～2時間着手するならどのあたりが良いか。
 機械学習の学習モデル生成パラメータ／ネットワーク検討周りがよいと思います。<br>
