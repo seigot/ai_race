@@ -211,6 +211,8 @@ source devel/setup.bash
 echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
 ```
 
+別リポジトリのビルドや、パッケージ追加時の再ビルド手順は、[FAQ #catkin_wsを再buildするにはどうすればよい？](https://github.com/seigot/ai_race/blob/main/FAQ.md)をご参考下さい。
+
 ## 3. サンプルコード
 
 ### 3.1. サンプルコードの実行
