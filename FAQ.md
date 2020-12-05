@@ -68,7 +68,7 @@ sudo ln -s ${USER_NAME} jetson
 
 以下の通り実行して下さい。
 
-(例) `~/catkin_ws`以下を、再度catkin buildする場合<
+(例) `~/catkin_ws`以下を、再度catkin buildする場合
 
 ```
 cd ~/catkin_ws
@@ -77,7 +77,7 @@ catkin build
 source devel/setup.bash
 ```
 
-(例) 既存のリポジトリを削除して再度catkin buildする場合
+(例) 既存のリポジトリを削除、別リポジトリを取得して再度catkin buildする場合
 
 ```
 cd ~/catkin_ws/src
