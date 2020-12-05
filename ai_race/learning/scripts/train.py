@@ -16,6 +16,7 @@ from sklearn.metrics import classification_report
 from sklearn.metrics import f1_score
 from sklearn.model_selection import train_test_split
 from MyDataSet import MyDataset
+from samplenet import SampleNet
 
 
 def main():
@@ -34,9 +35,14 @@ def main():
 	
 	print('data set')
 	# Set a model.
-	model = models.resnet18()
+	if args.model == 'resnet18':
+		model = models.resnet18()
+		model.fc = torch.nn.Linear(512, 3)
+	elif args.model == 'samplenet':
+		model = SampleNet()
+	else:
+		raise NotImplementedError()
 	model.train()
-	model.fc = torch.nn.Linear(512, 3)
 	model = model.to(device)
 
 	print('model set')
@@ -152,6 +158,7 @@ def parse_args():
 	
 	arg_parser.add_argument("--dataset_name", type=str, default='sim_race')
 	arg_parser.add_argument("--data_csv", type=str, default=os.environ['HOME'] + '/Images_from_rosbag/_2020-11-05-01-45-29_2/_2020-11-05-01-45-29.csv')
+	arg_parser.add_argument("--model", type=str, default='resnet18')
 	arg_parser.add_argument("--model_name", type=str, default='joycon_ResNet18')
 	arg_parser.add_argument("--model_ckpt_dir", type=str, default=os.environ['HOME'] + '/work/experiments/models/checkpoints/')
 	arg_parser.add_argument("--model_ckpt_path_temp", type=str, default=os.environ['HOME'] + '/work/experiments/models/checkpoints/{}_{}_epoch={}.pth')
