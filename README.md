@@ -268,9 +268,9 @@ python3 trt_conversion.py --pretrained_model $HOME/ai_race_data_sample/model/pla
 
 #### 学習用データの取得 (Optional)
 
-rqt, joystick, 各種コントローラーで車両操作し、ｇ学習用のデータ（画像、コマンド操作ログ）を取得する。<br>
+rqt, joystick, 各種コントローラーで車両操作し、学習用のデータ（画像、コマンド操作ログ）を取得する。<br>
 サンプルデータでは期待する性能を出ない等、課題を感じた場合は、学習データを独自に取得することをお勧めします。<br>
-以下を実行することで、keyboardから車両操作ができる。<br>
+以下を実行することで、keyboardから車両操作ができます。<br>
 
 ```
 cd ~/catkin_ws/src/ai_race/ai_race/utility/scripts
@@ -288,20 +288,20 @@ d 右にまがる
 ```
 
 車両が動いている際の、画像とコマンド操作ログを取得するには以下を別ターミナルで実行する。<br>
-（デフォルトでは`${HOME}`に画像とコマンド操作ログを含むrosbagファイルが出力される）<br>
 
 ```
 roslaunch sim_environment rosbag.launch
 ```
 
-rosbagファイルを、画像とコマンドに変換するには以下を実行する。
+デフォルトでは`${HOME}`に画像とコマンド操作ログを含むrosbagファイルが出力されます。<br>
+rosbagファイルを、画像とコマンドに変換するには以下を実行します。<br>
 
 ```
 cd ~/catkin_ws/src/ai_race/ai_race/utility/script
 python rosbag_to_images_and_commands.py <rosbagファイル>
 ```
 
-変換後のデータを、学習モデル作成に使用下さい。
+以上で作成したデータを、学習モデル作成に使用下さい。
 
 ### 3.2. 各種コマンドの説明
 
