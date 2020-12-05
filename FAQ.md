@@ -35,6 +35,16 @@
 インストール自動化スクリプトを作成しています。以下を参照下さい。<br>
 [setup](https://github.com/seigot/ai_race/blob/main/scripts/setup/README.md)<br>
 
+## インストール自動化スクリプト実行中に、scikit learnインストールエラー（error: library mach has Fortran sources but no Fortran compiler found）
+
+以下と同件の可能性があります。<br>
+[jetson nanoでscikit learnインストール時にエラー（error: library mach has Fortran sources but no Fortran compiler found）](https://qiita.com/seigot/items/7564b3901c48e10840f3)<br>
+この場合は、以下で解決するようです。<br>
+
+```
+sudo apt install -y gfortran
+```
+
 ## シミュレータ起動しても、モデルが表示されずに終了する
 
 `GAZEBO_MODEL_PATH`が実際のパスに合っていない可能性があります。<br>
@@ -56,9 +66,23 @@ sudo ln -s ${USER_NAME} jetson
 
 ## catkin_wsを再buildするにはどうすればよい？
 
-以下の通り実行して下さい。（`~/catkin_ws`以下をcatkin buildする場合の例）<br>
+以下の通り実行して下さい。
+
+(例) `~/catkin_ws`以下を、再度catkin buildする場合<
 
 ```
+cd ~/catkin_ws
+catkin clean -y
+catkin build
+source devel/setup.bash
+```
+
+(例) 既存のリポジトリを削除して再度catkin buildする場合
+
+```
+cd ~/catkin_ws/src
+sudo rm -r ai_race                                 # [注意]ai_raceリポジトリを削除します、ローカルの変更を失わないよう注意して下さい。
+git clone http://github.com/seigot/ai_race         # 自分のリポジトリを取得する場合は、ここのURLを変えて下さい。
 cd ~/catkin_ws
 catkin clean -y
 catkin build
