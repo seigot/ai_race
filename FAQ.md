@@ -64,6 +64,31 @@ USER_NAME=`whoami`
 sudo ln -s ${USER_NAME} jetson
 ```
 
+## `from torch2trt import TRTModule`実行時にエラー終了する。
+
+以下エラーログの場合、[こちら](https://qiita.com/seigot/items/5927c58688c4d40a5a86)と類似の可能性があります。
+
+```
+$ python -c "from torch2trt import TRTModule"
+WARNING: TensorRT Python 2 support is deprecated, and will be dropped in a future version!
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+...
+  File "/usr/lib/python2.7/copy.py", line 182, in deepcopy
+    rv = reductor(2)
+TypeError: can't pickle method_descriptor objects
+```
+
+[https://github.com/NVIDIA-AI-IOT/torch2trt](https://github.com/NVIDIA-AI-IOT/torch2trt)リポジトリアップデートの影響を受けている可能性があります。
+以下で、動作確認済みのバージョン（Wed Nov 4時点）に戻すと解消する可能性があります。
+
+```
+cd ~/torch2trt                                          # torch2trtを、git cloneしたリポジトリへ移動
+git checkout d1fa6f9f20c6c4c57a9486680ab38c45d0d94ec3   # 動作確認済みのバージョン（Wed Nov 4時点）に戻す
+sudo python setup.py install                            # 再インストール
+sudo python3 setup.py install                           # 再インストール
+```
+
 ## catkin_wsを再buildするにはどうすればよい？
 
 以下の通り実行して下さい。
