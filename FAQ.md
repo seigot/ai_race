@@ -64,7 +64,7 @@ USER_NAME=`whoami`
 sudo ln -s ${USER_NAME} jetson
 ```
 
-## `from torch2trt import TRTModule`実行時にエラー終了する。
+## `python -c "from torch2trt import TRTModule"`実行時にエラー終了する。
 
 以下エラーログの場合、[こちら](https://qiita.com/seigot/items/5927c58688c4d40a5a86)と類似の可能性があります。
 
@@ -79,8 +79,8 @@ Traceback (most recent call last):
 TypeError: can't pickle method_descriptor objects
 ```
 
-[https://github.com/NVIDIA-AI-IOT/torch2trt](https://github.com/NVIDIA-AI-IOT/torch2trt)リポジトリアップデートの影響を受けている可能性があります。
-以下で、動作確認済みのバージョン（Wed Nov 4時点）に戻すと解消する可能性があります。
+[https://github.com/NVIDIA-AI-IOT/torch2trt](https://github.com/NVIDIA-AI-IOT/torch2trt)リポジトリアップデートの影響を受けている可能性があります。<br>
+以下で、動作確認済みのバージョン（Wed Nov 4時点）に戻すと解消する可能性があります。<br>
 
 ```
 cd ~/torch2trt                                          # torch2trtを、git cloneしたリポジトリへ移動
