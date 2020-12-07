@@ -161,6 +161,7 @@ pip install 'pillow<7'
 cd ~
 git clone https://github.com/NVIDIA-AI-IOT/torch2trt
 cd torch2trt
+git checkout d1fa6f9f20c6c4c57a9486680ab38c45d0d94ec3   # 動作確認済みのバージョン（Wed Nov 4時点）に戻す
 sudo python setup.py install
 sudo python3 setup.py install
 
@@ -190,7 +191,7 @@ cd nano_build_opencv
 | ---- | ---- | ---- | ---- |
 |  pytorch  |  ~~1.6.0~~ 1.4.0  |  1.4.0  |  -  |
 |  torchvision  |  0.2.2  |  0.2.2  |  -  |
-|  torch2trt  |  -  |  -  |  -  |
+|  torch2trt  |  -  |  -  |  動作確認済みのバージョン `git checkout d1fa6f9f20c6c4c57a9486680ab38c45d0d94ec3`  |
 |  sklearn  |  0.23.2  |  Not_Installed  |  -  |
 |  pandas  |  0.22.0 ~~(1.1.3必須かも)~~  |  Not_Installed  |  -  |
 |  cv2  |  3.4.10  |  3.4.10   |  -  |

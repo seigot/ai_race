@@ -127,6 +127,7 @@ function install_torch2trt(){
     sudo rm -rf torch2trt
     git clone https://github.com/NVIDIA-AI-IOT/torch2trt
     cd torch2trt
+    git checkout d1fa6f9f20c6c4c57a9486680ab38c45d0d94ec3
     sudo python setup.py install
     sudo python3 setup.py install
 }
