@@ -48,7 +48,7 @@ def main():
 	print('model set')
 	# Set loss function and optimization function.
 	criterion = nn.CrossEntropyLoss()
-	optimizer = optim.Adam(model.parameters())
+	optimizer = optim.Adam(model.parameters(), lr=args.lr)
 	#optimizer = optim.SGD(model.parameters(), lr=args.lr, momentum=0.9, weight_decay=5e-4)
 	print('optimizer set')
 	
@@ -163,7 +163,7 @@ def parse_args():
 	arg_parser.add_argument("--model_ckpt_dir", type=str, default=os.environ['HOME'] + '/work/experiments/models/checkpoints/')
 	arg_parser.add_argument("--model_ckpt_path_temp", type=str, default=os.environ['HOME'] + '/work/experiments/models/checkpoints/{}_{}_epoch={}.pth')
 	arg_parser.add_argument('--n_epoch', default=20, type=int, help='The number of epoch')
-	arg_parser.add_argument('--lr', default=0.1, type=float, help='Learning rate')
+	arg_parser.add_argument('--lr', default=0.001, type=float, help='Learning rate')
 	arg_parser.add_argument('--test_interval', default=5, type=int, help='test interval')
 	arg_parser.add_argument('--save_model_interval', default=5, type=int, help='save model interval')
 
