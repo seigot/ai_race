@@ -70,4 +70,7 @@ python -m pip install pygame==1.9.6
 
 # mkdir
 mkdir -p ~/Images_from_rosbag
+
+# scikit learn
+sudo apt install -y gfortran
 ```

@@ -86,6 +86,8 @@ sudo apt-get install -y libfreetype6-dev
 sudo apt-get install -y libportmidi-dev
 sudo pip3 install pgzero
 python -m pip install pygame==1.9.6
+# scikit learn
+sudo apt install -y gfortran
 ```
 
 ### 2.2. ROSのインストール

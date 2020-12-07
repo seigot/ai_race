@@ -47,6 +47,8 @@ function install_basic_package(){
     sudo apt-get install -y libportmidi-dev
     sudo pip3 install pgzero
     python -m pip install pygame==1.9.6
+    # scikit learn
+    sudo apt install -y gfortran
 }
 
 function install_ros(){

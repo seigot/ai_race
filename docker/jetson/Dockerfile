@@ -75,6 +75,9 @@ RUN apt-get update -y && \
     pip3 install pgzero && \
     python -m pip install pygame==1.9.6
 
+# scikit learn
+RUN sudo apt install -y gfortran
+
 # pytorch
 RUN pip --version && \
     pip3 --version
