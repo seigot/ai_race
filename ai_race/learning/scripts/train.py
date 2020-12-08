@@ -12,6 +12,7 @@ import os
 import io
 import argparse
 import pandas as pd
+from sklearn.metrics import confusion_matrix
 from sklearn.metrics import classification_report
 from sklearn.metrics import f1_score
 from sklearn.model_selection import train_test_split
@@ -137,6 +138,11 @@ def test(model, device, test_loader, criterion):
 		running_loss += loss.item()
 		
 	test_acc, test_loss = calc_score(output_list, target_list, running_loss, test_loader)
+
+	print('confusion_matrix')
+	print(confusion_matrix(output_list, target_list))
+	print('classification_report')
+	print(classification_report(output_list, target_list))
 
 	return test_acc, test_loss
 
