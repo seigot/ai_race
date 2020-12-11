@@ -5,6 +5,7 @@
   <arg name="debug" default="false"/>
   <arg name="gui" default="false"/>
   <arg name="track_name" default="medium_track.world"/>
+  <arg name="controller" default="false" />
 
   <!-- We resume the logic in empty_world.launch, changing only the name of 
     the world to be launched -->
@@ -16,7 +17,7 @@
     <arg name="use_sim_time" value="true" />
     <arg name="headless" value="false" />
   </include>
-  
+
   <!-- urdf xml robot description loaded on the Parameter Server-->
   <param name="robot_description" command="$(find xacro)/xacro.py '$(find sim_environment)/urdf/wheel_robot.urdf.xacro'" />
   <param name="camera_description" command="$(find xacro)/xacro.py '$(find sim_environment)/urdf/surveillance_camera.urdf.xacro'" />
@@ -66,6 +67,10 @@
   <!-- courseout recovery node-->
     <node pkg="sim_environment" type="jugemu.py" name="jugemu" output="screen" />  
 
-
+  <!-- without gui(with keyboard con) -->
+  <group if="$(eval controller==true)">
+      <node pkg="utility" type="keyboard_con_pygame2.py" name="keyboard_con_pygame2" output="screen" />
+      <node pkg="sim_environment" type="window_management2.py" name="window_management" output="screen" />
+  </group>
 
 </launch>
