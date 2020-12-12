@@ -445,17 +445,11 @@ forkしたリポジトリで各々のローカル変更、チューニング等�
 本リポジトリのバージョンアップを取り込む場合は、以下手順を行って下さい。<br>
 
 ```
-- ローカルのmasterブランチに移動
-- fork元のリポジトリをupstream という名前でリモートリポジトリに登録（名前はなんでもいい。登録済みならスキップ）
-- upstream から最新のコードをfetch
-- upstream/master を ローカルのmaster にmerge
-```
-
-```
-git checkout master
-git remote add upstream https://github.com/seigot/ai_race
-git fetch upstream
-git merge upstream/master
+git checkout master                                        # ローカルのmasterブランチに移動
+git remote add upstream https://github.com/seigot/ai_race  # fork元のリポジトリをupstream という名前でリモートリポジトリに登録（名前はなんでもいい。登録済みならスキップ）
+git fetch upstream                                         # upstream から最新のコードをfetch
+git merge upstream/master                                  # upstream/master を ローカルのmaster にmerge
+git push                                                   # 変更を反映
 ```
 
 参考：[github で fork したリポジトリで本家に追従する](https://please-sleep.cou929.nu/track-original-at-forked-repo.html)
