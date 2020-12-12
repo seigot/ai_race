@@ -1,0 +1,9 @@
+version: '2.0'
+
+services:
+  myproject:
+     image: seigott/ai_race_docker:ubuntu-cpu
+     container_name: ai_race_docker_cpu
+     ports:
+      - "6081:80"
+     shm_size: '512m'
