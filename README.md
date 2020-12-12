@@ -255,20 +255,31 @@ python inference_from_image.py --trt_module --trt_model $HOME/ai_race_data_sampl
 
 #### 学習モデルを作成
 
-サンプルデータを使って学習モデルを作成する場合の例。一度実行すると結構時間が掛かります。<br>
+サンプルデータを使って学習モデルを作成する場合の例。<br>
+動作確認用に`--n_epoch 3`を指定して約30分程で終わるようにしています。<br>
 
 ```
 cd ~/catkin_ws/src/ai_race/ai_race/learning/scripts
-python3 train.py --data_csv $HOME/ai_race_data_sample/dataset/plane/_2020-11-17-01-34-45/_2020-11-17-01-34-45.csv --model_name sample_model
+python3 train.py --data_csv $HOME/ai_race_data_sample/dataset/plane/_2020-11-17-01-34-45/_2020-11-17-01-34-45.csv --model_name sample_model --n_epoch 3
 ```
 
-次に、JetsonNanoに合わせて学習モデルを軽量化する。(trtあり版と呼ばれるもの) <br>
-作成した学習モデルのパスが、`$HOME/ai_race_data_sample/model/plane/sample_plane.pth` である場合の例。<br>
+`train.py`の実行ログを参照し、学習モデル(`*.pth`)ファイルが作成できていることを確認下さい。<br>
+`train.py`の引数に与えられるパラメータは以下で確認できます。`--n_epoch NN`等のパラメータは適宜調整して下さい。<br>
+
+```
+python3 train.py -h
+```
+
+#### 学習モデルの軽量化
+
+JetsonNanoに合わせて学習モデルを軽量化する。(trtあり版と呼ばれるもの) <br>
+作成した学習モデルのパスが、`$HOME/ai_race_data_sample/model/plane/sample_plane.pth` である場合の例。一度実行すると約10分程掛かります。<br>
 
 ```
 python3 trt_conversion.py --pretrained_model $HOME/ai_race_data_sample/model/plane/sample_plane.pth --trt_model sample_model_trt.pth
 ```
 
+`trt_conversion.py`の実行ログを参照し、`--trt_model`に指定したファイルが作成できていることを確認下さい。<br>
 その後は前述同様、軽量化した学習モデルを利用して推論、車両操作を行って下さい。
 
 #### 学習用データの取得 (Optional)
