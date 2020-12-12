@@ -79,7 +79,7 @@ def main():
 			print(stdout_temp.format(epoch+1, train_acc, train_loss)) #, test_acc, test_loss))
 
 		# Save a model checkpoint.
-		if(epoch%args.save_model_interval == 0):
+		if(epoch%args.save_model_interval == 0 or epoch+1 == args.n_epoch):
 			model_ckpt_path = args.model_ckpt_path_temp.format(args.dataset_name, args.model_name, epoch+1)
 			torch.save(model.state_dict(), model_ckpt_path)
 			print('Saved a model checkpoint at {}'.format(model_ckpt_path))
