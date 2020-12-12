@@ -46,9 +46,14 @@ def parse_args():
 	arg_parser.add_argument("--trt_model", type=str, default='road_following_model_trt.pth' )
 
 	args = arg_parser.parse_args()
-
 	return args
 
 if __name__ == '__main__':
     args = parse_args()
+    print("process start...")
+
     init_inference()
+
+    print("finished successfully.")
+    print("model_path: " + args.trt_model)
+    os._exit(0)
