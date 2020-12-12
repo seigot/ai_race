@@ -347,8 +347,7 @@ python listup_all_rosbag_timestamp.py *.bag               # 時刻表示でき�
 ## 学習 
 cd learning/scripts (学習用フォルダへ移動) 
 python3 train.py --data_csv <csvのパス フルパス指定> --model_name <保存するモデル名>  
-#### 以下のディレクトリにモデルが保存されます
-ls ~/catkin_ws/src/ai_race/ai_raceexperiments/models/checkpoints/*.pth
+#### 実行ログ記載のディレクトリにモデルが保存されます
 ```
 
 * Step3.学習モデルを使って推論、車両操作
