@@ -303,18 +303,24 @@ a 左にまがる
 d 右にまがる
 ```
 
-車両が動いている際の、画像とコマンド操作ログを取得するには以下を別ターミナルで実行する。<br>
+車両が動いている際の、画像とコマンド操作ログを取得するには以下を別ターミナルで実行します。<br>
+デフォルトでは`${HOME}`に画像とコマンド操作ログを含む`rosbag(.bag)`ファイルが出力されます。<br>
 
 ```
 roslaunch sim_environment rosbag.launch
+
+### `Ctl+C`で終了する
+### 終了後、rosbag(.bag)ファイルがあることをコマンドから確認する
+ls ${HOME}/*.bag
 ```
 
-デフォルトでは`${HOME}`に画像とコマンド操作ログを含むrosbagファイルが出力されます。<br>
-rosbagファイルを、画像とコマンドに変換するには以下を実行します。<br>
+`rosbag(.bag)`ファイルを、画像とコマンドに変換するには以下を実行します。<br>
+デフォルトでは`${HOME}/Images_from_rosbag/.`以下にファイルが出力されます。<br>
 
 ```
 cd ~/catkin_ws/src/ai_race/ai_race/utility/script
-python rosbag_to_images_and_commands.py <rosbagファイル>
+python rosbag_to_images_and_commands.py xxx.bag  # xxx.bagファイルは実在するrosbagファイルを指定する
+ls ${HOME}/Images_from_rosbag/.                  # 画像とコマンドの変換データがあること確認する
 ```
 
 以上で作成したデータを、学習モデル作成に使用下さい。
