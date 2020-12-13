@@ -163,4 +163,18 @@ pytorch等のライブラリバージョンを一致させることがポイン�
 特別な理由がなければ、Proxy環境以外での環境構築、及び利用をお勧めします。<br>
 Proxy利用自体が各ネットワーク事情に依存すると思いますので、Proxy環境で使用する場合のサポートは困難です。<br>
 
+## forkしたリポジトリに最新バージョン取り込みたい
+
+本リポジトリのバージョンアップを取り込む場合は、forkしたリポジトリにて以下を実行して下さい。
+
+```
+git checkout master                                        # ローカルのmasterブランチに移動
+git remote add upstream https://github.com/seigot/ai_race  # fork元のリポジトリをupstream という名前でリモートリポジトリに登録（名前はなんでもいい。登録済みならスキップ）
+git fetch upstream                                         # upstream から最新のコードをfetch
+git merge upstream/master                                  # upstream/master を ローカルのmaster にmerge
+git push                                                   # 変更を反映
+```
+
+参考：[github で fork したリポジトリで本家に追従する](https://please-sleep.cou929.nu/track-original-at-forked-repo.html)
+
 ## xxx
