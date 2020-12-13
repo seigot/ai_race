@@ -63,7 +63,8 @@ def output_files(bagFilename):
     with open(outputcsv, 'w') as f:
         writer = csv.writer(f)
         writer.writerows(csv_out)
-
+        print("finished successfully.")
+        print("outputdir: " + outputdir)
 
 if __name__ == '__main__':
     if len(sys.argv) < 2 :
