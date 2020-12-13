@@ -434,7 +434,9 @@ python inference_from_image.py --trt_module --trt_model <保存したtrtモデ�
     └── stop.sh       # [大会用] 停止スクリプト
 ```
 
-### 3.4 学習モデルチューニングのはじめかた
+### 3.4 学習モデル自作のはじめかた
+
+#### 本リポジトリのfork
 
 まず、Githubアカウントを取得して本リポジトリを自リポジトリにforkして下さい。
 
@@ -445,20 +447,36 @@ python inference_from_image.py --trt_module --trt_model <保存したtrtモデ�
 > 2. ページの右上にある [Fork] をクリックします。 <br>
 > 参考：[リポジトリをフォークする](https://docs.github.com/ja/free-pro-team@latest/github/getting-started-with-github/fork-a-repo) <br>
 
-forkしたリポジトリで各々のローカル変更、チューニング等行ってください。<br>
+#### 学習用データの取得、チューニング、学習モデル作成
 
-```
-・機械学習モデルの作成を工夫する場合
-   --> train.py周りを参考にして、パラメータや各種処理の更新を行ってください。
-       変更ファイルは、運営とのconflictを避けるためにyour_environment下に格納することをお勧めします。
-・学習データの取得を工夫する場合
-   --> utility以下を参考に、手動で車両を操作して学習データを取得して下さい。
-       サイズの大きなデータは可能な限り、本リポジトリ以外でやりとりすることをお勧めします。（Githubの1ファイル最大が50MBまでという制約あり）
-```
+forkしたリポジトリで各々の学習データ取得、チューニング、学習モデル作成をしてください。<br>
+変更ファイルは、運営とのconflictを避けるために`your_environmentディレクトリ`以下に登録することをお勧めします。<br>
 
+- 学習データの取得を工夫する
+
+サンプルの`学習用データの取得`を参考に、車両を自ら操作して学習データを取得することが可能です。<br>
+`走行経路`や`入力画像のバリエーション`など、各々工夫をしてみてください。<br>
 <br>
+※ 学習データ自体はサイズが大きいため、ファイルの受渡しはgithub以外でやりとりすることをお勧めします。<br>
+　（Githubは1ファイル最大が50MBまで、1GB 以下を推奨という制約があり、大きなファイルを扱うのに適しているとはいえない）<br>
+
+- チューニング、学習モデルの作成を工夫する
+
+train.pyや周辺ファイルを参考に、各種パラメータを調整することが可能です。<br>
+機械学習アルゴリズム選定など含め、各々工夫をしてみてください。<br>
+
+#### 自リポジトリの学習モデルを公式リリースする
+
+学習モデルを公式リリースする場合は、Githubリリースの機能を使うと簡単なのでお勧めです。
+
+> 学習モデルを提出（バイナリリリース）する場合の手順参考 <br>
+> [リポジトリのリリースを管理する](https://docs.github.com/ja/free-pro-team@latest/github/administering-a-repository/managing-releases-in-a-repository) <br>
+> 7.オプションで、コンパイルされたプログラムなどのバイナリファイルをリリースに含めるには、ドラッグアンドドロップするかバイナリボックスで手動で選択します。 <br>
+
+#### 本リポジトリの最新バージョン取り込み
+
 今後、本リポジトリもバージョンアップしていく予定です。<br>
-本リポジトリのバージョンアップを取り込む場合は、以下手順を行って下さい。<br>
+本リポジトリのバージョンアップを取り込む場合は、forkしたリポジトリにて以下を実行して下さい。<br>
 
 ```
 git checkout master                                        # ローカルのmasterブランチに移動
@@ -470,6 +488,14 @@ git push                                                   # 変更を反映
 
 参考：[github で fork したリポジトリで本家に追従する](https://please-sleep.cou929.nu/track-original-at-forked-repo.html)
 
+#### Pull Requestを送る（Optional）
+
+本リポジトリへ修正リクエストを送ることが可能です。詳しくは参考をご参照下さい。<br>
+<br>
+参考：<br>
+[GitHub-プルリクエストの作成方法](https://docs.github.com/ja/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request)<br>
+[[実践] はじめてのPull Requestをやってみよう](https://qiita.com/wataryooou/items/8dce6b6d5f54ab2cef04)<br>
+[【GitHub】Pull Requestの手順](https://qiita.com/aipacommander/items/d61d21988a36a4d0e58b)<br>
 
 ## 4. ルール
 
