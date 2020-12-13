@@ -177,4 +177,9 @@ git push                                                   # 変更を反映
 
 参考：[github で fork したリポジトリで本家に追従する](https://please-sleep.cou929.nu/track-original-at-forked-repo.html)
 
+## `train.py/trt_conversion.py/inference_from_image.py`の実行ログの期待値がほしい
+
+[実行ログ](https://github.com/seigot/ai_race/blob/main/document/exec_log.md)に記載しました。<br>
+ただし、最新コードでは出力ログが変わることがあります。<br>
+
 ## xxx
