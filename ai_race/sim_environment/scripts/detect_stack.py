@@ -64,7 +64,7 @@ class StackDetector:
 
 
     def compare_command_value(self):
-        print rospy.Time.now().to_sec(), self.pre_t
+        # print rospy.Time.now().to_sec(), self.pre_t
         dt = rospy.Time.now().to_sec() - self.pre_t
         if dt <= sys.float_info.epsilon:
             return
