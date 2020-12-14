@@ -73,7 +73,7 @@ class StackDetector:
         self.robot_speed.linear.y = (self.pose.position.y - self.pre_robot_pos.position.y)/dt
        
         speed = math.sqrt((self.robot_speed.linear.x)**2 + (self.robot_speed.linear.y)**2)
-        print speed, self.target_command
+        # print speed, self.target_command
         if (self.target_command - speed) > 1.0:
             self.stack_counter += 1
 
