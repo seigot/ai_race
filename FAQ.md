@@ -89,6 +89,19 @@ sudo python setup.py install                            # 再インストール
 sudo python3 setup.py install                           # 再インストール
 ```
 
+動作確認済みのバージョン（Wed Nov 4時点）に戻せているかは、以下コマンドで確認可能です。
+
+```
+$ cd ~/torch2trt      # torch2trtを、git cloneしたリポジトリへ移動
+$ git log -1          # 動作確認済みのバージョン（Wed Nov 4時点）に戻せているか確認、以下ログが出ればOK
+commit d1fa6f9f20c6c4c57a9486680ab38c45d0d94ec3 (HEAD -> master, origin/master, origin/HEAD)
+Author: John <jwelsh@nvidia.com>
+Date:   Wed Nov 4 13:45:36 2020 -0500
+    Sandeepkumar skb groupnorm plugin (#437)
+    * added plugin for GroupNorm
+    Co-authored-by: sandeepkumar-skb <sandeep.skb@uber.com>
+```
+
 ## catkin_wsを再buildするにはどうすればよい？
 
 以下の通り実行して下さい。
