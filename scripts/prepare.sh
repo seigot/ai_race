@@ -31,6 +31,34 @@ echo "GAME_TIME: ${GAME_TIME}"
 echo "WITH_GUI: ${WITH_GUI}"
 echo "WITH_CONTROLLER: ${WITH_CONTROLLER}"
 
+# warning
+function output_warning(){
+    local LEVEL=$1
+    local CNT=0
+    echo "---"
+    # check if install package
+    if [ ${LEVEL} == "1a" ]; then
+	array=(
+	    ros-melodic-cob-srvs
+	)
+	for e in ${array[@]}; do
+	    if ! dpkg -l | grep --quiet "${e}"; then
+		echo "!!! [Warning] ${e} not installed, install by following !!!"
+		echo "\$ sudo apt install ${e}"
+		echo "!!! --------------------------------------------- !!!"
+		CNT=$(($CNT+1))
+
+	    fi
+	done
+	if [ ${CNT} -gt 0 ];then
+	    # wait to show warning..
+	    sleep 10
+	fi
+    fi
+    echo "---"
+}
+output_warning ${LEVEL}
+
 # init judge server, timer window, etc
 gnome-terminal -- python3 ../judge/judgeServer.py --gametime ${GAME_TIME}
 sleep 1
