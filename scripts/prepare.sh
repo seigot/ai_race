@@ -45,7 +45,7 @@ function output_warning(){
 	    if ! dpkg -l | grep --quiet "${e}"; then
 		echo "!!! [Warning] ${e} not installed, install by following !!!"
 		echo "\$ sudo apt install ${e}"
-		sudo apt install ${e}
+		sudo apt install -y ${e}
 		echo "install end. if error end, please install manually..."
 		echo "!!! --------------------------------------------- !!!"
 		CNT=$(($CNT+1))
