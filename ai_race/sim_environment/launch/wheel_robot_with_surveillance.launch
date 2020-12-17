@@ -78,9 +78,11 @@
     <node pkg="sim_environment" type="jugemu.py" name="jugemu" output="screen" />  
 
   <!-- without gui(with keyboard con) -->
+  <group if="$(eval gui==false)">
+      <node pkg="sim_environment" type="window_management2.py" name="window_management" output="screen" />
+  </group>
   <group if="$(eval controller==true)">
       <node pkg="utility" type="keyboard_con_pygame2.py" name="keyboard_con_pygame2" output="screen" />
-      <node pkg="sim_environment" type="window_management2.py" name="window_management" output="screen" />
   </group>
 
 </launch>

@@ -70,6 +70,7 @@ function install_ros(){
 function install_ros_related_packages(){
     # joint state controller, and ros package
     sudo apt install -y ros-melodic-ros-control ros-melodic-ros-controllers  ros-melodic-joint-state-controller ros-melodic-effort-controllers ros-melodic-position-controllers ros-melodic-joint-trajectory-controller
+    sudo apt install ros-melodic-cob-srvs
     # gazebo
     sudo apt-get install -y gazebo9
     sudo sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable `lsb_release -cs` main" > /etc/apt/sources.list.d/gazebo-stable.list'

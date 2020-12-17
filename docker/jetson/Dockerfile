@@ -44,6 +44,7 @@ RUN git clone https://github.com/karaage0703/jetson-nano-tools /tmp/jetson-nano-
 
 # install package
 RUN sudo apt install -y ros-melodic-ros-control ros-melodic-ros-controllers  ros-melodic-joint-state-controller ros-melodic-effort-controllers ros-melodic-position-controllers ros-melodic-joint-trajectory-controller && \
+    sudo apt install ros-melodic-cob-srvs && \
     sudo apt-get install -y gazebo9 && \
     sudo sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable `lsb_release -cs` main" > /etc/apt/sources.list.d/gazebo-stable.list' && \
     wget http://packages.osrfoundation.org/gazebo.key -O - | sudo apt-key add - && \
