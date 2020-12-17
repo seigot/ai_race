@@ -6,6 +6,7 @@
   <arg name="gui" default="false"/>
   <arg name="track_name" default="medium_track.world"/>
   <arg name="controller" default="false" />
+  <arg name="dynamic_recon" default="false" />
 
   <!-- We resume the logic in empty_world.launch, changing only the name of 
     the world to be launched -->
@@ -55,6 +56,15 @@
   <node name="image_view" pkg="image_view" type="image_view" args="image:=/front_camera/image_raw" />
   <node name="image_view_sur_camera" pkg="image_view" type="image_view" args="image:=/surveillance_camera/image_raw" />
   <node name="image_view_godeye_camera" pkg="image_view" type="image_view" args="image:=/godeye_camera/image_raw" />
+
+  <!-- dynamic reconfigure SERVER for max speed coeff node -->
+  <node pkg="sim_environment" type="dynamic_recon_server.py" name="dynamic_recon_server_node" output="screen" />
+
+  <!-- use dynamic reconfigure course_out_surveillance-->
+  <group if="$(eval dynamic_recon==true)">
+    <!-- dynamic reconfigure CLIENT for max speed coeff node -->
+      <node pkg="sim_environment" type="course_out_surveillance.py" name="course_out_surveillance" output="screen" />
+  </group>
 
   <!-- servo node -->
     <node pkg="sim_environment" type="servo_commands.py" name="servo_commands" output="screen" />
