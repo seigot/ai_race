@@ -72,10 +72,11 @@ def servo_commands():
 
     pub_pos_left_steering_hinge = rospy.Publisher('/front_left_hinge_position_controller/command', Float64, queue_size=1)
     pub_pos_right_steering_hinge = rospy.Publisher('/front_right_hinge_position_controller/command', Float64, queue_size=1)
-
-    dynamic_client = dynamic_reconfigure.client.Client("dynamic_recon_server_node", timeout=30, config_callback=dynamic_recon_callback)
-
     rospy.Subscriber("/cmd_vel", Twist, set_throttle_steer)
+    try:
+        dynamic_client = dynamic_reconfigure.client.Client("dynamic_recon_server_node", timeout=30, config_callback=dynamic_recon_callback)
+    except rospy.exceptions.ROSException as e:
+        print("dynamic_recon_server_node not found, do nothing")
 
     # spin() simply keeps python from exiting until this node is stopped
     rospy.spin()
