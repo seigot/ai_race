@@ -181,10 +181,10 @@ Proxy利用自体が各ネットワーク事情に依存すると思いますの
 本リポジトリのバージョンアップを取り込む場合は、forkしたリポジトリにて以下を実行して下さい。
 
 ```
-git checkout master                                        # ローカルのmasterブランチに移動
+git checkout main                                          # ローカルのmainブランチに移動
 git remote add upstream https://github.com/seigot/ai_race  # fork元のリポジトリをupstream という名前でリモートリポジトリに登録（名前はなんでもいい。登録済みならスキップ）
 git fetch upstream                                         # upstream から最新のコードをfetch
-git merge upstream/master                                  # upstream/master を ローカルのmaster にmerge
+git merge upstream/main                                    # upstream/main を ローカルのmaster にmerge
 git push                                                   # 変更を反映
 ```
 
