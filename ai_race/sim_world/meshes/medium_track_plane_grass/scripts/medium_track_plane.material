@@ -10,7 +10,7 @@ material medium_track/Image
 
 	  texture_unit
 	  {
-		texture medium_track_plane2.png
+		texture medium_track_plane3.png
 	  }
     }
   }
