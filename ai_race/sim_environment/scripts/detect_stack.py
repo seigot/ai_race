@@ -42,8 +42,12 @@ class StackDetector:
     #     self.right_command = msg.data
 
     def get_speed(self, models):
-        index = models.name.index("wheel_robot")
-        self.pose = models.pose[index]
+        try:
+            index = models.name.index("wheel_robot")
+            self.pose = models.pose[index]
+        except ValueError:
+            #print ('can not get model.name.index, skip !!')
+            pass
         
 
     def search_nearest_respown(self):
