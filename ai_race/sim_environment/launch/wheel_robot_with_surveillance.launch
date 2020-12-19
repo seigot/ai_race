@@ -7,6 +7,7 @@
   <arg name="track_name" default="medium_track.world"/>
   <arg name="controller" default="false" />
   <arg name="dynamic_recon" default="false" />
+  <arg name="with_auto_recovery" default="false" />
 
   <!-- We resume the logic in empty_world.launch, changing only the name of 
     the world to be launched -->
@@ -76,6 +77,11 @@
     <node pkg="sim_environment" type="timing_surveillance.py" name="timing_surveillance" output="screen" />
   <!-- courseout recovery node-->
     <node pkg="sim_environment" type="jugemu.py" name="jugemu" output="screen" />  
+  <group if="$(eval with_auto_recovery==true)">
+    <rosparam file="$(find sim_environment)/config/respown_point.yaml" command="load" />
+    <node pkg="sim_environment" type="detect_stack.py" name="detect_stack" output="screen" /> 
+    <node pkg="sim_environment" type="jugemu_new.py" name="jugemu_new" output="screen" />
+  </group>
 
   <!-- without gui(with keyboard con) -->
   <group if="$(eval gui==false)">

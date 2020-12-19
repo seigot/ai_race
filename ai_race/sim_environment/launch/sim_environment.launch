@@ -10,6 +10,7 @@
       <arg name="track_name" value="medium_track_plane.world" />
       <arg name="gui" value="$(arg gui)" />
       <arg name="controller" value="$(arg controller)" />
+      <arg name="with_auto_recovery" value="false" />
     </include>  
   </group>
 
@@ -20,10 +21,8 @@
       <arg name="gui" value="$(arg gui)" />
       <arg name="controller" value="$(arg controller)" />
       <arg name="dynamic_recon" value="True" />
+      <arg name="with_auto_recovery" value="true" />
     </include>
-    <rosparam file="$(find sim_environment)/config/respown_point.yaml" command="load" />
-    <node pkg="sim_environment" type="detect_stack.py" name="detect_stack" output="screen" /> 
-    <node pkg="sim_environment" type="jugemu_new.py" name="jugemu_new" output="screen" />
   </group>
 
   <!-- level 1a (level1 advanced) -->
@@ -33,10 +32,8 @@
       <arg name="gui" value="$(arg gui)" />
       <arg name="controller" value="$(arg controller)" />
       <arg name="dynamic_recon" value="True" />
+      <arg name="with_auto_recovery" value="true" />
     </include>
-    <rosparam file="$(find sim_environment)/config/respown_point.yaml" command="load" />
-    <node pkg="sim_environment" type="detect_stack.py" name="detect_stack" output="screen" /> 
-    <node pkg="sim_environment" type="jugemu_new.py" name="jugemu_new" output="screen" />
   </group>
   
   <!-- level 2 (if you want to run , set launch arg level=2 --> 
@@ -45,6 +42,7 @@
       <arg name="track_name" value="medium_track.world" />
       <arg name="gui" value="$(arg gui)" />
       <arg name="controller" value="$(arg controller)" />
+      <arg name="with_auto_recovery" value="false" />
     </include>  
   </group>
 
@@ -54,6 +52,7 @@
       <arg name="track_name" value="hard_track.world" />
       <arg name="gui" value="$(arg gui)" />
       <arg name="controller" value="$(arg controller)" />
+      <arg name="with_auto_recovery" value="false" />
     </include>  
   </group>
 
