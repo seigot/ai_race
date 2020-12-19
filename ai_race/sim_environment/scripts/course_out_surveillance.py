@@ -36,10 +36,13 @@ def xy_update(data):
     global x
     global y
 
-    pos = data.name.index('wheel_robot')
-    x = data.pose[pos].position.x
-    y = data.pose[pos].position.y
-
+    try:
+        pos = data.name.index('wheel_robot')
+        x = data.pose[pos].position.x
+        y = data.pose[pos].position.y
+    except ValueError:
+        #print ('can not get model.name.index, skip !!')
+        pass
 
 def judge_course_l1():
     global dynamic_client
