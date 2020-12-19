@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 
 <sdf version="1.5">
-  <model name="wood_block_100_10_10cm">
+  <model name="wood_block_282_10_10cm">
     <link name="link">
       <pose>0 0 0.05 0 0 0</pose>
 

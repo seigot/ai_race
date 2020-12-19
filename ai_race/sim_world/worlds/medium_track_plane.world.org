@@ -34,7 +34,7 @@
   </light>
 
   <include>
-    <uri>model://sim_world/models//medium_track_plane_grass</uri>
+    <uri>model://sim_world/models//medium_track_plane</uri>
     <pose>0 0 0 0 0 0</pose>
     <name>racetrack</name>
   </include>
@@ -81,25 +81,25 @@
     
     <include>
       <name>upper_wood</name>
-      <uri>model://sim_world/models/wood_block_144_10_10cm</uri>
+      <uri>model://sim_world/models/wood_block_100_10_10cm</uri>
       <static>true</static>
       <pose>0 1.36 0 0 0 0</pose>
     </include>
     <include>
       <name>lower_wood</name>
-      <uri>model://sim_world/models/wood_block_144_10_10cm</uri>
+      <uri>model://sim_world/models/wood_block_100_10_10cm</uri>
       <static>true</static>
       <pose>0 -1.36 0 0 0 0</pose>
     </include>
     <include>
       <name>right_wood</name>
-      <uri>model://sim_world/models/wood_block_282_10_10cm</uri>
+      <uri>model://sim_world/models/wood_block_100_10_10cm2</uri>
       <static>true</static>
       <pose>0.72 0 0 0 0 0</pose>
     </include>
     <include>
       <name>left_wood</name>
-      <uri>model://sim_world/models/wood_block_282_10_10cm</uri>
+      <uri>model://sim_world/models/wood_block_100_10_10cm2</uri>
       <static>true</static>
       <pose>-0.72 0 0 0 0 0</pose>
     </include>

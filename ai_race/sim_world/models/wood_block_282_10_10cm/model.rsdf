@@ -5,8 +5,8 @@
 
   # Geometry
   dx = 0.1
-  dy = 0.025
-  dz = 0.01
+  dy = 2.82
+  dz = 0.1
 
   # Material
   # Assume soft wood with density of 500 kg / m^3
