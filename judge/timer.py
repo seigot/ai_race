@@ -137,10 +137,6 @@ class Window(QMainWindow):
                             )
         return res
 
-
-
-
-
     # init button
     def Init(self):
         url = JUDGESERVER_REQUEST_URL
@@ -206,20 +202,30 @@ class Window(QMainWindow):
         # request GET data to server
         url = JUDGESERVER_GETSTATE_URL
         data = self.httpGetReqToURL(url)
-        time = data["judge_info"]["time"]
+
+        time_mode = int(data["judge_info"]["time_mode"])
+        if time_mode == 1:
+            elapsed_time = data["judge_info"]["elapsed_time"]["system_time"]
+            time_mode_str = "System Time: "
+        else:
+            elapsed_time = data["judge_info"]["elapsed_time"]["ros_time"]
+            time_mode_str = "ROS Time: "
+        time_max = int(data["judge_info"]["time_max"])
+
         lap_count = data["judge_info"]["lap_count"]
         courseout_count = data["judge_info"]["courseout_count"]
         #courseout_count = 0
         judgestate = data["judge_info"]["judgestate"]
 
         # timer text
-        passed_time_str = str('{:.2f}'.format(time))
+        passed_time_str = str('{:.2f}'.format(elapsed_time))
+        time_max_str = str('{:}'.format(time_max))
         lap_count_str = str(lap_count)
         courseout_count_str = str(courseout_count)
         judgestate_str = str(judgestate)
 
         text = "JudgeState: " + judgestate_str + "\n" \
-               + "Time: " + passed_time_str + " (s)" + "\n" \
+               + time_mode_str + passed_time_str + " / " + time_max_str + " (s)""\n" \
                + "LAP: " + lap_count_str + "  " \
                + "CourseOut: " + courseout_count_str
 

@@ -2,6 +2,7 @@
 import os
 import datetime
 import time
+from enum import Enum
 import argparse
 import json
 import threading
@@ -15,10 +16,26 @@ from logging.handlers import RotatingFileHandler
 
 ## general definition
 DEFAULT_GAME_TIME=240
+DEFAULT_TIME_MODE=1
 
 ## flask
 app = Flask(__name__)
 
+## time mode
+class TimeMode(Enum):
+    SYSTEM_TIME = 1
+    ROS_TIME = 2
+
+class TimeManagementClass():
+    def __init__(self):
+        self.start_time = 0.00
+        self.elapsed_time = 0.00
+        self.current_time = 0.00
+
+    def init_time(self):
+        self.start_time = 0.00
+        self.elapsed_time = 0.00
+        self.current_time = 0.00
 
 class GameManagerClass:
 
@@ -29,6 +46,9 @@ class GameManagerClass:
     
     def __init__(self, args):
         self.time_max = args.gametime # [sec]
+        self.time_mode = args.timemode
+        self.system_time = TimeManagementClass() # system time
+        self.ros_time = TimeManagementClass()    # ros time
         self.initGameData()
 
     def setJudgeState(self, state):
@@ -52,15 +72,16 @@ class GameManagerClass:
 
     def initGameData(self):
         self.setJudgeState("init")
-        self.start_time = 0.00
-        self.passed_time = 0.00
+        self.system_time.init_time()
+        self.ros_time.init_time()
         self.lap_count = 0
         self.courseout_count = 0
         self.is_courseout = 0
 
     def startGame(self):
         self.setJudgeState("start")
-        self.start_time = time.time()
+        self.system_time.start_time = time.time()
+        self.ros_time.start_time = self.ros_time.current_time
         return True
 
     def stopGame(self):
@@ -91,19 +112,29 @@ class GameManagerClass:
             return False
         return True
 
+    def is_timeover(self):
+        if self.time_mode == TimeMode.SYSTEM_TIME:
+            if self.system_time.elapsed_time < self.time_max:
+                return False
+        else: # ROS_TIME
+            if self.ros_time.elapsed_time < self.time_max:
+                return False
+        return True
+
     def updateTime(self):
         #app.logger.info("updateTime")
-        if self.start_time == 0:
-            self.passed_time = 0.00
+        if self.system_time.start_time == 0:
+            self.system_time.elapsed_time = 0.00
             return False
 
         # update time
-        self.passed_time = time.time() - self.start_time
+        self.system_time.elapsed_time = time.time() - self.system_time.start_time
+        self.ros_time.elapsed_time = self.ros_time.current_time - self.ros_time.start_time
         # check if time is over
-        if self.passed_time >= self.time_max:
+        if self.is_timeover() == True:
             self.stopGame()
 
-        #app.logger.info("passed_Time {}".format(self.passed_time))
+        #app.logger.info("elapsed_time {}".format(self.elapsed_time))
         return True
 
     def updateData(self, body):
@@ -118,6 +149,8 @@ class GameManagerClass:
         if "is_courseout" in body:
             self.is_courseout = int(body["is_courseout"])
             print(self.is_courseout)
+        if "current_ros_time" in body:
+            self.ros_time.current_time = float(body["current_ros_time"])
         return True
 
     def getGameStateJson(self):
@@ -134,7 +167,11 @@ class GameManagerClass:
             },
             "judge_info": {
                 "description": "judge information",
-                "time": self.passed_time,
+                "elapsed_time": {
+                    "system_time": self.system_time.elapsed_time,
+                    "ros_time": self.ros_time.elapsed_time,
+                },
+                "time_mode": self.time_mode,
                 "time_max": self.time_max,
                 "lap_count": self.lap_count,
                 "courseout_count": self.courseout_count,
@@ -182,7 +219,7 @@ def requestToJudge():
 
 @app.route('/judgeserver/updateData', methods=['POST'])
 def updateData():
-    print("request to POST /judgeserver/updateData")
+    #print("request to POST /judgeserver/updateData")
     body = request.json
     ip = request.remote_addr
     app.logger.info("POST /judgeserver/updateData " + str(ip) + str(body))
@@ -205,6 +242,7 @@ def parse_argument():
     # argument parse
     parser = argparse.ArgumentParser(description='judger server')
     parser.add_argument('--gametime', '--gt', default=int(DEFAULT_GAME_TIME), type=int, help='game time [sec]')
+    parser.add_argument('--timemode', '--tm', default=int(DEFAULT_TIME_MODE), type=int, help='time mode (1:SYSTEM_TIME/2:ROS_TIME)')
     args = parser.parse_args()
     return args
 

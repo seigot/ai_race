@@ -25,6 +25,8 @@ class JudgeCommunicationd(object):
         #print(GameStateCallback_timer_duration)
         rospy.Timer(rospy.Duration(GameStateCallback_timer_duration),
                     self.publishGameStateCallback)
+        rospy.Timer(rospy.Duration(GameStateCallback_timer_duration),
+                    self.postRosTimerCallback)
         self.tryCourseRecoveryCallback = rospy.Subscriber('gamestate', String, self.tryCourseRecoveryCallback)
 
     # http request
@@ -33,6 +35,15 @@ class JudgeCommunicationd(object):
                             json.dumps(data),
                             headers={'Content-Type': 'application/json'}
                             )
+        return res
+
+    def postRosTimerCallback(self, state):
+        url = JUDGESERVER_UPDATEDATA_URL
+        req_data = {
+            "current_ros_time": 0
+        }
+        req_data["current_ros_time"] = rospy.Time.now().to_sec()
+        res = self.httpPostReqToURL(url, req_data)
         return res
 
     def publishGameStateCallback(self, state):
