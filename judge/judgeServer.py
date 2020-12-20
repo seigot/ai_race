@@ -75,6 +75,7 @@ class GameManagerClass:
         self.system_time.init_time()
         self.ros_time.init_time()
         self.lap_count = 0
+        self.recovery_count = 0
         self.courseout_count = 0
         self.is_courseout = 0
 
@@ -146,6 +147,8 @@ class GameManagerClass:
             self.lap_count = self.lap_count + int(body["lap_count"])
         if "courseout_count" in body:
             self.courseout_count = self.courseout_count + int(body["courseout_count"])
+        if "recovery_count" in body:
+            self.recovery_count = self.recovery_count + int(body["recovery_count"])
         if "is_courseout" in body:
             self.is_courseout = int(body["is_courseout"])
             print(self.is_courseout)
@@ -174,6 +177,7 @@ class GameManagerClass:
                 "time_mode": self.time_mode,
                 "time_max": self.time_max,
                 "lap_count": self.lap_count,
+                "recovery_count": self.recovery_count,
                 "courseout_count": self.courseout_count,
                 "is_courseout": self.is_courseout,
                 "judgestate": self.judgestate,

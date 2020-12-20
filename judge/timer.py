@@ -73,14 +73,14 @@ class Window(QMainWindow):
                           stop_width_height[0], stop_width_height[1])
         stop.pressed.connect(self.Stop)
 
-        # create CourseOut Recovery button
-        CourseOutRecovery = QPushButton("CourseOut\nRecovery", self) 
-        CourseOutRecovery_upper_left = (300, 150)
-        CourseOutRecovery_width_height = (90, 40)
-        CourseOutRecovery.setGeometry(CourseOutRecovery_upper_left[0], CourseOutRecovery_upper_left[1],
-                          CourseOutRecovery_width_height[0], CourseOutRecovery_width_height[1])
-        CourseOutRecovery.pressed.connect(self.CourseOutRecovery)
-        CourseOutRecovery.setFont(QFont("Meiryo", 9))
+        # create Manual Recovery button
+        ManualRecovery = QPushButton("Manual\nRecovery", self) 
+        ManualRecovery_upper_left = (300, 150)
+        ManualRecovery_width_height = (90, 40)
+        ManualRecovery.setGeometry(ManualRecovery_upper_left[0], ManualRecovery_upper_left[1],
+                          ManualRecovery_width_height[0], ManualRecovery_width_height[1])
+        ManualRecovery.pressed.connect(self.ManualRecovery)
+        ManualRecovery.setFont(QFont("Meiryo", 9))
 
         # create lap_count Plus/Minus button 
         lapcountPlus = QPushButton("Lap++", self) 
@@ -113,6 +113,23 @@ class Window(QMainWindow):
                              CourseOutCountMinus_width_height[0], CourseOutCountMinus_width_height[1])
         CourseOutCountMinus.pressed.connect(self.CourseOutCount_minus)
         CourseOutCountMinus.setFont(QFont("Meiryo", 9))
+
+        # create RecoveryCount Plus/Minus button 
+        RecoveryCountPlus = QPushButton("Recovery++", self) 
+        RecoveryCountPlus_upper_left = (395, 195)
+        RecoveryCountPlus_width_height = (90, 40)
+        RecoveryCountPlus.setGeometry(RecoveryCountPlus_upper_left[0], RecoveryCountPlus_upper_left[1],
+                             RecoveryCountPlus_width_height[0], RecoveryCountPlus_width_height[1])
+        RecoveryCountPlus.pressed.connect(self.RecoveryCount_plus) 
+        RecoveryCountPlus.setFont(QFont("Meiryo", 9))
+
+        RecoveryCountMinus = QPushButton("Recovery--", self) 
+        RecoveryCountMinus_upper_left = (490, 195)
+        RecoveryCountMinus_width_height = (90, 40)
+        RecoveryCountMinus.setGeometry(RecoveryCountMinus_upper_left[0], RecoveryCountMinus_upper_left[1],
+                             RecoveryCountMinus_width_height[0], RecoveryCountMinus_width_height[1])
+        RecoveryCountMinus.pressed.connect(self.RecoveryCount_minus)
+        RecoveryCountMinus.setFont(QFont("Meiryo", 9))
 
         # creating a timer object 
         timer = QTimer(self) 
@@ -158,8 +175,8 @@ class Window(QMainWindow):
         res = self.httpPostReqToURL(url, req_data)
         return res
 
-    # CourseOutRecovery button
-    def CourseOutRecovery(self):
+    # ManualRecovery button
+    def ManualRecovery(self):
         url = JUDGESERVER_UPDATEDATA_URL
         req_data = {
             # "courseout_count": 1,
@@ -198,6 +215,21 @@ class Window(QMainWindow):
         res = self.httpPostReqToURL(url, req_data)
         return res
 
+    # recovery count button
+    def RecoveryCount_plus(self):
+        # request POST data to server
+        url = JUDGESERVER_UPDATEDATA_URL
+        req_data = {"recovery_count": 1}
+        res = self.httpPostReqToURL(url, req_data)
+        return res
+
+    def RecoveryCount_minus(self):
+        # request POST data to server
+        url = JUDGESERVER_UPDATEDATA_URL
+        req_data = {"recovery_count": -1}
+        res = self.httpPostReqToURL(url, req_data)
+        return res
+
     def gettimertext(self):
         # request GET data to server
         url = JUDGESERVER_GETSTATE_URL
@@ -213,6 +245,7 @@ class Window(QMainWindow):
         time_max = int(data["judge_info"]["time_max"])
 
         lap_count = data["judge_info"]["lap_count"]
+        recovery_count = data["judge_info"]["recovery_count"]
         courseout_count = data["judge_info"]["courseout_count"]
         #courseout_count = 0
         judgestate = data["judge_info"]["judgestate"]
@@ -221,13 +254,15 @@ class Window(QMainWindow):
         passed_time_str = str('{:.2f}'.format(elapsed_time))
         time_max_str = str('{:}'.format(time_max))
         lap_count_str = str(lap_count)
+        recovery_count_str = str(recovery_count)
         courseout_count_str = str(courseout_count)
         judgestate_str = str(judgestate)
 
         text = "JudgeState: " + judgestate_str + "\n" \
                + time_mode_str + passed_time_str + " / " + time_max_str + " (s)""\n" \
                + "LAP: " + lap_count_str + "  " \
-               + "CourseOut: " + courseout_count_str
+               + "CourseOut: " + courseout_count_str + "  " \
+               + "Recovery: " + recovery_count_str
 
         return text
 
