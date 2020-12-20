@@ -5,6 +5,8 @@ import time
 
 from gazebo_msgs.msg import ModelStates
 from std_msgs.msg import Bool
+import requests
+import json
 
 #max speed param
 MAX_SPEED_W = 0.5
@@ -21,6 +23,8 @@ y = 0.0
 
 dynamic_client = None
 curr_max_speed_coeff = 1.0
+
+JUDGESERVER_UPDATEDATA_URL="http://127.0.0.1:5000/judgeserver/updateData"
 
 #for debug
 def print_pose(data):
@@ -81,6 +85,12 @@ def judge_course_l1():
     if   (course_out_flag == True)  and (curr_max_speed_coeff != MAX_SPEED_W):
         print "OK -> wwww"
         dynamic_client.update_configuration({"max_speed_coeff":MAX_SPEED_W})
+        # courseout count
+        url = JUDGESERVER_UPDATEDATA_URL
+        req_data = {
+            "courseout_count": 1
+        }
+        res = httpPostReqToURL(url, req_data)
     elif (course_out_flag == False) and (curr_max_speed_coeff == MAX_SPEED_W):
         print "wwww -> OK"
         dynamic_client.update_configuration({"max_speed_coeff":1.0})
@@ -100,6 +110,14 @@ def course_out_surveillance():
     # spin() simply keeps python from exiting until this node is stopped
       rospy.spin()
 """
+
+# http request
+def httpPostReqToURL(url, data):
+    res = requests.post(url,
+                        json.dumps(data),
+                        headers={'Content-Type': 'application/json'}
+    )
+    return res
 
 if __name__ == '__main__':
     try:

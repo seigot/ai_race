@@ -77,7 +77,7 @@ class jugemu:
         else:
             url = JUDGESERVER_UPDATEDATA_URL
             req_data = {
-                "courseout_count": 1
+                "recovery_count": 1
             }
             res = self.httpPostReqToURL(url, req_data)
             # rospy.sleep(1)
