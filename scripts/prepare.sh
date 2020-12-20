@@ -8,6 +8,7 @@ set -u
 # default option parameter
 LEVEL=1
 GAME_TIME=240
+TIME_MODE=2
 PACKAGE_NAME="your_environment"
 WITH_GUI="true"
 WITH_CONTROLLER="false"
@@ -28,6 +29,7 @@ echo "start prepare.sh"
 echo "LEVEL: ${LEVEL}"
 echo "PACKAGE_NAME: ${PACKAGE_NAME}"
 echo "GAME_TIME: ${GAME_TIME}"
+echo "TIME_MODE: ${TIME_MODE} (1:SYSTEM TIME/2:ROS Time)"
 echo "WITH_GUI: ${WITH_GUI}"
 echo "WITH_CONTROLLER: ${WITH_CONTROLLER}"
 
@@ -57,7 +59,7 @@ function output_warning(){
 output_warning ${LEVEL}
 
 # init judge server, timer window, etc
-gnome-terminal -- python3 ../judge/judgeServer.py --gametime ${GAME_TIME}
+gnome-terminal -- python3 ../judge/judgeServer.py --gametime ${GAME_TIME} --timemode ${TIME_MODE}
 sleep 1
 gnome-terminal -- python3 ../judge/timer.py
 # [future work] if necessary, register some data to server here.
