@@ -39,7 +39,7 @@ function output_warning(){
     local CNT=0
     echo "---"
     # check if install package
-    if [ ${LEVEL} == "1a" ]; then
+    if [ ${LEVEL} != "1" ]; then
 	array=(
 	    ros-melodic-cob-srvs
 	)
