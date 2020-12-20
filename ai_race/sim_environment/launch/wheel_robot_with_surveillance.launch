@@ -58,11 +58,10 @@
   <node name="image_view_sur_camera" pkg="image_view" type="image_view" args="image:=/surveillance_camera/image_raw" />
   <node name="image_view_godeye_camera" pkg="image_view" type="image_view" args="image:=/godeye_camera/image_raw" />
 
-  <!-- dynamic reconfigure SERVER for max speed coeff node -->
-  <node pkg="sim_environment" type="dynamic_recon_server.py" name="dynamic_recon_server_node" output="screen" />
-
   <!-- use dynamic reconfigure course_out_surveillance-->
   <group if="$(eval dynamic_recon==true)">
+    <!-- dynamic reconfigure SERVER for max speed coeff node -->
+      <node pkg="sim_environment" type="dynamic_recon_server.py" name="dynamic_recon_server_node" output="screen" />
     <!-- dynamic reconfigure CLIENT for max speed coeff node -->
       <node pkg="sim_environment" type="course_out_surveillance.py" name="course_out_surveillance" output="screen" />
   </group>
