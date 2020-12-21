@@ -17,7 +17,7 @@ from sklearn.metrics import classification_report
 from sklearn.metrics import f1_score
 from sklearn.model_selection import train_test_split
 from MyDataSet import MyDataset
-from samplenet import SampleNet
+from samplenet import SampleNet, SimpleNet
 
 
 def main():
@@ -41,6 +41,8 @@ def main():
 		model.fc = torch.nn.Linear(512, 3)
 	elif args.model == 'samplenet':
 		model = SampleNet()
+	elif args.model == 'simplenet':
+		model = SimpleNet()
 	else:
 		raise NotImplementedError()
 	model.train()
