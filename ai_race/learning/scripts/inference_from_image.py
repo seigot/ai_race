@@ -25,13 +25,23 @@ from PIL import Image as IMG
 import cv2
 from cv_bridge import CvBridge
 
-model = models.resnet18()
+from samplenet import SampleNet, SimpleNet
+
+model = None
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 def init_inference():
     global model
     global device
-    model.fc = torch.nn.Linear(512, 3)
+    if args.model == 'resnet18':
+        model = models.resnet18()
+        model.fc = torch.nn.Linear(512, 3)
+    elif args.model == 'samplenet':
+        model = SampleNet()
+    elif args.model == 'simplenet':
+        model = SimpleNet()
+    else:
+        raise NotImplementedError()
     model.eval()
     #model.load_state_dict(torch.load(args.pretrained_model))
     
@@ -122,6 +132,7 @@ def parse_args():
 	# Set arguments.
 	arg_parser = argparse.ArgumentParser(description="Autonomous with inference")
 	
+	arg_parser.add_argument("--model", type=str, default='resnet18')
 	arg_parser.add_argument("--trt_conversion", action='store_true')
 	arg_parser.add_argument("--trt_module", action='store_true')
 	arg_parser.add_argument("--pretrained_model", type=str, default='/home/shiozaki/work/experiments/models/checkpoints/sim_race_joycon_ResNet18_6_epoch=20.pth')
