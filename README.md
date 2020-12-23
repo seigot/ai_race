@@ -498,6 +498,18 @@ git push                                                   # 変更を反映
 [[実践] はじめてのPull Requestをやってみよう](https://qiita.com/wataryooou/items/8dce6b6d5f54ab2cef04)<br>
 [【GitHub】Pull Requestの手順](https://qiita.com/aipacommander/items/d61d21988a36a4d0e58b)<br>
 
+
+### 3.5 SimpleNetを使う
+
+デフォルトでは、ニューラルネットワークとしてResNet-18を使うようになっていますが、自分でニューラルネットワークを作成する場合のサンプルとして、[シンプルなニューラルネットワーク(SimpleNet)](https://github.com/seigot/ai_race/blob/main/ai_race/learning/scripts/samplenet.py#L35)を用意しています。<br>
+ResNet-18ではなくSimpleNetを使う場合は、`train.py`, `trt_conversion.py`, `inference_from_image.py`の実行時に、`--model simplenet`オプションを付けてください。
+```
+cd ~/catkin_ws/src/ai_race/ai_race/learning/scripts
+python3 train.py --model simplenet　 --data_csv $HOME/ai_race_data_sample/dataset/plane/_2020-11-17-01-34-45/_2020-11-17-01-34-45.csv --model_name sample_model
+python3 trt_conversion.py --model simplenet --pretrained_model <学習させたモデル フルパス指定> --trt_model <保存するtrtモデル名>
+python inference_from_image.py --model simplenet --trt_module --trt_model <保存したtrtモデル名 フルパス指定> 
+```
+
 ## 4. ルール
 
 ### 4.1. 概要
