@@ -530,15 +530,25 @@ python inference_from_image.py --model simplenet --trt_module --trt_model <保�
 
 以下のコースを用意しました。<br>
 
-|  -  |  level1  |  level2  |  level3  |
+|  -  |  level1  |  level1 with透明壁  |  level1 advance  |
 | ---- | ---- | ---- | ---- |
-|  名称  |  Plane  |  Medium Track  |  Hard track  |
-|  外観  |  ![medium_track_plane-2.png](https://github.com/seigot/ai_race/blob/main/document/medium_track_plane-2.png)  |  ![medium_track-2.png](https://github.com/seigot/ai_race/blob/main/document/medium_track-2.png)  |  ![hard_track.png](https://github.com/seigot/ai_race/blob/main/document/hard_track.png)  |
-|  特徴  |  地面：一様な模様です  |  地面：濃淡付きの模様です  |  地面：サーキット型の模様です。カーブが急で、速度を調整しないと曲がれない  |
-|  障害物  |  なし  |  なし  |  三角コーンを置くかも  |
-|  起動コマンド  |  bash prepare.sh -l 1  |  bash prepare.sh -l 2  |  bash prepare.sh -l 3  |
-|  学習データのサンプル  |  あり（１週分）[url](https://github.com/seigot/ai_race_data_sample/tree/main/dataset/plane)  |  あり（１週分）[url](https://github.com/seigot/ai_race_data_sample/tree/main/dataset/medium) |  なし  |
-|  備考  |  今回のルールで採用  |  optional  |  optional（準備中）  |
+|  名称  |  Plane  |  Plane(with透明壁)  |  Plane(advance)  |
+|  外観  |  ![medium_track_plane-2.png](https://github.com/seigot/ai_race/blob/main/document/medium_track_plane-2.png)  |  ![medium_track_plane_tomei-kabe.png](https://github.com/seigot/ai_race/blob/main/document/medium_track_plane_tomei-kabe.png)  |  ![medium_track_plane3_advance.png](https://github.com/seigot/ai_race/blob/main/document/medium_track_plane3_advance.png)  |
+|  特徴  |  地面：一様な模様です  |  地面：一様な模様です  |  地面：一様な模様+周辺に草が生えています。<br>草エリア走行時は速度が落ちます。  |
+|  障害物  |  なし  |  赤い点線部分に透明の壁があります  |  赤い点線部分に透明の壁があります  |
+|  起動コマンド  |  bash prepare.sh -l 1  |  bash prepare.sh -l 1t  |  bash prepare.sh -l 1a  |
+|  学習データのサンプル  |  あり（１週分）[url](https://github.com/seigot/ai_race_data_sample/tree/main/dataset/plane)  |  なし  |  なし  |
+|  備考  |  今回のルールで採用  |  初回起動前に、[FAQ](FAQ.md)を参考に再度catkin buildして下さい  |  初回起動前に、[FAQ](FAQ.md)を参考に再度catkin buildして下さい  |
+
+|  -  |  level2  |  level3  |
+| ---- | ---- | ---- |
+|  名称  |  Medium Track  |  Hard track  |
+|  外観  |  ![medium_track-2.png](https://github.com/seigot/ai_race/blob/main/document/medium_track-2.png)  |  ![hard_track.png](https://github.com/seigot/ai_race/blob/main/document/hard_track.png)  |
+|  特徴  |  地面：濃淡付きの模様です  |  地面：サーキット型の模様です。カーブが急で、速度を調整しないと曲がれない  |
+|  障害物  |  なし  |  三角コーンを置くかも  |
+|  起動コマンド  |  bash prepare.sh -l 2  |  bash prepare.sh -l 3  |
+|  学習データのサンプル  |  あり（１週分）[url](https://github.com/seigot/ai_race_data_sample/tree/main/dataset/medium) |  なし  |
+|  備考  |  optional  |  optional（準備中）  |
 
 ### 4.4 提出して頂くもの
 
