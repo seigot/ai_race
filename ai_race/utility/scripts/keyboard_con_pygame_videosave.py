@@ -187,7 +187,7 @@ class keyboardController:
         self.images.append(CvBridge().imgmsg_to_cv2(self.current_img, "bgr8"))
         self.command.append(twist.angular.z)
 
-        self.tocsv.append([self.frame_n, self.outputimagedir+"/image"+str(self.frame_n).zfill(5)+".jpg",twist.angular.z ])
+        self.tocsv.append([self.frame_n, self.outputimagedir+"/image"+str(self.frame_n).zfill(5)+".jpg",twist.angular.z+1 ])
         self.frame_n += 1
 
         if self.button_cnt>=10:
