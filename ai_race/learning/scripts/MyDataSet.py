@@ -9,9 +9,8 @@ LABEL_IDX = 2
 IMG_IDX = 1
 
 class MyDataset(Dataset):
-   def __init__(self, csv_file_path, root_dir, transform=None):
-      self.image_dataframe = pd.read_csv(csv_file_path,engine='python')
-      self.root_dir = root_dir
+   def __init__(self,image_dataframe, transform=None):
+      self.image_dataframe = image_dataframe
       self.transform = transform
       
    def __len__(self):
