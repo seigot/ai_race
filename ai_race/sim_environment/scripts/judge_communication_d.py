@@ -19,13 +19,13 @@ class JudgeCommunicationd(object):
     #jsonの内容
         # judge_info
 
-    def __init__(self, judge_url, GameStateCallback_timer_duration):
+    def __init__(self, judge_url, GameStateCallback_timer_duration, Post_Ros_timer_duration):
         self.judge_url = judge_url
         self.vel_pub = rospy.Publisher('gamestate', String, queue_size=1)
         #print(GameStateCallback_timer_duration)
         rospy.Timer(rospy.Duration(GameStateCallback_timer_duration),
                     self.publishGameStateCallback)
-        rospy.Timer(rospy.Duration(GameStateCallback_timer_duration),
+        rospy.Timer(rospy.Duration(Post_Ros_timer_duration),
                     self.postRosTimerCallback)
         self.tryCourseRecoveryCallback = rospy.Subscriber('gamestate', String, self.tryCourseRecoveryCallback)
 
@@ -98,7 +98,8 @@ if __name__ == "__main__":
     JUDGE_URL = rospy.get_param('~judge_url', 'http://127.0.0.1:5000')
     JUDGESERVER_GETSTATE_URL = JUDGE_URL + "/judgeserver/getState"
     TIMER_DURATION = rospy.get_param('~GameStateCallback_timer_duration', 0.25)
-    JUDGECOMMUNICATIOND = JudgeCommunicationd(JUDGESERVER_GETSTATE_URL, TIMER_DURATION)
+    POST_ROSTIMER_DURATION = rospy.get_param('~PostRosTimerCallback_timer_duration', 0.25)
+    JUDGECOMMUNICATIOND = JudgeCommunicationd(JUDGESERVER_GETSTATE_URL, TIMER_DURATION, POST_ROSTIMER_DURATION)
 
     rospy.spin()
 
