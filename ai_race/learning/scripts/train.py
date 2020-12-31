@@ -29,6 +29,7 @@ def main():
 	device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
 	# Prepare dataset.
+	np.random.seed(seed=0)
 	image_dataframe = pd.read_csv(args.data_csv, engine='python', header=None)
 	image_dataframe = image_dataframe.reindex(np.random.permutation(image_dataframe.index))
 	test_num = int(len(image_dataframe) * 0.2)
