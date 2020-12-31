@@ -12,10 +12,12 @@ def main():
     rospack = rospkg.RosPack()
     learning_pkg_path = rospack.get_path('learning')
     trt_model_path = rospy.get_param('~trt_model')
+    image_topic_name = rospy.get_param('~image_topic_name')
+    #image_topic_name = "/front_camera/image_exp"
 
     # call command
     inference_from_image_path = learning_pkg_path + '/scripts/inference_from_image.py'
-    command = 'python' + ' ' + inference_from_image_path + ' ' + '--trt_module --trt_model' + ' ' + trt_model_path
+    command = 'python' + ' ' + inference_from_image_path + ' ' + '--trt_module --trt_model' + ' ' + trt_model_path + ' ' + "--image_topic_name" +' ' + image_topic_name
     print(command)
     subprocess.call(command.split())
 
