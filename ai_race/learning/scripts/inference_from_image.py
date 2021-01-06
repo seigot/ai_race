@@ -121,7 +121,8 @@ def inference_from_image():
     global twist_pub
     rospy.init_node('inference_from_image', anonymous=True)
     twist_pub = rospy.Publisher('/cmd_vel', Twist, queue_size=1)
-    rospy.Subscriber("/front_camera/image_raw", Image, set_throttle_steer)
+    image_topic_name = args.image_topic_name
+    rospy.Subscriber(image_topic_name, Image, set_throttle_steer)
     r = rospy.Rate(10)
     #while not rospy.is_shutdown():
     #    r.sleep()
@@ -137,6 +138,7 @@ def parse_args():
 	arg_parser.add_argument("--trt_module", action='store_true')
 	arg_parser.add_argument("--pretrained_model", type=str, default='/home/shiozaki/work/experiments/models/checkpoints/sim_race_joycon_ResNet18_6_epoch=20.pth')
 	arg_parser.add_argument("--trt_model", type=str, default='road_following_model_trt.pth' )
+	arg_parser.add_argument("--image_topic_name", type=str, default='/front_camera/image_raw' )
 
 	args = arg_parser.parse_args()
 

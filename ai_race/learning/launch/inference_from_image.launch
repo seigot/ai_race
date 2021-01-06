@@ -2,9 +2,15 @@
 <launch>
   <!-- roslaunch arguments -->
   <arg name="trt_model" default="default_path" />
+  <arg name="image_topic_name" default="/front_camera/image_exp" />
 
+  <!-- republish raw image -->
+  <include file="$(find sim_environment)/launch/image_republish.launch"/>
+
+  <!-- call node -->
   <node pkg="learning" type="rosnode_inference_from_image.py" name="rosnode_inference_from_image" output="screen" >
     <param name="trt_model" value="$(arg trt_model)" />
+    <param name="image_topic_name" value="$(arg image_topic_name)" />
   </node>
 
 </launch>

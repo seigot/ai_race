@@ -291,7 +291,11 @@ rqt, joystick, 各種コントローラーで車両操作し、学習用のデ�
 
 ```
 cd ~/catkin_ws/src/ai_race/ai_race/utility/scripts
-python keyboard_con_pygame2.py
+python keyboard_con_pygame_videosave.py
+
+### `ESC`キー押下で終了
+### 終了後、学習データ（画像とコマンド）を格納したディレクトリがあることをコマンドから確認する
+ls ${HOME}/Images_from_rosbag/
 ```
 
 上記実行後、左下の「？」のうち`keyboard_con....py`が表示されてるものを押して、<br>
@@ -304,26 +308,9 @@ a 左にまがる
 d 右にまがる
 ```
 
-車両が動いている際の、画像とコマンド操作ログを取得するには以下を別ターミナルで実行します。<br>
-デフォルトでは`${HOME}`に画像とコマンド操作ログを含む`rosbag(.bag)`ファイルが出力されます。<br>
-
-```
-roslaunch sim_environment rosbag.launch
-
-### `Ctl+C`で終了する
-### 終了後、rosbag(.bag)ファイルがあることをコマンドから確認する
-ls ${HOME}/*.bag
-```
-
-`rosbag(.bag)`ファイルを、画像とコマンドに変換するには以下を実行します。<br>
-デフォルトでは`${HOME}/Images_from_rosbag/.`以下にファイルが出力されます。<br>
-
-```
-cd ~/catkin_ws/src/ai_race/ai_race/utility/script
-python rosbag_to_images_and_commands.py xxx.bag  # xxx.bagファイルは実在するrosbagファイルを指定する
-ls ${HOME}/Images_from_rosbag/.                  # 画像とコマンドの変換データがあること確認する
-```
-
+`keyboard_con_pygame_videosave.py`の停止は`ESC`キーを押下して下さい。<br>
+その後、`${HOME}/Images_from_rosbag/`以下に学習データ（画像とコマンド）が格納されます。<br>
+<br>
 以上で作成したデータを、学習モデル作成に使用下さい。
 
 ### 3.2. 各種コマンドの説明
