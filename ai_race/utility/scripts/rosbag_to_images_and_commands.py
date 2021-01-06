@@ -6,6 +6,7 @@ import os
 import rosbag
 import cv2
 import csv
+import argparse
 from cv_bridge import CvBridge, CvBridgeError
 from sensor_msgs.msg import Image
 
@@ -13,12 +14,15 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)) + "/../config")
 import util_config
 
 INFERENCE_TIME = util_config.Inference_time
+DISCRETIZATION = util_config.Discretization_number
 TRANSMIT_MARGIN = 0.01
 
-def output_files(bagFilename):
+def output_files():
 
-    inputfile = os.path.basename(bagFilename)
-    inputdir = os.path.dirname(bagFilename)
+    args = parse_args()
+
+    inputfile = os.path.basename(args.bagFilename)
+    inputdir = os.path.dirname(args.bagFilename)
     outputdir = inputdir + '/Images_from_rosbag/' + inputfile[0:len(inputfile)-4]
     
     # determin directory name to be unique
@@ -40,7 +44,7 @@ def output_files(bagFilename):
     prev=""
 
     num = 0
-    for topic, msg, t in  rosbag.Bag(bagFilename).read_messages():
+    for topic, msg, t in  rosbag.Bag(args.bagFilename).read_messages():
         if topic == '/front_camera/image_raw':
             # extract image , save it and register path 
             img_time = t.to_sec()
@@ -55,8 +59,7 @@ def output_files(bagFilename):
                 #process when command came in a certain time from image came
                 if t.to_sec() - img_time < INFERENCE_TIME + TRANSMIT_MARGIN :
                     #for analog pad
-                    #cmd = str(int(msg.angular.z*100+256))
-                    cmd = str(int(msg.angular.z+1))
+                    cmd = str(int(msg.angular.z*((DISCRETIZATION-1)/2)+((DISCRETIZATION-1)/2)))
                     csv_out.append([str(num), image_path,cmd])
                     num = num +1
             prev = "cmd"
@@ -66,9 +69,21 @@ def output_files(bagFilename):
         print("finished successfully.")
         print("outputdir: " + outputdir)
 
-if __name__ == '__main__':
-    if len(sys.argv) < 2 :
-        print "rosbagファイルを入力してください"
+
+def parse_args():
+    # Set arguments.
+    arg_parser = argparse.ArgumentParser(description="rosbag2image")
+    
+    arg_parser.add_argument("--bagFilename", type=str, help='bagfilename')
+
+    args = arg_parser.parse_args()
+
+    # Validate paths.
+    if DISCRETIZATION % 2 != 1:
+        print "discretization number should be odd number"
         exit()
-    else :
-        output_files(sys.argv[1])
+    
+    return args
+
+if __name__ == '__main__':
+    output_files()
