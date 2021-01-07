@@ -8,6 +8,7 @@ import torchvision.transforms as transforms
 import torchvision.models as models
 
 import os
+import sys
 import io
 import argparse
 import numpy as np
@@ -17,6 +18,11 @@ from sklearn.metrics import classification_report
 from sklearn.metrics import f1_score
 from MyDataSet import MyDataset
 from samplenet import SampleNet, SimpleNet
+
+sys.path.append(os.path.dirname(os.path.abspath(__file__)) + "/../config")
+import learning_config
+
+DISCRETIZATION = learning_config.Discretization_number
 
 
 def main():
@@ -42,11 +48,11 @@ def main():
 	# Set a model.
 	if args.model == 'resnet18':
 		model = models.resnet18()
-		model.fc = torch.nn.Linear(512, 3)
+		model.fc = torch.nn.Linear(512, DISCRETIZATION)
 	elif args.model == 'samplenet':
-		model = SampleNet()
+		model = SampleNet(DISCRETIZATION)
 	elif args.model == 'simplenet':
-		model = SimpleNet()
+		model = SimpleNet(DISCRETIZATION)
 	else:
 		raise NotImplementedError()
 	model.train()

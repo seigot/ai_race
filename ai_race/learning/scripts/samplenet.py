@@ -3,7 +3,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 class SampleNet(nn.Module):
-    def __init__(self):
+    def __init__(self, DISCRETIZATION=3):
         super(SampleNet, self).__init__()
         self.conv1 = nn.Conv2d(3, 16, 3, 1, padding=1)
         self.conv2 = nn.Conv2d(16, 16, 3, 1, padding=1)
@@ -11,7 +11,7 @@ class SampleNet(nn.Module):
         self.conv4 = nn.Conv2d(16, 16, 3, 1, padding=1)
         self.conv5 = nn.Conv2d(16, 16, 3, 1, padding=1)
         self.fc1 = nn.Linear(76800, 128)
-        self.fc2 = nn.Linear(128, 3)
+        self.fc2 = nn.Linear(128, DISCRETIZATION)
 
     def forward(self, x):
         x = self.conv1(x)
@@ -33,7 +33,7 @@ class SampleNet(nn.Module):
         return x
 
 class SimpleNet(nn.Module):
-    def __init__(self):
+    def __init__(self, DISCRETIZATION=3):
         super(SimpleNet, self).__init__()
         self.conv1 = nn.Conv2d(3, 16, 3, 1, padding=1)
         self.conv2 = nn.Conv2d(16, 16, 3, 1, padding=1)
@@ -41,7 +41,7 @@ class SimpleNet(nn.Module):
         self.conv4 = nn.Conv2d(16, 16, 3, 1, padding=1)
         self.conv5 = nn.Conv2d(16, 16, 3, 1, padding=1)
         self.fc1 = nn.Linear(int(76800/16), 128)
-        self.fc2 = nn.Linear(128, 3)
+        self.fc2 = nn.Linear(128, DISCRETIZATION)
         nn.init.kaiming_normal_(self.conv1.weight)
         nn.init.kaiming_normal_(self.conv2.weight)
         nn.init.kaiming_normal_(self.conv3.weight)
