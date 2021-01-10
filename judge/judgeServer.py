@@ -29,13 +29,17 @@ class TimeMode(Enum):
 class TimeManagementClass():
     def __init__(self):
         self.start_time = 0.00
-        self.elapsed_time = 0.00
+        self.elapsed_time = 0.00 # elapsed_time = current_time - start_time
         self.current_time = 0.00
+        self.lap_start_time = 0.00
+        self.lap_time_list = list(range(0))
 
     def init_time(self):
         self.start_time = 0.00
         self.elapsed_time = 0.00
         self.current_time = 0.00
+        self.lap_start_time = 0.00
+        self.lap_time_list = list(range(0))
 
 class GameManagerClass:
 
@@ -75,6 +79,7 @@ class GameManagerClass:
         self.system_time.init_time()
         self.ros_time.init_time()
         self.lap_count = 0
+        self.lap_count_prev = 0
         self.recovery_count = 0
         self.courseout_count = 0
         self.is_courseout = 0
@@ -131,6 +136,24 @@ class GameManagerClass:
         # update time
         self.system_time.elapsed_time = time.time() - self.system_time.start_time
         self.ros_time.elapsed_time = self.ros_time.current_time - self.ros_time.start_time
+
+        # update lap time
+        if self.lap_count > self.lap_count_prev:
+            self.lap_count_prev = self.lap_count
+            # calculate lap_time
+            if self.lap_count == 1:
+                lap_ros_time = self.ros_time.elapsed_time
+                lap_system_time = self.system_time.elapsed_time
+            else:
+                lap_ros_time = self.ros_time.elapsed_time - self.ros_time.lap_start_time
+                lap_system_time = self.system_time.elapsed_time - self.system_time.lap_start_time
+            # add list
+            self.ros_time.lap_time_list.append(round(lap_ros_time,3))
+            self.system_time.lap_time_list.append(round(lap_system_time,3))
+            # update
+            self.ros_time.lap_start_time = self.ros_time.elapsed_time
+            self.system_time.lap_start_time = self.system_time.elapsed_time
+
         # check if time is over
         if self.is_timeover() == True:
             self.stopGame()
@@ -173,6 +196,10 @@ class GameManagerClass:
                 "elapsed_time": {
                     "system_time": self.system_time.elapsed_time,
                     "ros_time": self.ros_time.elapsed_time,
+                },
+                "lap_time": {
+                    "system_time": self.system_time.lap_time_list,
+                    "ros_time": self.ros_time.lap_time_list,
                 },
                 "time_mode": self.time_mode,
                 "time_max": self.time_max,
