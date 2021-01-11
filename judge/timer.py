@@ -23,6 +23,9 @@ class Window(QMainWindow):
         # setting title 
         self.setWindowTitle("Python Stop watch") 
 
+        # update frequency
+        self.TimerUpdate_mSec = 500
+        
         # setting geometry
         upper_left = (100,100)
         width_height = (600, 240)
@@ -33,15 +36,15 @@ class Window(QMainWindow):
         self.UiComponents() 
 
         # showing all the widgets 
-        self.show() 
+        self.show()
 
     # method for widgets 
     def UiComponents(self): 
 
         # creating a label to show the time 
         self.label = QLabel(self)
-        label_upper_left = (20, 10)
-        label_width_height = (560, 130)
+        label_upper_left = (10, 10)
+        label_width_height = (580, 130)
         self.label.setGeometry(label_upper_left[0], label_upper_left[1], 
                                label_width_height[0], label_width_height[1]) 
         self.label.setStyleSheet("border : 4px solid black;") 
@@ -134,12 +137,15 @@ class Window(QMainWindow):
         # creating a timer object 
         timer = QTimer(self) 
         timer.timeout.connect(self.callback_showTime)
-        timer.start(500) # update the timer by n(msec)
+        timer.start(self.TimerUpdate_mSec) # update the timer by n(msec)
 
     # timer callback function 
     def callback_showTime(self):
         # showing text 
-        self.label.setText(self.gettimertext())
+        text = self.gettimertext()
+        if text is None:
+            return
+        self.label.setText(text)
 
     def httpGetReqToURL(self, url):
         resp = requests.get(url)
@@ -258,6 +264,11 @@ class Window(QMainWindow):
         courseout_count_str = str(courseout_count)
         judgestate_str = str(judgestate)
 
+        # update check
+        if elapsed_time > (time_max + self.TimerUpdate_mSec/1000):
+            return None
+        
+        # update timer text
         text = "JudgeState: " + judgestate_str + "\n" \
                + time_mode_str + passed_time_str + " / " + time_max_str + " (s)""\n" \
                + "LAP: " + lap_count_str + "  " \
