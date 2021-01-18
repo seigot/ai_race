@@ -28,7 +28,7 @@ class Window(QMainWindow):
         
         # setting geometry
         upper_left = (100,100)
-        width_height = (600, 240)
+        width_height = (600, 280)
         self.setGeometry(upper_left[0], upper_left[1],
                          width_height[0], width_height[1]) 
 
@@ -44,7 +44,7 @@ class Window(QMainWindow):
         # creating a label to show the time 
         self.label = QLabel(self)
         label_upper_left = (10, 10)
-        label_width_height = (580, 130)
+        label_width_height = (580, 170)
         self.label.setGeometry(label_upper_left[0], label_upper_left[1], 
                                label_width_height[0], label_width_height[1]) 
         self.label.setStyleSheet("border : 4px solid black;") 
@@ -54,7 +54,7 @@ class Window(QMainWindow):
   
         # create init button 
         init = QPushButton("Init", self) 
-        init_upper_left = (15, 150)
+        init_upper_left = (15, 190)
         init_width_height = (90, 40)
         init.setGeometry(init_upper_left[0], init_upper_left[1], 
                          init_width_height[0], init_width_height[1])
@@ -62,7 +62,7 @@ class Window(QMainWindow):
 
         # create start button
         start = QPushButton("Start", self) 
-        start_upper_left = (110, 150)
+        start_upper_left = (110, 190)
         start_width_height = (90, 40)
         start.setGeometry(start_upper_left[0], start_upper_left[1],
                           start_width_height[0], start_width_height[1])
@@ -70,7 +70,7 @@ class Window(QMainWindow):
 
         # create stop button 
         stop = QPushButton("Stop", self) 
-        stop_upper_left = (205, 150)
+        stop_upper_left = (205, 190)
         stop_width_height = (90, 40)
         stop.setGeometry(stop_upper_left[0], stop_upper_left[1],
                           stop_width_height[0], stop_width_height[1])
@@ -78,7 +78,7 @@ class Window(QMainWindow):
 
         # create Manual Recovery button
         ManualRecovery = QPushButton("Manual\nRecovery", self) 
-        ManualRecovery_upper_left = (300, 150)
+        ManualRecovery_upper_left = (300, 190)
         ManualRecovery_width_height = (90, 40)
         ManualRecovery.setGeometry(ManualRecovery_upper_left[0], ManualRecovery_upper_left[1],
                           ManualRecovery_width_height[0], ManualRecovery_width_height[1])
@@ -87,14 +87,14 @@ class Window(QMainWindow):
 
         # create lap_count Plus/Minus button 
         lapcountPlus = QPushButton("Lap++", self) 
-        lapcountPlus_upper_left = (15, 195)
+        lapcountPlus_upper_left = (15, 235)
         lapcountPlus_width_height = (90, 40)
         lapcountPlus.setGeometry(lapcountPlus_upper_left[0], lapcountPlus_upper_left[1],
                              lapcountPlus_width_height[0], lapcountPlus_width_height[1])
         lapcountPlus.pressed.connect(self.LapCount_plus) 
 
         lapcountMinus = QPushButton("Lap--", self) 
-        lapcountMinus_upper_left = (110, 195)
+        lapcountMinus_upper_left = (110, 235)
         lapcountMinus_width_height = (90, 40)
         lapcountMinus.setGeometry(lapcountMinus_upper_left[0], lapcountMinus_upper_left[1],
                              lapcountMinus_width_height[0], lapcountMinus_width_height[1])
@@ -102,7 +102,7 @@ class Window(QMainWindow):
 
         # create CourseOutCount Plus/Minus button 
         CourseOutCountPlus = QPushButton("CourseOut++", self) 
-        CourseOutCountPlus_upper_left = (205, 195)
+        CourseOutCountPlus_upper_left = (205, 235)
         CourseOutCountPlus_width_height = (90, 40)
         CourseOutCountPlus.setGeometry(CourseOutCountPlus_upper_left[0], CourseOutCountPlus_upper_left[1],
                              CourseOutCountPlus_width_height[0], CourseOutCountPlus_width_height[1])
@@ -110,7 +110,7 @@ class Window(QMainWindow):
         CourseOutCountPlus.setFont(QFont("Meiryo", 9))
 
         CourseOutCountMinus = QPushButton("CourseOut--", self) 
-        CourseOutCountMinus_upper_left = (300, 195)
+        CourseOutCountMinus_upper_left = (300, 235)
         CourseOutCountMinus_width_height = (90, 40)
         CourseOutCountMinus.setGeometry(CourseOutCountMinus_upper_left[0], CourseOutCountMinus_upper_left[1],
                              CourseOutCountMinus_width_height[0], CourseOutCountMinus_width_height[1])
@@ -119,7 +119,7 @@ class Window(QMainWindow):
 
         # create RecoveryCount Plus/Minus button 
         RecoveryCountPlus = QPushButton("Recovery++", self) 
-        RecoveryCountPlus_upper_left = (395, 195)
+        RecoveryCountPlus_upper_left = (395, 235)
         RecoveryCountPlus_width_height = (90, 40)
         RecoveryCountPlus.setGeometry(RecoveryCountPlus_upper_left[0], RecoveryCountPlus_upper_left[1],
                              RecoveryCountPlus_width_height[0], RecoveryCountPlus_width_height[1])
@@ -127,7 +127,7 @@ class Window(QMainWindow):
         RecoveryCountPlus.setFont(QFont("Meiryo", 9))
 
         RecoveryCountMinus = QPushButton("Recovery--", self) 
-        RecoveryCountMinus_upper_left = (490, 195)
+        RecoveryCountMinus_upper_left = (490, 235)
         RecoveryCountMinus_width_height = (90, 40)
         RecoveryCountMinus.setGeometry(RecoveryCountMinus_upper_left[0], RecoveryCountMinus_upper_left[1],
                              RecoveryCountMinus_width_height[0], RecoveryCountMinus_width_height[1])
@@ -244,9 +244,11 @@ class Window(QMainWindow):
         time_mode = int(data["judge_info"]["time_mode"])
         if time_mode == 1:
             elapsed_time = data["judge_info"]["elapsed_time"]["system_time"]
+            lap_time_lst = data["judge_info"]["lap_time"]["system_time"]
             time_mode_str = "System Time: "
         else:
             elapsed_time = data["judge_info"]["elapsed_time"]["ros_time"]
+            lap_time_lst = data["judge_info"]["lap_time"]["ros_time"]
             time_mode_str = "ROS Time: "
         time_max = int(data["judge_info"]["time_max"])
 
@@ -256,6 +258,13 @@ class Window(QMainWindow):
         #courseout_count = 0
         judgestate = data["judge_info"]["judgestate"]
 
+        # get lap_time
+        lap_time_lst_length = len(lap_time_lst)
+        if lap_time_lst_length <= 0:
+            lap_time = 0
+        else:
+            lap_time = lap_time_lst[lap_time_lst_length - 1]
+
         # timer text
         passed_time_str = str('{:.2f}'.format(elapsed_time))
         time_max_str = str('{:}'.format(time_max))
@@ -263,6 +272,7 @@ class Window(QMainWindow):
         recovery_count_str = str(recovery_count)
         courseout_count_str = str(courseout_count)
         judgestate_str = str(judgestate)
+        lap_time_str = str('{:.2f}'.format(lap_time))
 
         # update check
         if elapsed_time > (time_max + self.TimerUpdate_mSec/1000):
@@ -270,7 +280,8 @@ class Window(QMainWindow):
         
         # update timer text
         text = "JudgeState: " + judgestate_str + "\n" \
-               + time_mode_str + passed_time_str + " / " + time_max_str + " (s)""\n" \
+               + time_mode_str + passed_time_str + " / " + time_max_str + " (s)" + "\n" \
+               + "LAP Time: " + lap_time_str + " (s)" + "\n" \
                + "LAP: " + lap_count_str + "  " \
                + "CourseOut: " + courseout_count_str + "  " \
                + "Recovery: " + recovery_count_str
