@@ -1,8 +1,11 @@
 <?xml version="1.0"?>
 <launch>
+  <arg name="arrow" default="true" />
   <arg name="level" default="1"/>
   <arg name="gui" default="true" />
   <arg name="controller" default="false" />
+  <arg name="record" default="false" />
+  <arg name="play" default="false" />
 
   <!-- level 1 (default) -->
   <group if="$(eval level==1)"> 
@@ -12,6 +15,9 @@
       <arg name="controller" value="$(arg controller)" />
       <arg name="dynamic_recon" value="false" />
       <arg name="with_auto_recovery" value="false" />
+      <arg name="arrow" value="$(arg arrow)" />
+      <arg name="record" value="$(arg record)" />
+      <arg name="play" value="$(arg play)" />
     </include>  
   </group>
 
@@ -23,6 +29,9 @@
       <arg name="controller" value="$(arg controller)" />
       <arg name="dynamic_recon" value="True" />
       <arg name="with_auto_recovery" value="true" />
+      <arg name="arrow" value="$(arg arrow)" />
+      <arg name="record" value="$(arg record)" />
+      <arg name="play" value="$(arg play)" />
     </include>
   </group>
 
@@ -34,6 +43,9 @@
       <arg name="controller" value="$(arg controller)" />
       <arg name="dynamic_recon" value="True" />
       <arg name="with_auto_recovery" value="true" />
+      <arg name="arrow" value="$(arg arrow)" />
+      <arg name="record" value="$(arg record)" />
+      <arg name="play" value="$(arg play)" />
     </include>
   </group>
   
@@ -45,6 +57,9 @@
       <arg name="controller" value="$(arg controller)" />
       <arg name="dynamic_recon" value="false" />
       <arg name="with_auto_recovery" value="false" />
+      <arg name="arrow" value="$(arg arrow)" />
+      <arg name="record" value="$(arg record)" />
+      <arg name="play" value="$(arg play)" />
     </include>  
   </group>
 
@@ -56,6 +71,9 @@
       <arg name="controller" value="$(arg controller)" />
       <arg name="dynamic_recon" value="false" />
       <arg name="with_auto_recovery" value="false" />
+      <arg name="arrow" value="$(arg arrow)" />
+      <arg name="record" value="$(arg record)" />
+      <arg name="play" value="$(arg play)" />
     </include>  
   </group>
 

@@ -1,18 +1,17 @@
 <?xml version="1.0"?>
-<robot name="surveillance_camera_base" xmlns:xacro="http://www.ros.org/wiki/xacro">
+<robot name="godeye_perspective_base" xmlns:xacro="http://www.ros.org/wiki/xacro">
  
   <!-- Included URDF/XACRO Files -->
   <xacro:include filename="$(find sim_environment)/urdf/camera_macro.xacro" />
-  <xacro:include filename="$(find sim_environment)/urdf/ir_sensor_macro.xacro" />
 
   <!-- PROPERTY LIST -->
   <!--All units in m-kg-s-radians unit system -->
   <property name="M_PI" value="3.1415926535897931" />
 
   <!-- Main Body-base -->
-  <property name="base_x_size" value="0.05" /> 
-  <property name="base_y_size" value="0.05" /> 
-  <property name="base_z_size" value="0.3" />
+  <property name="base_x_size" value="0.01" /> 
+  <property name="base_y_size" value="0.01" /> 
+  <property name="base_z_size" value="0.01" />
   <property name="base_mass" value="1000" /> <!-- in kg-->
 
   <!--Inertial macros for the box and cylinder. Units are kg*m^2-->
@@ -52,36 +51,28 @@
       <origin xyz="0 0 0" />
       <!--The 3x3 rotational inertia matrix. -->
       <box_inertia  m="${base_mass}" x="${base_x_size}" y="${base_y_size}" z="${base_z_size}"/> 
-    </inertial>    
-    <visual>
-      <origin xyz="0 0 0" rpy="0 0 ${-M_PI/2}" />
-      <geometry>
-        <box size="${base_x_size} ${base_y_size} ${base_z_size}"/>
-      </geometry>
-      <!--<material name="Yellow" />-->
-    </visual>  
+    </inertial>   
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0 " />
       <geometry>
         <box size="${base_x_size} ${base_y_size} ${base_z_size}"/>
       </geometry>
-    </collision>     
+    </collision>      
   </link>
   <gazebo reference="base_link">
     <!--<material>Gazebo/Yellow</material>-->
-    <turnGravityOff>false</turnGravityOff>
+    <turnGravityOff>true</turnGravityOff>
   </gazebo>
   
   
   <joint name="base_footprint_joint" type="fixed">
-    <origin xyz="0 0 0.02" rpy="0 0 0" />
+    <origin xyz="0 0 0" rpy="0 1.5708 0" />
     <parent link="base_footprint"/>
     <child link="base_link" />
   </joint>
   
   <!-- camera -->
-  <camera_macro parent="base_link" prefix="surveillance_camera" xyz="0.1 0.0 0.12"/>
-  <ir_sensor_macro parent="base_link" prefix="ir_sensor" xyz="0.1 0.0 -0.12"/>
+  <camera_macro_perspective_720x480 parent="base_link" prefix="godeye_camera_perspective" xyz="-1.5 0.0 0" x_rot="0" y_rot="-150" z_rot="-38"/>
  
   <gazebo>
     <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so" />

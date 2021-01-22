@@ -1,17 +1,24 @@
 <?xml version="1.0"?>
 <launch>
+  <arg name="arrow" default="true" />
   <arg name="level" default="1"/>
   <arg name="gui" default="true" />
   <arg name="controller" default="false" />
+  <arg name="record" default="false" />
+  <arg name="play" default="false" />
+  
 
   <!-- This is your sim_environment setup launch file. -->
   <!-- If you want to get dataset from your original world, use this file. -->
   
   <!-- launch default sim_environment -->
   <include file="$(find sim_environment)/launch/sim_environment.launch">
+    <arg name="arrow" value="$(arg arrow)" />
     <arg name="level" value="$(arg level)" />
     <arg name="gui" value="$(arg gui)" />
     <arg name="controller" value="$(arg controller)" />
+    <arg name="record" value="$(arg record)" />
+    <arg name="play" value="$(arg play)" />
   </include>  
 
 </launch>

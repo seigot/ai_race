@@ -8,6 +8,9 @@
   <arg name="controller" default="false" />
   <arg name="dynamic_recon" default="false" />
   <arg name="with_auto_recovery" default="false" />
+  <arg name="arrow" default="true" />
+  <arg name="record" default="false" />
+  <arg name="play" default="false" />
 
   <!-- We resume the logic in empty_world.launch, changing only the name of 
     the world to be launched -->
@@ -24,6 +27,7 @@
   <param name="robot_description" command="$(find xacro)/xacro.py '$(find sim_environment)/urdf/wheel_robot.urdf.xacro'" />
   <param name="camera_description" command="$(find xacro)/xacro.py '$(find sim_environment)/urdf/surveillance_camera.urdf.xacro'" />
   <param name="godeye_description" command="$(find xacro)/xacro.py '$(find sim_environment)/urdf/godeye.urdf.xacro'" />
+  <param name="godeye_perspective_description" command="$(find xacro)/xacro.py '$(find sim_environment)/urdf/godeye_perspective.urdf.xacro'" />
 
   <!-- push robot_description to factory and spawn robot in gazebo -->
   <node name="wheel_robot_spawn" pkg="gazebo_ros" type="spawn_model" output="screen" 
@@ -32,6 +36,8 @@
     args="-urdf -x 1.0 -y 0.0 -z 0.0 -Y 0  -param camera_description -model surveillance_camera" />
   <node name="godeye_spawn" pkg="gazebo_ros" type="spawn_model" output="screen" 
     args="-urdf -x 0.0 -y 0.0 -z 0.0   -param godeye_description -model godeye_camera" />
+  <node name="godeye_perspective_spawn" pkg="gazebo_ros" type="spawn_model" output="screen" 
+    args="-urdf -x 2.5 -y -3.5 -z 0.0   -param godeye_perspective_description -model godeye_camera_perspective" />  
  
   <!-- robot visualization in Rviz -->
   <group if="$(arg show_rviz)">
@@ -53,11 +59,24 @@
   </node>
   <!--<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" ></node>-->
   
-  <!--<node name="rqt_gui" pkg="rqt_gui" type="rqt_gui"/>-->
-  <node name="image_view" pkg="image_view" type="image_view" args="image:=/front_camera/image_raw" />
-  <node name="image_view_sur_camera" pkg="image_view" type="image_view" args="image:=/surveillance_camera/image_raw" />
-  <node name="image_view_godeye_camera" pkg="image_view" type="image_view" args="image:=/godeye_camera/image_raw" />
+  <!--<node name="image_view_sur_camera" pkg="image_view" type="image_view" args="image:=/surveillance_camera/image_raw" />-->
+  <group if="$(eval play==false)">
+    <node name="image_view_godeye_camera" pkg="image_view" type="image_view" args="image:=/godeye_camera/image_raw" />
+   </group>
+  <group unless="$(eval play==false)">
+    <node name="image_view_godeye_camera_w_champ" pkg="image_view" type="image_view" args="image:=/godeye_camera_w_champ/image_raw" />
+  </group>
 
+  <!--<node name="rqt_gui" pkg="rqt_gui" type="rqt_gui"/>-->
+  <group if="$(eval arrow==true)">
+    <node name="image_view" pkg="image_view" type="image_view" args="image:=/front_camera_w_arrow/image_raw" />
+  </group>
+  <group if="$(eval arrow==false)">
+    <node name="image_view" pkg="image_view" type="image_view" args="image:=/front_camera/image_raw" />
+  </group>
+
+  <node name="image_view_godeye_camera_perspective" pkg="image_view" type="image_view" args="image:=/godeye_camera_perspective/image_raw" />
+  
   <!-- use dynamic reconfigure course_out_surveillance-->
   <group if="$(eval dynamic_recon==true)">
     <!-- dynamic reconfigure SERVER for max speed coeff node -->
@@ -82,9 +101,33 @@
     <node pkg="sim_environment" type="jugemu_new.py" name="jugemu_new" output="screen" />
   </group>
 
+  <group unless="$(eval play==false)">
+    <node pkg="sim_environment" type="position_player.py" name="champion_replay" args="$(arg play)" />
+  </group>
+
+  <group if="$(eval record==true)">
+    <node pkg="sim_environment" type="position_recording.py" name="record_position"/>
+  </group>
+
   <!-- without gui(with keyboard con) -->
-  <group if="$(eval gui==false)">
+  <group if="$(eval arrow==false)">
+    <group unless="$(eval play==false)">
+      <node pkg="sim_environment" type="window_management2.py" name="window_management" output="screen" args="-play" />
+    </group>
+    <group if="$(eval play==false)">
       <node pkg="sim_environment" type="window_management2.py" name="window_management" output="screen" />
+    </group>
+  </group>
+  <group if="$(eval arrow==true)">
+    <group unless="$(eval play==false)">
+      <node pkg="sim_environment" type="window_management2.py" name="window_management" output="screen" args="-play -arrow" />
+    </group>
+    <group if="$(eval play==false)">
+      <node pkg="sim_environment" type="window_management2.py" name="window_management" output="screen" args="-arrow"/>
+    </group>
+  </group>
+  <group if="$(eval arrow==true)">
+    <node pkg="sim_environment" type="command_Superimposition.py" name="add_arrow"/>
   </group>
   <group if="$(eval controller==true)">
       <node pkg="utility" type="keyboard_con_pygame2.py" name="keyboard_con_pygame2" output="screen" />

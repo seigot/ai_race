@@ -53,7 +53,8 @@
       </sensor>
     </gazebo>
   </xacro:macro> 
-    <xacro:macro name="camera_macro_640x480" params="parent prefix xyz">
+
+  <xacro:macro name="camera_macro_640x480" params="parent prefix xyz">
     <joint name="${prefix}_joint" type="fixed">
       <parent link="${parent}"/>
       <child  link="${prefix}_link"/>
@@ -107,4 +108,61 @@
       </sensor>
     </gazebo>
   </xacro:macro> 
+  
+  <xacro:macro name="camera_macro_perspective_720x480" params="parent prefix xyz x_rot y_rot z_rot">
+    <joint name="${prefix}_joint" type="fixed">
+      <parent link="${parent}"/>
+      <child  link="${prefix}_link"/>
+      <origin xyz="${xyz}" rpy="${radians(-90)} 0 ${radians(-90)}"/>
+      <!--<origin xyz="${xyz}" rpy="${radians(x_rot)} ${radians(y_rot)} ${radians(z_rot)}"/>-->
+    </joint>
+    <link name="${prefix}_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <box size="0.01 0.01 0.03" />
+        </geometry>
+        <material name="Green" />
+      </visual>
+    </link>
+    <gazebo reference="${prefix}_link">
+      <sensor type="camera" name="${prefix}">
+        <update_rate>10.0</update_rate>
+        <camera name="${prefix}">
+          <pose>0 0 0 ${radians(x_rot)} ${radians(y_rot)} ${radians(z_rot)}"</pose>
+          <!--<horizontal_fov>1.3962634</horizontal_fov>-->
+          <horizontal_fov>1.4</horizontal_fov>
+          <image>
+            <width>720</width>
+            <height>480</height>
+            <format>R8G8B8</format>
+          </image>
+          <clip>
+            <near>0.02</near><!--default 0.02-->
+            <far>50</far>
+          </clip>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>0.007</stddev>
+          </noise>
+        </camera>
+        <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+          <alwaysOn>true</alwaysOn>
+          <updateRate>0.0</updateRate>
+          <cameraName>${prefix}</cameraName>
+          <imageTopicName>image_raw</imageTopicName>
+          <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+          <frameName>${prefix}_link</frameName>
+          <hackBaseline>0.0</hackBaseline>
+          <distortionK1>0.0</distortionK1>
+          <distortionK2>0.0</distortionK2>
+          <distortionK3>0.0</distortionK3>
+          <distortionT1>0.0</distortionT1>
+          <distortionT2>0.0</distortionT2>
+        </plugin>
+      </sensor>
+    </gazebo>
+  </xacro:macro> 
 </robot>
+

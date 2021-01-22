@@ -39,6 +39,7 @@
  
   <gazebo reference="base_footprint">
     <turnGravityOff>false</turnGravityOff>
+    <static>true</static>
   </gazebo>
  
   <!-- BASE-LINK -->
