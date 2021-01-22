@@ -11,6 +11,7 @@ import cv2
 from cv_bridge import CvBridge
 import numpy as np
 
+import os
 import sys
 import csv
 
@@ -26,8 +27,7 @@ image += 255
 frame_n = 0
 bridge = CvBridge()
 start_flag = False
-
-flag_img = cv2.imread('/home/jetson/flag.jpg')
+flag_img = cv2.imread(os.path.abspath(__file__)[:-len(os.path.basename(__file__))] + 'flag.jpg')
 flag_img = cv2.resize(flag_img,(int(flag_img.shape[1]/2), int(flag_img.shape[0]/2)))
 
 def sub_image(data):
