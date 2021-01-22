@@ -56,7 +56,6 @@ def save_xy():
     global pos
 
     pos.append([x,y])
-    print("\f, \f" % x, y)
 
 def time_start(data):
     if data.linear.x > 0.1 :
