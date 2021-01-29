@@ -38,6 +38,7 @@ def print_pose(data):
     pos = data.name.index('wheel_robot')
     print "position:" + '\n' + '\tx:' + str(data.pose[pos].position.x) + '\n' + '\ty:' + str(data.pose[pos].position.y) + '\n' + '\tz:' + str(data.pose[pos].position.z) + '\n' + " orientation:" + '\n' + '\tx:' + str(data.pose[pos].orientation.x) + '\n' + '\ty:' + str(data.pose[pos].orientation.y) + '\n' + '\tz:' + str(data.pose[pos].orientation.z) + '\n' + "\033[8A",
 
+# update xy position data
 def xy_update(data):
     global x
     global y
@@ -50,6 +51,8 @@ def xy_update(data):
         #print ('can not get model.name.index, skip !!')
         pass
 
+# is it used?
+# may be able to be deleted
 def save_xy():
     global x
     global y
@@ -57,6 +60,8 @@ def save_xy():
 
     pos.append([x,y])
 
+# detect machine start, and define end time
+# for now end time is defined as 245 secs advanced from start time
 def time_start(data):
     if data.linear.x > 0.1 :
         sub_once.unregister()
@@ -74,6 +79,7 @@ def time_start(data):
                 sys.exit()
             rate.sleep()
 
+#initialize recorder
 def position_recording():
     
     rospy.init_node('course_out_surveillance', anonymous=True)

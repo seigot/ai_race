@@ -30,14 +30,16 @@ start_flag = False
 flag_img = cv2.imread(os.path.abspath(__file__)[:-len(os.path.basename(__file__))] + 'flag.jpg')
 flag_img = cv2.resize(flag_img,(int(flag_img.shape[1]/2), int(flag_img.shape[0]/2)))
 
+# subscript godeye image
 def sub_image(data):
     global image
     global bridge
     image = bridge.imgmsg_to_cv2(data, "bgr8")
 
+# add flag onto godeye image
 def add_flag_in_image(image,(x,y)):
     global flag_img
-    #print 320+y+flag_img.shape[1]
+    #make flag figure mask to transcript on godeye vision
     flag_img_mask_tmp = cv2.cvtColor(flag_img, cv2.COLOR_BGR2GRAY)
     th, flag_img_mask_tmp = cv2.threshold(flag_img_mask_tmp, 60, 255, cv2.THRESH_BINARY)
     flag_img_mask = np.zeros((flag_img_mask_tmp.shape[0],flag_img_mask_tmp.shape[1],3))
@@ -47,11 +49,14 @@ def add_flag_in_image(image,(x,y)):
     flag_img = np.zeros_like(flag_img)
     flag_img[:,:,2] = flag_img_mask_tmp[:,:]
     flag_img_mask = flag_img_mask.astype(np.uint8)
+
+    #or operation between godeye image and flag mask
+    #after that, subtract flag figure from godeye image and add flag image to godeye image
     img_cp = image[x:x+flag_img.shape[0],y:y+flag_img.shape[1],:]*(flag_img_mask)
     image[x:x+flag_img.shape[0],y:y+flag_img.shape[1],:] -= img_cp
     image[x:x+flag_img.shape[0],y:y+flag_img.shape[1],:] += flag_img
-    #print (np.max(image))
 
+# publish godeye image with champion flag
 def publish_champ_image():
     global image
     global frame_n
@@ -59,7 +64,6 @@ def publish_champ_image():
     global start_flag
 
     msg = Image()
-    #cv2.circle(image, (-int(float(pos[frame_n][1])*70)+320,-int(float(pos[frame_n][0])*70)+240), 12, (255,127,127), thickness=3)
     if frame_n < len(pos):
         add_flag_in_image(image,(-int(float(pos[frame_n][0])*70)+240-flag_img.shape[0],-int(float(pos[frame_n][1])*70)+320 ))
     msg.header.stamp = rospy.Time.now()
@@ -69,6 +73,7 @@ def publish_champ_image():
     if start_flag:
         frame_n+=1
 
+# detect machine start
 def time_start(data):
     if data.linear.x != 0 :
         sub_once.unregister()
