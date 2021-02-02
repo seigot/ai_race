@@ -26,13 +26,24 @@
   <param name="godeye_description" command="$(find xacro)/xacro.py '$(find sim_environment)/urdf/godeye.urdf.xacro'" />
 
   <!-- push robot_description to factory and spawn robot in gazebo -->
-  <node name="wheel_robot_spawn" pkg="gazebo_ros" type="spawn_model" output="screen" 
-    args="-urdf -x 1.6 -y 0.0 -z 0.0 -Y 1.57  -param robot_description -model wheel_robot" />
-  <node name="camera_spawn" pkg="gazebo_ros" type="spawn_model" output="screen" 
-    args="-urdf -x 1.0 -y 0.0 -z 0.0 -Y 0  -param camera_description -model surveillance_camera" />
-  <node name="godeye_spawn" pkg="gazebo_ros" type="spawn_model" output="screen" 
-    args="-urdf -x 0.0 -y 0.0 -z 0.0   -param godeye_description -model godeye_camera" />
- 
+  <group unless="$(eval track_name=='hard_track.world')">
+    <node name="wheel_robot_spawn" pkg="gazebo_ros" type="spawn_model" output="screen"
+      args="-urdf -x 1.6 -y 0.0 -z 0.0 -Y 1.57  -param robot_description -model wheel_robot" />
+    <node name="camera_spawn" pkg="gazebo_ros" type="spawn_model" output="screen"
+      args="-urdf -x 1.0 -y 0.0 -z 0.0 -Y 0  -param camera_description -model surveillance_camera" />
+    <node name="godeye_spawn" pkg="gazebo_ros" type="spawn_model" output="screen" 
+      args="-urdf -x 0.0 -y 0.0 -z 0.0 -param godeye_description -model godeye_camera" />
+  </group>
+
+  <group if="$(eval track_name=='hard_track.world')">
+    <node name="wheel_robot_spawn" pkg="gazebo_ros" type="spawn_model" output="screen"
+      args="-urdf -x 1.8 -y 0.6 -z 0.03 -Y 0.0 -param robot_description -model wheel_robot" />
+    <node name="camera_spawn" pkg="gazebo_ros" type="spawn_model" output="screen"
+      args="-urdf -x 2.0 -y 0.12 -z 0.13 -Y 1.57 -param camera_description -model surveillance_camera" />
+    <node name="godeye_spawn" pkg="gazebo_ros" type="spawn_model" output="screen" 
+      args="-urdf -x 3.3 -y 2.3 -z 0.0 -Y 1.57 -param godeye_description -model godeye_camera" />
+  </group>
+
   <!-- robot visualization in Rviz -->
   <group if="$(arg show_rviz)">
     <node name="rviz" pkg="rviz" type="rviz" output="screen" args="-d $(find sim_environment)/launch/wheel_robot.rviz"/> 
