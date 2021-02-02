@@ -178,6 +178,13 @@ https://developer.nvidia.com/jetpack-43-archive
  -> https://developer.nvidia.com/jetson-nano-sd-card-imager-3231
 ```
 
+Jetpack 4.4.1 archiveは以下の通りです。
+
+```
+Jetpack 4.4.1 archive
+https://developer.nvidia.com/jetpack-sdk-441-archive
+```
+
 ## Jetson nanoにVNC接続するにはどうすればよい？
 
 以下のJetson開発者向けサイトの通り実施すればよさそうです。（MacOSでの実績あり）<br>
@@ -214,5 +221,26 @@ git push                                                   # 変更を反映
 
 [実行ログ](https://github.com/seigot/ai_race/blob/main/document/exec_log.md)に記載しました。<br>
 ただし、最新コードでは出力ログが変わることがあります。<br>
+
+## レース当日に運営側で実行したコマンドはどのようなものか
+
+以下の通りです。ご参考。
+
+- 学習モデルの実行手順<br>
+[https://github.com/seigot/ai_race_score/tree/main/check](https://github.com/seigot/ai_race_score/tree/main/check)<br>
+
+- 走行ログのrecord/replay
+
+```
+cd ~/catkin_ws/src/ai_race/scripts
+./prepare_pos.sh -l 1t -g false -r true            # -r true  : 走行ログをrecordする。ログは"Position_Logs/_2021-01-22-22-48-38/pos.csv"等に保存される。
+./prepare_pos.sh -l 1t -g false -z pos.csv         # -z *.csv : 指定した走行ログをreplayする。軌跡は旗で表示される。
+./prepare_pos.sh -l 1t -g false -r true -z pos.csv # 走行ログをrecordしつつ、指定した走行ログをreplayする。
+
+推論は「学習モデルの実行手順」の通り実施
+```
+
+- 動画編集は以下（3倍速、領域を切り出す、先頭n秒削除、カットと結合）<br>
+[コマンドラインからmp4を倍速に変換する](https://qiita.com/seigot/items/4d89c42a992569fa1890)<br>
 
 ## xxx
