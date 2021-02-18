@@ -9,6 +9,8 @@ import sys
 from std_msgs.msg import Float64
 from cob_srvs.srv import SetInt, SetIntRequest
 from gazebo_msgs.msg import ModelStates
+from nav_msgs.msg import Odometry
+import tf
 from geometry_msgs.msg import Twist, Pose
 
 class StackDetector:
@@ -18,7 +20,8 @@ class StackDetector:
         # rospy.Subscriber("/rear_left_wheel_velocity_controller/command", Float64, self.get_left_command)
         # rospy.Subscriber("/rear_right_wheel_velocity_controller/command", Float64, self.get_right_command)
         rospy.Subscriber("/cmd_vel", Twist, self.get_target_command)
-        rospy.Subscriber("/gazebo/model_states", ModelStates, self.get_speed)
+        #rospy.Subscriber("/gazebo/model_states", ModelStates, self.get_speed)
+        self.pose_sub = rospy.Subscriber('/wheel_robot_tracker', Odometry, self.callback_odom)
         self.respown_srv = rospy.ServiceProxy("/jugemu_new/respown", SetInt)
         self.right_command = 0.0
         self.left_command = 0.0
@@ -28,6 +31,7 @@ class StackDetector:
         self.pre_t = 0.0
         self.stack_counter = 0.0
         self.pose = Pose()
+        self.odom_theta = 1.57
         
     def get_rosparam(self):
         self.respown_point = rospy.get_param("/respown_point")
@@ -41,14 +45,23 @@ class StackDetector:
     # def get_right_command(self, msg):
     #     self.right_command = msg.data
 
-    def get_speed(self, models):
-        try:
-            index = models.name.index("wheel_robot")
-            self.pose = models.pose[index]
-        except ValueError:
-            #print ('can not get model.name.index, skip !!')
-            pass
-        
+    #def get_speed(self, models):
+    #    try:
+    #        index = models.name.index("wheel_robot")
+    #        self.pose = models.pose[index]
+    #    except ValueError:
+    #        #print ('can not get model.name.index, skip !!')
+    #        pass
+
+    def callback_odom(self, msg):
+        self.pose = msg.pose.pose
+        qx = msg.pose.pose.orientation.x
+        qy = msg.pose.pose.orientation.y
+        qz = msg.pose.pose.orientation.z
+        qw = msg.pose.pose.orientation.w
+        q = (qx, qy, qz, qw)
+        e = tf.transformations.euler_from_quaternion(q)
+        self.odom_theta = e[2]
 
     def search_nearest_respown(self):
         min_distance = 100.0
