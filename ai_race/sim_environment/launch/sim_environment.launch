@@ -74,10 +74,13 @@
       <arg name="arrow" value="$(arg arrow)" />
       <arg name="record" value="$(arg record)" />
       <arg name="play" value="$(arg play)" />
+      <arg name="robot_pos" value="-x 1.8 -y 0.6 -z 0.03 -Y 0.0"/>
+      <arg name="camera_pos" value="-x 2.0 -y 0.12 -z 0.13 -Y 1.57"/>
+      <arg name="godeye_pos" value="-x 3.3 -y 2.3 -z 0.0 -Y 1.57"/>
     </include>  
   </group>
 
-  <!-- level s (if you want to run , set launch arg level=s --> 
+  <!-- level l (if you want to run , set launch arg level=s --> 
   <group if="$(eval level=='l')"> 
     <include file="$(find sim_environment)/launch/wheel_robot_with_surveillance.launch">
       <arg name="track_name" value="medium_track_plane_w_wall_large.world" />
@@ -88,8 +91,9 @@
       <arg name="arrow" value="$(arg arrow)" />
       <arg name="record" value="$(arg record)" />
       <arg name="play" value="$(arg play)" />
-      <arg name="robot_x_pos" value="5.75"/>
-      <arg name="camera_x_pos" value="5.15"/>
+      <arg name="robot_pos" value="-x 5.75 -y 0 -z 0 -Y 1.57"/>
+      <arg name="camera_pos" value="-x 5.15 -y 0 -z 0 -Y 0.0"/>
+      <arg name="godeye_pos" value="-x 0 -y 0 -z 4.0 -Y 0.0"/>
       <arg name="perspective" value="3" />
     </include>  
   </group>

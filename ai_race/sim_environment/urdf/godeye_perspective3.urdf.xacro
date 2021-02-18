@@ -72,7 +72,7 @@
   </joint>
   
   <!-- camera -->
-  <camera_macro_perspective2_720x480 parent="base_link" prefix="godeye_camera_perspective" xyz="-4.5 0.0 0" x_rot="0" y_rot="-150" z_rot="-38"/>
+  <camera_macro_perspective_720x480 parent="base_link" prefix="godeye_camera_perspective" xyz="-4.0 0.0 0" x_rot="0" y_rot="-160" z_rot="-41"/>
  
   <gazebo>
     <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so" />

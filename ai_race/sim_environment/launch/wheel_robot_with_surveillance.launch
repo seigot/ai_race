@@ -12,8 +12,9 @@
   <arg name="record" default="false" />
   <arg name="play" default="false" />
   <arg name="perspective" default="1" />
-  <arg name="robot_x_pos" default="1.6" />
-  <arg name="camera_x_pos" default="1.0" />
+  <arg name="robot_pos" default="-x 1.6 -y 0 -z 0 -Y 1.57" />
+  <arg name="camera_pos" default="-x 1.0 -y 0 -z 0 -Y 0" />
+  <arg name="godeye_pos" default="-x 0 -y 0 -z 0 -Y 0" />
 
   <!-- We resume the logic in empty_world.launch, changing only the name of 
     the world to be launched -->
@@ -43,11 +44,11 @@
 
   <!-- push robot_description to factory and spawn robot in gazebo -->
   <node name="wheel_robot_spawn" pkg="gazebo_ros" type="spawn_model" output="screen" 
-    args="-urdf -x $(arg robot_x_pos) -y 0.0 -z 0.0 -Y 1.57  -param robot_description -model wheel_robot" />
+    args="-urdf $(arg robot_pos)  -param robot_description -model wheel_robot" />
   <node name="camera_spawn" pkg="gazebo_ros" type="spawn_model" output="screen" 
-    args="-urdf -x $(arg camera_x_pos) -y 0.0 -z 0.0 -Y 0  -param camera_description -model surveillance_camera" />
+    args="-urdf $(arg camera_pos)  -param camera_description -model surveillance_camera" />
   <node name="godeye_spawn" pkg="gazebo_ros" type="spawn_model" output="screen" 
-    args="-urdf -x 0.0 -y 0.0 -z 0.0   -param godeye_description -model godeye_camera" />
+    args="-urdf $(arg godeye_pos)  -param godeye_description -model godeye_camera" />
   <group if="$(eval perspective==1)">
    <node name="godeye_perspective_spawn" pkg="gazebo_ros" type="spawn_model" output="screen" 
       args="-urdf -x 2.5 -y -3.5 -z 0.0   -param godeye_perspective_description -model godeye_camera_perspective" />  
@@ -58,7 +59,7 @@
   </group>
   <group if="$(eval perspective==3)">
    <node name="godeye_perspective_spawn" pkg="gazebo_ros" type="spawn_model" output="screen" 
-      args="-urdf -x 8 -y -11.5 -z 0.0   -param godeye_perspective_description -model godeye_camera_perspective" />  
+      args="-urdf -x 7.5 -y -10.5 -z 0.0   -param godeye_perspective_description -model godeye_camera_perspective" />  
   </group>
  
   <!-- robot visualization in Rviz -->
