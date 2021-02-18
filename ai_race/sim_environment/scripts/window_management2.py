@@ -34,12 +34,12 @@ def start_trigger(data):
         stopwatch_id
         if cnt > 1:
             sub_once.unregister()
-            if args_parsed["arrow"]:
+            if args_parsed["play"]:
                 godeye_id = subprocess.check_output(['xdotool search --onlyvisible --name "/godeye_camera_w_champ/image_raw"'], shell=True)
             else :
                 godeye_id = subprocess.check_output(['xdotool search --onlyvisible --name "/godeye_camera/image_raw"'], shell=True)
                 
-            if args_parsed["play"] :
+            if args_parsed["arrow"] :
                 front_id = subprocess.check_output(['xdotool search --onlyvisible --name "/front_camera_w_arrow/image_raw"'], shell=True)
             else :
                 front_id = subprocess.check_output(['xdotool search --onlyvisible --name "/front_camera/image_raw"'], shell=True)
