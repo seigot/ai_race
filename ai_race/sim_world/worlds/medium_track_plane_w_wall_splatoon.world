@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+<sdf version="1.4">
+<world name="medium_track">
+
+  <scene>
+    <ambient>0.5 0.5 0.5 1.0</ambient>
+    <shadows>0</shadows>
+  </scene>
+
+  <include>
+    <uri>model://sun</uri>
+    <pose>0.0 0.0 15.0 0 0 0</pose>
+    <cast_shadows>false</cast_shadows>
+    <attenuation>
+      <constant>0.5</constant>
+      <linear>0.01</linear>
+      <quadratic>0.0</quadratic>
+      <range>100</range>
+    </attenuation>
+  </include>
+
+  <light type="point" name="Light 1">
+         <pose>0 0 15 0 0 0</pose>
+         <diffuse>.9 .9 .9 1</diffuse>
+         <specular>.1 .1 .1 1</specular>
+         <attenuation>
+                <constant>0.4</constant>
+                <linear>0.0</linear>
+                <quadratic>0.02</quadratic>
+                <range>50</range>
+         </attenuation>
+         <direction>0 0 -1</direction>
+         <cast_shadows>false</cast_shadows>
+  </light>
+
+  <include>
+    <uri>model://sim_world/models//medium_track_plane_splatoon</uri>
+    <pose>0 0 0 0 0 0</pose>
+    <name>racetrack</name>
+  </include>
+<!--
+    <include>
+      <name>beer0</name>
+      <uri>model://sim_world/models/sankaku_cone</uri>
+      <static>true</static>
+      <pose>2 1 0 0 0 0</pose>
+    </include>
+
+    <include>
+      <name>beer1</name>
+      <uri>model://sim_world/models/coke_can</uri>
+      <static>true</static>
+      <pose>1 1 0 0 0 0</pose>
+    </include>
+-->
+    <include>
+      <name>right_wall</name>
+      <uri>model://sim_world/models/white_wall</uri>
+      <static>true</static>
+      <pose>3.32 0 0 0 0 0</pose>
+    </include>
+    <include>
+      <name>left_wall</name>
+      <uri>model://sim_world/models/white_wall</uri>
+      <static>true</static>
+      <pose>-3.32 0 0 0 0 0</pose>
+    </include>
+    <include>
+      <name>upper_wall</name>
+      <uri>model://sim_world/models/white_wall2</uri>
+      <static>true</static>
+      <pose>0 3.805 0 0 0 0</pose>
+    </include>
+    <include>
+      <name>lower_wall</name>
+      <uri>model://sim_world/models/white_wall2</uri>
+      <static>true</static>
+      <pose>0 -3.805 0 0 0 0</pose>
+    </include>
+
+    
+    <include>
+      <name>upper_wood</name>
+      <uri>model://sim_world/models/wood_block_144_10_10cm</uri>
+      <static>true</static>
+      <pose>0 1.36 0 0 0 0</pose>
+    </include>
+    <include>
+      <name>lower_wood</name>
+      <uri>model://sim_world/models/wood_block_144_10_10cm</uri>
+      <static>true</static>
+      <pose>0 -1.36 0 0 0 0</pose>
+    </include>
+    <include>
+      <name>right_wood</name>
+      <uri>model://sim_world/models/wood_block_282_10_10cm</uri>
+      <static>true</static>
+      <pose>0.72 0 0 0 0 0</pose>
+    </include>
+    <include>
+      <name>left_wood</name>
+      <uri>model://sim_world/models/wood_block_282_10_10cm</uri>
+      <static>true</static>
+      <pose>-0.72 0 0 0 0 0</pose>
+    </include>
+</world>
+</sdf>
