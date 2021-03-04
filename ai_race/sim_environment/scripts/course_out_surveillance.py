@@ -13,11 +13,11 @@ import json
 MAX_SPEED_W = 0.5
 
 #Level1 Parameters
-Ly = 1
-Lx = 1.1
-r  = 0.5
-Ly_out = 3.0
-Lx_out = 2.5
+Ly = 1.04
+Lx = 1.2
+r  = 0.75
+Ly_out = 2.85
+Lx_out = 2.25
 
 x = 1.6
 y = 0.0

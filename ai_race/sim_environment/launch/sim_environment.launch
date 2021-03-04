@@ -87,7 +87,7 @@
       <arg name="gui" value="$(arg gui)" />
       <arg name="controller" value="$(arg controller)" />
       <arg name="dynamic_recon" value="false" />
-      <arg name="with_auto_recovery" value="false" />
+      <arg name="with_auto_recovery" value="true" />    <!--  for large field debug -->
       <arg name="arrow" value="$(arg arrow)" />
       <arg name="record" value="$(arg record)" />
       <arg name="play" value="$(arg play)" />
@@ -104,7 +104,7 @@
       <arg name="track_name" value="medium_track_plane_w_wall_fall.world" />
       <arg name="gui" value="$(arg gui)" />
       <arg name="controller" value="$(arg controller)" />
-      <arg name="dynamic_recon" value="false" />
+      <arg name="dynamic_recon" value="True" />
       <arg name="with_auto_recovery" value="false" />
       <arg name="arrow" value="$(arg arrow)" />
       <arg name="record" value="$(arg record)" />
@@ -119,7 +119,7 @@
       <arg name="track_name" value="medium_track_plane_w_wall_cherry.world" />
       <arg name="gui" value="$(arg gui)" />
       <arg name="controller" value="$(arg controller)" />
-      <arg name="dynamic_recon" value="false" />
+      <arg name="dynamic_recon" value="True" />
       <arg name="with_auto_recovery" value="false" />
       <arg name="arrow" value="$(arg arrow)" />
       <arg name="record" value="$(arg record)" />
@@ -134,7 +134,7 @@
       <arg name="track_name" value="medium_track_plane_w_wall_summer.world" />
       <arg name="gui" value="$(arg gui)" />
       <arg name="controller" value="$(arg controller)" />
-      <arg name="dynamic_recon" value="false" />
+      <arg name="dynamic_recon" value="True" />
       <arg name="with_auto_recovery" value="false" />
       <arg name="arrow" value="$(arg arrow)" />
       <arg name="record" value="$(arg record)" />
@@ -149,7 +149,7 @@
       <arg name="track_name" value="medium_track_plane_w_wall_winter.world" />
       <arg name="gui" value="$(arg gui)" />
       <arg name="controller" value="$(arg controller)" />
-      <arg name="dynamic_recon" value="false" />
+      <arg name="dynamic_recon" value="True" />
       <arg name="with_auto_recovery" value="false" />
       <arg name="arrow" value="$(arg arrow)" />
       <arg name="record" value="$(arg record)" />
