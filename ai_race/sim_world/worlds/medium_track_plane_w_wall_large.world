@@ -98,57 +98,57 @@
 
 
 
-
+-->
     <include>
       <name>right_wall</name>
-      <uri>model://sim_world/models/white_wall</uri>
+      <uri>model://sim_world/models/transparent_wall_24m</uri>
       <static>true</static>
-      <pose>3.32 0 0 0 0 0</pose>
+      <pose>11.9 0 0 0 0 0</pose>
     </include>
     <include>
       <name>left_wall</name>
-      <uri>model://sim_world/models/white_wall</uri>
+      <uri>model://sim_world/models/transparent_wall_24m</uri>
       <static>true</static>
-      <pose>-3.32 0 0 0 0 0</pose>
+      <pose>-11.9 0 0 0 0 0</pose>
     </include>
     <include>
       <name>upper_wall</name>
-      <uri>model://sim_world/models/white_wall2</uri>
+      <uri>model://sim_world/models/transparent_wall_24m</uri>
       <static>true</static>
-      <pose>0 3.805 0 0 0 0</pose>
+      <pose>0 11.9 0 0 0 1.5708</pose>
     </include>
     <include>
       <name>lower_wall</name>
-      <uri>model://sim_world/models/white_wall2</uri>
+      <uri>model://sim_world/models/transparent_wall_24m</uri>
       <static>true</static>
-      <pose>0 -3.805 0 0 0 0</pose>
+      <pose>0 -11.9 0 0 0 1.5708</pose>
     </include>
 
     
     <include>
       <name>upper_wood</name>
-      <uri>model://sim_world/models/wood_block_144_10_10cm</uri>
+      <uri>model://sim_world/models/transparent_block_700_20_20cm</uri>
       <static>true</static>
-      <pose>0 1.36 0 0 0 0</pose>
+      <pose>0 5.4 0 0 0 0</pose>
     </include>
     <include>
       <name>lower_wood</name>
-      <uri>model://sim_world/models/wood_block_144_10_10cm</uri>
+      <uri>model://sim_world/models/transparent_block_700_20_20cm</uri>
       <static>true</static>
-      <pose>0 -1.36 0 0 0 0</pose>
+      <pose>0 -5.4 0 0 0 0</pose>
     </include>
     <include>
       <name>right_wood</name>
-      <uri>model://sim_world/models/wood_block_282_10_10cm</uri>
+      <uri>model://sim_world/models/transparent_block_1100_20_20cm</uri>
       <static>true</static>
-      <pose>0.72 0 0 0 0 0</pose>
+      <pose>3.4 0 0 0 0 1.5708</pose>
     </include>
     <include>
       <name>left_wood</name>
-      <uri>model://sim_world/models/wood_block_282_10_10cm</uri>
+      <uri>model://sim_world/models/transparent_block_1100_20_20cm</uri>
       <static>true</static>
-      <pose>-0.72 0 0 0 0 0</pose>
+      <pose>-3.4 0 0 0 0 1.5708</pose>
     </include>
--->
+
 </world>
 </sdf>
