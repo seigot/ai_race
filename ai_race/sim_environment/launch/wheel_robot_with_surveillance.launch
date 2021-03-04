@@ -120,6 +120,8 @@
     <node pkg="sim_environment" type="jugemu.py" name="jugemu" output="screen" />  
   <group if="$(eval with_auto_recovery==true)">
     <rosparam file="$(find sim_environment)/config/respown_point.yaml" command="load" />
+    <!-- for large field -->
+    <rosparam file="$(find sim_environment)/config/respown_point_large.yaml" command="load" /> 
     <node pkg="sim_environment" type="detect_stack.py" name="detect_stack" output="screen" /> 
     <node pkg="sim_environment" type="jugemu_new.py" name="jugemu_new" output="screen" />
   </group>
