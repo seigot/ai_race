@@ -96,6 +96,7 @@
       <arg name="godeye_pos" value="-x 0 -y 0 -z 4.0 -Y 0.0"/>
       <arg name="perspective" value="3" />
     </include>  
+    <include file="$(find sim_environment)/launch/collision_surveillance.launch" />
   </group>
 
   <!-- level 1f (if you want to run , set launch arg level=s --> 

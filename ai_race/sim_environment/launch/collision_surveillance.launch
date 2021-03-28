@@ -1,0 +1,3 @@
+<launch>
+  <node pkg="sim_environment" type="collision_surveillance.py" name="collision_surveillance" output="screen" />
+</launch>
