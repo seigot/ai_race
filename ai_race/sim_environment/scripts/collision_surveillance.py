@@ -123,5 +123,6 @@ if __name__ == '__main__':
             else:
                 print("not collided")
                 pass
+            rate.sleep()
     except rospy.ROSInterruptException:
         pass
