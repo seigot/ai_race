@@ -86,11 +86,12 @@
       <arg name="track_name" value="medium_track_plane_w_wall_large.world" />
       <arg name="gui" value="$(arg gui)" />
       <arg name="controller" value="$(arg controller)" />
-      <arg name="dynamic_recon" value="false" />
+      <arg name="dynamic_recon" value="True" />
       <arg name="with_auto_recovery" value="true" />    <!--  for large field debug -->
       <arg name="arrow" value="$(arg arrow)" />
       <arg name="record" value="$(arg record)" />
       <arg name="play" value="$(arg play)" />
+      <arg name="track_size" default="2"/>
       <arg name="robot_pos" value="-x 5.75 -y 0 -z 0 -Y 1.57"/>
       <arg name="camera_pos" value="-x 5.15 -y 0 -z 0 -Y 0.0"/>
       <arg name="godeye_pos" value="-x 0 -y 0 -z 4.0 -Y 0.0"/>
@@ -109,6 +110,7 @@
       <arg name="arrow" value="$(arg arrow)" />
       <arg name="record" value="$(arg record)" />
       <arg name="play" value="$(arg play)" />
+      <arg name="track_size" default="1"/>
       <arg name="perspective" value="2" />
     </include>  
   </group>
@@ -124,6 +126,7 @@
       <arg name="arrow" value="$(arg arrow)" />
       <arg name="record" value="$(arg record)" />
       <arg name="play" value="$(arg play)" />
+      <arg name="track_size" default="1"/>
       <arg name="perspective" value="2" />
     </include>  
   </group>
@@ -139,6 +142,7 @@
       <arg name="arrow" value="$(arg arrow)" />
       <arg name="record" value="$(arg record)" />
       <arg name="play" value="$(arg play)" />
+      <arg name="track_size" default="1"/>
       <arg name="perspective" value="2" />
     </include>  
   </group>
@@ -154,6 +158,7 @@
       <arg name="arrow" value="$(arg arrow)" />
       <arg name="record" value="$(arg record)" />
       <arg name="play" value="$(arg play)" />
+      <arg name="track_size" default="1"/>
       <arg name="perspective" value="2" />
     </include>  
   </group>

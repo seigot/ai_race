@@ -12,12 +12,12 @@ import json
 #max speed param
 MAX_SPEED_W = 0.5
 
-#Level1 Parameters
-Ly = 1.04
-Lx = 1.2
-r  = 0.75
-Ly_out = 2.85
-Lx_out = 2.25
+#Track Size Parameters
+Lx = rospy.get_param('/course_size_lx', 1.2)
+Ly = rospy.get_param('/course_size_ly', 1.04)
+r  = rospy.get_param('/course_size_r', 0.75)
+Lx_out = rospy.get_param('course_size_lx_out', 2.25)
+Ly_out = rospy.get_param('course_size_ly_out', 2.85)
 
 x = 1.6
 y = 0.0

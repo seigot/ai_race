@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <launch>
   <!-- roslaunch arguments -->
   <arg name="show_rviz" default="false"/>
@@ -11,6 +12,7 @@
   <arg name="arrow" default="true" />
   <arg name="record" default="false" />
   <arg name="play" default="false" />
+  <arg name="track_size" default="1"/> <!-- 1:small, 2:large 3... -->
   <arg name="perspective" default="1" />
   <arg name="robot_pos" default="-x 1.6 -y 0 -z 0 -Y 1.57" />
   <arg name="camera_pos" default="-x 1.0 -y 0 -z 0 -Y 0" />
@@ -106,6 +108,13 @@
       <node pkg="sim_environment" type="dynamic_recon_server.py" name="dynamic_recon_server_node" output="screen" />
     <!-- dynamic reconfigure CLIENT for max speed coeff node -->
       <node pkg="sim_environment" type="course_out_surveillance.py" name="course_out_surveillance" output="screen" />
+  </group>
+
+  <group if="$(eval track_size==1)">
+    <rosparam file="$(find sim_environment)/config/course_size_small.yaml" command="load" />
+  </group>
+  <group if="$(eval track_size==2)">
+    <rosparam file="$(find sim_environment)/config/course_size_large.yaml" command="load" />
   </group>
 
   <!-- servo node -->
