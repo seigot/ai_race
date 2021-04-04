@@ -171,7 +171,7 @@ class GameManagerClass:
         self.ros_time.elapsed_time = self.ros_time.current_time - self.ros_time.start_time
 
         # update lap time
-        if self.lap_count > self.lap_count_prev:
+        if float(self.lap_count) > float(self.lap_count_prev):
             self.lap_count_prev = self.lap_count
             # calculate lap_time
             if self.lap_count == 1:
