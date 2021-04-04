@@ -7,6 +7,7 @@ import argparse
 import json
 import threading
 import pprint
+from decimal import Decimal, Context
 ## flask
 from flask import Flask, request, jsonify, render_template
 from flask import send_from_directory
@@ -165,9 +166,11 @@ class GameManagerClass:
         app.logger.info("updateData")
 
         # check which data is requested to update
-        ## lap count
         if "lap_count" in body:
-            self.lap_count = self.lap_count + int(body["lap_count"])
+            ## lap count
+            ## delete unnecessary 0, from lap_count value
+            current_lap = float(self.lap_count) + float(body["lap_count"])
+            self.lap_count = self.decimal_normalize( float(current_lap) )
         if "courseout_count" in body:
             self.courseout_count = self.courseout_count + int(body["courseout_count"])
         if "recovery_count" in body:
@@ -218,6 +221,8 @@ class GameManagerClass:
     def writeResult(self):
         ## For Debug, output Result file.
         script_dir = os.path.dirname(os.path.abspath(__file__))
+        #current_time_str = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
+        #log_file_path = script_dir + "/log/" + "game_result_" + current_time_str + ".log"
         log_file_path = script_dir + "/log/" + "game_result.log"
         with open(log_file_path, "w") as f:
             jsondata = self.getGameStateJson()
@@ -225,6 +230,14 @@ class GameManagerClass:
             app.logger.info("Write Result {}".format(jsondata))
             print("result log: " + log_file_path)
             pprint.pprint(jsondata, compact = True)
+
+    def decimal_normalize(self, f):
+        """数値fの小数点以下を正規化する。文字列を返す"""
+        def _remove_exponent(d):
+            return d.quantize(Decimal(1)) if d == d.to_integral() else d.normalize()
+        a = Decimal.normalize(Decimal(str(f)))
+        b = _remove_exponent(a)
+        return str(b)
 
 ### API definition
 @app.route('/')
