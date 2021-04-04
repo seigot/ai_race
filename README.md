@@ -533,6 +533,17 @@ python inference_from_image.py --model simplenet --trt_module --trt_model <保�
 |  学習データのサンプル  |  あり（１週分）[url](https://github.com/seigot/ai_race_data_sample/tree/main/dataset/plane)  |  なし  |  なし  |
 |  備考  |  今回のルールで採用  |  初回起動前に、[FAQ](FAQ.md)を参考に再度catkin buildして下さい  |  初回起動前に、[FAQ](FAQ.md)を参考に再度catkin buildして下さい  |
 
+
+|  -  |  level1春  |  level1夏  |  level1秋  |  level1冬  |
+| ---- | ---- | ---- | ---- | ---- |
+|  名称  |  cherry  |  summer  |  fall  |  winter  |
+|  外観  |  [こちら](https://github.com/seigot/ai_race/blob/main/ai_race/sim_world/meshes/medium_track_plane_cherry/textures/medium_track_cherry.png)  |  [こちら](https://github.com/seigot/ai_race/blob/main/ai_race/sim_world/meshes/medium_track_plane_summer/textures/medium_track_summer.png)  |  [こちら](https://github.com/seigot/ai_race/blob/main/ai_race/sim_world/meshes/medium_track_plane_fall/textures/medium_track_plane_fallen_leaves.png)  |  [こちら](https://github.com/seigot/ai_race/blob/main/ai_race/sim_world/meshes/medium_track_plane_winter/textures/medium_track_winter.png)  |
+|  特徴  |  フィールド一面に桜が広がっています  |  フィールド一面、夏模様です  |  フィールド一面に落ち葉が広がっています  |  フィールド一面、、冬模様です  |
+|  障害物  |  -  |  -  |  -  |  -  |
+|  起動コマンド  |  bash prepare.sh -l 1c  |  bash prepare.sh -l 1s  |  bash prepare.sh -l 1f  |  bash prepare.sh -l 1w  |
+|  学習データのサンプル  |  なし  |  なし  |  なし  |  なし  |
+|  備考  |  -  |  -  |  -  |  -  |
+
 |  -  |  level2  |  level3  |
 | ---- | ---- | ---- |
 |  名称  |  Medium Track  |  Hard track  |
@@ -545,7 +556,7 @@ python inference_from_image.py --model simplenet --trt_module --trt_model <保�
 
 ### 4.4 提出して頂くもの
 
-* level1コースで動作する学習モデルを提出して下さい。（学習モデルは、前述のJetsonNano向けに軽量化したtrtあり版をお願いします） <br>
+* 競技コースで動作する学習モデル、コマンド実行方法を提出して下さい。（学習モデルは、trtあり版/trtなし版どちらでもOKです） <br>
 * 提出方法は、Githubリリースの機能を使うと簡単なのでお勧めです。この場合はGithubリポジトリ名/リリースURLを教えて下さい。<br>
 
 > 学習モデルを提出（バイナリリリース）する場合の手順参考 <br>
