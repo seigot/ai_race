@@ -5,6 +5,7 @@ import requests
 import json
 
 from gazebo_msgs.msg import ModelStates
+from nav_msgs.msg import Odometry
 
 JUDGESERVER_UPDATEDATA_URL="http://127.0.0.1:5000/judgeserver/updateData"
 
@@ -46,12 +47,19 @@ class CollisionDetector(object):
         self.cool_time = cool_time
         self.cool_time_left = 0
         rospy.Subscriber("/gazebo/model_states", ModelStates, self.callback, queue_size=1)
+        self.wheel_robot_tracker_x = 0
+        self.wheel_robot_tracker_y = 0
+        rospy.Subscriber('/wheel_robot_tracker', Odometry, self.callback_odom)
         self.data = None
         self.obeject_positions = {}
 
     def callback(self, data):
         self.data = data
         self.cool_time_left -= 1
+
+    def callback_odom(self, msg):
+        self.wheel_robot_tracker_x = msg.pose.pose.position.x
+        self.wheel_robot_tracker_y = msg.pose.pose.position.y
 
     def is_collided_rect_and_rect(
             self,
@@ -78,17 +86,17 @@ class CollisionDetector(object):
     def get_position(self, data):
         if data is None:
             return 0, 0
-        try:
-            pos = data.name.index('wheel_robot')
-        except ValueError:
-            return 0, 0
-        x = data.pose[pos].position.x
-        y = data.pose[pos].position.y
+        x = self.wheel_robot_tracker_x
+        y = self.wheel_robot_tracker_y
+        #print(x,y)
         # 障害物の座標が分かっていないなら取得する
         if len(self.obeject_positions) != len(CONES):
             self.obeject_positions = {}
             for object_name in CONES:
                 pos = data.name.index(object_name)
+                print(object_name)
+                print(data.pose[pos].position.x)
+                print(data.pose[pos].position.y)
                 self.obeject_positions[object_name] = [
                     data.pose[pos].position.x,
                     data.pose[pos].position.y,
