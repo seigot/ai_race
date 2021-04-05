@@ -46,7 +46,7 @@ class CollisionDetector(object):
     def __init__(self, cool_time=0):
         self.cool_time = cool_time
         self.cool_time_left = 0
-        rospy.Subscriber("/gazebo/model_states", ModelStates, self.callback, queue_size=1)
+        self.model_states_subscriber = rospy.Subscriber("/gazebo/model_states", ModelStates, self.callback, queue_size=1)
         self.wheel_robot_tracker_x = 0
         self.wheel_robot_tracker_y = 0
         rospy.Subscriber('/wheel_robot_tracker', Odometry, self.callback_odom)
@@ -101,6 +101,8 @@ class CollisionDetector(object):
                     data.pose[pos].position.x,
                     data.pose[pos].position.y,
                 ]
+            # unregister, if already unnecessary.
+            self.model_states_subscriber.unregister()
         return x, y
 
     # http request
