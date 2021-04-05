@@ -86,60 +86,67 @@ class Window(QMainWindow):
         ManualRecovery.setFont(QFont("Meiryo", 9))
 
         # create ConeCount button
-        ConeA = QPushButton("ConeA", self) 
+        name_coneA = "coneA"
+        ConeA = QPushButton(name_coneA, self) 
         ConeA_upper_left = (395, 230)
         ConeA_width_height = (50, 20)
         ConeA.setGeometry(ConeA_upper_left[0], ConeA_upper_left[1],
                           ConeA_width_height[0], ConeA_width_height[1])
-        ConeA.pressed.connect(self.ConeA)
+        ConeA.pressed.connect(lambda: self.UpdateConeCount(name_coneA))
         ConeA.setFont(QFont("Meiryo", 8))
 
-        ConeB = QPushButton("ConeB", self) 
+        name_coneB = "coneB"
+        ConeB = QPushButton(name_coneB, self) 
         ConeB_upper_left = (445, 230)
         ConeB_width_height = (50, 20)
         ConeB.setGeometry(ConeB_upper_left[0], ConeB_upper_left[1],
                           ConeB_width_height[0], ConeB_width_height[1])
-        ConeB.pressed.connect(self.ConeB)
+        ConeB.pressed.connect(lambda: self.UpdateConeCount(name_coneB))
         ConeB.setFont(QFont("Meiryo", 8))        
 
-        ConeC = QPushButton("ConeC", self) 
+        name_coneC = "coneC"
+        ConeC = QPushButton(name_coneC, self) 
         ConeC_upper_left = (495, 230)
         ConeC_width_height = (50, 20)
         ConeC.setGeometry(ConeC_upper_left[0], ConeC_upper_left[1],
                           ConeC_width_height[0], ConeC_width_height[1])
-        ConeC.pressed.connect(self.ConeC)
+        ConeC.pressed.connect(lambda: self.UpdateConeCount(name_coneC))
         ConeC.setFont(QFont("Meiryo", 8))
 
-        ConeD = QPushButton("ConeD", self) 
+        name_coneD = "coneD"
+        ConeD = QPushButton(name_coneD, self) 
         ConeD_upper_left = (545, 230)
         ConeD_width_height = (50, 20)
         ConeD.setGeometry(ConeD_upper_left[0], ConeD_upper_left[1],
                           ConeD_width_height[0], ConeD_width_height[1])
-        ConeD.pressed.connect(self.ConeD)
+        ConeD.pressed.connect(lambda: self.UpdateConeCount(name_coneD))
         ConeD.setFont(QFont("Meiryo", 8))
 
-        ConeE = QPushButton("ConeE", self) 
+        name_coneE = "coneE"
+        ConeE = QPushButton(name_coneE, self) 
         ConeE_upper_left = (395, 250)
         ConeE_width_height = (50, 20)
         ConeE.setGeometry(ConeE_upper_left[0], ConeE_upper_left[1],
                           ConeE_width_height[0], ConeE_width_height[1])
-        ConeE.pressed.connect(self.ConeE)
+        ConeE.pressed.connect(lambda: self.UpdateConeCount(name_coneE))
         ConeE.setFont(QFont("Meiryo", 8))
 
-        ConeF = QPushButton("ConeF", self) 
+        name_coneF = "coneF"        
+        ConeF = QPushButton(name_coneF, self) 
         ConeF_upper_left = (445, 250)
         ConeF_width_height = (50, 20)
         ConeF.setGeometry(ConeF_upper_left[0], ConeF_upper_left[1],
                           ConeF_width_height[0], ConeF_width_height[1])
-        ConeF.pressed.connect(self.ConeF)
+        ConeF.pressed.connect(lambda: self.UpdateConeCount(name_coneF))
         ConeF.setFont(QFont("Meiryo", 8))
 
-        ConeG = QPushButton("ConeG", self) 
+        name_coneG = "coneG"
+        ConeG = QPushButton(name_coneG, self) 
         ConeG_upper_left = (495, 250)
         ConeG_width_height = (50, 20)
         ConeG.setGeometry(ConeG_upper_left[0], ConeG_upper_left[1],
                           ConeG_width_height[0], ConeG_width_height[1])
-        ConeG.pressed.connect(self.ConeG)
+        ConeG.pressed.connect(lambda: self.UpdateConeCount(name_coneG))
         ConeG.setFont(QFont("Meiryo", 8))
 
         # create lap_count Plus/Minus button 
@@ -249,77 +256,11 @@ class Window(QMainWindow):
         return res
 
     # ConeCount button
-    def ConeA(self):
+    def UpdateConeCount(self, name):
         url = JUDGESERVER_UPDATEDATA_URL
         req_data = {
             "cone": {
-                "name" : "coneA",
-                "count" : 1
-                }
-        }
-        res = self.httpPostReqToURL(url, req_data)
-        return res
-
-    def ConeB(self):
-        url = JUDGESERVER_UPDATEDATA_URL
-        req_data = {
-            "cone": {
-                "name" : "coneB",
-                "count" : 1
-                }
-        }
-        res = self.httpPostReqToURL(url, req_data)
-        return res
-
-    def ConeC(self):
-        url = JUDGESERVER_UPDATEDATA_URL
-        req_data = {
-            "cone": {
-                "name" : "coneC",
-                "count" : 1
-                }
-        }
-        res = self.httpPostReqToURL(url, req_data)
-        return res
-
-    def ConeD(self):
-        url = JUDGESERVER_UPDATEDATA_URL
-        req_data = {
-            "cone": {
-                "name" : "coneD",
-                "count" : 1
-                }
-        }
-        res = self.httpPostReqToURL(url, req_data)
-        return res
-    
-    def ConeE(self):
-        url = JUDGESERVER_UPDATEDATA_URL
-        req_data = {
-            "cone": {
-                "name" : "coneE",
-                "count" : 1
-                }
-        }
-        res = self.httpPostReqToURL(url, req_data)
-        return res
-
-    def ConeF(self):
-        url = JUDGESERVER_UPDATEDATA_URL
-        req_data = {
-            "cone": {
-                "name" : "coneF",
-                "count" : 1
-                }
-        }
-        res = self.httpPostReqToURL(url, req_data)
-        return res
-
-    def ConeG(self):
-        url = JUDGESERVER_UPDATEDATA_URL
-        req_data = {
-            "cone": {
-                "name" : "coneG",
+                "name" : name,
                 "count" : 1
                 }
         }
