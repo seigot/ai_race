@@ -76,13 +76,13 @@ class GameManagerClass:
         self.system_time = TimeManagementClass() # system time
         self.ros_time = TimeManagementClass()    # ros time
         self.ObstacleClasses = [                 # Obstacle in field
-            ObstacleClass("cone", "coneA"),      ## kind, name
-            ObstacleClass("cone", "coneB"),
-            ObstacleClass("cone", "coneC"),
-            ObstacleClass("cone", "coneD"),
-            ObstacleClass("cone", "coneE"),
-            ObstacleClass("cone", "coneF"),
-            ObstacleClass("cone", "coneG")
+            ObstacleClass("cone", "cone_A"),      ## kind, name
+            ObstacleClass("cone", "cone_B"),
+            ObstacleClass("cone", "cone_C"),
+            ObstacleClass("cone", "cone_D"),
+            ObstacleClass("cone", "cone_E"),
+            ObstacleClass("cone", "cone_F"),
+            ObstacleClass("cone", "cone_G")
         ]
         self.initGameData()
 

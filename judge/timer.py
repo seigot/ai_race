@@ -86,7 +86,7 @@ class Window(QMainWindow):
         ManualRecovery.setFont(QFont("Meiryo", 9))
 
         # create ConeCount button
-        name_coneA = "coneA"
+        name_coneA = "cone_A"
         ConeA = QPushButton(name_coneA, self) 
         ConeA_upper_left = (395, 230)
         ConeA_width_height = (50, 20)
@@ -95,7 +95,7 @@ class Window(QMainWindow):
         ConeA.pressed.connect(lambda: self.UpdateConeCount(name_coneA))
         ConeA.setFont(QFont("Meiryo", 8))
 
-        name_coneB = "coneB"
+        name_coneB = "cone_B"
         ConeB = QPushButton(name_coneB, self) 
         ConeB_upper_left = (445, 230)
         ConeB_width_height = (50, 20)
@@ -104,7 +104,7 @@ class Window(QMainWindow):
         ConeB.pressed.connect(lambda: self.UpdateConeCount(name_coneB))
         ConeB.setFont(QFont("Meiryo", 8))        
 
-        name_coneC = "coneC"
+        name_coneC = "cone_C"
         ConeC = QPushButton(name_coneC, self) 
         ConeC_upper_left = (495, 230)
         ConeC_width_height = (50, 20)
@@ -113,7 +113,7 @@ class Window(QMainWindow):
         ConeC.pressed.connect(lambda: self.UpdateConeCount(name_coneC))
         ConeC.setFont(QFont("Meiryo", 8))
 
-        name_coneD = "coneD"
+        name_coneD = "cone_D"
         ConeD = QPushButton(name_coneD, self) 
         ConeD_upper_left = (545, 230)
         ConeD_width_height = (50, 20)
@@ -122,7 +122,7 @@ class Window(QMainWindow):
         ConeD.pressed.connect(lambda: self.UpdateConeCount(name_coneD))
         ConeD.setFont(QFont("Meiryo", 8))
 
-        name_coneE = "coneE"
+        name_coneE = "cone_E"
         ConeE = QPushButton(name_coneE, self) 
         ConeE_upper_left = (395, 250)
         ConeE_width_height = (50, 20)
@@ -131,7 +131,7 @@ class Window(QMainWindow):
         ConeE.pressed.connect(lambda: self.UpdateConeCount(name_coneE))
         ConeE.setFont(QFont("Meiryo", 8))
 
-        name_coneF = "coneF"        
+        name_coneF = "cone_F"        
         ConeF = QPushButton(name_coneF, self) 
         ConeF_upper_left = (445, 250)
         ConeF_width_height = (50, 20)
@@ -140,7 +140,7 @@ class Window(QMainWindow):
         ConeF.pressed.connect(lambda: self.UpdateConeCount(name_coneF))
         ConeF.setFont(QFont("Meiryo", 8))
 
-        name_coneG = "coneG"
+        name_coneG = "cone_G"
         ConeG = QPushButton(name_coneG, self) 
         ConeG_upper_left = (495, 250)
         ConeG_width_height = (50, 20)
