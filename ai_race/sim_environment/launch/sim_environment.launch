@@ -15,6 +15,7 @@
       <arg name="controller" value="$(arg controller)" />
       <arg name="dynamic_recon" value="false" />
       <arg name="with_auto_recovery" value="false" />
+      <arg name="collision_detection" value="false" />
       <arg name="arrow" value="$(arg arrow)" />
       <arg name="record" value="$(arg record)" />
       <arg name="play" value="$(arg play)" />
@@ -29,6 +30,7 @@
       <arg name="controller" value="$(arg controller)" />
       <arg name="dynamic_recon" value="True" />
       <arg name="with_auto_recovery" value="true" />
+      <arg name="collision_detection" value="false" />
       <arg name="arrow" value="$(arg arrow)" />
       <arg name="record" value="$(arg record)" />
       <arg name="play" value="$(arg play)" />
@@ -43,6 +45,7 @@
       <arg name="controller" value="$(arg controller)" />
       <arg name="dynamic_recon" value="True" />
       <arg name="with_auto_recovery" value="true" />
+      <arg name="collision_detection" value="false" />
       <arg name="arrow" value="$(arg arrow)" />
       <arg name="record" value="$(arg record)" />
       <arg name="play" value="$(arg play)" />
@@ -57,6 +60,7 @@
       <arg name="controller" value="$(arg controller)" />
       <arg name="dynamic_recon" value="false" />
       <arg name="with_auto_recovery" value="false" />
+      <arg name="collision_detection" value="false" />
       <arg name="arrow" value="$(arg arrow)" />
       <arg name="record" value="$(arg record)" />
       <arg name="play" value="$(arg play)" />
@@ -71,6 +75,7 @@
       <arg name="controller" value="$(arg controller)" />
       <arg name="dynamic_recon" value="false" />
       <arg name="with_auto_recovery" value="false" />
+      <arg name="collision_detection" value="false" />
       <arg name="arrow" value="$(arg arrow)" />
       <arg name="record" value="$(arg record)" />
       <arg name="play" value="$(arg play)" />
@@ -88,6 +93,7 @@
       <arg name="controller" value="$(arg controller)" />
       <arg name="dynamic_recon" value="True" />
       <arg name="with_auto_recovery" value="true" />    <!--  for large field debug -->
+      <arg name="collision_detection" value="true" />
       <arg name="arrow" value="$(arg arrow)" />
       <arg name="record" value="$(arg record)" />
       <arg name="play" value="$(arg play)" />
@@ -97,7 +103,6 @@
       <arg name="godeye_pos" value="-x 0 -y 0 -z 4.0 -Y 0.0"/>
       <arg name="perspective" value="3" />
     </include>  
-    <include file="$(find sim_environment)/launch/collision_surveillance.launch" />
   </group>
 
   <!-- level 1f (if you want to run , set launch arg level=s --> 
@@ -108,6 +113,7 @@
       <arg name="controller" value="$(arg controller)" />
       <arg name="dynamic_recon" value="True" />
       <arg name="with_auto_recovery" value="false" />
+      <arg name="collision_detection" value="false" />
       <arg name="arrow" value="$(arg arrow)" />
       <arg name="record" value="$(arg record)" />
       <arg name="play" value="$(arg play)" />
@@ -124,6 +130,7 @@
       <arg name="controller" value="$(arg controller)" />
       <arg name="dynamic_recon" value="True" />
       <arg name="with_auto_recovery" value="false" />
+      <arg name="collision_detection" value="false" />
       <arg name="arrow" value="$(arg arrow)" />
       <arg name="record" value="$(arg record)" />
       <arg name="play" value="$(arg play)" />
@@ -140,6 +147,7 @@
       <arg name="controller" value="$(arg controller)" />
       <arg name="dynamic_recon" value="True" />
       <arg name="with_auto_recovery" value="false" />
+      <arg name="collision_detection" value="false" />
       <arg name="arrow" value="$(arg arrow)" />
       <arg name="record" value="$(arg record)" />
       <arg name="play" value="$(arg play)" />
@@ -156,6 +164,7 @@
       <arg name="controller" value="$(arg controller)" />
       <arg name="dynamic_recon" value="True" />
       <arg name="with_auto_recovery" value="false" />
+      <arg name="collision_detection" value="false" />
       <arg name="arrow" value="$(arg arrow)" />
       <arg name="record" value="$(arg record)" />
       <arg name="play" value="$(arg play)" />

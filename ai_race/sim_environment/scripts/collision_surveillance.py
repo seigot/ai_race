@@ -1,9 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import rospy
+import requests
+import json
 
 from gazebo_msgs.msg import ModelStates
 
+JUDGESERVER_UPDATEDATA_URL="http://127.0.0.1:5000/judgeserver/updateData"
 
 CONES = [
     "cone_A",
@@ -92,6 +95,25 @@ class CollisionDetector(object):
                 ]
         return x, y
 
+    # http request
+    def httpPostReqToURL(self, url, data):
+        res = requests.post(url,
+                            json.dumps(data),
+                            headers={'Content-Type': 'application/json'}
+                            )
+        return res
+
+    def UpdateConeCount(self, name):
+        url = JUDGESERVER_UPDATEDATA_URL
+        req_data = {
+            "cone": {
+                "name" : name,
+                "count" : 1
+                }
+        }
+        res = self.httpPostReqToURL(url, req_data)
+        return res
+    
     # 障害物判定
     @property
     def collided_object(self):
@@ -107,6 +129,8 @@ class CollisionDetector(object):
                     object_y + CONE_WIDTH / 2, object_y - CONE_WIDTH / 2
                     ):
                 self.cool_time_left = self.cool_time
+                # update Count request
+                self.UpdateConeCount(object_name)
                 return object_name
         return None
 

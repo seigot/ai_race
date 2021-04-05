@@ -9,6 +9,7 @@
   <arg name="controller" default="false" />
   <arg name="dynamic_recon" default="false" />
   <arg name="with_auto_recovery" default="false" />
+  <arg name="collision_detection" default="false" />
   <arg name="arrow" default="true" />
   <arg name="record" default="false" />
   <arg name="play" default="false" />
@@ -109,6 +110,12 @@
     <!-- dynamic reconfigure CLIENT for max speed coeff node -->
       <node pkg="sim_environment" type="course_out_surveillance.py" name="course_out_surveillance" output="screen" />
   </group>
+
+  <!-- use collision_detection-->
+  <group if="$(eval collision_detection==true)">
+      <node pkg="sim_environment" type="collision_surveillance.py" name="collision_surveillance" output="screen" />
+  </group>
+
 
   <group if="$(eval track_size==1)">
     <rosparam file="$(find sim_environment)/config/course_size_small.yaml" command="load" />
