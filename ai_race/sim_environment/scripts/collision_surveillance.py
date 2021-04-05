@@ -51,6 +51,8 @@ class CollisionDetector(object):
         self.model_states_subscriber = rospy.Subscriber("/gazebo/model_states", ModelStates, self.callback, queue_size=1)
         self.wheel_robot_tracker_x = 0
         self.wheel_robot_tracker_y = 0
+        self.wheel_robot_tracker_dx = 0
+        self.wheel_robot_tracker_dy = 0
         rospy.Subscriber('/wheel_robot_tracker', Odometry, self.callback_odom)
         self.data = None
         self.obeject_positions = {}
@@ -59,6 +61,8 @@ class CollisionDetector(object):
         self.data = data
 
     def callback_odom(self, msg):
+        self.wheel_robot_tracker_dx = msg.pose.pose.position.x - self.wheel_robot_tracker_x
+        self.wheel_robot_tracker_dy = msg.pose.pose.position.y - self.wheel_robot_tracker_y
         self.wheel_robot_tracker_x = msg.pose.pose.position.x
         self.wheel_robot_tracker_y = msg.pose.pose.position.y
 
@@ -132,9 +136,17 @@ class CollisionDetector(object):
 
         if self.data is None:
             return None
-        if self.current_time - self.prev_time_when_collision < self.cool_time_sec:
-            return None
 
+        if abs(self.wheel_robot_tracker_dx)+abs(self.wheel_robot_tracker_dy) < 0.1:
+            # stack soon after collision
+            if self.current_time - self.prev_time_when_collision < self.cool_time_sec:
+                self.prev_time_when_collision = self.current_time
+                return None
+
+        if self.current_time - self.prev_time_when_collision < self.cool_time_sec:
+            # avoid chattering
+            return None
+        
         car_x, car_y = self.get_position(self.data)
         for object_name, object_position in self.obeject_positions.items():
             object_x, object_y = object_position
