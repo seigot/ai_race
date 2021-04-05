@@ -550,7 +550,7 @@ python inference_from_image.py --model simplenet --trt_module --trt_model <保�
 |  外観  |  [こちら](https://github.com/seigot/ai_race/blob/main/ai_race/sim_world/meshes/medium_track_plane_large/textures/medium_track_plane_large.png)  |
 |  特徴  |  level1を大きくしたフィールドに障害物が置かれています  |
 |  障害物  |  コース上に三角コーンが複数置かれます（置き方はランダムになる予定です）  |
-|  起動コマンド  |  bash prepare.sh -l 1l  |
+|  起動コマンド  |  bash prepare.sh -l l  |
 |  学習データのサンプル  |  なし  |
 |  備考  |  -  |
 
