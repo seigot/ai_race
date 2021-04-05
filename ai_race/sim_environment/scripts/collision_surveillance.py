@@ -3,6 +3,7 @@
 import rospy
 import requests
 import json
+import time
 
 from gazebo_msgs.msg import ModelStates
 from nav_msgs.msg import Odometry
@@ -24,7 +25,7 @@ CONE_WIDTH = 0.2
 
 # 一度検出した後に次に検出可能になるまでの時間
 # mainに書いているけどクラスに書いた方が自然な気がする
-COOL_TIME = 30
+COOL_TIME_SEC = 0.3
 
 #TODO: 引数名を真面目に考える
 #降順にして返す、sortでやったほうがよい気がしてきた
@@ -43,9 +44,10 @@ def is_in_range(value, minimum, maximum):
 
 class CollisionDetector(object):
 
-    def __init__(self, cool_time=0):
-        self.cool_time = cool_time
-        self.cool_time_left = 0
+    def __init__(self, cool_time_sec=0):
+        self.cool_time_sec = cool_time_sec
+        self.current_time = rospy.Time.now().to_sec()
+        self.prev_time_when_collision = self.current_time
         self.model_states_subscriber = rospy.Subscriber("/gazebo/model_states", ModelStates, self.callback, queue_size=1)
         self.wheel_robot_tracker_x = 0
         self.wheel_robot_tracker_y = 0
@@ -55,7 +57,6 @@ class CollisionDetector(object):
 
     def callback(self, data):
         self.data = data
-        self.cool_time_left -= 1
 
     def callback_odom(self, msg):
         self.wheel_robot_tracker_x = msg.pose.pose.position.x
@@ -127,8 +128,13 @@ class CollisionDetector(object):
     # 障害物判定
     @property
     def collided_object(self):
-        if self.data is None or self.cool_time_left > 0:
+        self.current_time = rospy.Time.now().to_sec()
+
+        if self.data is None:
             return None
+        if self.current_time - self.prev_time_when_collision < self.cool_time_sec:
+            return None
+
         car_x, car_y = self.get_position(self.data)
         for object_name, object_position in self.obeject_positions.items():
             object_x, object_y = object_position
@@ -138,7 +144,7 @@ class CollisionDetector(object):
                     object_x + CONE_WIDTH / 2, object_x - CONE_WIDTH / 2,
                     object_y + CONE_WIDTH / 2, object_y - CONE_WIDTH / 2
                     ):
-                self.cool_time_left = self.cool_time
+                self.prev_time_when_collision = self.current_time
                 # update Count request
                 self.UpdateConeCount(object_name)
                 return object_name
@@ -146,9 +152,8 @@ class CollisionDetector(object):
 
 if __name__ == '__main__':
     try:
-        cool_time = 0
         rospy.init_node('collision_surveillance', anonymous=True)
-        collision_detector = CollisionDetector(COOL_TIME)
+        collision_detector = CollisionDetector(COOL_TIME_SEC)
         rate = rospy.Rate(10)
         while not rospy.is_shutdown():
             collided_object = collision_detector.collided_object
