@@ -58,6 +58,15 @@ class CollisionDetector(object):
         self.obeject_positions = {}
 
     def callback(self, data):
+        # check if all CONE objects are spawn in the world.
+        # sometimes CONEs are allocated randomly..
+        for object_name in CONES:
+            try:
+                pos = data.name.index(object_name)
+            except ValueError:
+                print (object_name + " not found!! skip save data...")
+                return
+        # save data
         self.data = data
 
     def callback_odom(self, msg):
