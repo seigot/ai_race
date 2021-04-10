@@ -85,6 +85,11 @@
   </node>
   <!--<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" ></node>-->
   
+  <!-- load cones -->
+  <group if="$(eval track_size==2)">
+    <node pkg="sim_environment" type="spawn_random_cones.py" name="spawn_cones" output="screen" />
+  </group>
+
   <!--<node name="image_view_sur_camera" pkg="image_view" type="image_view" args="image:=/surveillance_camera/image_raw" />-->
   <group if="$(eval play==false)">
     <node name="image_view_godeye_camera" pkg="image_view" type="image_view" args="image:=/godeye_camera/image_raw" />
