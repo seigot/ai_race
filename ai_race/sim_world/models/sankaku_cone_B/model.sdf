@@ -1,6 +1,7 @@
 <?xml version="1.0" ?>
 <sdf version="1.4">
   <model name="cone_w_coin_B">
+    <static>true</static>
     <link name="link">
       <inertial>
         <pose>0 0 0 0 0 0</pose>
@@ -18,7 +19,7 @@
         <pose>0 0 0 0 0 0</pose>
         <geometry>
           <mesh>
-            <uri>model://sankaku_cone_B/meshes/cone_with_coin_B_edge.dae</uri>
+            <uri>model://sankaku_cone_B/meshes/cone_with_coin_B.dae</uri>
             <scale>0.5 0.5 0.5</scale>
           </mesh>
         </geometry>
@@ -27,7 +28,7 @@
         <pose>0 0 0 0 0 0</pose>
         <geometry>
           <mesh>
-            <uri>model://sankaku_cone_B/meshes/cone_with_coin_B_edge.dae</uri>
+            <uri>model://sankaku_cone_B/meshes/cone_with_coin_B.dae</uri>
            <scale>0.5 0.5 0.5</scale>
           </mesh>
         </geometry>

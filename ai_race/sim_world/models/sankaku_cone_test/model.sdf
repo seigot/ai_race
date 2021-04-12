@@ -1,6 +1,7 @@
 <?xml version="1.0" ?>
 <sdf version="1.4">
   <model name="cone_w_coin">
+    <static>true</static>
     <link name="link">
       <inertial>
         <pose>0 0 0 0 0 0</pose>
