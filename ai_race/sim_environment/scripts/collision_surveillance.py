@@ -64,7 +64,7 @@ class CollisionDetector(object):
             try:
                 pos = data.name.index(object_name)
             except ValueError:
-                print (object_name + " not found!! skip save data...")
+                print (object_name + " not found!! skip save data...by collision surveillance")
                 return
         # save data
         self.data = data

@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-#
 import rospy
 import sys
+import os
 import subprocess
 import math
 import random
@@ -12,15 +13,9 @@ poss=[]
 
 def pos1(dl, dw):
     theta =dl/(8*PI)*(2*PI)
-    #phi = (PI-theta)/2
-    #eps = PI - theta - PI/2
-    #a = 4 * math.cos(phi)
-    #ldx = - 2 * a * math.cos(phi)
-    #ldy = 2 * a * math.sin(phi)
     wdx = dw*math.cos(theta)
     wdy = dw*math.sin(theta)
     x, y = rotate(4, 0, theta)
-    #return 6+ldx, 4+ldy
     return 2 + x + wdx, 4 + y + wdy
 
 def pos2(dl, dw):
@@ -75,16 +70,17 @@ def callback(data):
     alp=['A','B','C','D','E','F','G']
     SubOnce.unregister()
     for i in range(7):
-        pos = False
         
+        stream = os.popen('echo $GAZEBO_WORLD_MODEL_PATH')
+        model_path = stream.read()
         try :
             pos = data.name.index('cone_with_coin_'+alp[i])
         except :
-            subprocess.Popen(['rosrun', 'gazebo_ros', 'spawn_model', '-file', '/home/jetson/catkin_ws_seigot/src/ai_race/ai_race/sim_world/models/sankaku_cone_'+alp[i]+'/model.sdf', '-sdf', '-model', 'cone_with_coin_'+alp[i], '-y', str(poss[i][1]), '-x', str(poss[i][0])])
+            subprocess.Popen(['rosrun', 'gazebo_ros', 'spawn_model', '-file', model_path[:len(model_path)-1] + '/sankaku_cone_'+alp[i]+'/model.sdf', '-sdf', '-model', 'cone_'+alp[i], '-y', str(poss[i][1]), '-x', str(poss[i][0])])
             continue
         
         subprocess.call(['rosservice', 'call', 'gazebo/delete_model', 'cone_with_coin_'+alp[i]])
-        subprocess.Popen(['rosrun', 'gazebo_ros', 'spawn_model', '-file', '/home/jetson/catkin_ws_seigot/src/ai_race/ai_race/sim_world/models/sankaku_cone_'+alp[i]+'/model.sdf', '-sdf', '-model', 'cone_with_coin_'+alp[i], '-y', str(poss[i][1]), '-x', str(poss[i][0])])
+        subprocess.Popen(['rosrun', 'gazebo_ros', 'spawn_model', '-file',model_path[:len(model_path)-1] + '/sankaku_cone_'+alp[i]+'/model.sdf', '-sdf', '-model', 'cone_'+alp[i], '-y', str(poss[i][1]), '-x', str(poss[i][0])])
     quit()
 
 def main():

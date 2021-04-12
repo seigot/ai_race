@@ -24,8 +24,8 @@ front_right_wheel_velocity_controller:
 front_left_hinge_position_controller:
   joint: front_left_hinge_joint
   type: effort_controllers/JointPositionController
-  pid: {p: 1.5, i: 0.01, d: 0.1}
+  pid: {p: 1.5, i: 0.01, d: 0.1, i_clamp: 0.5}
 front_right_hinge_position_controller:
   joint: front_right_hinge_joint
   type: effort_controllers/JointPositionController
-  pid: {p: 1.5, i: 0.01, d: 0.1}
+  pid: {p: 1.5, i: 0.01, d: 0.1, i_clamp: 0.5}
