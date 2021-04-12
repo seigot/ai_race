@@ -120,7 +120,7 @@
   <!-- use collision_detection-->
   <group if="$(eval collision_detection==true)">
       <node pkg="sim_environment" type="collision_surveillance.py" name="collision_surveillance" output="screen" >
-	<param name="cone_width" value="$(arg collision_detection_cone_width)" />
+	        <param name="cone_width" type = "double " value="$(arg collision_detection_cone_width)" />
       </node>
   </group>
 

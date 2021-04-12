@@ -22,6 +22,11 @@ CONES = [
 CAR_LENGTH = 0.4
 CAR_WIDTH = 0.2
 
+try:
+    CONE_WIDTH = rospy.get_param("/collision_surveillance/cone_width")
+except:
+    pass
+
 # 一度検出した後に次に検出可能になるまでの時間
 # mainに書いているけどクラスに書いた方が自然な気がする
 COOL_TIME_SEC = 0.3
@@ -68,7 +73,7 @@ class CollisionDetector(object):
             try:
                 pos = data.name.index(object_name)
             except ValueError:
-                print (object_name + " not found!! skip save data...by collision surveillance")
+                print (object_name + " not found!! skip save data...")
                 return
         # save data
         self.data = data
