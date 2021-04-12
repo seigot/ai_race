@@ -70,9 +70,15 @@ def callback(data):
     alp=['A','B','C','D','E','F','G']
     SubOnce.unregister()
     for i in range(7):
-        
-        stream = os.popen('echo $GAZEBO_WORLD_MODEL_PATH')
+
+        # get MODEL_PATH
+        stream = os.popen('echo $GAZEBO_MODEL_PATH | tr \':\' \'\n\' | grep "sim_world/models"')
         model_path = stream.read()
+        if model_path == '\n':
+            # parse error
+            print("invalid environment parameter, check GAZEBO_MODEL_PATH")
+            exit
+
         try :
             pos = data.name.index('cone_with_coin_'+alp[i])
         except :
