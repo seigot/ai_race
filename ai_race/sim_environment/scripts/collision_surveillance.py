@@ -21,7 +21,6 @@ CONES = [
 ]
 CAR_LENGTH = 0.4
 CAR_WIDTH = 0.2
-CONE_WIDTH = 0.2
 
 # 一度検出した後に次に検出可能になるまでの時間
 # mainに書いているけどクラスに書いた方が自然な気がする
@@ -48,6 +47,7 @@ class CollisionDetector(object):
         self.cool_time_sec = cool_time_sec
         self.current_time = rospy.Time.now().to_sec()
         self.prev_time_when_collision = self.current_time
+        self.get_rosparam()
         self.model_states_subscriber = rospy.Subscriber("/gazebo/model_states", ModelStates, self.callback, queue_size=1)
         self.wheel_robot_tracker_x = 0
         self.wheel_robot_tracker_y = 0
@@ -57,6 +57,10 @@ class CollisionDetector(object):
         self.data = None
         self.obeject_positions = {}
 
+    def get_rosparam(self):
+        self.cone_width = rospy.get_param('~cone_width', default=0.2)
+        print("cone_width ")
+        print(self.cone_width)
     def callback(self, data):
         # check if all CONE objects are spawn in the world.
         # sometimes CONEs are allocated randomly..
@@ -162,8 +166,8 @@ class CollisionDetector(object):
             if self.is_collided_rect_and_rect(
                     car_x + CAR_WIDTH / 2, car_x - CAR_WIDTH / 2,
                     car_y + CAR_LENGTH / 2, car_y - CAR_LENGTH / 2,
-                    object_x + CONE_WIDTH / 2, object_x - CONE_WIDTH / 2,
-                    object_y + CONE_WIDTH / 2, object_y - CONE_WIDTH / 2
+                    object_x + self.cone_width / 2, object_x - self.cone_width / 2,
+                    object_y + self.cone_width / 2, object_y - self.cone_width / 2
                     ):
                 self.prev_time_when_collision = self.current_time
                 # update Count request
