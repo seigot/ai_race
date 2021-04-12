@@ -73,8 +73,10 @@ class CollisionDetector(object):
             try:
                 pos = data.name.index(object_name)
             except ValueError:
-                print (object_name + " not found!! skip save data...")
+                print (object_name + " not found!! waiting to be spawned in the world...")
                 return
+
+        print("all cones found!!")
         # save data
         self.data = data
 
@@ -190,7 +192,6 @@ if __name__ == '__main__':
             if collided_object is not None:
                 print("collided: {}".format(collided_object))
             else:
-                print("not collided")
                 pass
             rate.sleep()
     except rospy.ROSInterruptException:
