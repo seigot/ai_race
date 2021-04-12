@@ -6,7 +6,7 @@
   <arg name="controller" default="false" />
   <arg name="record" default="false" />
   <arg name="play" default="false" />
-  
+  <arg name="collision_detection_cone_width" default="0.2" />
 
   <!-- This is your sim_environment setup launch file. -->
   <!-- If you want to get dataset from your original world, use this file. -->
@@ -19,6 +19,7 @@
     <arg name="controller" value="$(arg controller)" />
     <arg name="record" value="$(arg record)" />
     <arg name="play" value="$(arg play)" />
+    <arg name="collision_detection_cone_width" value="$(arg collision_detection_cone_width)" />
   </include>  
 
 </launch>

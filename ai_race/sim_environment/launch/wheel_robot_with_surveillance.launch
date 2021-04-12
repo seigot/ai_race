@@ -10,6 +10,7 @@
   <arg name="dynamic_recon" default="false" />
   <arg name="with_auto_recovery" default="false" />
   <arg name="collision_detection" default="false" />
+  <arg name="collision_detection_cone_width" default="0.2" />
   <arg name="arrow" default="true" />
   <arg name="record" default="false" />
   <arg name="play" default="false" />
@@ -118,7 +119,9 @@
 
   <!-- use collision_detection-->
   <group if="$(eval collision_detection==true)">
-      <node pkg="sim_environment" type="collision_surveillance.py" name="collision_surveillance" output="screen" />
+      <node pkg="sim_environment" type="collision_surveillance.py" name="collision_surveillance" output="screen" >
+	<param name="cone_width" value="$(arg collision_detection_cone_width)" />
+      </node>
   </group>
 
 
