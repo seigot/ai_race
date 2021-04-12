@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<robot name="ir_sensor2" xmlns:xacro="http://www.ros.org/wiki/xacro">
+ 
+  <!-- Included URDF/XACRO Files -->
+  <xacro:include filename="$(find sim_environment)/urdf/ir_sensor_macro.xacro" />
+
+  <!-- PROPERTY LIST -->
+  <!--All units in m-kg-s-radians unit system -->
+  <property name="M_PI" value="3.1415926535897931" />
+
+  <!-- Main Body-base -->
+  <property name="base_x_size" value="0.05" /> 
+  <property name="base_y_size" value="0.05" /> 
+  <property name="base_z_size" value="0.31" />
+  <property name="base_mass" value="1000" /> <!-- in kg-->
+
+  <!--Inertial macros for the box and cylinder. Units are kg*m^2-->
+  <macro name="box_inertia" params="m x y z">
+    <inertia  ixx="${m*(y*y+z*z)/12}" ixy = "0" ixz = "0"
+              iyy="${m*(x*x+z*z)/12}" iyz = "0"
+              izz="${m*(x*x+z*z)/12}" /> 
+  </macro>
+
+  <macro name="cylinder_inertia" params="m r h">
+    <inertia  ixx="${m*(3*r*r+h*h)/12}" ixy = "0" ixz = "0"
+              iyy="${m*(3*r*r+h*h)/12}" iyz = "0"
+              izz="${m*r*r/2}" /> 
+  </macro>
+  <!-- BASE-FOOTPRINT -->
+  <!-- base_footprint is a fictitious link(frame) that is on the ground right below base_link origin -->
+  <link name="base_footprint">
+    <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+            <box size="0.001 0.001 0.001" />
+        </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0 " />
+      <geometry>
+        <box size="${base_x_size} ${base_y_size} ${base_z_size}"/>
+      </geometry>
+    </collision>     
+  </link>
+ 
+  <gazebo reference="base_footprint">
+    <turnGravityOff>false</turnGravityOff>
+    <static>true</static>
+  </gazebo>
+ 
+  <!-- BASE-LINK -->
+  <!--Actual body/chassis of the robot-->
+  <link name="base_link">
+    <inertial>
+      <!--<mass value="${base_mass}" />-->
+      <mass value="${base_mass}" />
+      <origin xyz="0 0 0" />
+      <!--The 3x3 rotational inertia matrix. -->
+      <box_inertia  m="${base_mass}" x="${base_x_size}" y="${base_y_size}" z="${base_z_size}"/> 
+    </inertial>   
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 ${-M_PI/2}" />
+      <geometry>
+        <box size="${base_x_size} ${base_y_size} ${base_z_size}"/>
+      </geometry>
+      <!--<material name="Yellow" />-->
+    </visual>   
+  </link>
+  <gazebo reference="base_link">
+    <!--<material>Gazebo/Yellow</material>-->
+    <turnGravityOff>false</turnGravityOff>
+  </gazebo>
+  
+  
+  <joint name="base_footprint_joint" type="fixed">
+    <origin xyz="0 0 0.02" rpy="0 0 0" />
+    <parent link="base_footprint"/>
+    <child link="base_link" />
+  </joint>
+  
+  <!-- camera -->
+  <ir_sensor_macro parent="base_link" prefix="ir_sensor2" ir_n="2" xyz="0.1 0.0 -0.12"/>
+ 
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so" />
+  </gazebo>
+ 
+
+</robot>
