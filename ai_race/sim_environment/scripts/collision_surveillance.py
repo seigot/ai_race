@@ -79,6 +79,8 @@ class CollisionDetector(object):
         print("all cones found!!")
         # save data
         self.data = data
+        # unregister, if already unnecessary.
+        self.model_states_subscriber.unregister()
 
     def callback_odom(self, msg):
         self.wheel_robot_tracker_dx = msg.pose.pose.position.x - self.wheel_robot_tracker_x
@@ -126,8 +128,6 @@ class CollisionDetector(object):
                     data.pose[pos].position.x,
                     data.pose[pos].position.y,
                 ]
-            # unregister, if already unnecessary.
-            self.model_states_subscriber.unregister()
         return x, y
 
     # http request
