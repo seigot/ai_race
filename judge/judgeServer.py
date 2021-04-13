@@ -99,7 +99,8 @@ class GameManagerClass:
         # position x,y,z / orientation x,y,z,w
         self.CourseOutRecoveryLocationList = {
             "index": [
-                [1.75, 0.50, 0.75, 0, 0, 0.3, 0.3]
+                #[1.75, 0.50, 0.75, 0, 0, 0.3, 0.3]#small course
+                [5.75, 0.50, 0.75, 0, 0, 0.3, 0.3]
             ]
         }
 
