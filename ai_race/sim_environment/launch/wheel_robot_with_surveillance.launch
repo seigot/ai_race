@@ -11,6 +11,7 @@
   <arg name="with_auto_recovery" default="false" />
   <arg name="collision_detection" default="false" />
   <arg name="collision_detection_cone_width" default="0.2" />
+  <arg name="random_cone_placement" default="false" />
   <arg name="arrow" default="true" />
   <arg name="record" default="false" />
   <arg name="play" default="false" />
@@ -88,7 +89,9 @@
   
   <!-- load cones -->
   <group if="$(eval track_size==2)">
-    <node pkg="sim_environment" type="spawn_random_cones.py" name="spawn_cones" output="screen" />
+    <group if="$(eval random_cone_placement==true)">
+      <node pkg="sim_environment" type="spawn_random_cones.py" name="spawn_cones" output="screen" />
+    </group>
   </group>
 
   <!--<node name="image_view_sur_camera" pkg="image_view" type="image_view" args="image:=/surveillance_camera/image_raw" />-->

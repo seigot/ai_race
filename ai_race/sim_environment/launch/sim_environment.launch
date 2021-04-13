@@ -7,6 +7,7 @@
   <arg name="record" default="false" />
   <arg name="play" default="false" />
   <arg name="collision_detection_cone_width" default="0.2" />
+  <arg name="random_cone_placement" default="false" />
 
   <!-- level 1 (default) -->
   <group if="$(eval level==1)"> 
@@ -96,6 +97,7 @@
       <arg name="with_auto_recovery" value="true" />    <!--  for large field debug -->
       <arg name="collision_detection" value="true" />
       <arg name="collision_detection_cone_width" value="$(arg collision_detection_cone_width)" />
+      <arg name="random_cone_placement" value="$(arg random_cone_placement" />
       <arg name="arrow" value="$(arg arrow)" />
       <arg name="record" value="$(arg record)" />
       <arg name="play" value="$(arg play)" />

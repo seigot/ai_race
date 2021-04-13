@@ -13,6 +13,7 @@ PACKAGE_NAME="your_environment"
 WITH_GUI="true"
 WITH_CONTROLLER="false"
 COLLISION_DETECTION_CONE_WIDTH=0.2
+RANDOM_CONE_PLACEMENT="false"
 
 # option
 while getopts l:p:t:g:c:w: OPT
@@ -24,6 +25,7 @@ do
         "g" ) WITH_GUI="$OPTARG" ;;
         "c" ) WITH_CONTROLLER="$OPTARG" ;;
 	"w" ) COLLISION_DETECTION_CONE_WIDTH="$OPTARG" ;;
+	"r" ) RANDOM_CONE_PLACEMENT="$OPTARG" ;;
     esac
 done
 
@@ -35,6 +37,7 @@ echo "TIME_MODE: ${TIME_MODE} (1:SYSTEM TIME/2:ROS Time)"
 echo "WITH_GUI: ${WITH_GUI}"
 echo "WITH_CONTROLLER: ${WITH_CONTROLLER}"
 echo "COLLISION_DETECTION_CONE_WIDTH: ${COLLISION_DETECTION_CONE_WIDTH}"
+echo "RANDOM_CONE_PLACEMENT: ${RANDOM_CONE_PLACEMENT}"
 
 # warning
 function output_warning(){
@@ -68,7 +71,7 @@ gnome-terminal -- python3 ../judge/timer.py
 # [future work] if necessary, register some data to server here.
 
 # init simulator, course and vehicle
-roslaunch ${PACKAGE_NAME} sim_environment.launch level:=${LEVEL} gui:=${WITH_GUI} controller:=${WITH_CONTROLLER} collision_detection_cone_width:=${COLLISION_DETECTION_CONE_WIDTH} 
+roslaunch ${PACKAGE_NAME} sim_environment.launch level:=${LEVEL} gui:=${WITH_GUI} controller:=${WITH_CONTROLLER} collision_detection_cone_width:=${COLLISION_DETECTION_CONE_WIDTH} random_cone_placement:=${RANDOM_CONE_PLACEMENT}
 
 #roslaunch your_environment your_environment.launch level:=${LEVEL}
 #roslaunch sim_environment sim_environment.launch level:=${LEVEL}

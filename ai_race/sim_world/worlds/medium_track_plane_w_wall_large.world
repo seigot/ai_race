@@ -38,7 +38,7 @@
     <pose>0 0 0 0 0 0</pose>
     <name>racetrack</name>
   </include>
-<!--
+
   <include>
     <name>cone_A</name>
     <uri>model://sim_world/models/sankaku_cone_A</uri>
@@ -49,7 +49,7 @@
     <name>cone_B</name>
     <uri>model://sim_world/models/sankaku_cone_B</uri>
     <static>true</static>
-    <pose>-5.2 4.2 0 0 0 0</pose>
+    <pose>0.8 7.57 0 0 0 0</pose>
   </include>
   <include>
     <name>cone_C</name>
@@ -61,7 +61,7 @@
     <name>cone_D</name>
     <uri>model://sim_world/models/sankaku_cone_D</uri>
     <static>true</static>
-    <pose>-5.2 8.7 0 0 0 0</pose>
+    <pose>-5.95 1 0 0 0 0</pose>
   </include>
   <include>
     <name>cone_E</name>
@@ -81,7 +81,7 @@
     <static>true</static>
     <pose>4.26 -7.1 0 0 0 0</pose>
   </include>
--->
+
 <!--
     <include>
       <name>beer0</name>
