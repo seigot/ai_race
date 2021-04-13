@@ -6,6 +6,7 @@
   <arg name="debug" default="false"/>
   <arg name="gui" default="false"/>
   <arg name="track_name" default="medium_track.world"/>
+  <arg name="track_size_yaml" default="false"/>  
   <arg name="controller" default="false" />
   <arg name="dynamic_recon" default="false" />
   <arg name="with_auto_recovery" default="false" />
@@ -15,7 +16,6 @@
   <arg name="arrow" default="true" />
   <arg name="record" default="false" />
   <arg name="play" default="false" />
-  <arg name="track_size" default="1"/> <!-- 1:small, 2:large 3... -->
   <arg name="perspective" default="1" />
   <arg name="robot_pos" default="-x 1.6 -y 0 -z 0 -Y 1.57" />
   <arg name="camera_pos" default="-x 1.0 -y 0 -z 0 -Y 0" />
@@ -88,11 +88,9 @@
   <!--<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" ></node>-->
   
   <!-- load cones -->
-  <group if="$(eval track_size==2)">
     <group if="$(eval random_cone_placement==true)">
       <node pkg="sim_environment" type="spawn_random_cones.py" name="spawn_cones" output="screen" />
     </group>
-  </group>
 
   <!--<node name="image_view_sur_camera" pkg="image_view" type="image_view" args="image:=/surveillance_camera/image_raw" />-->
   <group if="$(eval play==false)">
@@ -120,19 +118,16 @@
       <node pkg="sim_environment" type="course_out_surveillance.py" name="course_out_surveillance" output="screen" />
   </group>
 
+  <!-- track size parameter -->  
+  <group if="$(eval track_size_yaml!=false)">
+    <rosparam file="$(find sim_environment)/config/$(arg track_size_yaml)" command="load" />
+  </group>
+
   <!-- use collision_detection-->
   <group if="$(eval collision_detection==true)">
       <node pkg="sim_environment" type="collision_surveillance.py" name="collision_surveillance" output="screen" >
 	        <param name="cone_width" type = "double " value="$(arg collision_detection_cone_width)" />
       </node>
-  </group>
-
-
-  <group if="$(eval track_size==1)">
-    <rosparam file="$(find sim_environment)/config/course_size_small.yaml" command="load" />
-  </group>
-  <group if="$(eval track_size==2)">
-    <rosparam file="$(find sim_environment)/config/course_size_large.yaml" command="load" />
   </group>
 
   <!-- servo node -->
