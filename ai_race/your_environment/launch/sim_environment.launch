@@ -7,6 +7,7 @@
   <arg name="record" default="false" />
   <arg name="play" default="false" />
   <arg name="collision_detection_cone_width" default="0.2" />
+  <arg name="random_cone_placement" default="false" />
 
   <!-- This is your sim_environment setup launch file. -->
   <!-- If you want to get dataset from your original world, use this file. -->
@@ -20,6 +21,7 @@
     <arg name="record" value="$(arg record)" />
     <arg name="play" value="$(arg play)" />
     <arg name="collision_detection_cone_width" value="$(arg collision_detection_cone_width)" />
+    <arg name="random_cone_placement" value="$(arg random_cone_placement)" />
   </include>  
 
 </launch>

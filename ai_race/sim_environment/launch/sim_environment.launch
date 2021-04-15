@@ -9,6 +9,7 @@
   <arg name="collision_detection_cone_width" default="0.2" />
   <arg name="random_cone_placement" default="false" />
 
+
   <!-- level 1 (default) -->
   <group if="$(eval level==1)"> 
     <include file="$(find sim_environment)/launch/wheel_robot_with_surveillance.launch">
@@ -88,25 +89,49 @@
   </group>
 
   <!-- level l (if you want to run , set launch arg level=s --> 
+
+    
   <group if="$(eval level=='l')"> 
-    <include file="$(find sim_environment)/launch/wheel_robot_with_surveillance.launch">
-      <arg name="track_name" value="medium_track_plane_w_wall_large.world" />
-      <arg name="track_size_yaml" value="course_size_large.yaml"/>      
-      <arg name="gui" value="$(arg gui)" />
-      <arg name="controller" value="$(arg controller)" />
-      <arg name="dynamic_recon" value="True" />
-      <arg name="with_auto_recovery" value="true" />    <!--  for large field debug -->
-      <arg name="collision_detection" value="true" />
-      <arg name="collision_detection_cone_width" value="$(arg collision_detection_cone_width)" />
-      <arg name="random_cone_placement" value="$(arg random_cone_placement" />
-      <arg name="arrow" value="$(arg arrow)" />
-      <arg name="record" value="$(arg record)" />
-      <arg name="play" value="$(arg play)" />
-      <arg name="robot_pos" value="-x 5.75 -y 0 -z 0 -Y 1.57"/>
-      <arg name="camera_pos" value="-x 5.15 -y 0 -z 0 -Y 0.0"/>
-      <arg name="godeye_pos" value="-x 0 -y 0 -z 4.0 -Y 0.0"/>
-      <arg name="perspective" value="3" />
-    </include>  
+    <group if="$(eval random_cone_placement==false)">
+      <include file="$(find sim_environment)/launch/wheel_robot_with_surveillance.launch">
+        <arg name="track_name" value="medium_track_plane_w_wall_large.world" />
+        <arg name="track_size_yaml" value="course_size_large.yaml"/>      
+        <arg name="gui" value="$(arg gui)" />
+        <arg name="controller" value="$(arg controller)" />
+        <arg name="dynamic_recon" value="True" />
+        <arg name="with_auto_recovery" value="true" />    <!--  for large field debug -->
+        <arg name="collision_detection" value="true" />
+        <arg name="collision_detection_cone_width" value="$(arg collision_detection_cone_width)" />
+        <arg name="random_cone_placement" value="$(arg random_cone_placement)" />
+        <arg name="arrow" value="$(arg arrow)" />
+        <arg name="record" value="$(arg record)" />
+        <arg name="play" value="$(arg play)" />
+        <arg name="robot_pos" value="-x 5.75 -y 0 -z 0 -Y 1.57"/>
+        <arg name="camera_pos" value="-x 5.15 -y 0 -z 0 -Y 0.0"/>
+        <arg name="godeye_pos" value="-x 0 -y 0 -z 4.0 -Y 0.0"/>
+        <arg name="perspective" value="3" />
+      </include>  
+    </group>
+    <group if="$(eval random_cone_placement!=false)">
+      <include file="$(find sim_environment)/launch/wheel_robot_with_surveillance.launch">
+        <arg name="track_name" value="medium_track_plane_w_wall_large_for_random.world" />
+        <arg name="track_size_yaml" value="course_size_large.yaml"/>      
+        <arg name="gui" value="$(arg gui)" />
+        <arg name="controller" value="$(arg controller)" />
+        <arg name="dynamic_recon" value="True" />
+        <arg name="with_auto_recovery" value="true" />    <!--  for large field debug -->
+        <arg name="collision_detection" value="true" />
+        <arg name="collision_detection_cone_width" value="$(arg collision_detection_cone_width)" />
+        <arg name="random_cone_placement" value="$(arg random_cone_placement)" />
+        <arg name="arrow" value="$(arg arrow)" />
+        <arg name="record" value="$(arg record)" />
+        <arg name="play" value="$(arg play)" />
+        <arg name="robot_pos" value="-x 5.75 -y 0 -z 0 -Y 1.57"/>
+        <arg name="camera_pos" value="-x 5.15 -y 0 -z 0 -Y 0.0"/>
+        <arg name="godeye_pos" value="-x 0 -y 0 -z 4.0 -Y 0.0"/>
+        <arg name="perspective" value="3" />
+      </include>  
+    </group>
   </group>
 
   <!-- level 1f (if you want to run , set launch arg level=s --> 

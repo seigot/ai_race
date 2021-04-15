@@ -88,7 +88,7 @@
   <!--<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" ></node>-->
   
   <!-- load cones -->
-    <group if="$(eval random_cone_placement==true)">
+    <group if="$(eval random_cone_placement!=false)">
       <node pkg="sim_environment" type="spawn_random_cones.py" name="spawn_cones" output="screen" />
     </group>
 

@@ -38,7 +38,7 @@
     <pose>0 0 0 0 0 0</pose>
     <name>racetrack</name>
   </include>
-
+<!--
   <include>
     <name>cone_A</name>
     <uri>model://sim_world/models/sankaku_cone_A</uri>
@@ -81,7 +81,7 @@
     <static>true</static>
     <pose>4.26 -7.1 0 0 0 0</pose>
   </include>
-  
+  -->
 <!--
     <include>
       <name>beer0</name>
