@@ -16,7 +16,7 @@ COLLISION_DETECTION_CONE_WIDTH=0.2
 RANDOM_CONE_PLACEMENT="false"
 
 # option
-while getopts l:p:t:g:c:w: OPT
+while getopts l:p:t:g:c:w:r: OPT
 do
     case $OPT in
         "l" ) LEVEL=$OPTARG ;;
@@ -24,8 +24,8 @@ do
         "t" ) GAME_TIME=$OPTARG ;;
         "g" ) WITH_GUI="$OPTARG" ;;
         "c" ) WITH_CONTROLLER="$OPTARG" ;;
-	"w" ) COLLISION_DETECTION_CONE_WIDTH="$OPTARG" ;;
-	"r" ) RANDOM_CONE_PLACEMENT="$OPTARG" ;;
+		"w" ) COLLISION_DETECTION_CONE_WIDTH="$OPTARG" ;;
+		"r" ) RANDOM_CONE_PLACEMENT="$OPTARG" ;;
     esac
 done
 

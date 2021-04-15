@@ -11,6 +11,7 @@ from gazebo_msgs.msg import ModelStates
 PI = math.pi
 poss=[]
 
+
 def pos1(dl, dw):
     theta =dl/(8*PI)*(2*PI)
     wdx = dw*math.cos(theta)
@@ -56,12 +57,12 @@ def rotate(x, y, rad):
 
 def rand_odd():
     dl = random.uniform(1.5, 2 * PI - 1.5)
-    dw = random.uniform(0, 0.4)
+    dw = random.uniform(-0.4, 0.4)
     return dl, dw
 
 def rand_even():
     dl = random.uniform(0.5, 4 - 0.5)
-    dw = random.uniform(0, 0.4)
+    dw = random.uniform(-0.4, 0.4)
     return dl, dw
 
 
