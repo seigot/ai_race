@@ -16,7 +16,7 @@ COLLISION_DETECTION_CONE_WIDTH=0.2
 RANDOM_CONE_PLACEMENT="false"
 
 # option
-while getopts l:p:t:g:c:w: OPT
+while getopts l:p:t:g:c:w:r: OPT
 do
     case $OPT in
         "l" ) LEVEL=$OPTARG ;;
