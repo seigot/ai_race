@@ -1,0 +1,18 @@
+diff --git a/ai_race/sim_environment/urdf/wheel_robot.urdf.xacro b/ai_race/sim_environment/urdf/wheel_robot.urdf.xacro
+index 525c950..58bde98 100755
+--- a/ai_race/sim_environment/urdf/wheel_robot.urdf.xacro
++++ b/ai_race/sim_environment/urdf/wheel_robot.urdf.xacro
+@@ -110,5 +110,13 @@
+       <updateRate>10.0</updateRate>
+     </plugin>
+   </gazebo> 
++  <gazebo>
++    <plugin name="ground_truth" filename="libgazebo_ros_p3d.so">
++      <frameName>world</frameName>
++      <bodyName>base_link</bodyName>
++      <topicName>/tracker</topicName>
++      <updateRate>10.0</updateRate>
++    </plugin>
++  </gazebo>
+ 
+ </robot>
